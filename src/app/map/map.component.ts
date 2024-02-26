@@ -8,10 +8,20 @@ import * as L from 'leaflet';
 })
 export class MapComponent implements OnInit, AfterViewInit {
   private map!: L.Map
-  markers: L.Marker[] = [
-    L.marker([31.9539, 35.9106]), // Amman
-    L.marker([32.5568, 35.8469]) // Irbid
-  ];
+
+  private initMap(): void {
+    this.map = L.map('map', {
+      center: [ 13.7563, 100.5018 ],
+      zoom: 14
+    });
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      minZoom: 3,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tiles.addTo(this.map);
+  }
 
   constructor() { }
 
@@ -19,29 +29,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.initializeMap();
-    this.addMarkers();
-    this.centerMap();
+    this.initMap();
   }
 
 
-  private initializeMap() {
-    const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-    this.map = L.map('map');
-    L.tileLayer(baseMapURl).addTo(this.map);
-  }
 
-
-  private addMarkers() {
-    // Add your markers to the map
-    this.markers.forEach(marker => marker.addTo(this.map));
-  }
-
-  private centerMap() {
-    // Create a LatLngBounds object to encompass all the marker locations
-    const bounds = L.latLngBounds(this.markers.map(marker => marker.getLatLng()));
-    
-    // Fit the map view to the bounds
-    this.map.fitBounds(bounds);
-  }
 }
