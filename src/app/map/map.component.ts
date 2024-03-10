@@ -31,7 +31,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       
       // Call a method to handle the query using the latitude and longitude
       // this.queryOSMData(latitude, longitude);
-      this.address(latitude, longitude)
+      // this.address(latitude, longitude)
+      this.addMarker(latitude,longitude)
     });
   }
 
