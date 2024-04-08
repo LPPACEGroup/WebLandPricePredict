@@ -1,16 +1,19 @@
-.map-container {
+/* .map-container {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
   }
-  
-  .map-frame {
-    /* border: 2px solid black; */
+   */
+  /* .map-frame {
     height: 100%;
-  }
+  } */
   
-  #map {
+  /* #map {
     height: 100%;
+  } */
+
+  .bbg {
+    z-index: 200000000000000;
   }
