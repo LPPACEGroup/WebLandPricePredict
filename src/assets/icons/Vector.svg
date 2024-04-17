@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" fill="none"
-    xmlns:v="https://vecta.io/nano">
-    <path d="M1 18.5h22.969M1 9.75h22.969M1 1h22.969" stroke="#f0f8ff" stroke-width="1.5"
-        stroke-linecap="round" stroke-linejoin="round" />
+<svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#f0f8ff" id="svg_1" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" d="m3.89855,21.18743l21.17872,0m-21.17872,-8.068l21.17872,0m-21.17872,-8.068l21.17872,0"/>
+ </g>
 </svg>

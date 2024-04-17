@@ -1,35 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31"
-    height="30" fill="none" xmlns:v="https://vecta.io/nano">
-    <g stroke="#f0f8ff">
-        <g stroke-linejoin="round" stroke-width="1.5">
-            <path
-                d="M23.482.938H6.595c-1.036 0-1.876.839-1.876 1.875v24.375c0 1.035.84 1.875 1.876 1.875h16.887c1.036 0 1.876-.84 1.876-1.875V2.813c0-1.036-.84-1.875-1.876-1.875z" />
-            <path
-                d="M20.667 4.688H9.409a.94.94 0 0 0-.938.938v3.75a.94.94 0 0 0 .938.938h11.258a.94.94 0 0 0 .938-.937v-3.75a.94.94 0 0 0-.938-.937z" />
-        </g>
-        <g stroke-width="1.5">
-            <use xlink:href="#A" />
-            <use xlink:href="#B" />
-            <use xlink:href="#A" y="4.687" />
-            <use xlink:href="#B" y="4.687" />
-            <use xlink:href="#A" y="9.375" />
-            <use xlink:href="#B" y="9.375" />
-            <use xlink:href="#A" x="5.356" />
-            <use xlink:href="#B" x="5.353" />
-            <use xlink:href="#A" x="5.356" y="4.687" />
-            <use xlink:href="#B" x="5.353" y="4.687" />
-            <use xlink:href="#A" x="5.356" y="9.375" />
-            <use xlink:href="#B" x="5.353" y="9.375" />
-            <use xlink:href="#A" x="10.321" />
-            <use xlink:href="#B" x="10.318" />
-            <use xlink:href="#A" x="10.321" y="4.687" />
-            <use xlink:href="#B" x="10.318" y="4.687" />
-            <use xlink:href="#A" x="10.321" y="9.375" />
-            <use xlink:href="#B" x="10.318" y="9.375" />
-        </g>
-    </g>
-    <defs>
-        <path id="A" d="M9.877 15.938a.47.47 0 0 1-.469-.469.47.47 0 0 1 .469-.469" />
-        <path id="B" d="M9.879 15.938a.47.47 0 0 0 .469-.469.47.47 0 0 0-.469-.469" />
-    </defs>
+<svg width="28.000000000000004" height="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none">
+ <defs>
+  <path d="m9.877,15.938a0.47,0.47 0 0 1 -0.469,-0.469a0.47,0.47 0 0 1 0.469,-0.469" id="A"/>
+  <path d="m9.879,15.938a0.47,0.47 0 0 0 0.469,-0.469a0.47,0.47 0 0 0 -0.469,-0.469" id="B"/>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1" stroke="#f0f8ff">
+   <g id="svg_2" stroke-width="1.5" stroke-linejoin="round">
+    <path id="svg_3" d="m22.45001,0.938l-16.887,0c-1.036,0 -1.876,0.839 -1.876,1.875l0,24.375c0,1.035 0.84,1.875 1.876,1.875l16.887,0c1.036,0 1.876,-0.84 1.876,-1.875l0,-24.375c0,-1.036 -0.84,-1.875 -1.876,-1.875z"/>
+    <path id="svg_4" d="m19.63501,4.688l-11.258,0a0.94,0.94 0 0 0 -0.938,0.938l0,3.75a0.94,0.94 0 0 0 0.938,0.938l11.258,0a0.94,0.94 0 0 0 0.938,-0.937l0,-3.75a0.94,0.94 0 0 0 -0.938,-0.937l0,-0.002z"/>
+   </g>
+   <g id="svg_5" stroke-width="1.5">
+    <use x="-1.03199" y="0" id="svg_6" xlink:href="#A"/>
+    <use x="-1.03199" y="0" id="svg_7" xlink:href="#B"/>
+    <use x="-1.03199" id="svg_8" y="4.687" xlink:href="#A"/>
+    <use x="-1.03199" id="svg_9" y="4.687" xlink:href="#B"/>
+    <use x="-1.03199" id="svg_10" y="9.375" xlink:href="#A"/>
+    <use x="-1.03199" id="svg_11" y="9.375" xlink:href="#B"/>
+    <use y="0" id="svg_12" x="4.32401" xlink:href="#A"/>
+    <use y="0" id="svg_13" x="4.32101" xlink:href="#B"/>
+    <use id="svg_14" y="4.687" x="4.32401" xlink:href="#A"/>
+    <use id="svg_15" y="4.687" x="4.32101" xlink:href="#B"/>
+    <use id="svg_16" y="9.375" x="4.32401" xlink:href="#A"/>
+    <use id="svg_17" y="9.375" x="4.32101" xlink:href="#B"/>
+    <use y="0" id="svg_18" x="9.28901" xlink:href="#A"/>
+    <use y="0" id="svg_19" x="9.28601" xlink:href="#B"/>
+    <use id="svg_20" y="4.687" x="9.28901" xlink:href="#A"/>
+    <use id="svg_21" y="4.687" x="9.28601" xlink:href="#B"/>
+    <use id="svg_22" y="9.375" x="9.28901" xlink:href="#A"/>
+    <use id="svg_23" y="9.375" x="9.28601" xlink:href="#B"/>
+   </g>
+  </g>
+ </g>
 </svg>
