@@ -4,6 +4,7 @@ import { CalculatorComponent } from './page/calculator/calculator.component';
 import { MapComponent } from './page/map/map.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { MonitorComponent } from './page/monitor/monitor.component';
+import { QuestionComponent } from './page/question/question.component';
 
 export const routes: Routes = [
     {   path: 'Home', component: HomeComponent },
@@ -11,6 +12,7 @@ export const routes: Routes = [
     { path: 'Dashboard', component: DashboardComponent },
     { path: 'Monitor', component: MonitorComponent },
     { path: 'Calculator', component: CalculatorComponent },
+    { path: 'Question', component: QuestionComponent },
     {path:'**',component:HomeComponent},
 ];
     

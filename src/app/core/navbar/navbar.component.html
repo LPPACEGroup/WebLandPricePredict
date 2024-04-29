@@ -3,7 +3,8 @@
     <div class="  navbar-center">
         <ul class="menu menu-horizontal">
             <li class="hover:bg-transparent">
-                <div routerLink="Home" class="text-white flex flex-col-reverse hover:bg-transparent"
+                <div routerLink="Home"
+                    class="text-white flex flex-col-reverse hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
                     routerLinkActive="text-yellow ">
                     <p>หน้าหลัก</p>
                     <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round"
@@ -19,7 +20,8 @@
                 </div>
             </li>
             <li class="hover:bg-transparent">
-                <div routerLink="Map" class="text-white flex flex-col-reverse hover:bg-transparent "
+                <div routerLink="Map"
+                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
                     routerLinkActive="text-yellow">
                     <p>แผนที่</p>
 
@@ -56,7 +58,8 @@
                 </div>
             </li>
             <li class="hover:bg-transparent">
-                <div routerLink="Dashboard" class="text-white flex flex-col-reverse hover:bg-transparent"
+                <div routerLink="Dashboard"
+                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
                     routerLinkActive="text-yellow">
                     <p>แดชบอร์ด</p>
                     <svg width="28" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" class="stroke-white"
@@ -85,7 +88,8 @@
                 </div>
             </li>
             <li class="hover:bg-transparent">
-                <div routerLink="Monitor" class="text-white flex flex-col-reverse hover:bg-transparent"
+                <div routerLink="Monitor"
+                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
                     routerLinkActive="text-yellow">
                     <p>มอนิเตอร์</p>
                     <svg width="28.000000000000004" height="30" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -118,7 +122,8 @@
                 </div>
             </li>
             <li class="hover:bg-transparent">
-                <div routerLink="Calculator" class="text-white flex flex-col-reverse hover:bg-transparent"
+                <div routerLink="Calculator"
+                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
                     routerLinkActive="text-yellow">
                     <p>เครื่องคิดเลข</p>
                     <svg width="28.000000000000004" height="30" xmlns="http://www.w3.org/2000/svg"
@@ -165,13 +170,13 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <ul class="menu menu-horizontal">
-            <li>
-                <details>
-                    <summary>
+        <ul class="menu menu-horizontal flex items-center">
+            <li class="">
+                <details class="open:stroke-yellow">
+                    <summary class="after:content-none">
                         <div>
                             <svg width="28" height="30" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" stroke=""
-                                fill="none" class="stroke-white" routerLinkActive="stroke-yellow">
+                                fill="none" class="stroke-white " routerLinkActive="stroke-yellow">
 
                                 <g>
                                     <title>Layer 1</title>
@@ -186,10 +191,7 @@
 
                         </div>
                     </summary>
-                    <ul class="p-2 text-dark-blue bg-white">
-                        <li><a>noti1หหหหหหห</a></li>
-                        <li><a>noti2</a></li>
-                    </ul>
+                    <app-noti></app-noti>
                 </details>
             </li>
             <li class="flex items-end">
@@ -215,8 +217,8 @@
                     <div class="drawer-side">
                         <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
                         <ul class="menu p-4 w-80 min-h-full bg-white text-dark-blue">
-                            <li><a>คู่มือการใช้งาน</a></li>
-                            <li><a>คำถามที่พบบ่อย</a></li>
+                            <li ><a>คู่มือการใช้งาน</a></li>
+                            <li routerLink="Question"><a>คำถามที่พบบ่อย</a></li>
                             <li><a>ติดต่อเรา</a></li>
                             <li><a>แพ็คเกจสมาชิก</a></li>
                             <li><a>หน้าโปรไฟล์</a></li>
