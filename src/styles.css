@@ -4,3 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .collapse {
+    visibility: visible;
+    }
+    }
