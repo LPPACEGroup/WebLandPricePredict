@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SvgIconComponent } from '../../core/svg-icon/svg-icon.component';
+import { SvgIconModule } from '../../core/svg-icon/svg-icon/svg-icon.module';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SvgIconComponent],
+  imports: [SvgIconModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

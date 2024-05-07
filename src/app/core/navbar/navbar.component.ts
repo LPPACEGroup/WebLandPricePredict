@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { NotiComponent } from '../noti/noti.component';
+import { SvgIconModule } from '../svg-icon/svg-icon/svg-icon.module';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink,SvgIconComponent,RouterLinkActive,NotiComponent],
+  imports: [RouterLink,SvgIconModule,RouterLinkActive,NotiComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

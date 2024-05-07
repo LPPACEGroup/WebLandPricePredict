@@ -9,3 +9,11 @@
     visibility: visible;
     }
     }
+
+
+.inset-x-0 {
+    z-index: 0;
+}
+.menu {
+    z-index: 1;
+}

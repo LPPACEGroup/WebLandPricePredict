@@ -1,31 +1,48 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  important:true,
+  important: true,
   content: [
     "./src/**/*.{html,ts}",
   ],
   theme: {
-
     extend: {
-      colors:{
-        'dark-blue':'#2749A3',
-        'ocean-blue':'#307DA2',
-        'blue':'#86B6CD',
-        'baby-blue':'#C6E6FF',
-        'yellow':'#F3C762',
-        'light-blue':'#F0F8FF',
-        'grey':'#7D7A83',
-        'light-grey':'#E0E0E0',
-        'lighter-grey':'#F4F2F2',
+      colors: {
+        'dark-blue': '#2749A3',
+        'ocean-blue': '#307DA2',
+        'blue': '#86B6CD',
+        'baby-blue': '#C6E6FF',
+        'alice-blue': '#F0F8FF',
+        'yellow': '#F3C762',
+        'light-blue': '#F0F8FF',
+        'grey': '#7D7A83',
+        'light-grey': '#E0E0E0',
+        'lighter-grey': '#F4F2F2',
       },
       fontFamily: {
-        LPPA: ["Kodchasan",'sans-serif'],
-      },height: {
+        LPPA: ["Kodchasan", 'sans-serif'],
+      },
+      height: {
         '9/10': '90%', // Custom height utility for 90%
+      },
+      flex: {
+        center: '0 1 auto',
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [
+    require("daisyui"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.flex-center': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      };
+
+      addUtilities(newUtilities);
+    }
+  ],
   daisyui: {
     themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
     darkTheme: "aqua", // name of one of the included themes for dark mode

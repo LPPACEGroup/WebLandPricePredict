@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { SvgIconModule } from '../../core/svg-icon/svg-icon/svg-icon.module';
 
 @Component({
-  selector: 'app-map',
+  selector: 'app-contact-page',
   standalone: true,
   imports: [SvgIconModule],
-  templateUrl: './map.component.html',
-  styleUrl: './map.component.css'
+  templateUrl: './contact-page.component.html',
+  styleUrl: './contact-page.component.css'
 })
-export class MapComponent {
+export class ContactPageComponent {
 
 }
