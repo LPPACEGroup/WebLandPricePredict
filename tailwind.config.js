@@ -22,7 +22,30 @@ module.exports = {
         LPPA: ["Kodchasan", 'sans-serif'],
       },
       height: {
-        '9/10': '90%', // Custom height utility for 90%
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+        'nmax': 'calc(100vh - 80px)',
+
+      },minHeight: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+        'nmax': 'calc(100vh - 80px)',
+      },
+      width: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+      },
+      minWidth: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
       },
       flex: {
         center: '0 1 auto',

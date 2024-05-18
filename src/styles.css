@@ -17,3 +17,11 @@
 .menu {
     z-index: 1;
 }
+html {
+    font-family: 'Kodchasan', sans-serif;
+    background-color: white;
+    color: #307DA2;
+    min-height: 100%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
