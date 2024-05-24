@@ -1,12 +1,153 @@
-<div class="w-full h-full fixed flex flex-col">
-    <div class=" bg-dark-blue grow ">
-        <div class="bg-white h-full"></div>
-        <div>
-            <footer class="footer footer-center p-4 bg-base-300 text-base-content">
-                <aside>
-                    <p>Copyright © 2024 - All right reserved by ACME Industries Ltd</p>
-                </aside>
-            </footer>
+<div class="h-nmax relative">
+    <div class="   relative bg-blue profile-container">
+        <div class="h-full  w-5/12 bg-cover"
+            style="background-image: url('.../../../../../assets/imgs/bg_profile.png');">
+            <div class="w-9/12 h-full flex flex-col justify-center items-center gap-3 py-3">
+                <div class="h-32 w-32 bg-dark-blue rounded-full"></div>
+                <div class="text-baby-blue font-bold text-3xl">Tier 1</div>
+                <div class="h-10 w-7/12 bg-white text-dark-blue rounded-full grid grid-cols-7 items-center">
+                    <div class="col-span-1 pl-2 items-center  flex">
+                        <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+
+                    </div>
+                    <input class="col-span-5 rounded-full font-medium px-5" placeholder="นางสาวนาตาลี สุรีนิสา" />
+                </div>
+                <div class="h-10 w-7/12 bg-white text-dark-blue rounded-full grid grid-cols-7 items-center">
+                    <div class="col-span-1 pl-2 items-center  flex">
+                        <mat-icon fontSet="material-icons-outlined">credit_card</mat-icon>
+
+                    </div>
+                    <input class="col-span-5 rounded-full font-medium px-5" placeholder="099-984-2350" />
+                </div>
+                <div class="h-10 w-7/12 bg-white text-dark-blue rounded-full grid grid-cols-7 items-center">
+                    <div class="col-span-1 pl-2 items-center  flex">
+                        <mat-icon fontSet="material-icons-outlined">mail</mat-icon>
+
+                    </div>
+                    <input class="col-span-5 rounded-full font-medium px-5" placeholder="registrar&#64;kmitl.ac.th" />
+                </div>
+                <div class="form-control w-9/12">
+                    <label class="label">
+                        <span class="label-text text-dark-blue font-bold">รหัสผ่าน</span>
+                    </label>
+                    <label class="input-group w-full flex-center">
+                        <input type="password" placeholder="กรอกรหัสผ่านเพื่อดำเนินการต่อ"
+                            class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                    </label>
+                    <label class="label flex-center">
+                        <button class="bg-dark-blue w-1/3 h-8 rounded-full  text-white">แก้ไขข้อมูล</button>
+                    </label>
+                    <label for="" class="flex-center ">
+                        <textarea class="textarea text-dark-blue address min-h-28 w-10/12"
+                            placeholder="173/103 หมู้บ้านบางปลารุ่งเรือง หมู่ 4 ต.บ้านเกาะ อ.เมือง จ. สมุทรสาคร  74000"></textarea>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div
+            class="h-full  w-8/12 bg-cover bg-white z-10 absolute right-0 top-0  rounded-l-2xl grid text-dark-blue font-semibold  text-sm">
+            <div class=" p-5 flex flex-col items-start h-1/2">
+                <div class="flex-center ">
+                    <div class=" text-lg font-semibold">ข้อมูลการติดต่อ</div>
+                    <div class="rounded-full bg-dark-blue w-7 h-7 flex-center  text-white"><mat-icon
+                            fontSet="material-icons-outlined">edits</mat-icon></div>
+                </div>
+                <div class="w-8/10 ">
+                    <p> ที่อยู่
+                    </p>
+                    <textarea name="" id="" class="rounded-xl w-full h-16 bg-light-blue p-2 border border-light-grey"></textarea>
+                </div>
+                <div class="w-8/10 flex flex-row gap-3">
+                    <div class="w-full">
+                        <p> จังหวัด
+                        </p>
+                        <input type="text" placeholder="สมุทรสาคร"
+                            class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                    </div>
+                    <div class="w-full">
+                        <p> ตำบล
+                        </p>
+                        <input type="text" placeholder="บ้านเกาะ"
+                            class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                    </div>
+                </div>
+                <div class="w-8/10 flex flex-row gap-3">
+                    <div class="w-full">
+                        <p> อำเภอ
+                        </p>
+                        <input type="text" placeholder="เมืองสมุทรสาคร"
+                            class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                    </div>
+                    <div class="w-full">
+                        <p> รหัสไปรษณีย์
+                        </p>
+                        <input type="text" placeholder="74000"
+                            class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                    </div>
+                </div>
+
+            </div>
+            <div class=" p-5 flex flex-col items-start h-1/2">
+                <div class="flex-center ">
+                    <div class=" text-lg font-semibold">ข้อมูลการชำระเงิน</div>
+                    <div class="rounded-full bg-dark-blue w-7 h-7 flex-center  text-white"><mat-icon
+                            fontSet="material-icons-outlined">edits</mat-icon></div>
+                </div>
+
+                <div class="flex flex-row w-full justify-center items-center">
+                    <div class="w-1/2 flex flex-col gap-3 border-r border-light-grey justify-center">
+                        <div class="w-full ">
+                            <div class = "w-10/12">
+                                <p> ชื่อหน่วยงาน
+                                </p>
+                                <input type="text" placeholder="Byou Sigma"
+                                    class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                            </div>
+                        </div>
+                        <div class="w-full ">
+                            <div class = "w-10/12">
+                                <p> เลขประจำตัวผู้เสียภาษี
+                                </p>
+                                <input type="text" placeholder="XXX-XXX-XXXX"
+                                    class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full " />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/2 flex flex-col gap-3 justify-center items-center pl-5">
+                        <div class="w-full ">
+                            <div class = "w-10/12">
+                                <p> บัญชีธนาคาร
+                                </p>
+                                <input type="text" placeholder="กสิกรไทย"
+                                    class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                            </div>
+                        </div>
+                        <div class="w-full ">
+                            <div class = "w-10/12">
+                                <p> ช่องทางอื่น ๆ
+                                </p>
+                                <input type="text" placeholder="Email"
+                                    class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="w-8/10">
+                    <p> ที่อยู่
+                    </p>
+                    <textarea name="" id="" class="rounded-xl w-full h-16 bg-light-blue p-2 border border-light-grey"></textarea>
+                </div>
+            </div>
         </div>
     </div>
+    <footer class="footer footer-center p-4 bg-dark-blue  text-white start-0 absolute bottom-0 h-10 flex-center">
+        <div class="flex-center"><input type="checkbox" checked="checked" class="checkbox border border-white"/>
+            <p>ต้องการรับการแจ้งเตือนผ่านทางเมล์</p>
+        </div>
+        <div class="flex-center"><input type="checkbox" checked="checked" class="checkbox border border-white"/>
+            <p>ต้องการรับข่าวสารผ่านทางเมล์</p>
+        </div>
+    </footer>
 </div>

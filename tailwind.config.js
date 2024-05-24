@@ -17,6 +17,7 @@ module.exports = {
         'grey': '#7D7A83',
         'light-grey': '#E0E0E0',
         'lighter-grey': '#F4F2F2',
+        'blue-2':"#9FC8D8",
       },
       fontFamily: {
         LPPA: ["Kodchasan", 'sans-serif'],
