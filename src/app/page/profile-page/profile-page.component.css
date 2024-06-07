@@ -1,0 +1,7 @@
+input:focus-visible {
+  outline: none;
+}
+
+.profile-container {
+    height: calc(100% - 40px);
+}

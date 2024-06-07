@@ -1,0 +1,63 @@
+<div class="grid w-full h-full">
+    <div class="bg-dark-blue bg-cover bg-no-repeat" style="background-image: url('assets/imgs/bg_contact.png');"></div>
+    <div class="bg-baby-blue"></div>
+    <div class="absolute inset-x-0 flex items-center justify-center h-4/5 ">
+        <div class="bg-light-grey h-4/5 w-4/5 mt-16 rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-x-6" style="overflow: auto;">
+            <div class="bg-white rounded-2xl mt-6 mb-6 ml-6 flex flex-col relative">
+                <div class="absolute w-20 h-20 rounded-full bg-ocean-blue left-1/2 transform -translate-x-1/2 -translate-y-1/4 flex-center">
+                    <app-svg-icon [iconName]="'tools'"/>
+                </div>
+                <div class="h-36 flex flex-col justify-end">
+                    <h1 class="text-dark-blue font-LPPA text-3xl text-center font-bold">บริการ</h1>
+                    <p class="text-ocean-blue font-LPPA text-base text-center ">ระบบจะตอบกลับภายใน 24 ชั่วโมง</p>
+                </div>
+                <div class="flex justify-end flex-col flex-1 mx-2">
+                    <div class="chat  chat-start">
+                        <div class="bg-grey p-2 rounded-3xl font-LPPA font-medium text-black">It's over Anakin, <br />I
+                            have the high ground.</div>
+                    </div>
+                    <div class="chat  chat-end">
+                        <div class="bg-ocean-blue p-2 rounded-3xl font-LPPA font-medium text-white">You underestimate my
+                            power!</div>
+                    </div>
+                </div>
+                <div class="w-full flex flex-row px-2 items-center">
+                    <app-svg-icon [iconName]="'picture'" class="p-2 " />
+                    <input type="text" placeholder="พิมข้อความของคุณได้ที่นี้"
+                        class="input input-bordered w-full border-white border-l-lighter-grey rounded-none placeholder-dark-blue font-medium" />
+                    <app-svg-icon [iconName]="'send'" />
+                </div>
+            </div>
+            <div class="bg-white rounded-r-3xl flex flex-col justify-center items-center gap-y-5 relative">
+                <div>
+                    <h1 class="text-dark-blue text-3xl font-bold font-LPPA">ติดต่อเรา</h1>
+                </div>
+                <div class="bg-alice-blue  min-w-80 h-8 flex justify-center items-center">
+                    <app-svg-icon [iconName]="'email'" />
+                    <p class="text-lg text-dark-blue">Email</p>
+                </div>
+                <div class="bg-alice-blue min-w-80 h-8 flex justify-center items-center"> <app-svg-icon
+                        [iconName]="'tel'" />
+                    <p>Tel</p>
+                </div>
+                <div class="bg-alice-blue min-w-80 h-8 flex justify-center items-center"> <app-svg-icon
+                        [iconName]="'facebook'" />
+                    <p>Facebook</p>
+                </div>
+                <div class=" min-w-80 h-48 ">
+                    <p class="text-dark-blue font-semibold font-LPPA">ข้อเสนอแนะ</p>
+                    <textarea class="textarea w-full h-3/4 border-grey"
+                        placeholder="พิมข้อความของคุณได้ที่นี้!"></textarea>
+                    <div class="w-full flex justify-center">
+                        <button class="btn btn-sm bg-dark-blue text-white rounded-3xl w-20">ส่ง</button>
+                    </div>
+                </div>
+                <div class=" min-w-80 h-10 ">
+                    <p class="text-dark-blue font-LPPA text-sm text-center">เปิดให้บริการตั้งแต่ 9.00 น.- 18.00 น.<br />
+                        ปิดทำการเฉพาะวันหยุดสุดสัปดาห์และวันหยุดนักขัตฤกษ</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

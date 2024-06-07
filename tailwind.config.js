@@ -1,0 +1,81 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  important: true,
+  content: [
+    "./src/**/*.{html,ts}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'dark-blue': '#2749A3',
+        'ocean-blue': '#307DA2',
+        'blue': '#86B6CD',
+        'baby-blue': '#C6E6FF',
+        'alice-blue': '#F0F8FF',
+        'yellow': '#F3C762',
+        'light-blue': '#F0F8FF',
+        'grey': '#7D7A83',
+        'light-grey': '#E0E0E0',
+        'lighter-grey': '#F4F2F2',
+        'blue-2':"#9FC8D8",
+        'gold': '#F3C762',
+      },
+      fontFamily: {
+        LPPA: ["Kodchasan", 'sans-serif'],
+      },
+      height: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+        'nmax': 'calc(100vh - 80px)',
+
+      },minHeight: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+        'nmax': 'calc(100vh - 80px)',
+      },
+      width: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+      },
+      minWidth: {
+        '9/10': '90%',
+        '8/10': '80%',
+        '36rem': '36rem',
+        '30rem': '30rem',
+      },
+      flex: {
+        center: '0 1 auto',
+      },
+    },
+  },
+  plugins: [
+    require("daisyui"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.flex-center': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      };
+
+      addUtilities(newUtilities);
+    }
+  ],
+  daisyui: {
+    themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    darkTheme: "aqua", // name of one of the included themes for dark mode
+    base: true, // applies background color and foreground color for root element by default
+    styled: true, // include daisyUI colors and design decisions for all components
+    utils: true, // adds responsive and modifier utility classes
+    prefix: "", // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
+    logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
+    themeRoot: ":root", // The element that receives theme color CSS variables
+  },
+}

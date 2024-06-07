@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Kodchasan&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .collapse {
+    visibility: visible;
+    }
+    }
+
+
+.inset-x-0 {
+    z-index: 0;
+}
+.menu {
+    z-index: 1;
+}
+html {
+    font-family: 'Kodchasan', sans-serif;
+    background-color: white;
+    color: #2749A3;
+    min-height: 100%;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+textarea {
+    resize: none;
+ }
+
+
+
+/* calculator page */
+ .mat-mdc-tab .mdc-tab__text-label {
+    color: #2749A3 !important;
+    font-weight: 900; 
+    font-family: 'Kodchasan', sans-serif ;
+
+}
+
+.mat-mdc-tab {
+    background-color: #fff !important;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.mdc-tab-indicator--active {
+    background-color: #86B6CD !important;
+
+}
+
+.mdc-tab-indicator__content--underline
+{
+    display: none !important;
+}
+.mat-mdc-tab-group .mat-mdc-tab{
+    /* --mat-tab-header-active-ripple-color:transparent; */
+    border-radius: 15px 15px 0px 0px !important;
+    overflow: hidden;
+
+}
