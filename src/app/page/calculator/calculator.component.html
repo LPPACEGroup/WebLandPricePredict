@@ -1,1 +1,12 @@
-<p>calculator works!</p>
+<div class="h-nmax  relative flex-center">
+    <div class="h-9/10 w-2/3 bg-white z-10 ">
+        <mat-tab-group  >
+            <mat-tab label="คำนวณสินเชื่อ" class="h-full "> <app-loan-calculator /> </mat-tab>
+            <mat-tab label="เปรียบเทียบสินเชื่อ"> <app-loan-compare /> </mat-tab>
+            <mat-tab label="รีไฟแนนซ์"> <app-refinance /> </mat-tab>
+            <mat-tab label="อัตราร้อยละต่อปี(APR)"> <app-apr /> </mat-tab>
+        </mat-tab-group>
+
+    </div>
+    <div class="absolute h-1/2 z-0 bg-ocean-blue bottom-0 w-full"></div>
+</div>
