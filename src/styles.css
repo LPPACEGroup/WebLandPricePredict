@@ -58,5 +58,11 @@ textarea {
     /* --mat-tab-header-active-ripple-color:transparent; */
     border-radius: 15px 15px 0px 0px !important;
     overflow: hidden;
+}
 
+.mat-mdc-tab-group-stretch-tabs {
+    height: 100% !important;
+}
+.mat-mdc-tab-body-wrapper {
+    height: 100% !important;
 }
