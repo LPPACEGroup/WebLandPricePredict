@@ -1,72 +1,50 @@
 import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { MapComponent } from '../../core/map/map.component';
-import * as Leaflet from 'leaflet'; 
-Leaflet.Icon.Default.imagePath = 'assets/';
+import { SearchApiService } from '../../service/search-api.service';
 
 @Component({
   selector: 'app-map-page',
   standalone: true,
-  imports: [MapComponent],
+  imports: [MapComponent, HttpClientModule], // Include HttpClientModule here
   templateUrl: './map-page.component.html',
-  styleUrl: './map-page.component.css'
+  styleUrls: ['./map-page.component.css']
 })
 export class MapPageComponent {
-  map!: Leaflet.Map;
-  markers: Leaflet.Marker[] = [];
-  options = {
-    layers: [
-      Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      })
-    ],
-    zoom: 16,
-    center: { lat: 28.626137, lng: 79.821603 }
-  }
+  coordinates: [number, number] | null = null;  constructor(private searchApiService: SearchApiService) {}
 
-  initMarkers() {
-    const initialMarkers = [
-      {
-        position: { lat: 28.625485, lng: 79.821091 },
-        draggable: true
-      },
-      {
-        position: { lat: 28.625293, lng: 79.817926 },
-        draggable: false
-      },
-      {
-        position: { lat: 28.625182, lng: 79.81464 },
-        draggable: true
-      }
-    ];
-    for (let index = 0; index < initialMarkers.length; index++) {
-      const data = initialMarkers[index];
-      const marker = this.generateMarker(data, index);
-      marker.addTo(this.map).bindPopup(`<b>${data.position.lat},  ${data.position.lng}</b>`);
-      this.map.panTo(data.position);
-      this.markers.push(marker)
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.handleSearch(event);
     }
   }
 
-  generateMarker(data: any, index: number) {
-    return Leaflet.marker(data.position, { draggable: data.draggable })
-      .on('click', (event) => this.markerClicked(event, index))
-      .on('dragend', (event) => this.markerDragEnd(event, index));
-  }
+  handleSearch(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const searchTerm = inputElement.value.trim();
+    console.log(searchTerm);
+    
+    if (searchTerm) {
+      this.searchApiService.searchLocation(searchTerm).subscribe(
+        (response: any) => {
+          console.log('Search results:', response);
+          // Check if features array is not empty
+          if (response.features && response.features.length > 0) {
+            // Extract the first set of coordinates
+            const firstCoordinates = response.features[0].geometry.coordinates;
+            console.log('First Coordinates:', firstCoordinates);
+            // You can use these coordinates to set a map view or perform other operations
+            this.coordinates = firstCoordinates;
 
-  onMapReady($event: Leaflet.Map) {
-    this.map = $event;
-    this.initMarkers();
+          } else {
+            console.log('No features found.');
+          }
+        
+        },
+        (error: any) => {
+          console.error('Error fetching search results:', error);
+        }
+      );
+    }
   }
-
-  mapClicked($event: any) {
-    console.log($event.latlng.lat, $event.latlng.lng);
-  }
-
-  markerClicked($event: any, index: number) {
-    console.log($event.latlng.lat, $event.latlng.lng);
-  }
-
-  markerDragEnd($event: any, index: number) {
-    console.log($event.target.getLatLng());
-  } 
 }

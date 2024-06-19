@@ -1,3 +1,21 @@
-<div class="h-nmax relative">
-    <app-map></app-map>
+<div class="min-h-nmax relative">
+    <app-map [coordinates]="coordinates"></app-map>
+    <div class="h-full w-96 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue ">
+        <input placeholder="เลขที่/เขต/แขวง/จังหวัด........"
+            class="input input-bordered w-10/12 h-10  rounded-full placeholder-dark-blue" 
+            (keydown)="onKeyDown($event)"/>
+
+        <div class=" w-10/12 flex flex-row gap-2"> 
+            <select class="select select-bordered  max-w-xs rounded-full ">
+                <option disabled selected>เลือกแสดงข้อมูลแผนที่</option>
+                <option>Han Solo</option>
+                <option>Greedo</option>
+              </select>
+              <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 ">
+                <option disabled selected>อื่นๆ</option>
+                <option>Han Solo</option>
+                <option>Greedo</option>
+              </select>
+        </div>
+    </div>
 </div>

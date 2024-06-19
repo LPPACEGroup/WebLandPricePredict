@@ -66,3 +66,10 @@ textarea {
 .mat-mdc-tab-body-wrapper {
     height: 100% !important;
 }
+/* remove focus on input and select*/
+.input:focus, .input:focus-within {
+    border: none;
+}
+.select:focus{
+    border: none;
+}
