@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,10 +12,13 @@ export class SearchApiService {
   constructor(private http: HttpClient) {}
 
   searchLocation(query: string): Observable<any> {
+    
     const params = {
       q: query,
-      format: 'geojson'
+      format: 'jsonv2'
     };
-    return this.http.get(this.baseUrl, { params });
+    const headers = new HttpHeaders()
+    .set('accept-language', 'th');
+    return this.http.get(this.baseUrl, { params ,headers});
   }
 }
