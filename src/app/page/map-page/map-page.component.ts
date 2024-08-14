@@ -1,9 +1,10 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild ,OnInit} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../../core/map/map.component';
-import { SearchApiService } from '../../service/search-api.service';
+import { SearchApiService } from '../../service/SearchLand/search-api.service';
 import { CommonModule } from '@angular/common';
 import { LandCardComponent } from '../../core/land-card/land-card.component';
+import { LandListService } from '../../service/LandList/land-list.service';
 
 interface LocationResult {
   place_id: number;
@@ -29,7 +30,9 @@ export class MapPageComponent {
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
-  constructor(private searchApiService: SearchApiService) {}
+  constructor(private searchApiService: SearchApiService,
+    private landListService: LandListService
+  ) {}
 
   @HostListener('document:click', ['$event'])
   onGlobalClick(event: MouseEvent) {
@@ -41,12 +44,20 @@ export class MapPageComponent {
       this.isInputFocused = false;
     }
   }
+  
+  landList: any[] = [];
+
+  ngOnInit(): void {
+    this.landListService.getData().subscribe(response => {
+      this.landList = response;
+    });
+  }
 
   onFocus() {
     this.isInputFocused = true;
     console.log('focus');
   }
-
+  
   onBlur() {
     // Use timeout to ensure the blur event doesn't interfere with click event
     setTimeout(() => this.isInputFocused = false, 200);

@@ -18,7 +18,7 @@ export class MapComponent implements OnChanges {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [39.8282, -98.5795],
+      center: [13.7299, 100.7782],
       zoom: 14,
     });
     const tiles = L.tileLayer(
