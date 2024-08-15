@@ -1,0 +1,71 @@
+.bg{
+  background-image: url('.../../../../../assets/imgs/bg.png');
+  background-size: cover;
+  position: fixed;
+  inset: 0;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.scrollable-content {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  background-color: white;
+  display: flex;
+  border-radius: 10px;
+}
+
+.left-content {
+  display: flex;
+  flex-direction: row; /* Align icon and list horizontally */
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-right: 1px solid #e0e0e0; /* Optional: Add border to separate content visually */
+}
+
+.right-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.icon-container {
+  margin-right: 50px; /* Space between icon and list */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  fill: #2749A3;
+}
+
+
+.icon-text {
+  margin-top: 8px; /* Space between icon and text */
+  font-size: 28px;
+  text-align: center; /* Center text alignment */
+}
