@@ -71,3 +71,4 @@ export class MapComponent implements OnChanges {
     this.initMap();
   }
 }
+
