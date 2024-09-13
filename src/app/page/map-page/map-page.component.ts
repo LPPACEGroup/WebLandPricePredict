@@ -1,9 +1,10 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild ,OnInit} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../../core/map/map.component';
-import { SearchApiService } from '../../service/search-api.service';
+import { SearchApiService } from '../../service/SearchLand/search-api.service';
 import { CommonModule } from '@angular/common';
 import { LandCardComponent } from '../../core/land-card/land-card.component';
+import { LandListService } from '../../service/LandList/land-list.service';
 
 interface LocationResult {
   place_id: number;
@@ -25,21 +26,31 @@ export class MapPageComponent {
   loading = false;
   isInputFocused: boolean = false;
   results: LocationResult[] = [];
-  
+
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
-  constructor(private searchApiService: SearchApiService) {}
+  constructor(private searchApiService: SearchApiService,
+    private landListService: LandListService
+  ) {}
 
   @HostListener('document:click', ['$event'])
   onGlobalClick(event: MouseEvent) {
     const targetElement = event.target as HTMLElement;
 
     // Check if the click is outside the search input and results container
-    if (!this.searchInput.nativeElement.contains(targetElement) && 
+    if (!this.searchInput.nativeElement.contains(targetElement) &&
         !this.searchResults.nativeElement.contains(targetElement)) {
       this.isInputFocused = false;
     }
+  }
+
+  landList: any[] = [];
+
+  ngOnInit(): void {
+    this.landListService.getData().subscribe(response => {
+      this.landList = response;
+    });
   }
 
   onFocus() {
