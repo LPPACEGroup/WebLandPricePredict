@@ -1,12 +1,14 @@
-<div class="h-20  bg-dark-blue navbar sticky top-0 z-50">
-  <h1 class="text-white font-LPPA text-5xl navbar-start">LPPM</h1>
-  <div class="  navbar-end">
-    <ul class="menu menu-horizontal">
+<div class="h-10  bg-dark-blue navbar sticky top-0 z-50">
+  <h1 class="text-white font-LPPA text-3xl navbar-start">LPPM</h1>
+  <div class="navbar-end">
 
-      <li class="hover:bg-transparent">
-        <div routerLink="home"
-          class="text-white  hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow ">
+
+    <!-- main menu -->
+    <ul class="menu menu-horizontal lg:flex min-w-full">
+
+      <!-- Home btt -->
+      <li class="">
+        <div routerLink="home" class="text-white" routerLinkActive="">
           <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 24 24" fill="none">
             <path opacity="0.1"
               d="M17.7218 8.08382L14.7218 5.29811C13.4309 4.09937 12.7854 3.5 12 3.5C11.2146 3.5 10.5691 4.09937 9.2782 5.29811L6.2782 8.08382C5.64836 8.66867 5.33345 8.96109 5.16672 9.34342C5 9.72575 5 10.1555 5 11.015V16.9999C5 18.8856 5 19.8284 5.58579 20.4142C6.17157 20.9999 7.11438 20.9999 9 20.9999H9.75V16.9999C9.75 15.7573 10.7574 14.7499 12 14.7499C13.2426 14.7499 14.25 15.7573 14.25 16.9999V20.9999H15C16.8856 20.9999 17.8284 20.9999 18.4142 20.4142C19 19.8284 19 18.8856 19 16.9999L19 11.015C19 10.1555 19 9.72575 18.8333 9.34342C18.6666 8.96109 18.3516 8.66866 17.7218 8.08382Z"
@@ -23,24 +25,29 @@
         </div>
       </li>
 
-      <li class="hover:bg-transparent">
-        <div routerLink="Map"
-          class="text-white flex hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow">
+      <!-- Map btt -->
+      <li class="">
+        <div routerLink="Map" class="text-white flex " routerLinkActive="">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0007 1.83337C15.3218 1.83337 17.4824 1.83337 18.8244 3.17537C19.2864 3.63737 19.5898 4.19654 19.7887 4.90696L4.90757 19.7881C4.19715 19.5892 3.63798 19.2858 3.17598 18.8238C1.83398 17.4827 1.83398 15.3212 1.83398 11C1.83398 6.67887 1.83398 4.51829 3.17598 3.17537C4.51982 1.83337 6.67948 1.83337 11.0007 1.83337ZM5.04232 8.02729C5.04232 9.66354 6.06623 11.573 7.66398 12.2559C8.03615 12.4145 8.46515 12.4145 8.83732 12.2559C10.4351 11.573 11.459 9.66354 11.459 8.02729C11.459 6.37821 10.0226 5.04171 8.25065 5.04171C6.47873 5.04171 5.04232 6.37821 5.04232 8.02729Z" fill="white"/>
-            <path d="M9.625 8.25C9.625 8.61467 9.48013 8.96441 9.22227 9.22227C8.96441 9.48013 8.61467 9.625 8.25 9.625C7.88533 9.625 7.53559 9.48013 7.27773 9.22227C7.01987 8.96441 6.875 8.61467 6.875 8.25C6.875 7.88533 7.01987 7.53559 7.27773 7.27773C7.53559 7.01987 7.88533 6.875 8.25 6.875C8.61467 6.875 8.96441 7.01987 9.22227 7.27773C9.48013 7.53559 9.625 7.88533 9.625 8.25Z" fill="white"/>
-            <path opacity="0.5" d="M20.0666 6.57434C20.1675 7.73026 20.1675 9.17217 20.1675 11C20.1675 14.7895 20.1675 16.9171 19.2627 18.2884L13.8058 12.8333L20.0666 6.57434ZM18.2901 19.261L12.8351 13.8059L6.57422 20.0649C7.73105 20.1667 9.17297 20.1667 11.0017 20.1667C14.7912 20.1667 16.9188 20.1667 18.2901 19.261Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M11.0007 1.83337C15.3218 1.83337 17.4824 1.83337 18.8244 3.17537C19.2864 3.63737 19.5898 4.19654 19.7887 4.90696L4.90757 19.7881C4.19715 19.5892 3.63798 19.2858 3.17598 18.8238C1.83398 17.4827 1.83398 15.3212 1.83398 11C1.83398 6.67887 1.83398 4.51829 3.17598 3.17537C4.51982 1.83337 6.67948 1.83337 11.0007 1.83337ZM5.04232 8.02729C5.04232 9.66354 6.06623 11.573 7.66398 12.2559C8.03615 12.4145 8.46515 12.4145 8.83732 12.2559C10.4351 11.573 11.459 9.66354 11.459 8.02729C11.459 6.37821 10.0226 5.04171 8.25065 5.04171C6.47873 5.04171 5.04232 6.37821 5.04232 8.02729Z"
+              fill="white" />
+            <path
+              d="M9.625 8.25C9.625 8.61467 9.48013 8.96441 9.22227 9.22227C8.96441 9.48013 8.61467 9.625 8.25 9.625C7.88533 9.625 7.53559 9.48013 7.27773 9.22227C7.01987 8.96441 6.875 8.61467 6.875 8.25C6.875 7.88533 7.01987 7.53559 7.27773 7.27773C7.53559 7.01987 7.88533 6.875 8.25 6.875C8.61467 6.875 8.96441 7.01987 9.22227 7.27773C9.48013 7.53559 9.625 7.88533 9.625 8.25Z"
+              fill="white" />
+            <path opacity="0.5"
+              d="M20.0666 6.57434C20.1675 7.73026 20.1675 9.17217 20.1675 11C20.1675 14.7895 20.1675 16.9171 19.2627 18.2884L13.8058 12.8333L20.0666 6.57434ZM18.2901 19.261L12.8351 13.8059L6.57422 20.0649C7.73105 20.1667 9.17297 20.1667 11.0017 20.1667C14.7912 20.1667 16.9188 20.1667 18.2901 19.261Z"
+              fill="white" />
 
           </svg>
           <p>แผนที่</p>
         </div>
       </li>
 
-      <li class="hover:bg-transparent">
-        <div routerLink="Dashboard"
-          class="text-white  hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow ">
+
+      <!-- Dashboard Button -->
+      <li class="">
+        <div routerLink="Dashboard" class="text-white flex" routerLinkActive="">
           <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"
             class="stroke-white" routerLinkActive="stroke-yellow">
             <path opacity="0.32"
@@ -58,10 +65,10 @@
         </div>
       </li>
 
-      <li class="hover:bg-transparent">
-        <div routerLink="Blog"
-          class="text-white flex hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow">
+
+      <!-- Blog Button -->
+      <li class="">
+        <div routerLink="Blog" class="text-white flex" routerLinkActive="">
           <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
             <g opacity="0.32">
               <path
@@ -101,93 +108,128 @@
         </div>
       </li>
 
-
-      <li class="flex items-end">
+      <!-- Drawer for mobile menu
+      <li class="flex items-end lg:hidden">
         <div class="drawer drawer-end">
-          <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-          <div class="drawer-content  ">
-            <!-- Page content here -->
-            <label for="my-drawer" class="">
+          <label for="mobile-drawer" class="sr-only">Toggle mobile menu</label>
+          <input id="mobile-drawer" type="checkbox" class="drawer-toggle" />
+          <div class="drawer-content">
+            <label for="my-drawer" class="cursor-pointer">
               <div
                 class="text-white flex hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
                   <path opacity="0.32"
-                    d="M14.112 4.125H4.43232C3.56285 4.125 2.85547 4.63885 2.85547 5.27122C2.85547 5.90281 3.56285 6.41667 4.43232 6.41667H14.112C14.9814 6.41667 15.6888 5.90281 15.6888 5.27122C15.6888 4.63883 14.9814 4.125 14.112 4.125Z"
-                    fill="white" />
+                    d="M19.5219 15.5561C19.2618 16.1567 18.6434 16.5 17.989 16.5H13.6869C13.7151 16.4216 13.7401 16.3413 13.7617 16.2592C14.0128 15.306 13.7484 14.3358 13.1424 13.655C13.3661 11.8334 13.5057 9.6144 13.611 8.00987C13.7288 6.25954 12.4444 4.86669 11.5007 4.86669C10.5569 4.86669 9.27252 6.25954 9.39031 8.00987C9.49558 9.6144 9.63515 11.8334 9.85889 13.655C9.2529 14.3358 8.98851 15.306 9.2396 16.2592C9.26118 16.3413 9.28616 16.4216 9.31444 16.5H5.01199C4.35758 16.5 3.73921 16.1567 3.47906 15.5561L1.15673 10.3428C0.896582 9.7422 1.33288 9.08778 1.99191 9.08778H21.0099C21.6689 9.08778 22.1052 9.7422 21.8451 10.3428L19.5219 15.5561Z"
+                    fill="#323232" />
                   <path
-                    d="M17.7787 9.854H8.09899C7.22952 9.854 6.52214 10.3679 6.52214 11.0002C6.52214 11.6318 7.22952 12.1457 8.09899 12.1457H17.7786C18.6481 12.1457 19.3555 11.6318 19.3555 11.0002C19.3555 10.3678 18.6481 9.854 17.7787 9.854Z"
-                    fill="white" />
-                  <defs>
-                    <path d="m9.877,15.938a0.47,0.47 0 0 1 -0.469,-0.469a0.47,0.47 0 0 1 0.469,-0.469" id="A" />
-                    <path d="m9.879,15.938a0.47,0.47 0 0 0 0.469,-0.469a0.47,0.47 0 0 0 -0.469,-0.469" id="B" />
-                  </defs>
-                  <g>
-                    <title>Layer 1</title>
-                    <g id="svg_1" stroke="">
-                      <g id="svg_2" stroke-width="1.5" stroke-linejoin="round">
-                        <path id="svg_3"
-                          d="m22.45001,0.938l-16.887,0c-1.036,0 -1.876,0.839 -1.876,1.875l0,24.375c0,1.035 0.84,1.875 1.876,1.875l16.887,0c1.036,0 1.876,-0.84 1.876,-1.875l0,-24.375c0,-1.036 -0.84,-1.875 -1.876,-1.875z" />
-                        <path id="svg_4"
-                          d="m19.63501,4.688l-11.258,0a0.94,0.94 0 0 0 -0.938,0.938l0,3.75a0.94,0.94 0 0 0 0.938,0.938l11.258,0a0.94,0.94 0 0 0 0.938,-0.937l0,-3.75a0.94,0.94 0 0 0 -0.938,-0.937l0,-0.002z" />
-                      </g>
-                      <g id="svg_5" stroke-width="1.5">
-                        <use x="-1.03199" y="0" id="svg_6" xlink:href="#A" />
-                        <use x="-1.03199" y="0" id="svg_7" xlink:href="#B" />
-                        <use x="-1.03199" id="svg_8" y="4.687" xlink:href="#A" />
-                        <use x="-1.03199" id="svg_9" y="4.687" xlink:href="#B" />
-                        <use x="-1.03199" id="svg_10" y="9.375" xlink:href="#A" />
-                        <use x="-1.03199" id="svg_11" y="9.375" xlink:href="#B" />
-                        <use y="0" id="svg_12" x="4.32401" xlink:href="#A" />
-                        <use y="0" id="svg_13" x="4.32101" xlink:href="#B" />
-                        <use id="svg_14" y="4.687" x="4.32401" xlink:href="#A" />
-                        <use id="svg_15" y="4.687" x="4.32101" xlink:href="#B" />
-                        <use id="svg_16" y="9.375" x="4.32401" xlink:href="#A" />
-                        <use id="svg_17" y="9.375" x="4.32101" xlink:href="#B" />
-                        <use y="0" id="svg_18" x="9.28901" xlink:href="#A" />
-                        <use y="0" id="svg_19" x="9.28601" xlink:href="#B" />
-                        <use id="svg_20" y="4.687" x="9.28901" xlink:href="#A" />
-                        <use id="svg_21" y="4.687" x="9.28601" xlink:href="#B" />
-                        <use id="svg_22" y="9.375" x="9.28901" xlink:href="#A" />
-                        <use id="svg_23" y="9.375" x="9.28601" xlink:href="#B" />
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-                <p>เพิ่มเติม</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                    d="M13.6079 9.59839C13.7248 7.82632 12.4845 6.375 11.5 6.375C10.5155 6.375 9.27524 7.82632 9.3921 9.59839C9.5007 11.2425 9.61561 13.0985 9.83165 14.0255C9.46174 14.2132 9.27888 14.6251 9.27888 15.0727C9.27888 15.6482 9.72631 16.125 10.2989 16.125H12.7011C13.2737 16.125 13.7211 15.6482 13.7211 15.0727C13.7211 14.6251 13.5383 14.2132 13.1683 14.0255C13.3844 13.0985 13.4993 11.2425 13.6079 9.59839Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                   <path
-                    d="M8.10502 10.334C7.94925 10.3343 7.79829 10.2801 7.67835 10.1807L3.67835 6.84735C3.39484 6.61171 3.35604 6.19086 3.59168 5.90735C3.82732 5.62385 4.24818 5.58505 4.53168 5.82069L8.10502 8.80735L11.6783 5.92735C11.8161 5.81551 11.9927 5.76317 12.1691 5.78194C12.3456 5.80071 12.5072 5.88903 12.6183 6.02735C12.7418 6.16593 12.8019 6.34967 12.7841 6.53439C12.7664 6.71911 12.6725 6.88809 12.525 7.00069L8.52502 10.2207C8.40163 10.3044 8.25375 10.3443 8.10502 10.334Z"
-                    fill="white" />
+                    d="M6.588 18.193C7.1072 19.2175 8.16358 19.875 9.3532 19.875H13.6468C14.8364 19.875 15.8928 19.2175 16.412 18.193L19.2415 12.5H3.75848L6.588 18.193Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
+                <p>เมนู</p>
               </div>
             </label>
           </div>
           <div class="drawer-side">
-            <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <ul class="menu p-4 w-80 min-h-full bg-white text-dark-blue">
-              <li><a>คู่มือการใช้งาน</a></li>
-              <li routerLink="Question"><a>คำถามที่พบบ่อย</a></li>
-              <li routerLink="Contact"><a>ติดต่อเรา</a></li>
-              <li routerLink="Subscription"><a>แพ็คเกจสมาชิก</a></li>
-
-              <li><a>ออกจากระบบ<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
-                      fill="#2749A3" />
-                  </svg>
-                </a></li>
+            <label for="my-drawer" class="drawer-overlay"></label>
+            <ul class="menu p-4 w-80 bg-white text-dark-blue">
+              <li>
+                <a routerLink="home" routerLinkActive="text-yellow">หน้าหลัก</a>
+              </li>
+              <li>
+                <a routerLink="Map" routerLinkActive="text-yellow">แผนที่</a>
+              </li>
+              <li>
+                <a routerLink="Dashboard" routerLinkActive="text-yellow">แดชบอร์ด</a>
+              </li>
+              <li>
+                <a routerLink="Blog" routerLinkActive="text-yellow">บล็อก</a>
+              </li>
             </ul>
           </div>
         </div>
-      </li>
+      </li> -->
 
+
+      <!-- Dropdown for more menu -->
+      <div class="flex-none">
+        <div class="dropdown dropdown-end">
+          <li tabindex="0" class="">
+            <div class="text-white flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+                <path opacity="0.32"
+                  d="M14.112 4.125H4.43232C3.56285 4.125 2.85547 4.63885 2.85547 5.27122C2.85547 5.90281 3.56285 6.41667 4.43232 6.41667H14.112C14.9814 6.41667 15.6888 5.90281 15.6888 5.27122C15.6888 4.63883 14.9814 4.125 14.112 4.125Z"
+                  fill="white" />
+                <path
+                  d="M17.7787 9.854H8.09899C7.22952 9.854 6.52214 10.3679 6.52214 11.0002C6.52214 11.6318 7.22952 12.1457 8.09899 12.1457H17.7786C18.6481 12.1457 19.3555 11.6318 19.3555 11.0002C19.3555 10.3678 18.6481 9.854 17.7787 9.854Z"
+                  fill="white" />
+                <defs>
+                  <path d="m9.877,15.938a0.47,0.47 0 0 1 -0.469,-0.469a0.47,0.47 0 0 1 0.469,-0.469" id="A" />
+                  <path d="m9.879,15.938a0.47,0.47 0 0 0 0.469,-0.469a0.47,0.47 0 0 0 -0.469,-0.469" id="B" />
+                </defs>
+                <g>
+                  <title>Layer 1</title>
+                  <g id="svg_1" stroke="">
+                    <g id="svg_2" stroke-width="1.5" stroke-linejoin="round">
+                      <path id="svg_3"
+                        d="m22.45001,0.938l-16.887,0c-1.036,0 -1.876,0.839 -1.876,1.875l0,24.375c0,1.035 0.84,1.875 1.876,1.875l16.887,0c1.036,0 1.876,-0.84 1.876,-1.875l0,-24.375c0,-1.036 -0.84,-1.875 -1.876,-1.875z" />
+                      <path id="svg_4"
+                        d="m19.63501,4.688l-11.258,0a0.94,0.94 0 0 0 -0.938,0.938l0,3.75a0.94,0.94 0 0 0 0.938,0.938l11.258,0a0.94,0.94 0 0 0 0.938,-0.937l0,-3.75a0.94,0.94 0 0 0 -0.938,-0.937l0,-0.002z" />
+                    </g>
+                    <g id="svg_5" stroke-width="1.5">
+                      <use x="-1.03199" y="0" id="svg_6" xlink:href="#A" />
+                      <use x="-1.03199" y="0" id="svg_7" xlink:href="#B" />
+                      <use x="-1.03199" id="svg_8" y="4.687" xlink:href="#A" />
+                      <use x="-1.03199" id="svg_9" y="4.687" xlink:href="#B" />
+                      <use x="-1.03199" id="svg_10" y="9.375" xlink:href="#A" />
+                      <use x="-1.03199" id="svg_11" y="9.375" xlink:href="#B" />
+                      <use y="0" id="svg_12" x="4.32401" xlink:href="#A" />
+                      <use y="0" id="svg_13" x="4.32101" xlink:href="#B" />
+                      <use id="svg_14" y="4.687" x="4.32401" xlink:href="#A" />
+                      <use id="svg_15" y="4.687" x="4.32101" xlink:href="#B" />
+                      <use id="svg_16" y="9.375" x="4.32401" xlink:href="#A" />
+                      <use id="svg_17" y="9.375" x="4.32101" xlink:href="#B" />
+                      <use y="0" id="svg_18" x="9.28901" xlink:href="#A" />
+                      <use y="0" id="svg_19" x="9.28601" xlink:href="#B" />
+                      <use id="svg_20" y="4.687" x="9.28901" xlink:href="#A" />
+                      <use id="svg_21" y="4.687" x="9.28601" xlink:href="#B" />
+                      <use id="svg_22" y="9.375" x="9.28901" xlink:href="#A" />
+                      <use id="svg_23" y="9.375" x="9.28601" xlink:href="#B" />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <p>เพิ่มเติม</p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                <path
+                  d="M8.10502 10.334C7.94925 10.3343 7.79829 10.2801 7.67835 10.1807L3.67835 6.84735C3.39484 6.61171 3.35604 6.19086 3.59168 5.90735C3.82732 5.62385 4.24818 5.58505 4.53168 5.82069L8.10502 8.80735L11.6783 5.92735C11.8161 5.81551 11.9927 5.76317 12.1691 5.78194C12.3456 5.80071 12.5072 5.88903 12.6183 6.02735C12.7418 6.16593 12.8019 6.34967 12.7841 6.53439C12.7664 6.71911 12.6725 6.88809 12.525 7.00069L8.52502 10.2207C8.40163 10.3044 8.25375 10.3443 8.10502 10.334Z"
+                  fill="white" />
+              </svg>
+            </div>
+          </li>
+          <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <li><a>คู่มือการใช้งาน</a></li>
+            <li routerLink="Question"><a>คำถามที่พบบ่อย</a></li>
+            <li routerLink="Contact"><a>ติดต่อเรา</a></li>
+            <li routerLink="Subscription"><a>แพ็คเกจสมาชิก</a></li>
+            <li><a>ออกจากระบบ<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
+                    fill="#2749A3" />
+                </svg>
+              </a></li>
+          </ul>
+        </div>
+      </div>
     </ul>
 
+    <!-- end menu -->
+    <ul class="menu menu-horizontal">
 
-    <ul class="menu menu-horizontal flex items-center">
-
-
+      <!-- notification -->
       <div class="flex-none">
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -211,7 +253,7 @@
         </div>
       </div>
 
-
+      <!-- profile btt -->
       <div class="flex-none">
         <div class="dropdown dropdown-end">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -226,6 +268,7 @@
         </div>
       </div>
     </ul>
+
   </div>
 
 </div>
