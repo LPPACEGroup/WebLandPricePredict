@@ -13,8 +13,10 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.js'; // Add this line
 export class MapComponent implements OnChanges {
   // Implement OnChanges
   @Input() coordinates: [number, number] | null = null; // Input property to receive coordinates
+  @Input()   landList: any[] = [];
 
   private map!: L.Map;
+  private markersLayer = L.layerGroup();
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -32,6 +34,7 @@ export class MapComponent implements OnChanges {
     );
 
     tiles.addTo(this.map);
+    this.markersLayer.addTo(this.map);
     // var wmsLayer = L.tileLayer.wms('https://ms.longdo.com/mapproxy/service', {
     //   layers: 'dol_4326',
     //   format: 'image/png',
@@ -54,21 +57,37 @@ export class MapComponent implements OnChanges {
 
   updateMapView(coordinates: [number, number]) {
     if (coordinates) {
-      // Logic to update the map view based on the new coordinates
-      // console.log('Updating map view to:', coordinates);
+      //plan map ไปที่ coordinate ที่อยู่ตอนนี้
       this.map.panTo(new L.LatLng(coordinates[1], coordinates[0]));
       this.map.setZoom(15);
     }
+  }
+  private renderMarkers(): void {
+    // Clear the previous markers
+    this.markersLayer.clearLayers();
+
+    // Loop through landList and add markers
+    this.landList.forEach(land => {
+      if (land.latitude && land.longitude) {
+        const marker = L.marker([land.latitude, land.longitude]);
+        marker.bindPopup(`<b>${land.location}</b><br>${land.description}`); // Add popup info (optional)
+        this.markersLayer.addLayer(marker); // Add marker to the markers layer
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['coordinates']) {
       this.updateMapView(changes['coordinates'].currentValue);
     }
+    if (changes['landList']) {
+      this.renderMarkers(); 
+    }
   }
 
   ngAfterViewInit(): void {
     this.initMap();
+    
   }
 }
 

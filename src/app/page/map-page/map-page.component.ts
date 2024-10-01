@@ -1,10 +1,13 @@
-import { Component, ElementRef, HostListener, ViewChild ,OnInit} from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../../core/map/map.component';
 import { SearchApiService } from '../../service/SearchLand/search-api.service';
 import { CommonModule } from '@angular/common';
 import { LandCardComponent } from '../../core/land-card/land-card.component';
 import { LandListService } from '../../service/LandList/land-list.service';
+import { NearbyPlacesService } from 'app/service/NearbyPlace/nearby-place.service'; // Ensure the import is correct
+import { Element } from 'app/service/NearbyPlace/nearby-place.service'; // Ensure the import is correct
+import { GetRouteService } from 'app/service/GetRoute/get-route.service';
 
 interface LocationResult {
   place_id: number;
@@ -21,18 +24,24 @@ interface LocationResult {
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css']
 })
-export class MapPageComponent {
+export class MapPageComponent implements OnInit {
   coordinates: [number, number] | null = null;
   loading = false;
   isInputFocused: boolean = false;
   results: LocationResult[] = [];
+  selectedLand: any;
+  nearbyPlaces: Element[] = []; // Change to Element[] type
 
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
-  constructor(private searchApiService: SearchApiService,
-    private landListService: LandListService
+  constructor(
+    private searchApiService: SearchApiService,
+    private landListService: LandListService,
+    private nearbyPlacesService: NearbyPlacesService, // Correct casing
+    private getRouteService : GetRouteService
   ) {}
+
 
   @HostListener('document:click', ['$event'])
   onGlobalClick(event: MouseEvent) {
@@ -50,6 +59,7 @@ export class MapPageComponent {
   ngOnInit(): void {
     this.landListService.getData().subscribe(response => {
       this.landList = response;
+      console.log(this.landList);
     });
   }
 
@@ -69,6 +79,36 @@ export class MapPageComponent {
       // Handle enter key if needed
     }
   }
+  onCardClick(land: any) {
+    this.selectedLand = land;
+  
+    if (this.selectedLand?.latitude && this.selectedLand.longitude) {
+      this.nearbyPlacesService.getRestaurants(this.selectedLand.latitude, this.selectedLand.longitude)
+        .subscribe((response: any[]) => { // Use any[] if you're unsure of the exact type
+          this.nearbyPlaces = response; // Save the nearby places
+          console.log(this.nearbyPlaces);
+  
+          // Now get the nearby places within 5 km with name and type
+          this.getRouteService.getNearbyPlacesWithinDistance(
+            [this.selectedLand.longitude, this.selectedLand.latitude], // Starting coordinates
+            this.nearbyPlaces
+              .filter(place => place.lat !== undefined && place.lon !== undefined && place.tags) // Ensure name exists
+              .map(place => ({
+                lat: place.lat!, 
+                lon: place.lon!, 
+                tags: place.tags || 'Untags',  // Default name if not available
+                type: place.type || 'Unknown'   // Default type if not available
+              }))
+          ).subscribe(nearbyPlacesWithin5km => {
+            console.log('Nearby places within 5 km:', nearbyPlacesWithin5km);
+          });
+        });
+    }
+  
+    this.changeCoord(land.latitude, land.longitude);
+  }
+  
+  
 
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;

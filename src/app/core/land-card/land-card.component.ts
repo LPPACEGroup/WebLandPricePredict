@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-land-card',
@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class LandCardComponent {
   @Input() item: any;
+  @Output() sendItem = new EventEmitter();
 
 }
