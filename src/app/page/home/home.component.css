@@ -69,3 +69,52 @@
   font-size: 28px;
   text-align: center; /* Center text alignment */
 }
+
+.guide-box {
+  margin: 10px;
+  width: 250px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--oceanBlue);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+}
+
+
+/* Mobile devices (portrait and landscape) */
+@media (max-width: 768px) {
+  details[open] summary div svg {
+  stroke: #FF5733 !important;
+  }
+}
+
+/* Tablets (portrait and landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  details[open] summary div svg {
+  stroke: #33FF57 !important;
+  }
+}
+
+/* Laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  details[open] summary div svg {
+  stroke: #3357FF !important;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1441px) {
+  details[open] summary div svg {
+  stroke: #7623F3 !important;
+  }
+}
