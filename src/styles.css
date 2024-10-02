@@ -12,6 +12,24 @@
     }
 
 
+:root {
+  --darkBlue: #2749A3;
+  --oceanBlue: #307DA2;
+  --Blue: #86B6CD;
+  --babyBlue: #C6E6FF;
+  --lightBlue: #F0F8FF;
+
+  --accentYellow: #F3C762;
+  --accentGreen: #00A76F;
+
+  --black: #000000;
+  --grey: #7D7A83;
+  --midGrey: #D2D2D2;
+  --lightGrey: #E0E0E0;
+  --white: #ffffff;
+
+}
+
 .inset-x-0 {
     z-index: 0;
 }
@@ -21,7 +39,7 @@
 html {
     font-family: 'Kodchasan', sans-serif;
     background-color: white;
-    color: #2749A3;
+    color: var(--darkBlue);
     min-height: 100%;
 }
 html, body { height: 100%; }
@@ -36,7 +54,7 @@ textarea {
 /* calculator page */
  .mat-mdc-tab .mdc-tab__text-label {
     color: #2749A3 !important;
-    font-weight: 900; 
+    font-weight: 900;
     font-family: 'Kodchasan', sans-serif ;
 
 }
