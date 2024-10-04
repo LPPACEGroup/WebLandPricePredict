@@ -19,7 +19,10 @@
       <div class="  w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
         <div class="h-96 bg-blue ">
           <div class="bg-ocean-blue text-white h-14 text-xl font-semibold flex-center">ราคาทำนาย</div>
-          <div class="bg-white m-2"></div>
+          <div class="bg-white m-2">
+            <!-- Graph container -->
+            <canvas id="predictedPriceChart"></canvas>
+          </div>
         </div>
         <div class="h-96 bg-blue ">
           <div class="bg-ocean-blue text-white h-14 text-xl font-semibold flex-center">ราคาเฉลี่ยเขตที่ดิน</div>
@@ -30,8 +33,8 @@
 
 
     <div class="bg-white  w-full grid lg:grid-cols-2 grid-cols-1 gap-1">
-      <div class=" w-8/12 h-full flex justify-around">
-        <table class="table-auto w-full">
+      <div class=" w-full h-full flex justify-center">
+        <table class="table-auto w-full mx-auto justify-center">
           <thead>
             <tr>
               <th class="px-4 py-2">เขตพื้นที่</th>
@@ -65,9 +68,25 @@
       </div>
     </div>
 
-
     <div class="flex justify-start">
-      <p class="text-2xl font-bold">Property Report</p>
+      <p class="text-2xl font-bold mb-5">Property Report</p>
+      <div class=" w-auto h-full pl-5">
+        <select class="select select-bordered w-auto max-w-xs" title="เลือกพื้นที่ที่ต้องการ">
+          <option>แสดงเขตทั้งหมด</option>
+          <option>เลขที่ x เขตลาดกระบัง กรุงเทพมหานคร</option>
+          <option>เลขที่ yy เขตลาดกระบัง กรุงเทพมหานคร</option>
+          <option>เลขที่ x เขตมีนบุรี กรุงเทพมหานคร</option>
+          <option>เลขที่ x เขตคลองเตย กรุงเทพมหานคร</option>
+          <option>เลขที่ x เขตวัฒนา กรุงเทพมหานคร</option>
+        </select>
+      </div>
+    </div>
+    <div class=" w-full flex flex-col gap-y-5">
+      <div class="  w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
+        <div class="h-96 bg-white ">
+          <div class="text-black h-14 text-xl font-semibold flex-center flex items-center justify-center">กราฟ</div>
+        </div>
+      </div>
     </div>
 
 
@@ -75,6 +94,18 @@
     <div class="flex justify-start">
       <p class="text-2xl font-bold">Pinned Property</p>
     </div>
-
+    <!-- <div class="dropdown" (click)="toggleDropdown()">
+      Property Sale Detail
+    </div> -->
+    <!-- <div id="propertyDetail" class="dropdown-content"> -->
+    <!-- <div id="propertyDetail" class="dropdown-content" *ngIf="isDropdownVisible"> -->
+    <p><strong>ที่ดินเลขที่ 278</strong></p>
+    <p><strong>รายละเอียด</strong></p>
+    <p><strong>สถานที่สำคัญบริเวณใกล้เคียง</strong>
+      <a href="https://www.google.com/maps" target="_blank" rel="noopener">View on Map</a>
+    </p>
+    <p><strong>ข่าวสารที่เกี่ยวข้อง</strong></p>
   </div>
+
+
 </div>

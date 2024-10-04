@@ -1,7 +1,7 @@
 <div class="min-h-nmax relative">
   <app-map [coordinates]="coordinates">
-
   </app-map>
+
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-dark-blue"></span>
   </div>
@@ -23,12 +23,12 @@
     </div>
 
     <div class=" w-full flex flex-row gap-2">
-      <select class="select select-bordered  max-w-xs rounded-full ">
+      <select class="select select-bordered  max-w-xs rounded-full " title="Select an option">
         <option disabled selected>เลือกแสดงข้อมูลแผนที่</option>
         <option>Han Solo</option>
         <option>Greedo</option>
       </select>
-      <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 ">
+      <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 " title="Select an option">
         <option disabled selected>อื่นๆ</option>
         <option>Han Solo</option>
         <option>Greedo</option>
@@ -36,7 +36,7 @@
     </div>
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">
       <app-land-card class="w-full" *ngFor="let item of landList" [item]="item"></app-land-card>
-
     </div>
+
   </div>
 </div>

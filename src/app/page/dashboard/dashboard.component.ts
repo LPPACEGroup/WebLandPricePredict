@@ -27,5 +27,13 @@ export class DashboardComponent {
 
   }
 
+  isDropdownVisible = false;
+  toggleDropdown() {
+
+    this.isDropdownVisible = !this.isDropdownVisible;
+
+  }
 
 }
+
+// Add this method to the DashboardComponent class

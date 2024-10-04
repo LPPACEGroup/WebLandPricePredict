@@ -1,0 +1,10 @@
+<div class="dropdown" (click)="toggleDropdown()">
+  Property Sale Detail
+</div>
+<div id="propertyDetail" class="dropdown-content" *ngIf="isDropdownVisible">
+  <p><strong>Name:</strong> Example Property</p>
+  <p><strong>Detail:</strong> This is a detailed description of the property.</p>
+  <p><strong>Map:</strong> <a href="https://www.google.com/maps" target="_blank" rel="noopener">View on Map</a></p>
+  <p><strong>Nearest Places:</strong> School, Hospital, Supermarket</p>
+</div>
+
