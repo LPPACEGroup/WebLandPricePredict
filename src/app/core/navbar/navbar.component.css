@@ -1,40 +1,47 @@
-
 details[open] summary div svg {
-  stroke: #F3C762 !important;
+  stroke: #f3c762 !important;
+}
+
+.nav-icon {
+  width: 1.5rem; /* Equivalent to w-6 */
+  height: 1.5rem; /* Equivalent to h-6 */
+  display: inline-block; /* Equivalent to inline-block */
+  margin-right: 0.5rem; /* Equivalent to mr-2 */
+  fill: white;
 }
 
 /* Mobile devices (portrait and landscape) */
 @media (max-width: 768px) {
   details[open] summary div svg {
-    stroke: #FF5733 !important;
+    stroke: #ff5733 !important;
   }
 }
 
 /* Tablets (portrait and landscape) */
 @media (min-width: 769px) and (max-width: 1024px) {
   details[open] summary div svg {
-    stroke: #33FF57 !important;
+    stroke: #33ff57 !important;
   }
 }
 
 /* Laptops and desktops */
 @media (min-width: 1025px) and (max-width: 1440px) {
   details[open] summary div svg {
-    stroke: #3357FF !important;
+    stroke: #3357ff !important;
   }
 }
 
 /* Large screens */
 @media (min-width: 1441px) {
   details[open] summary div svg {
-    stroke: #7623F3 !important;
+    stroke: #7623f3 !important;
   }
 }
 
 /* New CSS rule for the navbar class */
 .navbar {
   height: 2.5rem; /* Equivalent to h-10 */
-  background-color: #307DA2; /* Equivalent to bg-dark-blue */
+  background-color: var(--oceanBlue); /* Equivalent to bg-dark-blue */
   position: sticky;
   top: 0;
   z-index: 50;

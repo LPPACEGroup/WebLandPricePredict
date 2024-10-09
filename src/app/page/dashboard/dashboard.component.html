@@ -1,5 +1,4 @@
-<div class="bg-cover bg-no-repeat min-h-nmax flex justify-center "
-  style="background-image: url('.../../../../../assets/imgs/bg_dashboard.png');">
+<div class="bg-cover bg-no-repeat min-h-nmax flex justify-center " style="background-color: white;">
 
   <!-- Overall Report -->
   <div class="flex flex-col w-full px-7 pt-5 gap-5">
@@ -17,51 +16,52 @@
     </div>
     <div class="  w-full flex flex-col gap-y-5">
       <div class="  w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
-        <div class="h-96 bg-blue ">
-          <div class="bg-ocean-blue text-white h-14 text-xl font-semibold flex-center">ราคาทำนาย</div>
-          <div class="bg-white m-2">
-            <!-- Graph container -->
-            <canvas id="predictedPriceChart"></canvas>
-          </div>
+        <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+          <div class="text-grey h-14 text-xl font-semibold flex-center"
+            style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+            ราคาทำนาย</div>
+          <div class="bg-white m-2"></div>
         </div>
-        <div class="h-96 bg-blue ">
-          <div class="bg-ocean-blue text-white h-14 text-xl font-semibold flex-center">ราคาเฉลี่ยเขตที่ดิน</div>
+        <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+          <div class="text-grey h-14 text-xl font-semibold flex-center"
+            style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+            ราคาเฉลี่ยเขตที่ดิน</div>
           <div class="bg-white m-2"></div>
         </div>
       </div>
     </div>
 
 
-    <div class="bg-white  w-full grid lg:grid-cols-2 grid-cols-1 gap-1">
-      <div class=" w-full h-full flex justify-center">
+    <div class="bg-white text-grey w-full grid lg:grid-cols-1 grid-cols-1 gap-1">
+      <div class="w-full h-full flex justify-center">
         <table class="table-auto w-full mx-auto justify-center">
           <thead>
             <tr>
-              <th class="px-4 py-2">เขตพื้นที่</th>
-              <th class="px-4 py-2">ราคาทำนาย</th>
-              <th class="px-4 py-2">ราคาเฉลี่ย</th>
+              <th class="px-4 py-2 text-left" style="background-color: var(--whiteGrey);">เขตพื้นที่</th>
+              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาทำนาย</th>
+              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาเฉลี่ย</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="border px-4 py-2">ลาดกระบัง</td>
-              <td class="border px-4 py-2">400,000</td>
-              <td class="border px-4 py-2">400,000</td>
+              <td class="px-4 py-2 text-left">ลาดกระบัง</td>
+              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">400,000</td>
             </tr>
             <tr>
-              <td class="border px-4 py-2">มีนบุรี</td>
-              <td class="border px-4 py-2">450,000</td>
-              <td class="border px-4 py-2">400,000</td>
+              <td class="px-4 py-2 text-left">มีนบุรี</td>
+              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">400,000</td>
             </tr>
             <tr>
-              <td class="border px-4 py-2">คลองเตย</td>
-              <td class="border px-4 py-2">400,000</td>
-              <td class="border px-4 py-2">400,000</td>
+              <td class="px-4 py-2 text-left">คลองเตย</td>
+              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">400,000</td>
             </tr>
             <tr>
-              <td class="border px-4 py-2">วัฒนา</td>
-              <td class="border px-4 py-2">450,000</td>
-              <td class="border px-4 py-2">400,000</td>
+              <td class="px-4 py-2 text-left">วัฒนา</td>
+              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">400,000</td>
             </tr>
           </tbody>
         </table>

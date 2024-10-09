@@ -1,5 +1,5 @@
-.bg{
-  background-image: url('.../../../../../assets/imgs/bg.png');
+.bg {
+  background-image: url(".../../../../../assets/imgs/bg.png");
   background-size: cover;
   position: fixed;
   inset: 0;
@@ -13,7 +13,7 @@
   position: relative;
   height: 100%;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .container {
@@ -32,18 +32,29 @@
   border-radius: 10px;
 }
 
+.box-content {
+  display: flex;
+}
+
 .left-content {
   display: flex;
   flex-direction: row; /* Align icon and list horizontally */
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+}
+
+.mid-content {
+  display: flex;
+  flex-direction: row; /* Align icon and list horizontally */
+  flex: 1;
+  align-items: center;
+  justify-content: left;
   border-right: 1px solid #e0e0e0; /* Optional: Add border to separate content visually */
 }
 
 .right-content {
-  flex: 1;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,15 +66,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  fill: none;
+  fill: var(--blue);
 }
 
 .icon {
   width: 50px;
   height: 50px;
-  fill: none;
 }
-
 
 .icon-text {
   margin-top: 8px; /* Space between icon and text */
@@ -73,7 +82,7 @@
 
 .text-description {
   font-size: 18px;
-  color: var(--midGrey);
+  color: var(--grey);
   text-align: center;
   margin-bottom: 10px; /* Space between text and list */
 }
@@ -87,7 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--oceanBlue);
+  border-color: var(--oceanBlue);
   font-size: 15px;
   font-weight: bold;
   text-align: center;
@@ -98,31 +107,30 @@
   border-radius: 30px;
 }
 
-
 /* Mobile devices (portrait and landscape) */
 @media (max-width: 768px) {
   details[open] summary div svg {
-  stroke: #FF5733 !important;
+    stroke: #ff5733 !important;
   }
 }
 
 /* Tablets (portrait and landscape) */
 @media (min-width: 769px) and (max-width: 1024px) {
   details[open] summary div svg {
-  stroke: #33FF57 !important;
+    stroke: #33ff57 !important;
   }
 }
 
 /* Laptops and desktops */
 @media (min-width: 1025px) and (max-width: 1440px) {
   details[open] summary div svg {
-  stroke: #3357FF !important;
+    stroke: #3357ff !important;
   }
 }
 
 /* Large screens */
 @media (min-width: 1441px) {
   details[open] summary div svg {
-  stroke: #7623F3 !important;
+    stroke: #7623f3 !important;
   }
 }
