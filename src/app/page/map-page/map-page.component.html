@@ -1,5 +1,5 @@
 <div class="min-h-nmax relative">
-  <app-map [coordinates]="coordinates" [landList]="landList">
+  <app-map [coordinates]="coordinates" [landList]="landList" [selectedMapLayer]="selectedMapLayer">
 
   </app-map>
   <dialog id="my_modal_4" class="modal">
@@ -100,8 +100,10 @@
         </div>
         <div class="border-b-2 py-5">
           <p class="text-lg">สถานที่ใกล้เคียง</p>
-          <p class="text-black text-sm">-ที่ดิน ขนาด 10 ไร่ 110 ตารางวา<br>-หน้ากว้างติดถนน 80 ม. ยาวเลียบคลองธรรมชาติ 186 ม. คลองเเล่นเรือได้<br>
-            -ติดถนนจงถนอม-วัดต้นเชือก หมายเลข 5014<br>-ใกล้มอเตอร์เวย์บางใหญ่-กาญจนบุรี<br>-ใกล้โครงการถนนนครอินทร์-ศาลายา<br>
+          <p class="text-black text-sm">-ที่ดิน ขนาด 10 ไร่ 110 ตารางวา<br>-หน้ากว้างติดถนน 80 ม. ยาวเลียบคลองธรรมชาติ
+            186 ม. คลองเเล่นเรือได้<br>
+            -ติดถนนจงถนอม-วัดต้นเชือก หมายเลข
+            5014<br>-ใกล้มอเตอร์เวย์บางใหญ่-กาญจนบุรี<br>-ใกล้โครงการถนนนครอินทร์-ศาลายา<br>
             -ทางคู่ขนานลอยฟ้าถนนบรมราชชนนี<br>-ทางพิเศษประจิมรัถยา 15 ก.ม.</p>
         </div>
         <div class="p-5">
@@ -133,11 +135,21 @@
     </div>
 
     <div class=" w-full flex flex-row gap-2">
-      <select class="select select-bordered  max-w-xs rounded-full ">
-        <option disabled selected>เลือกแสดงข้อมูลแผนที่</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
-      </select>
+      <details class="dropdown">
+        <summary class="btn m-1">เลือกแสดงข้อมูลแผนที่</summary>
+        <ul class="menu dropdown-content ">
+          <li> <label for=""> <input type="radio" name="mapOption" value="osm" (change)="onMapOptionChange('osm')" checked/>
+
+
+              <a>osm</a></label>
+          </li>
+          <li><label for=""> <input type="radio" name="mapOption" value="satellite" (change)="onMapOptionChange('satellite')" />
+
+
+            <a>ภาพถ่ายดาวเทียม</a></label>
+          </li>
+        </ul>
+      </details>
       <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 ">
         <option disabled selected>อื่นๆ</option>
         <option>Han Solo</option>

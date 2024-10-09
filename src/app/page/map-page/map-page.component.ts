@@ -31,6 +31,7 @@ export class MapPageComponent implements OnInit {
   results: LocationResult[] = [];
   selectedLand: any;
   nearbyPlaces: Element[] = []; // Change to Element[] type
+  selectedMapLayer: string = 'osm';
 
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
@@ -142,5 +143,8 @@ export class MapPageComponent implements OnInit {
     } else {
       this.results = [];
     }
+  }
+  onMapOptionChange(option: string): void {
+    this.selectedMapLayer = option;
   }
 }
