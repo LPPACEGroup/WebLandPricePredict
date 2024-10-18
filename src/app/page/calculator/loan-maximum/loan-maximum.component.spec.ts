@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandCardComponent } from './land-card.component';
+import { LoanMaximumComponent } from './loan-maximum.component';
 
-describe('LandCardComponent', () => {
-  let component: LandCardComponent;
-  let fixture: ComponentFixture<LandCardComponent>;
+describe('LoanMaximumComponent', () => {
+  let component: LoanMaximumComponent;
+  let fixture: ComponentFixture<LoanMaximumComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LandCardComponent]
+      imports: [LoanMaximumComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(LandCardComponent);
+    
+    fixture = TestBed.createComponent(LoanMaximumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

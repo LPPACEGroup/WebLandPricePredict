@@ -1,6 +1,23 @@
 <div class="bg-cover bg-no-repeat h-9/10 flex justify-center "
   style="background-image: url('.../../../../../assets/imgs/bg_1.png');">
-  <div class="h-9/10 w-2/4 bg-white m-2 rounded-3xl mt-5">
+  <div class="h-auto w-2/4 bg-white m-2 rounded-3xl mt-5">
+
+    <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/imgs/news1.png" class="d-block w-100" alt="News 1">
+          <div class="carousel-caption d-none d-md-block">
+            <h5 class="bold">ศุภาลัยลงทุนเพิ่ม 2 จังหวัดขายดีผุด “ลากูน หัวหิน” กับ “ปาล์มวิลล์”</h5>
+            <p class="text-black">ศุภาลัย เชื่อมั่น ! ตลาดบ้านเดี่ยว 2 ชั้น กระแสตอบรับดี วางหมากเพิ่ม 2 จังหวัดขายดี
+              ขานรับความต้องการลูกค้าในจังหวัดประจวบคีรีขันธ์กับลำปาง</p>
+          </div>
+        </div>
+      </div>
+
+      <app-carousel></app-carousel>
+
+    </div>
+
     <div class="grid grid-cols-1	m-4 gap-8">
       <div class="flex flex-row justify-center items-center mt-10"> <!-- Changed flex-col to flex-row -->
         <h1 class="text-3xl font-bold font-LPPA text-dark-blue">
@@ -37,9 +54,8 @@
       <div class="flex flex-col justify-center items-center">
         <label class="input input-bordered flex items-center gap-2 w-10/12 rounded-3xl bg-light-grey">
           <input type="text" class="grow text-center" placeholder="พิมพ์ค้นหา" />
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"  class="w-8 h-8 fill-dark-blue">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" 
-              class="w-4 h-4 opacity-70 fill-dark-blue">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-8 h-8 fill-dark-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-4 h-4 opacity-70 fill-dark-blue">
               <path fill-rule="evenodd"
                 d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                 clip-rule="evenodd" />
@@ -47,9 +63,12 @@
           </svg>
         </label>
       </div>
-      <app-collapse [question_header]="'คำามที่1'" [content]="'เนื้อหาง'"></app-collapse>
-      <app-collapse [question_header]="'คำามที่2'" [content]="'เนื้อหาง'"></app-collapse>
-      <app-collapse [question_header]="'คำามที่3'" [content]="'เนื้อหาง'"></app-collapse>
+      <app-collapse [question_header]="'หากผู้ขายไม่สามารถติดต่อได้ควรทำอย่างไร?'" [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
+ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
+      <app-collapse [question_header]="'ระบบสมาชิกโดนตัดเงินจากบัญชีไปแล้ว แต่ไม่ได้รับยศสมาชิกทำอย่างไร?'" [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
+        ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
+      <app-collapse [question_header]="'หากลืมรหัสผ่านควรทำอย่างไร'" [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
+      ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
 
     </div>
   </div>

@@ -10,24 +10,25 @@
 
       <div class="container">
         <div class="guide-box">
-          <a href="#content" class="guid-link">แนะนำเมนูหลัก</a>
+          <a href="#main-features" class="guid-link">แนะนำเมนูหลัก</a>
+        </div>
+
+        <div class="guide-box">
+          <a href="#other-features" class="guid-link">ฟีเจอร์อื่น ๆ</a>
         </div>
         <div class="guide-box">
-          <a href="#content" class="guid-link">ฟีเจอร์อื่น ๆ</a>
+          <a href="#intro" class="guid-link">ที่มาโครงงาน</a>
         </div>
         <div class="guide-box">
-          <a href="#content" class="guid-link">ที่มาโครงงาน</a>
+          <a href="#team" class="guid-link">ทีมผู้พัฒนา</a>
         </div>
         <div class="guide-box">
-          <a href="#content" class="guid-link">ทีมผู้พัฒนา</a>
-        </div>
-        <div class="guide-box">
-          <a href="#content" class="guid-link">แพ็คเกจสมาชิก</a>
+          <a href="#membership" class="guid-link">แพ็คเกจสมาชิก</a>
         </div>
       </div>
 
       <div class="container">
-        <div class="box">
+        <div class="box" id="main-features">
 
           <div class="left-content">
 
@@ -148,7 +149,8 @@
         </div>
       </div>
 
-      <div class="container">
+
+      <div class="container" id="other-features">
         <div class="box">
           <div class="left-content">
             <div class="icon-container">
@@ -176,86 +178,202 @@
       </div>
 
       <div class="h-36 flex flex-col justify-center text-dark-blue font-LPPA text-center font-bold">
-        <h1 class="text-5xl ">LPPM</h1>
+        <h1 class="text-5xl" id="intro">LPPM</h1>
       </div>
-      <div class="  w-full flex flex-col gap-y-5">
-        <div class="  w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
+
+      <div class="  w-full flex flex-col gap-y-5 justify-center">
+        <div class="  w-full ">
           <div class="h-auto ">
-            <div class=" text-dark-blue h-14 text-xl font-semibold flex-center">Land Price Prediction and
+            <div class=" text-dark-blue h-14 text-3xl font-semibold flex-center">Land Price Prediction and
               Monitoring</div>
-            <p class="text-dark-blue">เว็บไซต์เพื่อช่วยการทำนายและติดตามราคาที่ดิน ที่เกิดจาก
+            <p class="text-dark-blue text-xl ">เว็บไซต์เพื่อช่วยการทำนายและติดตามราคาที่ดิน ที่เกิดจาก
               ปัญหาในการตัดสินใจซื้อที่ดินจริงซึ่งต้องใช้ข้อมูลที่เยอะและ
               หายากเกินไป
               โดยการใช้เทคโนโลยี Machine Learning เข้ามาช่วยการ
               ทำนายราคา โดยอิงจากราคาการซื้อขายที่ดินจริงเพื่อให้ได้
               ผลการทำนายที่แม่นยำ</p>
           </div>
-          <div class="h-auto w-auto">
-            <img class="h-full w-auto" src="assets/imgs/map.png" alt="" />
-          </div>
+
+        </div>
+        <div class="h-auto w-full justify-items-center">
+          <img class="h-full w-auto" src="assets/imgs/land.png" alt="" />
         </div>
       </div>
 
-      <div class=" text-dark-blue h-14 text-xl font-semibold">จัดทำโดย</div>
+
+      <div class="h-36 flex flex-col justify-center text-dark-blue font-LPPA text-center font-bold">
+        <h1 class="text-5xl " id="membership">สมัครสมาชิก</h1>
+      </div>
+
+      <div class="container">
+        <div class="left-content ">
+
+          <div class="h-96  bg-white" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+            <div class="text-grey h-14 w-64 p-3 text-xl font-semibold flex-center"
+              style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+              Basic</div>
+            <div class="flex justify-center p-8 relative">
+              <ul>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>แผนที่</span>
+                </li>
+              </ul>
+              <button class="bg-dark-blue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
+                style="bottom: 10px;">899
+                B</button>
+            </div>
+          </div>
+
+          <div class="h-96  bg-white" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+            <div class="text-grey h-14 w-64 p-3 text-xl font-semibold flex-center"
+              style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+              Tier 1</div>
+            <div class="flex justify-center p-8 relative">
+              <ul>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>แผนที่</span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>
+                    ปักหมุดได้ 3 ที่
+
+                  </span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>มอนิเตอร์ได้ 3 ที่
+                  </span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>รัศมีรอบได้ 1 km</span>
+                </li>
+              </ul>
+              <button class="bg-dark-blue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
+                style="bottom: 10px;">1499 B</button>
+            </div>
+          </div>
+
+          <div class="h-96  bg-white" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+            <div class="text-grey h-14 w-64 p-3 text-xl font-semibold flex-center"
+              style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+              Tier 2</div>
+            <div class="flex justify-center p-8 relative">
+              <ul>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>แผนที่</span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>
+                    ปักหมุดได้ 5 ที่
+
+                  </span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>มอนิเตอร์ได้ 5 ที่
+                  </span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>เครื่องคำนวณ 5 ชนิด</span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>รัศมีรอบได้ 2 km</span>
+                </li>
+              </ul>
+              <button class="bg-dark-blue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white">1499
+                B</button>
+            </div>
+          </div>
+
+          <div class="h-96  bg-white" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+            <div class="text-grey h-14 w-64 p-3 text-xl font-semibold flex-center"
+              style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+              Tier 2</div>
+            <div class="flex justify-center p-8 relative">
+              <ul>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>แผนที่</span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>
+                    ปักหมุดได้ 10 ที่
+
+                  </span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>มอนิเตอร์ได้ 10 ที่
+                  </span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>เครื่องคำนวณ 5 ชนิด</span>
+                </li>
+                <li class="flex items-center justify-center py-2">
+                  <span class="text-green-400 pr-2">
+                  </span>
+                  <span>รัศมีรอบได้ 3 km</span>
+                </li>
+              </ul>
+              <button class="bg-dark-blue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white">1499
+                B</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="justify-items-center">
+      <div class=" text-dark-blue h-14 text-2xl font-semibold pt-4" id="team">จัดทำโดย</div>
       <div class=" text-dark-blue ">
         <p class="text-xl">64010052 กิตติกรณ์ อำภัยรัตน์</p>
         <p class="text-xl">64010247 ณัฐพล เนื้อเย็น</p>
-        <p class="text-xl">64010444 นีรชา เลาะหมัดจิตร</p> v
+        <p class="text-xl">64010444 นีรชา เลาะหมัดจิตร</p>
         <p class="text-xl">64010926 สุพิชญา พรหมปาลิต</p>
       </div>
 
-      <div class=" text-dark-blue h-14 text-xl font-semibold">อาจารย์ที่ปรึกษา</div>
+      <div class=" text-dark-blue h-14 text-2xl font-semibold pt-5">อาจารย์ที่ปรึกษา</div>
       <div class=" text-dark-blue ">
         <p class="text-xl">รศ.ดร.อรฉัตร จิตต์โสภักตร์</p>
       </div>
 
-      <div class=" text-dark-blue h-14 text-xl font-semibold">
+      <div class=" text-dark-blue h-14 text-xl font-semibold pt-5 pb-5">
         <p>นักศึกษาชั้นปีที่ 4</p>
         <p>คณะวิศวกรรมศาสตร์</p>
         <p>สาขาวิศวกรรมคอมพิวเตอร์</p>
         <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
       </div>
 
-      <div class="h-36 flex flex-col justify-center text-dark-blue font-LPPA text-center font-bold">
-        <h1 class="text-5xl ">สมัครสมาชิก</h1>
+      <div class="flex justify-center pt-10">
+        <img src="assets/imgs/cekmitl.png" alt="Logo 1" class="h-20 w-auto">
+        <img src="assets/imgs/kmitl_logo.png" alt="Logo 2" class="h-20 w-auto">
       </div>
-      <div class="container">
-        <div class="box">
-          <div class="left-content">
-            <div class="icon-container">
-              <img class="h-8 w-8" src="assets\icons\calculator.svg" alt="calculator" />
-              <p class="icon-text"> Basic </p>
-              <p class="text-description"> รายละเอียดสมาชิก </p>
-
-            </div>
-          </div>
-          <div class="left-content">
-            <div class="icon-container">
-              <img class="h-8 w-8" src="assets\icons\blog.svg" alt="Blog" />
-              <p class="icon-text"> Tier 1 </p>
-              <p class="text-description"> รายละเอียดสมาชิก </p>
-            </div>
-          </div>
-          <div class="left-content">
-            <div class="icon-container">
-              <img class="h-8 w-8" src="assets\icons\blog.svg" alt="Blog" />
-              <p class="icon-text"> Tier 2 </p>
-              <p class="text-description"> รายละเอียดสมาชิก </p>
-            </div>
-          </div>
-          <div class="left-content">
-            <div class="icon-container">
-              <img class="h-8 w-8" src="assets\icons\blog.svg" alt="Blog" />
-              <p class="icon-text"> Tier 3 </p>
-              <p class="text-description"> รายละเอียดสมาชิก </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-
 
     </div>
+
   </div>

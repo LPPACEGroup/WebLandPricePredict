@@ -1,0 +1,10 @@
+<p>carousel works!</p>
+<div class="carousel-container">
+  <div class="carousel-slide" [style.transform]="getTransform()">
+    <img *ngFor="let image of images" [src]="image.src" [alt]="image.alt" title="{{image.alt}}">
+  </div>
+</div>
+
+<!-- Navigation -->
+<button class="prev" (click)="prevSlide()">&#10094;</button>
+<button class="next" (click)="nextSlide()">&#10095;</button>
