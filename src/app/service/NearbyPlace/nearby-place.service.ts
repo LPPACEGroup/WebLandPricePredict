@@ -29,7 +29,7 @@ export class NearbyPlacesService {
 
   constructor(private http: HttpClient) { }
 
-  getRestaurants(latitude: number, longitude: number, radius: number = 5000): Observable<Element[]> {
+  getPlace(latitude: number, longitude: number, radius: number = 5000): Observable<Element[]> {
     const query = `
     [out:json];
     (
@@ -38,6 +38,11 @@ export class NearbyPlacesService {
       way["place"~"city|town|village|hamlet"](around:${radius},${latitude},${longitude});
       relation["place"~"city|town|village|hamlet"](around:${radius},${latitude},${longitude});
     
+      // Major roads
+      way["highway"~"motorway|trunk|primary"](around:${radius},${latitude},${longitude});
+      relation["highway"~"motorway|trunk|primary"](around:${radius},${latitude},${longitude});
+
+
       // Aerialway and Aeroway
       node["aerialway"="station"](around:${radius},${latitude},${longitude});
       way["aerialway"="station"](around:${radius},${latitude},${longitude});

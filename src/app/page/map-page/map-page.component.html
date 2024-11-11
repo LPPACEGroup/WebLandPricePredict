@@ -3,7 +3,7 @@
 
   </app-map>
   <dialog id="my_modal_4" class="modal">
-    <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll">
+    <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll ">
       <div class="w-full h-24 overflow-clip flex-center"><img class="w-full "
           src="https://prod-mfp-imgsrv.tillitsdone.com/uploads/medium__2fb08de653.png" alt="">
       </div>
@@ -117,7 +117,7 @@
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-dark-blue"></span>
   </div>
-  <div class="h-full w-96 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue ">
+  <div class="h-full w-1/4 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue ">
     <div class="w-full search">
       <input placeholder="เลขที่/เขต/แขวง/จังหวัด........"
         class="input input-bordered w-full h-10  rounded-full placeholder-dark-blue" (keydown)="onKeyDown($event)"
@@ -136,8 +136,8 @@
 
     <div class=" w-full flex flex-row gap-2">
       <details class="dropdown">
-        <summary class="btn m-1">เลือกแสดงข้อมูลแผนที่</summary>
-        <ul class="menu dropdown-content ">
+        <summary class="btn m-1 bg-white rounded-full text-dark-blue font-normal  select-bordered">เลือกแสดงข้อมูลแผนที่</summary>
+        <ul class="menu dropdown-content bg-white">
           <li> <label for=""> <input type="radio" name="mapOption" value="osm" (change)="onMapOptionChange('osm')" checked/>
 
 

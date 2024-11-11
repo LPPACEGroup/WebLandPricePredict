@@ -84,7 +84,7 @@ export class MapPageComponent implements OnInit {
     this.selectedLand = land;
   
     if (this.selectedLand?.latitude && this.selectedLand.longitude) {
-      this.nearbyPlacesService.getRestaurants(this.selectedLand.latitude, this.selectedLand.longitude)
+      this.nearbyPlacesService.getPlace(this.selectedLand.latitude, this.selectedLand.longitude)
         .subscribe((response: any[]) => { // Use any[] if you're unsure of the exact type
           this.nearbyPlaces = response; // Save the nearby places
           console.log(this.nearbyPlaces);

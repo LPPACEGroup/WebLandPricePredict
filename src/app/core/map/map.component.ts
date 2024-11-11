@@ -19,12 +19,15 @@ export class MapComponent implements OnChanges {
   private markersLayer = L.layerGroup();
   private osmLayer!: L.TileLayer;
   private googleSatLayer!: L.TileLayer;
+  private markerManage: boolean = false;
 
   // Initialize the map
   private initMap(): void {
     this.map = L.map('map', {
       center: [13.7299, 100.7782],
       zoom: 14,
+      zoomControl: false,
+      attributionControl: false,
     });
 
     // OSM Layer
@@ -47,6 +50,13 @@ export class MapComponent implements OnChanges {
       }
     );
 
+    this.map.on('click', (e: L.LeafletMouseEvent) => {
+      if (this.markerManage) {
+        const { lat, lng } = e.latlng;
+        this.addCustomMarker(lat, lng);
+      }
+    });
+
     // Set default map layer to OSM
     this.osmLayer.addTo(this.map);
 
@@ -62,18 +72,32 @@ export class MapComponent implements OnChanges {
     }
   }
 
-  // Render markers based on the landList
-  private renderMarkers(): void {
-    this.markersLayer.clearLayers();
+  
 
-    // Loop through landList and add markers
-    this.landList.forEach((land) => {
-      if (land.latitude && land.longitude) {
-        const marker = L.marker([land.latitude, land.longitude]);
-        marker.bindPopup(`<b>${land.location}</b><br>${land.description}`);
-        this.markersLayer.addLayer(marker); // Add marker to the markers layer
+  // Method to add a custom marker at given coordinates
+  addCustomMarker(latitude: number, longitude: number): void {
+    const customIcon = L.icon({
+      iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      shadowSize: [41, 41],
+    });
+
+    const marker = L.marker([latitude, longitude], { icon: customIcon });
+    // marker.bindPopup(
+    //   `<b>Custom Location</b><br>Latitude: ${latitude}, Longitude: ${longitude}`
+    // );
+    marker.on('click', (e: L.LeafletMouseEvent) => {
+      if (this.markerManage) {
+        this.map.removeLayer(marker);
       }
     });
+
+    this.markersLayer.addLayer(marker);
   }
 
   // Handle changes to input properties
@@ -81,11 +105,6 @@ export class MapComponent implements OnChanges {
     // Check for changes in coordinates
     if (changes['coordinates']) {
       this.updateMapView(changes['coordinates'].currentValue);
-    }
-
-    // Check for changes in landList
-    if (changes['landList']) {
-      this.renderMarkers();
     }
 
     // Check for changes in selectedMapLayer
@@ -107,8 +126,20 @@ export class MapComponent implements OnChanges {
     }
   }
 
+  clickZoomin() {
+    this.map.zoomIn();
+  }
+  clickZoomout() {
+    this.map.zoomOut();
+  }
+
   // Initialize the map after the view is initialized
   ngAfterViewInit(): void {
     this.initMap();
+  }
+  toggleMaker(): void {
+    this.markerManage = !this.markerManage;
+    console.log(this.markerManage);
+    
   }
 }
