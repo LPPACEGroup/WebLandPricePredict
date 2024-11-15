@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'; // Import OnChanges and SimpleChanges
+import { Component, Input,Output, OnChanges, EventEmitter, SimpleChanges } from '@angular/core'; // Import OnChanges and SimpleChanges
 import * as L from 'leaflet';
 import 'leaflet-control-geocoder';
 import 'leaflet-control-geocoder/dist/Control.Geocoder.js'; // Add this line
@@ -14,7 +14,9 @@ export class MapComponent implements OnChanges {
   @Input() coordinates: [number, number] | null = null; // Input property to receive coordinates
   @Input() landList: any[] = [];
   @Input() selectedMapLayer: string = 'osm'; // Default map layer
+  @Output() markerCoordOutput = new EventEmitter<any[]>();
 
+  private markerCoord :any[]= [];
   private map!: L.Map;
   private markersLayer = L.layerGroup();
   private osmLayer!: L.TileLayer;
@@ -88,15 +90,25 @@ export class MapComponent implements OnChanges {
     });
 
     const marker = L.marker([latitude, longitude], { icon: customIcon });
+    this.markerCoord.push([latitude, longitude]);
     // marker.bindPopup(
     //   `<b>Custom Location</b><br>Latitude: ${latitude}, Longitude: ${longitude}`
     // );
     marker.on('click', (e: L.LeafletMouseEvent) => {
       if (this.markerManage) {
         this.map.removeLayer(marker);
+        this.markerCoord = this.markerCoord.filter(
+          (coord) => coord[0] !== latitude && coord[1] !== longitude
+        );
+        this.markerCoordOutput.emit(this.markerCoord);
+        // console.log(this.markerCoord);
+
       }
     });
 
+    this.markerCoordOutput.emit(this.markerCoord);
+    // console.log(this.markerCoord);
+    
     this.markersLayer.addLayer(marker);
   }
 
@@ -139,7 +151,6 @@ export class MapComponent implements OnChanges {
   }
   toggleMaker(): void {
     this.markerManage = !this.markerManage;
-    console.log(this.markerManage);
     
   }
 }

@@ -8,6 +8,7 @@ import { LandListService } from '../../service/LandList/land-list.service';
 import { NearbyPlacesService } from 'app/service/NearbyPlace/nearby-place.service'; // Ensure the import is correct
 import { Element } from 'app/service/NearbyPlace/nearby-place.service'; // Ensure the import is correct
 import { GetRouteService } from 'app/service/GetRoute/get-route.service';
+import { MarkersortService } from 'app/service/MarkerSort/markersort.service'; // Ensure the import is correct
 
 interface LocationResult {
   place_id: number;
@@ -16,6 +17,7 @@ interface LocationResult {
   lat: string;
   lon: string;
 }
+
 
 @Component({
   selector: 'app-map-page',
@@ -32,6 +34,10 @@ export class MapPageComponent implements OnInit {
   selectedLand: any;
   nearbyPlaces: Element[] = []; // Change to Element[] type
   selectedMapLayer: string = 'osm';
+  activeMarker: any[] = [];
+  markerCoord: any[] = [];
+  landList: any[] = [];
+  sortedLandList: any[] = [];
 
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
@@ -40,7 +46,8 @@ export class MapPageComponent implements OnInit {
     private searchApiService: SearchApiService,
     private landListService: LandListService,
     private nearbyPlacesService: NearbyPlacesService, // Correct casing
-    private getRouteService : GetRouteService
+    private getRouteService : GetRouteService,
+    private markerSortService: MarkersortService // Add the service to the constructor
   ) {}
 
 
@@ -55,13 +62,13 @@ export class MapPageComponent implements OnInit {
     }
   }
 
-  landList: any[] = [];
 
   ngOnInit(): void {
     this.landListService.getData().subscribe(response => {
       this.landList = response;
-      console.log(this.landList);
+      this.sortedLandList = this.landList;
     });
+    
   }
 
   onFocus() {
@@ -83,30 +90,7 @@ export class MapPageComponent implements OnInit {
   onCardClick(land: any) {
     this.selectedLand = land;
   
-    if (this.selectedLand?.latitude && this.selectedLand.longitude) {
-      this.nearbyPlacesService.getPlace(this.selectedLand.latitude, this.selectedLand.longitude)
-        .subscribe((response: any[]) => { // Use any[] if you're unsure of the exact type
-          this.nearbyPlaces = response; // Save the nearby places
-          console.log(this.nearbyPlaces);
   
-          // Now get the nearby places within 5 km with name and type
-          this.getRouteService.getNearbyPlacesWithinDistance(
-            [this.selectedLand.longitude, this.selectedLand.latitude], // Starting coordinates
-            this.nearbyPlaces
-              .filter(place => place.lat !== undefined && place.lon !== undefined && place.tags) // Ensure name exists
-              .map(place => ({
-                lat: place.lat!, 
-                lon: place.lon!, 
-                tags: place.tags || 'Untags',  // Default name if not available
-                type: place.type || 'Unknown'   // Default type if not available
-              }))
-          ).subscribe(nearbyPlacesWithin5km => {
-            console.log('Nearby places within 5 km:', nearbyPlacesWithin5km);
-          });
-        });
-    }
-  
-    this.changeCoord(land.latitude, land.longitude);
   }
   
   
@@ -147,4 +131,13 @@ export class MapPageComponent implements OnInit {
   onMapOptionChange(option: string): void {
     this.selectedMapLayer = option;
   }
+  markerCoordUpdate(coord: any): void {
+    this.markerCoord = coord;
+    // console.log(this.markerCoord);
+    // console.log(this.landList);
+    this.sortedLandList = this.markerSortService.sortByProximity(this.landList, this.markerCoord);
+    
+    
+  }
+  
 }
