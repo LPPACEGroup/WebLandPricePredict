@@ -38,6 +38,8 @@ export class MapPageComponent implements OnInit {
   markerCoord: any[] = [];
   landList: any[] = [];
   sortedLandList: any[] = [];
+  filteredLandList: any[] = [];
+  matches: any[] = [];
 
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
@@ -66,6 +68,7 @@ export class MapPageComponent implements OnInit {
   ngOnInit(): void {
     this.landListService.getData().subscribe(response => {
       this.landList = response;
+      this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
     });
     
@@ -98,8 +101,8 @@ export class MapPageComponent implements OnInit {
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const value = inputElement.value;
-    console.log('Input changed:', value);
     this.handleSearch(value);
+    
   }
 
   createRange(number: number) {
@@ -112,21 +115,27 @@ export class MapPageComponent implements OnInit {
   }
 
   handleSearch(inputValue: string) {
+
+    // รวม location กับ description ของแต่ละที่ดินเข้าด้วยกันแล้ว ค้นหาด้วย inputValue
     if (inputValue && inputValue.length > 0) {
-      this.searchApiService.searchLocation(inputValue).subscribe(
-        (response: LocationResult[]) => {
-          console.log('Search results:', response);
-          this.results = response || [];
-          this.loading = false;
-        },
-        (error: any) => {
-          console.error('Error fetching search results:', error);
-          this.loading = false;
+      this.matches  = [];
+      this.landList.map((land) => { 
+        const combinedText = `${land.location} ${land.description}`;
+        if(combinedText.includes(inputValue)) {
+          this.matches.push(land);
         }
-      );
-    } else {
-      this.results = [];
+      });
     }
+    else {
+      this.matches = this.landList;
+    }
+
+    console.log(this.matches);
+    // update filteredLandList และ sortedLandList ด้วย matches ที่ได้
+    this.filteredLandList = this.matches;
+    this.sortedLandList = this.markerSortService.sortByProximity(this.filteredLandList, this.markerCoord);
+
+    
   }
   onMapOptionChange(option: string): void {
     this.selectedMapLayer = option;
@@ -135,7 +144,7 @@ export class MapPageComponent implements OnInit {
     this.markerCoord = coord;
     // console.log(this.markerCoord);
     // console.log(this.landList);
-    this.sortedLandList = this.markerSortService.sortByProximity(this.landList, this.markerCoord);
+    this.sortedLandList = this.markerSortService.sortByProximity(this.filteredLandList, this.markerCoord);
     
     
   }
