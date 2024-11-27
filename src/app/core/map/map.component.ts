@@ -1,7 +1,16 @@
-import { Component, Input,Output, OnChanges, EventEmitter, SimpleChanges } from '@angular/core'; // Import OnChanges and SimpleChanges
+import {
+  Component,
+  Input,
+  Output,
+  OnChanges,
+  EventEmitter,
+  SimpleChanges,
+} from '@angular/core'; // Import OnChanges and SimpleChanges
 import * as L from 'leaflet';
 import 'leaflet-control-geocoder';
-import 'leaflet-control-geocoder/dist/Control.Geocoder.js'; // Add this line
+import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
+import { GetJsonService } from 'app/service/GetJson/get-json.service';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-map',
@@ -16,12 +25,18 @@ export class MapComponent implements OnChanges {
   @Input() selectedMapLayer: string = 'osm'; // Default map layer
   @Output() markerCoordOutput = new EventEmitter<any[]>();
 
-  private markerCoord :any[]= [];
+  private markerCoord: any[] = [];
   private map!: L.Map;
   private markersLayer = L.layerGroup();
   private osmLayer!: L.TileLayer;
   private googleSatLayer!: L.TileLayer;
   private markerManage: boolean = false;
+  private geodata: any;
+  // private p1 = L.geoJSON();
+  // private p2 = L.geoJSON();
+  // private p3 = L.geoJSON();
+  // private p4 = L.geoJSON();
+  private colorMap = L.featureGroup();
 
   // Initialize the map
   private initMap(): void {
@@ -59,13 +74,50 @@ export class MapComponent implements OnChanges {
       }
     });
 
-    // Set default map layer to OSM
-    this.osmLayer.addTo(this.map);
+    // this.latkra.addTo(this.map);
 
+    this.osmLayer.addTo(this.map);
     // Add marker layer
     this.markersLayer.addTo(this.map);
-  }
 
+
+    L.geoJSON(this.geodata, {
+      style: (feature) => {
+        return {
+          color: feature ? this.getColor(feature.properties.color) : 'gray', 
+          weight: 2, // ความหนาของเส้นขอบ
+          opacity: 1, 
+          fillOpacity: 0.5, 
+        };
+      },
+    }).addTo(this.map);
+    
+  }
+  // map สีกับ geojson
+  getColor(color: any) {
+    switch (color) {
+      case 1:
+        return 'yellow';
+      case 2:
+        return 'orange';
+      case 3:
+        return 'brown';
+      case 4:
+        return 'red';
+      case 5:
+        return 'purple';
+      case 6:
+        return 'pink';
+      case 7:
+        return 'white';
+      case 8:
+        return 'green';
+      case 10:
+        return 'blue';
+      default:
+        return 'black'; 
+    }
+  }
   // Update the map view based on the provided coordinates
   private updateMapView(coordinates: [number, number]): void {
     if (coordinates) {
@@ -73,8 +125,6 @@ export class MapComponent implements OnChanges {
       this.map.setZoom(15);
     }
   }
-
-  
 
   // Method to add a custom marker at given coordinates
   addCustomMarker(latitude: number, longitude: number): void {
@@ -101,14 +151,13 @@ export class MapComponent implements OnChanges {
           (coord) => coord[0] !== latitude && coord[1] !== longitude
         );
         this.markerCoordOutput.emit(this.markerCoord);
-        // console.log(this.markerCoord);
-
+        console.log(this.checkColor(e.latlng.lat, e.latlng.lng));
       }
     });
 
     this.markerCoordOutput.emit(this.markerCoord);
     // console.log(this.markerCoord);
-    
+
     this.markersLayer.addLayer(marker);
   }
 
@@ -130,14 +179,82 @@ export class MapComponent implements OnChanges {
     if (layer === 'osm') {
       // Switch to OSM Layer
       this.map.removeLayer(this.googleSatLayer);
+      this.map.removeLayer(this.colorMap)
       this.osmLayer.addTo(this.map);
     } else if (layer === 'satellite') {
       // Switch to Google Satellite Layer
       this.map.removeLayer(this.osmLayer);
+      this.map.removeLayer(this.colorMap)
       this.googleSatLayer.addTo(this.map);
     }
+    else if (layer === 'colormap') {
+      // Switch to Colormap Layer
+      this.map.removeLayer(this.osmLayer);
+      this.osmLayer.addTo(this.map);
+      this.colorMap.addTo(this.map)
+
+    }
+  }
+  constructor(private getJsonService: GetJsonService) {
+    this.getJsonService
+      .getJson('assets/layers/latkrabang.geojson')
+      .subscribe((data:any) => {
+        this.colorMap.addLayer(L.geoJSON(data,{
+      style: (feature) => {
+        return {
+          color: feature ? this.getColor(feature.properties.color) : 'gray', 
+          weight: 2, // ความหนาของเส้นขอบ
+          opacity: 1, 
+          fillOpacity: 0.5, 
+        };
+      },
+    }))
+      });
+      this.getJsonService
+      .getJson('assets/layers/minburi.geojson')
+      .subscribe((data:any) => {
+        this.colorMap.addLayer(L.geoJSON(data,{
+      style: (feature) => {
+        return {
+          color: feature ? this.getColor(feature.properties.color) : 'gray', 
+          weight: 2, // ความหนาของเส้นขอบ
+          opacity: 1, 
+          fillOpacity: 0.5, 
+        };
+      },
+    }))
+      });
+      this.getJsonService
+      .getJson('assets/layers/khlong_Toei.geojson')
+      .subscribe((data:any) => {
+        this.colorMap.addLayer(L.geoJSON(data,{
+      style: (feature) => {
+        return {
+          color: feature ? this.getColor(feature.properties.color) : 'gray', 
+          weight: 2, // ความหนาของเส้นขอบ
+          opacity: 1, 
+          fillOpacity: 0.5, 
+        };
+      },
+    }))
+      });
+      this.getJsonService
+      .getJson('assets/layers/watthana.geojson')
+      .subscribe((data:any) => {
+        this.colorMap.addLayer(L.geoJSON(data,{
+      style: (feature) => {
+        return {
+          color: feature ? this.getColor(feature.properties.color) : 'gray', 
+          weight: 2, // ความหนาของเส้นขอบ
+          opacity: 1, 
+          fillOpacity: 0.5, 
+        };
+      },
+    }))
+      });
   }
 
+  ngOnInit() {}
   clickZoomin() {
     this.map.zoomIn();
   }
@@ -151,6 +268,22 @@ export class MapComponent implements OnChanges {
   }
   toggleMaker(): void {
     this.markerManage = !this.markerManage;
-    
+  }
+  checkColor(lat: number, lng: number): string {
+    const point = L.latLng(lat, lng);
+    let result = 'Point not inside any feature';
+
+    L.geoJSON(this.geodata, {
+      onEachFeature: (feature, layer) => {
+        if (layer instanceof L.Polygon || layer instanceof L.Polyline) {
+          // Check if the layer is of type Polygon or Polyline
+          if (layer.getBounds().contains(point)) {
+            result = `Color: ${feature.properties.color}`;
+          }
+        }
+      },
+    });
+
+    return result;
   }
 }

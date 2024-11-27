@@ -1,5 +1,6 @@
 <div class="min-h-nmax relative">
-  <app-map [coordinates]="coordinates" [landList]="landList" [selectedMapLayer]="selectedMapLayer" (markerCoordOutput)="markerCoordUpdate($event)">
+  <app-map [coordinates]="coordinates" [landList]="landList" [selectedMapLayer]="selectedMapLayer"
+    (markerCoordOutput)="markerCoordUpdate($event)">
 
   </app-map>
   <dialog id="my_modal_4" class="modal">
@@ -136,18 +137,34 @@
 
     <div class=" w-full flex flex-row gap-2">
       <details class="dropdown">
-        <summary class="btn m-1 bg-white rounded-full text-dark-blue font-normal  select-bordered">เลือกแสดงข้อมูลแผนที่</summary>
+        <summary class="btn m-1 bg-white rounded-full text-dark-blue font-normal  select-bordered">เลือกแสดงข้อมูลแผนที่
+        </summary>
         <ul class="menu dropdown-content bg-white">
-          <li> <label for=""> <input type="radio" name="mapOption" value="osm" (change)="onMapOptionChange('osm')" checked/>
+          <li>
+            <div><input id="osm" type="radio" name="mapOption" value="osm" (change)="onMapOptionChange('osm')"
+                checked />
 
 
-              <a>osm</a></label>
+              <label for="osm">osm</label>
+            </div>
           </li>
-          <li><label for=""> <input type="radio" name="mapOption" value="satellite" (change)="onMapOptionChange('satellite')" />
+          <li>
+            <div><input id="satellite" type="radio" name="mapOption" value="satellite" (change)="onMapOptionChange('satellite')"
+                checked />
 
 
-            <a>ภาพถ่ายดาวเทียม</a></label>
+              <label for="satellite">ภาพถ่ายดาวเทียม</label>
+            </div>
           </li>
+          <li>
+            <div><input id="colormap" type="radio" name="mapOption" value="colormap" (change)="onMapOptionChange('colormap')"
+                checked />
+
+
+              <label for="colormap">แผนที่สีผังเมือง</label>
+            </div>
+          </li>
+          
         </ul>
       </details>
       <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 ">
