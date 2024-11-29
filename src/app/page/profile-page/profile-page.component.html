@@ -56,19 +56,19 @@
                 <div class="w-8/10 ">
                     <p> ที่อยู่
                     </p>
-                    <textarea name="" id="" class="rounded-xl w-full h-16 bg-light-blue p-2 border border-light-grey"></textarea>
+                    <textarea name="" id="" class="rounded-xl w-full h-16 bg-light-blue p-2 border border-light-grey" title="Address" placeholder="Enter your address"></textarea>
                 </div>
                 <div class="w-8/10 flex flex-row gap-3">
                     <div class="w-full">
                         <p> จังหวัด
                         </p>
-                        <input type="text" 
+                        <input type="text" title="Province" placeholder="Enter your province"
                             class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                     </div>
                     <div class="w-full">
                         <p> ตำบล
                         </p>
-                        <input type="text" 
+                        <input type="text" title="District" placeholder="Enter your district"
                             class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                     <div class="w-full">
                         <p> อำเภอ
                         </p>
-                        <input type="text" 
+                        <input type="text" title="Amphoe" placeholder="Enter your amphoe"
                             class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                     </div>
                     <div class="w-full">
                         <p> รหัสไปรษณีย์
                         </p>
-                        <input type="text" 
+                        <input type="text" title="Bank Account" placeholder="Enter your bank account"
                             class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             <div class = "w-10/12">
                                 <p> ชื่อหน่วยงาน
                                 </p>
-                                <input type="text" 
+                                <input type="text" title="Bank Account" placeholder="Enter your bank account"
                                     class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                             <div class = "w-10/12">
                                 <p> บัญชีธนาคาร
                                 </p>
-                                <input type="text" 
+                                <input type="text" title="Bank Account" placeholder="Enter your bank account"
                                     class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                             <div class = "w-10/12">
                                 <p> ช่องทางอื่น ๆ
                                 </p>
-                                <input type="text" 
+                                <input type="text" title="Other Payment Methods" placeholder="Enter other payment methods"
                                     class="input input-bordered w-10/12 h-10 bg-light-blue rounded-full" />
                             </div>
                         </div>
@@ -137,17 +137,92 @@
                 <div class="w-8/10">
                     <p> ที่อยู่
                     </p>
-                    <textarea name="" id="" class="rounded-xl w-full h-16 bg-light-blue p-2 border border-light-grey"></textarea>
+                    <textarea name="" id="" class="rounded-xl w-full h-16 bg-light-blue p-2 border border-light-grey" title="Address" placeholder="Enter your address"></textarea>
                 </div>
             </div>
         </div>
     </div>
     <footer class="footer footer-center p-4 bg-dark-blue  text-white start-0 absolute bottom-0 h-10 flex-center">
-        <div class="flex-center"><input type="checkbox" checked="checked" class="checkbox border border-white bg-white"/>
+        <div class="flex-center"><input type="checkbox" checked="checked" class="checkbox border border-white bg-white" title="Receive notifications via email"/>
             <p>ต้องการรับการแจ้งเตือนผ่านทางเมล์</p>
         </div>
-        <div class="flex-center"><input type="checkbox" checked="checked" class="checkbox border border-white bg-white"/>
+        <div class="flex-center"><input type="checkbox" checked="checked" class="checkbox border border-white bg-white" title="Receive notifications via email"/>
             <p>ต้องการรับข่าวสารผ่านทางเมล์</p>
         </div>
     </footer>
+</div>
+<div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg max-w-4xl">
+  <div class="flex flex-row border-b pb-4">
+      <div class="flex items-center space-x-2 mr-6">
+          <img src="https://placehold.co/100x100"
+               alt="Placeholder image for user profile"
+               class="h-20 w-20 rounded-full border-2 border-gray-300">
+          <div>
+              <p class="font-semibold text-base">username24</p>
+              <p class="text-sm text-gray-500">User profile description</p>
+          </div>
+      </div>
+      <div class="flex-1">
+          <div class="bg-yellow-400 text-white py-2 px-4 rounded-r-lg text-sm font-semibold mb-2 inline-flex items-center">
+              <span>Tier 1</span>
+              <i class="fas fa-bell ml-2"></i>
+          </div>
+          <p class="text-sm text-gray-600 mb-1">Registration date: 23/4/2022 at 3:50 PM</p>
+      </div>
+  </div>
+  <div class="flex flex-col lg:flex-row justify-between mt-4">
+      <div class="flex-1">
+          <div class="flex items-center text-blue-500 mb-4">
+              <i class="fas fa-phone-alt"></i>
+              <span class="ml-2">099-984-2350</span>
+          </div>
+          <div class="flex items-center text-blue-500 mb-4">
+              <i class="fas fa-envelope"></i>
+              <span class="ml-2">registrar&#64;kmitl.ac.th</span>
+          </div>
+          <div class="flex items-center text-blue-500">
+              <i class="fas fa-calendar-alt"></i>
+              <span class="ml-2">3 years since 2540</span>
+          </div>
+      </div>
+      <div class="flex-1 lg:ml-10 mt-6 lg:mt-0">
+          <h3 class="text-xl font-semibold mb-2">User Information</h3>
+          <form>
+              <div class="mb-4">
+                  <label class="block mb-1">Name</label>
+                  <input type="text" placeholder="Your name" class="w-full px-3 py-2 border border-gray-300 rounded">
+              </div>
+              <div class="mb-4">
+                  <label class="block mb-1">Telephone No.</label>
+                  <input type="text" placeholder="Your telephone number" class="w-full px-3 py-2 border border-gray-300 rounded">
+              </div>
+              <div class="mb-4">
+                  <label class="block mb-1">Address</label>
+                  <textarea placeholder="Your address" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded"></textarea>
+              </div>
+              <div class="mb-4">
+                  <label class="block mb-1">Province</label>
+                  <select class="w-full px-3 py-2 border border-gray-300 rounded" title="province">
+                      <option value="">Select your province</option>
+                      <!-- Add other province options -->
+                  </select>
+              </div>
+              <div class="mb-4">
+                  <label class="block mb-1">District</label>
+                  <select class="w-full px-3 py-2 border border-gray-300 rounded" title="district">
+                      <option value="">Select your district</option>
+                      <!-- Add other district options -->
+                  </select>
+              </div>
+              <div class="mb-4">
+                  <label class="block mb-1">Postal Code</label>
+                  <label for="postal-code" class="block mb-1">Postal Code</label>
+                  <select id="postal-code" class="w-full px-3 py-2 border border-gray-300 rounded">
+                      <option value="">Select your postal code</option>
+                      <!-- Add other postal code options -->
+                  </select>
+              </div>
+          </form>
+      </div>
+  </div>
 </div>

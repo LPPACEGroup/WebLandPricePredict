@@ -10,6 +10,11 @@ import { SvgIconModule } from '../svg-icon/svg-icon/svg-icon.module';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
 
+export class NavbarComponent {
+  isDropdownOpen = false;
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 }

@@ -1,0 +1,1343 @@
+<?xml version="1.0"?>
+<WMS_Capabilities xmlns="http://www.opengis.net/wms" xmlns:sld="http://www.opengis.net/sld"
+  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  version="1.3.0"
+  xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd
+                      http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd">
+  <Service>
+    <Name>WMS</Name>
+    <Title>Longdo Map MapProxy</Title>
+    <Abstract>Tiles interface for Longdo Map</Abstract>
+    <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://map.longdo.com" />
+    <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>Administrator</ContactPerson>
+        <ContactOrganization></ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Technical Director</ContactPosition>
+      <ContactAddress>
+        <AddressType>postal</AddressType>
+        <Address></Address>
+        <City>Bangkok</City>
+        <StateOrProvince></StateOrProvince>
+        <PostCode>10500</PostCode>
+        <Country>Thailand</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone>+66(0)2632-9700</ContactVoiceTelephone>
+      <ContactFacsimileTelephone>+66(0)2632-9703</ContactFacsimileTelephone>
+      <ContactElectronicMailAddress>info@mm.co.th</ContactElectronicMailAddress>
+    </ContactInformation>
+    <Fees>Yes</Fees>
+    <AccessConstraints>The data is copyrighted by NuMAP Co., Ltd., Metamedia Technology Co., Ltd., and other owners. Please refer to http://map.longdo.com/terms.</AccessConstraints>
+    <MaxWidth>4000</MaxWidth>
+    <MaxHeight>4000</MaxHeight>
+  </Service>
+  <Capability>
+    <Request>
+      <GetCapabilities>
+        <Format>text/xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:href="https://ms.longdo.com/mapproxy/service?" />
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetCapabilities>
+      <GetMap>
+        <Format>image/png</Format>
+        <Format>image/jpeg</Format>
+        <Format>image/gif</Format>
+        <Format>image/GeoTIFF</Format>
+        <Format>image/tiff</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:href="https://ms.longdo.com/mapproxy/service?" />
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetMap>
+      <GetFeatureInfo>
+        <Format>text/plain</Format>
+        <Format>text/html</Format>
+        <Format>text/xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xlink:href="https://ms.longdo.com/mapproxy/service?" />
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetFeatureInfo>
+    </Request>
+    <Exception>
+      <Format>XML</Format>
+      <Format>INIMAGE</Format>
+      <Format>BLANK</Format>
+    </Exception>
+    <Layer>
+      <Title>Longdo Map MapProxy</Title>
+      <CRS>EPSG:3857</CRS>
+      <CRS>EPSG:4326</CRS>
+      <CRS>CRS:84</CRS>
+      <CRS>EPSG:4258</CRS>
+      <CRS>EPSG:900913</CRS>
+      <EX_GeographicBoundingBox>
+        <westBoundLongitude>-180</westBoundLongitude>
+        <eastBoundLongitude>180</eastBoundLongitude>
+        <southBoundLatitude>-89.999999</southBoundLatitude>
+        <northBoundLatitude>89.999999</northBoundLatitude>
+      </EX_GeographicBoundingBox>
+      <BoundingBox CRS="CRS:84" minx="-180" miny="-89.999999" maxx="180" maxy="89.999999" />
+      <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-147730762.66992167"
+        maxx="20037508.342789244" maxy="147730758.19456753" />
+      <BoundingBox CRS="EPSG:4326" minx="-90.0" miny="-180.0" maxx="90.0" maxy="180.0" />
+      <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-147730762.66992167"
+        maxx="20037508.342789244" maxy="147730758.19456753" />
+      <Layer>
+        <Name>longdo_icons</Name>
+        <Title>Longdo Map icons mode</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_political</Name>
+        <Title>Longdo Map political mode</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_political_en</Name>
+        <Title>Longdo Map political mode (English)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_icons_4326</Name>
+        <Title>Longdo Map icons mode in EPSG:4326</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_political_4326</Name>
+        <Title>Longdo Map political mode in EPSG:4326</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_political_en_4326</Name>
+        <Title>Longdo Map political mode (English) in EPSG:4326</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_icons_en</Name>
+        <Title>Longdo Map icons mode (English)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_icons_en_4326</Name>
+        <Title>Longdo Map icons mode (English) in EPSG:4326</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_gray</Name>
+        <Title>Longdo Map gray mode</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_gray_4326</Name>
+        <Title>Longdo Map gray mode in EPSG:4326</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_gray_en</Name>
+        <Title>Longdo Map gray mode (English)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>longdo_gray_en_4326</Name>
+        <Title>Longdo Map gray mode (English) in EPSG:4326</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>bluemarble_terrain</Name>
+        <Title>Bluemarble-based terrain map from GElib</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>thaichote_2562</Name>
+        <Title>Thaichote Satellite images 2560-2562 from GISTDA</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>thaichote</Name>
+        <Title>Thaichote Satellite images 2560-2562 from GISTDA</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>ldd_ortho</Name>
+        <Title>2547-2550 from Department of Land Development</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>3dcpd</Name>
+        <Title>Bangkok Metropolitan City Plan (3D CPD)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>mea_landbase</Name>
+        <Title>MEA Landbase</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>gistda_flood_update</Name>
+        <Title>GISTDA flood upate</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>cu_uav</Name>
+        <Title>Chulalongkorn University UAV images</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>cityplan_dpt</Name>
+        <Title>Thailand Cities Plan from DPT</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>cityplan_cities</Name>
+        <Title>Thailand Cities Plan City level</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <MinScaleDenominator>6.103515714285715</MinScaleDenominator>
+      </Layer>
+      <Layer>
+        <Name>cityplan_provinces</Name>
+        <Title>Thailand Cities Plan Province level</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <MinScaleDenominator>6.103515714285715</MinScaleDenominator>
+      </Layer>
+      <Layer>
+        <Name>cityplan_thailand</Name>
+        <Title>Thailand Cities Plans (Cities and Provinces)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <MinScaleDenominator>6.103515714285715</MinScaleDenominator>
+      </Layer>
+      <Layer>
+        <Name>rain_radar_bkk</Name>
+        <Title>Radar Images from Bangkok Metropolitan Area</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2564</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2563</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2562</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2561</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2560</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2559</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2558</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2557</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2556</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2555</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_3Bura_2554</Name>
+        <Title>Accidents data from DGA (3 sources)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_itic_2564</Name>
+        <Title>Accidents data from iTIC</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_itic_2563</Name>
+        <Title>Accidents data from iTIC</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>accident_itic_2562</Name>
+        <Title>Accidents data from iTIC</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>dol_4326</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-89.999999</southBoundLatitude>
+          <northBoundLatitude>89.999999</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-89.999999" maxx="180" maxy="89.999999" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-147730762.66992167"
+          maxx="20037508.342789244" maxy="147730758.19456753" />
+        <BoundingBox CRS="EPSG:4326" minx="-90.0" miny="-180.0" maxx="90.0" maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-147730762.66992167"
+          maxx="20037508.342789244" maxy="147730758.19456753" />
+      </Layer>
+      <Layer>
+        <Name>dol_parcel</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>t10_mwa</Name>
+        <Title>t10_mwa</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>rain_forecast_nextday</Name>
+        <Title>Rain Forecast by HAII (WRF)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <MinScaleDenominator>195.31250000000003</MinScaleDenominator>
+      </Layer>
+      <Layer>
+        <Name>siamsquare</Name>
+        <Title>Siam Square</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>chula</Name>
+        <Title>Chulalongkorn University</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>thailand_population</Name>
+        <Title>Thailand Population 2020</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population</Name>
+        <Title>FB Population</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_children</Name>
+        <Title>FB Population (Children)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_elderly</Name>
+        <Title>FB Population (Elderly)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_men</Name>
+        <Title>FB Population (Men)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>dol_4326</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-89.999999</southBoundLatitude>
+          <northBoundLatitude>89.999999</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-89.999999" maxx="180" maxy="89.999999" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-147730762.66992167"
+          maxx="20037508.342789244" maxy="147730758.19456753" />
+        <BoundingBox CRS="EPSG:4326" minx="-90.0" miny="-180.0" maxx="90.0" maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-147730762.66992167"
+          maxx="20037508.342789244" maxy="147730758.19456753" />
+      </Layer>
+      <Layer>
+        <Name>dol</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>dol_hd</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>dol_copy</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>dol_copy_hd</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>dolnsl</Name>
+        <Title>Department of Land WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>doh_section_km</Name>
+        <Title>Department of Highway WMS</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>t10_mwa</Name>
+        <Title>t10_mwa</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>rain_forecast_nextday</Name>
+        <Title>Rain Forecast by HAII (WRF)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789255"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <MinScaleDenominator>195.31250000000003</MinScaleDenominator>
+      </Layer>
+      <Layer>
+        <Name>siamsquare</Name>
+        <Title>Siam Square</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>chula</Name>
+        <Title>Chulalongkorn University</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>thailand_population</Name>
+        <Title>Thailand Population 2020</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population</Name>
+        <Title>FB Population</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_children</Name>
+        <Title>FB Population (Children)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_elderly</Name>
+        <Title>FB Population (Elderly)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_men</Name>
+        <Title>FB Population (Men)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_women</Name>
+        <Title>FB Population (Women)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_youth</Name>
+        <Title>FB Population (Youth)</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+      <Layer>
+        <Name>fb_population_2020</Name>
+        <Title>Fbpopulation - Fb Population 2020</Title>
+        <EX_GeographicBoundingBox>
+          <westBoundLongitude>-180</westBoundLongitude>
+          <eastBoundLongitude>180</eastBoundLongitude>
+          <southBoundLatitude>-85.0511287798066</southBoundLatitude>
+          <northBoundLatitude>85.0511287798066</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="CRS:84" minx="-180" miny="-85.0511287798066" maxx="180"
+          maxy="85.0511287798066" />
+        <BoundingBox CRS="EPSG:3857" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+        <BoundingBox CRS="EPSG:4326" minx="-85.0511287798066" miny="-180.0" maxx="85.0511287798066"
+          maxy="180.0" />
+        <BoundingBox CRS="EPSG:900913" minx="-20037508.342789244" miny="-20037508.342789244"
+          maxx="20037508.342789244" maxy="20037508.342789244" />
+      </Layer>
+    </Layer>
+  </Capability>
+</WMS_Capabilities>

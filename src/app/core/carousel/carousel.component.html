@@ -1,0 +1,19 @@
+<div class="carousel-container">
+
+  <div class="carousel-slide">
+    <div [style.transform]="getTransform()">
+      <div *ngFor="let image of images">
+        <img [src]="image.src" [alt]="image.alt" title="{{image.alt}}">
+      </div>
+    </div>
+
+    <div class="right-content">
+      <p>หมุเด้ง!</p>
+    </div>
+
+    <!-- Navigation -->
+    <button class="prev" (click)="prevSlide()">&#10094;</button>
+    <button class="next" (click)="nextSlide()">&#10095;</button>
+  </div>
+
+</div>

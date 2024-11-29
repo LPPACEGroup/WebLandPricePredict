@@ -10,7 +10,7 @@ import { SubscriptionPageComponent } from './page/subscription-page/subscription
 import { MapPageComponent } from './page/map-page/map-page.component';
 
 export const routes: Routes = [
-    {   path: 'Home', component: HomeComponent },
+    { path: 'Home', component: HomeComponent },
     { path: 'Map', component: MapPageComponent },
     { path: 'Dashboard', component: DashboardComponent },
     { path: 'Monitor', component: MonitorComponent },
@@ -22,4 +22,3 @@ export const routes: Routes = [
 
     {path:'**',component:HomeComponent},
 ];
-    

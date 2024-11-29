@@ -1,240 +1,100 @@
-<div class="h-20  bg-dark-blue navbar sticky top-0 z-50">
-    <h1 class="text-white font-LPPA text-5xl navbar-start">LPPA</h1>
-    <div class="  navbar-center">
-        <ul class="menu menu-horizontal">
-            <li class="hover:bg-transparent">
-                <div routerLink="Home"
-                    class="text-white flex flex-col-reverse hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-                    routerLinkActive="text-yellow ">
-                    <p>หน้าหลัก</p>
-                    <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg" stroke-linejoin="round"
-                        stroke-linecap="round" stroke-width="1.5" stroke="" fill="none" class="stroke-white"
-                        routerLinkActive="stroke-yellow">
+<div class="navbar">
+  <h1 class="text-white font-LPPA text-3xl navbar-start">LPPM</h1>
+  <div class="navbar-end">
 
-                        <g>
-                            <title>Layer 1</title>
-                            <path stroke="null" id="svg_1"
-                                d="m5.11748,16.3134l0,9.09507l6.61868,0l0,-6.61427c0,-0.43831 0.17462,-0.85897 0.48505,-1.1694s0.7311,-0.48416 1.17029,-0.48416l1.65445,0a1.65798,1.65798 0 0 1 1.17029,0.48416c0.31043,0.30955 0.48505,0.7311 0.48505,1.1694l0,6.61427l6.61868,0l0,-9.09507m-21.51226,-1.65357l11.24162,-11.23368a1.64916,1.64916 0 0 1 0.53532,-0.36158c0.20019,-0.08378 0.41626,-0.12699 0.63321,-0.12699a1.64916,1.64916 0 0 1 0.63409,0.12699c0.20107,0.08378 0.38275,0.20637 0.53532,0.36158l11.24162,11.23368m-7.44679,-7.44062l0,-3.21895l4.13701,0l0,7.35243" />
-                        </g>
-                    </svg>
-                </div>
-            </li>
-            <li class="hover:bg-transparent">
-                <div routerLink="Map"
-                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-                    routerLinkActive="text-yellow">
-                    <p>แผนที่</p>
+    <!-- main menu -->
+    <ul class="menu menu-horizontal lg:flex min-w-full navbar-end">
 
-                    <svg width="28" height="30.000000000000004" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        routerLinkActive="stroke-yellow" class="stroke-white">
+      <!-- Home btt -->
+      <li class="">
+        <div routerLink="home" class="text-white" routerLinkActive="">
+          <img src="assets\icons\home.svg" alt="Home" class="w-6 h-6 inline-block mr-2">
+          <p>หน้าหลัก</p>
+        </div>
+      </li>
 
-                        <g>
-                            <title>Layer 1</title>
-                            <g stroke="null" id="svg_10">
-                                <path stroke="" id="svg_1" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5"
-                                    d="m13.75217,2.19532c0.6765,0 1.34632,0.13316 1.97138,0.39186c0.62488,0.2587 1.19284,0.6379 1.67121,1.11592c0.47827,0.47802 0.8578,1.04552 1.1167,1.67008c0.2589,0.62457 0.39215,1.29398 0.39215,1.97001c0,2.19757 -3.07719,6.37879 -4.47494,8.16567c-0.08026,0.10268 -0.18294,0.18578 -0.30018,0.24289c-0.11714,0.0572 -0.246,0.08676 -0.37632,0.08676c-0.13041,0 -0.25918,-0.02956 -0.37641,-0.08676c-0.11723,-0.05711 -0.21983,-0.14021 -0.30018,-0.24289c-1.39775,-1.78579 -4.4749,-5.9681 -4.4749,-8.16567c0,-1.3653 0.54275,-2.67469 1.50881,-3.64009c0.96615,-0.96541 2.27632,-1.50778 3.64268,-1.50778z" />
-                                <path stroke="" id="svg_2" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5"
-                                    d="m6.88936,12.52667c-0.28905,0.06031 -0.55765,0.1942 -0.77983,0.38858c-0.22219,0.19438 -0.39047,0.44267 -0.48857,0.72107l-3.93914,12.01171c-0.09133,0.25872 -0.11925,0.53556 -0.08141,0.80728c0.03785,0.27181 0.14034,0.53044 0.29889,0.75447c0.15855,0.22394 0.36853,0.4068 0.61235,0.53282c0.2438,0.1262 0.51434,0.1921 0.78888,0.19219l20.90344,0c0.27464,0 0.54535,-0.06589 0.78934,-0.19219c0.2438,-0.1262 0.45402,-0.30896 0.61253,-0.53318c0.1586,-0.22413 0.26101,-0.48303 0.29881,-0.75493c0.03771,-0.27181 0.00961,-0.54883 -0.08191,-0.80764l-3.9392,-12.01171c-0.09875,-0.27977 -0.26851,-0.52934 -0.49273,-0.724c-0.22413,-0.19466 -0.49493,-0.32791 -0.78595,-0.38675" />
-                                <path stroke="" id="svg_3" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5" d="m8.60068,27.93359l1.71719,-10.29465" />
-                                <path stroke="" id="svg_4" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5" d="m18.90389,27.93359l-1.71715,-10.29465" />
-                                <path stroke="" id="svg_5" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5" d="m2.65292,22.78681l22.23247,0" />
-                                <path stroke="" id="svg_6" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5" d="m4.3081,17.63894l6.01004,0" />
-                                <path stroke="" id="svg_7" stroke-linejoin="round" stroke-linecap="round"
-                                    stroke-width="1.5" d="m17.18674,17.63894l6.00997,0" />
-                                <path stroke="" id="svg_8" stroke-width="1.5"
-                                    d="m13.76855,7.77218c-0.23712,0 -0.42931,-0.19206 -0.42931,-0.42899c0,-0.23693 0.19219,-0.42899 0.42931,-0.42899" />
-                                <path stroke="" id="svg_9" stroke-width="1.5"
-                                    d="m13.7691,7.77218c0.23712,0 0.42931,-0.19206 0.42931,-0.42899c0,-0.23693 -0.19219,-0.42899 -0.42931,-0.42899" />
-                            </g>
-                        </g>
-                    </svg>
+      <!-- Map btt -->
+      <li class="">
+        <div routerLink="Map" class="text-white flex " routerLinkActive="">
+          <img src="assets\icons\map.svg" alt="Map" class="nav-icon">
+          <p>แผนที่</p>
+        </div>
+      </li>
 
-                </div>
-            </li>
-            <li class="hover:bg-transparent">
-                <div routerLink="Dashboard"
-                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-                    routerLinkActive="text-yellow">
-                    <p>แดชบอร์ด</p>
-                    <svg width="28" height="30" xmlns="http://www.w3.org/2000/svg" fill="none" class="stroke-white"
-                        routerLinkActive="stroke-yellow">
-                        <defs>
-                            <clipPath id="A">
-                                <path id="svg_1" d="m0.019,0l30.021,0l0,30l-30.021,0l0,-30z" fill="#fff" />
-                            </clipPath>
-                        </defs>
-                        <g>
-                            <title>Layer 1</title>
-                            <g stroke="" id="svg_2" stroke-linejoin="round" stroke-width="1.5" clip-path="url(#A)">
-                                <path stroke="null" id="svg_3" stroke-linecap="round"
-                                    d="m10.27293,22.13992l4.0711,-4.06866a0.76491,0.76491 0 0 1 1.07901,0l1.97493,1.9733a0.76491,0.76491 0 0 0 1.07901,0l4.0711,-4.06866" />
-                                <path stroke="null" id="svg_4"
-                                    d="m4.16506,2.81379l19.84855,0s1.52656,0 1.52656,1.52575l0,19.83472s0,1.52575 -1.52656,1.52575l-19.84855,0s-1.52656,0 -1.52656,-1.52575l0,-19.83472s0,-1.52575 1.52656,-1.52575z" />
-                                <path stroke="null" id="svg_5"
-                                    d="m5.69244,10.69641a4.57317,4.57317 0 0 0 0.34828,1.75197c0.23029,0.55578 0.56717,1.06029 0.99275,1.48506a4.58131,4.58131 0 0 0 3.23865,1.34103a4.58131,4.58131 0 0 0 3.23865,-1.34103c0.42558,-0.42477 0.76247,-0.92928 0.99275,-1.48506a4.57317,4.57317 0 0 0 0,-3.50312c-0.23029,-0.55497 -0.56799,-1.06029 -0.99275,-1.48506a4.58131,4.58131 0 0 0 -3.23784,-1.34103a4.58131,4.58131 0 0 0 -3.23865,1.34103c-0.42558,0.42477 -0.76247,0.92928 -0.99275,1.48506a4.57317,4.57317 0 0 0 -0.34828,1.75197l-0.00081,-0.00081z" />
-                                <g stroke="null" id="svg_6" stroke-linecap="round">
-                                    <path stroke="null" id="svg_7"
-                                        d="m10.27293,6.11917l0,4.57724l3.23703,3.23459m5.15988,-6.28608l3.56252,0m-3.56252,3.56008l3.56252,0" />
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-            </li>
-            <li class="hover:bg-transparent">
-                <div routerLink="Monitor"
-                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-                    routerLinkActive="text-yellow">
-                    <p>มอนิเตอร์</p>
-                    <svg width="28.000000000000004" height="30" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        class="stroke-white" routerLinkActive="stroke-yellow">
-                        <defs>
-                            <clipPath id="A">
-                                <path id="svg_1" d="m0.018,0l30.021,0l0,30l-30.021,0l0,-30z" fill="#fff" />
-                            </clipPath>
-                        </defs>
-                        <g>
-                            <title>Layer 1</title>
-                            <g stroke="" id="svg_2" stroke-width="1.5" clip-path="url(#A)">
-                                <g stroke="null" id="svg_3" stroke-linejoin="round">
-                                    <path stroke="null" id="svg_4"
-                                        d="m22.83612,3.23129l-18.07941,0a1.95318,1.95318 0 0 0 -1.95474,1.95318l0,13.57226a1.95318,1.95318 0 0 0 1.95474,1.95318l18.07941,0a1.95318,1.95318 0 0 0 1.95474,-1.95318l0,-13.57226a1.95318,1.95318 0 0 0 -1.95474,-1.95318z" />
-                                    <g stroke="null" id="svg_5" stroke-linecap="round">
-                                        <path stroke="null" id="svg_6"
-                                            d="m11.79753,20.70913l-1.00003,3.99542m0.00078,-0.00078l5.49703,0m-0.49845,-3.99464l0.99847,3.99542" />
-                                        <path stroke="null" id="svg_7"
-                                            d="m18.29458,24.70377l-8.99556,0m-6.49706,-7.50177l21.9889,0m-18.87631,-9.92137l2.21412,0m2.21569,0l1.32894,0" />
-                                        <path stroke="null" id="svg_8"
-                                            d="m5.91455,10.26665l1.32816,0m2.21569,0l2.21412,0m-5.75797,2.98524l5.75797,0m3.12509,-10.02059l0,13.9707m0,-3.21806l2.9829,-2.90633a2.86727,2.86727 0 0 1 3.43447,-0.08203l3.57744,2.98837" />
-                                    </g>
-                                </g>
-                                <path stroke="null" id="svg_9"
-                                    d="m18.28911,7.76892c-0.26954,0 -0.48829,-0.21876 -0.48829,-0.48829s0.21876,-0.48829 0.48829,-0.48829m-0.00078,0.97659c0.26954,0 0.48829,-0.21876 0.48829,-0.48829s-0.21876,-0.48829 -0.48829,-0.48829" />
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-            </li>
-            <li class="hover:bg-transparent">
-                <div routerLink="Calculator"
-                    class="text-white flex flex-col-reverse hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-                    routerLinkActive="text-yellow">
-                    <p>เครื่องคิดเลข</p>
-                    <svg width="28.000000000000004" height="30" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" class="stroke-white"
-                        routerLinkActive="stroke-yellow">
-                        <defs>
-                            <path d="m9.877,15.938a0.47,0.47 0 0 1 -0.469,-0.469a0.47,0.47 0 0 1 0.469,-0.469" id="A" />
-                            <path d="m9.879,15.938a0.47,0.47 0 0 0 0.469,-0.469a0.47,0.47 0 0 0 -0.469,-0.469" id="B" />
-                        </defs>
-                        <g>
-                            <title>Layer 1</title>
-                            <g id="svg_1" stroke="">
-                                <g id="svg_2" stroke-width="1.5" stroke-linejoin="round">
-                                    <path id="svg_3"
-                                        d="m22.45001,0.938l-16.887,0c-1.036,0 -1.876,0.839 -1.876,1.875l0,24.375c0,1.035 0.84,1.875 1.876,1.875l16.887,0c1.036,0 1.876,-0.84 1.876,-1.875l0,-24.375c0,-1.036 -0.84,-1.875 -1.876,-1.875z" />
-                                    <path id="svg_4"
-                                        d="m19.63501,4.688l-11.258,0a0.94,0.94 0 0 0 -0.938,0.938l0,3.75a0.94,0.94 0 0 0 0.938,0.938l11.258,0a0.94,0.94 0 0 0 0.938,-0.937l0,-3.75a0.94,0.94 0 0 0 -0.938,-0.937l0,-0.002z" />
-                                </g>
-                                <g id="svg_5" stroke-width="1.5">
-                                    <use x="-1.03199" y="0" id="svg_6" xlink:href="#A" />
-                                    <use x="-1.03199" y="0" id="svg_7" xlink:href="#B" />
-                                    <use x="-1.03199" id="svg_8" y="4.687" xlink:href="#A" />
-                                    <use x="-1.03199" id="svg_9" y="4.687" xlink:href="#B" />
-                                    <use x="-1.03199" id="svg_10" y="9.375" xlink:href="#A" />
-                                    <use x="-1.03199" id="svg_11" y="9.375" xlink:href="#B" />
-                                    <use y="0" id="svg_12" x="4.32401" xlink:href="#A" />
-                                    <use y="0" id="svg_13" x="4.32101" xlink:href="#B" />
-                                    <use id="svg_14" y="4.687" x="4.32401" xlink:href="#A" />
-                                    <use id="svg_15" y="4.687" x="4.32101" xlink:href="#B" />
-                                    <use id="svg_16" y="9.375" x="4.32401" xlink:href="#A" />
-                                    <use id="svg_17" y="9.375" x="4.32101" xlink:href="#B" />
-                                    <use y="0" id="svg_18" x="9.28901" xlink:href="#A" />
-                                    <use y="0" id="svg_19" x="9.28601" xlink:href="#B" />
-                                    <use id="svg_20" y="4.687" x="9.28901" xlink:href="#A" />
-                                    <use id="svg_21" y="4.687" x="9.28601" xlink:href="#B" />
-                                    <use id="svg_22" y="9.375" x="9.28901" xlink:href="#A" />
-                                    <use id="svg_23" y="9.375" x="9.28601" xlink:href="#B" />
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-            </li>
-        </ul>
+
+      <!-- Dashboard Button -->
+      <li class="">
+        <div routerLink="Dashboard" class="text-white flex" routerLinkActive="">
+          <img src="assets/icons/dashboard.svg" alt="Dashboard" class="w-6 h-6 inline-block mr-2">
+          <p>แดชบอร์ด</p>
+        </div>
+      </li>
+
+
+      <!-- Blog Button -->
+      <li class="">
+        <div routerLink="Question" class="text-white flex" routerLinkActive="">
+          <img src="assets\icons\blog.svg" alt="Blog" class="w-6 h-6 inline-block mr-2">
+          <p>บล็อก</p>
+        </div>
+      </li>
+
+      <!-- Dropdown for more menu -->
+      <div class="flex-none">
+        <div class="dropdown dropdown-end">
+          <li tabindex="0" class="">
+            <div class="text-white flex">
+              <img src="assets\icons\moremenu.svg" alt="More" class="w-6 h-6 inline-block mr-2">
+              <p>เพิ่มเติม</p>
+              <img src="assets\icons\downarrow.svg" alt="More" class="w-6 h-6 inline-block mr-2">
+            </div>
+          </li>
+          <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <li routerLink="Calculator"><a>เครื่องคิดเลข</a></li>
+            <li><a>คู่มือการใช้งาน</a></li>
+            <li routerLink="Subscription"><a>แพ็คเกจสมาชิก</a></li>
+            <li routerLink="Contact"><a>ติดต่อเรา</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </ul>
+
+    <!-- notification -->
+    <div class="lg:flex">
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img src="assets/icons/bell.svg" alt="Notifications" class="w-10 h-10">
+          </div>
+        </div>
+        <app-noti class="z-10"></app-noti>
+      </div>
     </div>
-    <div class="navbar-end">
-        <ul class="menu menu-horizontal flex items-center">
-            <li class="">
-                <details class="open:stroke-yellow">
-                    <summary class="after:content-none">
-                        <div>
-                            <svg width="28" height="30" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" stroke=""
-                                fill="none" class="stroke-white " routerLinkActive="stroke-yellow">
 
-                                <g>
-                                    <title>Layer 1</title>
-                                    <g stroke="null" id="svg_4">
-                                        <path stroke="null" id="svg_1" stroke-linejoin="round" stroke-linecap="round"
-                                            d="m11.32692,26.92765a2.56633,2.71203 0 0 0 0.92607,1.40865c0.44489,0.35149 0.98517,0.54151 1.54064,0.54151s1.09575,-0.19002 1.54064,-0.54151a2.56633,2.71203 0 0 0 0.92607,-1.40865m-2.47009,-24.39399l0,-2.92703" />
-                                        <path stroke="null" id="svg_2" stroke-linejoin="round"
-                                            d="m13.79025,2.53366a9.24384,9.76866 0 0 1 6.53316,2.85834c1.73311,1.82973 2.70646,4.31159 2.70646,6.89962c0,9.16648 1.84792,10.73303 1.84792,10.73303l-22.17508,0s1.84792,-2.49257 1.84792,-10.73303c0,-2.58802 0.97335,-5.06989 2.70646,-6.89962a9.24384,9.76866 0 0 1 6.53316,-2.85834z" />
-                                    </g>
-                                </g>
-                            </svg>
-
-                        </div>
-                    </summary>
-                    <app-noti class="z-10"></app-noti>
-                </details>
-            </li>
-            <li class="flex items-end">
-                <div class="drawer drawer-end">
-                    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-                    <div class="drawer-content">
-                        <!-- Page content here -->
-                        <label for="my-drawer" class="btn bg-dark-blue drawer-button border-dark-blue">
-                            <div class="">
-                                <svg width="36" height="36" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    class="stroke-white">
-
-                                    <g>
-                                        <title>Layer 1</title>
-                                        <path id="svg_1" stroke-linejoin="round" stroke-linecap="round"
-                                            stroke-width="1.5"
-                                            d="m3.28365,29.82089l28.73823,0m-28.73823,-12.54746l28.73823,0m-28.73823,-12.54747l28.73823,0" />
-                                    </g>
-                                </svg>
-                            </div>
-                        </label>
-                    </div>
-                    <div class="drawer-side">
-                        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-                        <ul class="menu p-4 w-80 min-h-full bg-white text-dark-blue">
-                            <li ><a>คู่มือการใช้งาน</a></li>
-                            <li routerLink="Question"><a>คำถามที่พบบ่อย</a></li>
-                            <li routerLink="Contact"><a>ติดต่อเรา</a></li>
-                            <li routerLink="Subscription"><a>แพ็คเกจสมาชิก</a></li>
-                            <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>
-                            <li><a>ออกจากระบบ<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
-                                            fill="#2749A3" />
-                                    </svg>
-                                </a></li>
-
-                        </ul>
-                    </div>
-                </div>
-
-            </li>
+    <!-- profile btt -->
+    <div class="lg:flex">
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img src="assets\imgs\default profile img.png" alt="More" class="w-10 h-10">
+          </div>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>
+          <li routerLink="">
+            <a>ออกจากระบบ
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
+                  fill="#2749A3" />
+              </svg>
+            </a>
+          </li>
         </ul>
+      </div>
     </div>
+
+  </div>
+
 </div>
