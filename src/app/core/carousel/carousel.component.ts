@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -10,10 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class CarouselComponent implements OnInit {
 
   images = [
-    { src: 'https://via.placeholder.com/600x300?text=Slide+1', alt: 'Slide 1' },
-    { src: 'https://via.placeholder.com/600x300?text=Slide+2', alt: 'Slide 2' },
-    { src: 'https://via.placeholder.com/600x300?text=Slide+3', alt: 'Slide 3' },
-    { src: 'https://via.placeholder.com/600x300?text=Slide+4', alt: 'Slide 4' },
+    { src: '/assets/imgs/news1.png', alt: 'Slide 1' },
   ];
 
   currentIndex = 0;
@@ -25,7 +23,7 @@ export class CarouselComponent implements OnInit {
   }
 
   getTransform(): string {
-    return `translateX(${-this.currentIndex * 600}px)`;
+    return `translateX(${-this.currentIndex * 100}%)`;
   }
 
   prevSlide(): void {
