@@ -74,3 +74,23 @@ textarea {
 .select:focus{
     border: none;
 }
+
+
+
+.mdc-slider__thumb-knob{
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background-color: #F3C762 !important;
+    border-color: #F3C762 !important;
+}
+.mat-mdc-slider {
+    --mdc-slider-active-track-color: #ffecc0 !important;
+    --mdc-slider-inactive-track-color: #F3C762 !important;
+    --mdc-slider-inactive-track-height: 3px !important;
+}
+
+.mdc-slider__track--inactive {
+    opacity: 1 !important;
+}
+

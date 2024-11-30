@@ -9,6 +9,11 @@ import { NearbyPlacesService } from 'app/service/NearbyPlace/nearby-place.servic
 import { Element } from 'app/service/NearbyPlace/nearby-place.service'; // Ensure the import is correct
 import { GetRouteService } from 'app/service/GetRoute/get-route.service';
 import { MarkersortService } from 'app/service/MarkerSort/markersort.service'; // Ensure the import is correct
+import {MatIconModule} from '@angular/material/icon';
+import {MatSliderModule} from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 interface LocationResult {
   place_id: number;
@@ -17,15 +22,28 @@ interface LocationResult {
   lat: string;
   lon: string;
 }
-
+export class PriceSlider{
+  minPrice= 0;
+  maxPrice= 100000000;
+  leftPrice= this.minPrice;
+  rightPrice= this.maxPrice;
+}
+export class AreaSlider{
+  minArea= 0;
+  maxArea= 99999 ;
+  leftArea= this.minArea;
+  rightArea= this.maxArea;
+}
 
 @Component({
   selector: 'app-map-page',
   standalone: true,
-  imports: [MapComponent, HttpClientModule, CommonModule, LandCardComponent],
+  imports: [MapComponent, HttpClientModule, CommonModule, LandCardComponent, MatIconModule,MatSliderModule,FormsModule,MatInputModule,MatFormFieldModule],
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css']
 })
+
+
 export class MapPageComponent implements OnInit {
   coordinates: [number, number] | null = null;
   loading = false;
@@ -40,6 +58,11 @@ export class MapPageComponent implements OnInit {
   sortedLandList: any[] = [];
   filteredLandList: any[] = [];
   matches: any[] = [];
+  istoggleLandBar: boolean = false;
+  fastsellState = false;
+
+  Priceslider = new PriceSlider();
+  Areaslider = new AreaSlider();
 
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
@@ -95,7 +118,31 @@ export class MapPageComponent implements OnInit {
   
   
   }
+  toggleLandBar(){
+    this.istoggleLandBar = !this.istoggleLandBar;
+    
+  }
+  onFastSellClick(event: Event){
+    const toggleSwitch = event.target as HTMLInputElement;
+    const modal =document.getElementById('fastsell_Confirm') as HTMLDialogElement;  
+    toggleSwitch.checked = !toggleSwitch.checked;  
+    if (!toggleSwitch.checked){
+      modal.showModal();
+
+    }
+    else{
+      toggleSwitch.checked = false;
+      this.fastsellState = false;
+    }
+    
+  }
   
+
+  confirmFastSell(){
+    this.fastsellState = true;
+    
+  }
+
   
 
   onInput(event: Event) {
@@ -148,5 +195,83 @@ export class MapPageComponent implements OnInit {
     
     
   }
+  leftPriceChange(event: any){
+    const inputElement = event.target as HTMLInputElement;
+    const value = parseInt(inputElement.value)*1000000;
+    if (value<this.Priceslider.minPrice){
+      this.Priceslider.leftPrice = this.Priceslider.minPrice;
+    }
+    else if (value>this.Priceslider.rightPrice){
+      this.Priceslider.leftPrice = this.Priceslider.rightPrice;
+    }
+    else{
+      this.Priceslider.leftPrice = value;
+    }
+    
+  }
+  rightPriceChange(event: any){
+    const inputElement = event.target as HTMLInputElement;
+    const value = parseInt(inputElement.value)*1000000;
+    if (value>this.Priceslider.maxPrice){
+      this.Priceslider.rightPrice = this.Priceslider.maxPrice;
+    }
+    else if (value<this.Priceslider.leftPrice){
+      this.Priceslider.rightPrice = this.Priceslider.leftPrice;
+    }
+    else{
+      this.Priceslider.rightPrice = value;
+    }
+    console.log(this.Priceslider.rightPrice);
+    
+  }
+
+  leftAreaChange(event: any){
+    const inputElement = event.target as HTMLInputElement;
+    const value = parseInt(inputElement.value);
+    if (value<this.Areaslider.minArea){
+      this.Areaslider.leftArea = this.Areaslider.minArea;
+    }
+    else if (value>this.Areaslider.rightArea){
+      this.Areaslider.leftArea = this.Areaslider.rightArea;
+    }
+    else{
+      this.Areaslider.leftArea = value;
+    }
+    
+  }
+  rightAreaChange(event: any){
+    const inputElement = event.target as HTMLInputElement;
+    const value = parseInt(inputElement.value);
+    if (value>this.Areaslider.maxArea){
+      this.Areaslider.rightArea = this.Areaslider.maxArea;
+    }
+    else if (value<this.Areaslider.leftArea){
+      this.Areaslider.rightArea = this.Areaslider.leftArea;
+    }
+    else{
+      this.Areaslider.rightArea = value;
+    }
+    console.log(this.Areaslider.rightArea);
+    
+  }
+
+
+
+  validateNumberInput(event: KeyboardEvent): void {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab']; // Allow navigation keys
+    const inputChar = event.key;
+  
+    // Allow digits, one dot, and minus sign only at the start
+    const currentValue = (event.target as HTMLInputElement).value;
+    if (
+      !allowedKeys.includes(inputChar) &&
+      !(/^\d$/.test(inputChar) || 
+        (inputChar === '.' && !currentValue.includes('.')) || 
+        (inputChar === '-' && currentValue === ''))
+    ) {
+      event.preventDefault(); // Block disallowed keys
+    }
+  }
+  
   
 }

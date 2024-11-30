@@ -115,13 +115,38 @@
       </div>
     </div>
   </dialog>
+  <dialog id="fastsell_Confirm" class="modal">
+    <div class="modal-box relative">
+      <h3 class="text-lg font-bold text-gold"><mat-icon class="" aria-hidden="false"
+        aria-label="Example help icon" fontIcon="flash_on"/>&emsp; เปิดใช้งานการแสดงผลข้อมูลขายเร็ว!</h3>
+        <button class="" onclick="fastsell_Confirm.close()"><mat-icon class="absolute top-4 right-4 text-black" aria-hidden="false"
+          aria-label="Example help icon" fontIcon="close"/></button>
+      <p class="py-4 text-grey">หลังจากเปิดใช้งาน ข้อมูลที่นำมาแสดงจะมีเพียง 60% ของข้อมูลทั้งหมด และเป็นข้อมูลที่มาจากเว็บไซต์ InterHome เท่านั้น</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn text-white bg-dark-blue" (click)="confirmFastSell()">ยืนยันเปิดใช้งาน</button>
+          <button class="btn ml-7 text-black bg-white">ยกเลิก</button>
+        </form>
+        
+      </div>
+    </div>
+
+  </dialog>
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-dark-blue"></span>
   </div>
-  <div class="h-full w-1/4 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue ">
+  <div
+    class="h-full w-1/4 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue  landBar landbar-active"
+    [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
+    <div class="h-6 w-10 bg-white absolute left-0 top-12 -translate-x-full cursor-pointer flex" (click)="toggleLandBar()">
+      <mat-icon class="text-ocean-blue opacity-50 " aria-hidden="false" aria-label="Example help icon" fontIcon="play_arrow
+        "></mat-icon>
+      <mat-icon class="text-ocean-blue   -translate-x-3" aria-hidden="false" aria-label="Example help icon"
+        fontIcon="chevron_right"></mat-icon>
+    </div>
     <div class="w-full search">
-      <input placeholder="เลขที่/เขต/แขวง/จังหวัด........"
-        class="input input-bordered w-full h-10  rounded-full placeholder-dark-blue" (keydown)="onKeyDown($event)"
+      <input placeholder="ค้นหา ชื่อ/เขต/แขวง/จังหวัด........"
+        class="input input-bordered w-full h-10   placeholder-dark-blue" (keydown)="onKeyDown($event)"
         (input)="onInput($event)" (foucs)="onFocus()" #searchInput />
       <div class="bg-white z-40 h-44 overflow-y-scroll w-full pt-2"
         [ngClass]="{'block/': isInputFocused, 'hidden': !isInputFocused}" #searchResults>
@@ -135,9 +160,9 @@
       </div>
     </div>
 
-    <div class=" w-full flex flex-row gap-2">
-      <details class="dropdown">
-        <summary class="btn m-1 bg-white rounded-full text-dark-blue font-normal  select-bordered">เลือกแสดงข้อมูลแผนที่
+    <div class=" w-full flex flex-row gap-2 ">
+      <details class="dropdown w-1/2">
+        <summary class="btn  bg-white  text-dark-blue font-normal  select-bordered m-0 w-full">เลือกแสดงข้อมูลแผนที่
         </summary>
         <ul class="menu dropdown-content bg-white">
           <li>
@@ -149,29 +174,104 @@
             </div>
           </li>
           <li>
-            <div><input id="satellite" type="radio" name="mapOption" value="satellite" (change)="onMapOptionChange('satellite')"
-                checked />
+            <div><input id="satellite" type="radio" name="mapOption" value="satellite"
+                (change)="onMapOptionChange('satellite')" />
 
 
               <label for="satellite">ภาพถ่ายดาวเทียม</label>
             </div>
           </li>
           <li>
-            <div><input id="colormap" type="radio" name="mapOption" value="colormap" (change)="onMapOptionChange('colormap')"
-                checked />
+            <div><input id="colormap" type="radio" name="mapOption" value="colormap"
+                (change)="onMapOptionChange('colormap')" />
 
 
               <label for="colormap">แผนที่สีผังเมือง</label>
             </div>
           </li>
-          
+
         </ul>
       </details>
-      <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 ">
-        <option disabled selected>อื่นๆ</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
-      </select>
+      <details class="dropdown  w-1/2">
+        <summary class="btn  bg-white  text-dark-blue font-normal  select-bordered m-0 w-full ">ตั้งค่าแสดงรายการที่ดิน
+        </summary>
+        <div class="  m-0 p-5  dropdown-content w-11/12 bg-white ">
+          <h4>ช่วงราคา(ล้าน)</h4>
+          <form>
+            <div class="flex justify-between text-sm">
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Priceslider.leftPrice/1000000" (keydown.enter)="leftPriceChange($event)" (keypress)="validateNumberInput($event)"/>
+              <div class="flex flex-center">
+                <hr class="w-5 bg-grey h-1">
+              </div>
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Priceslider.rightPrice/1000000" (keydown.enter)="rightPriceChange($event)" (keypress)="validateNumberInput($event)"/>
+            
+            </div>
+          </form>
+          <div>
+            <mat-slider [min]="Priceslider.minPrice" [max]="Priceslider.maxPrice" class="w-full  m-0 slider">
+              <input  [(ngModel)]="Priceslider.leftPrice"  matSliderStartThumb>
+              <input   [(ngModel)]="Priceslider.rightPrice"  matSliderEndThumb>
+            </mat-slider>
+          </div>
+
+          <h4>ขนาดพื้นที่(ตารางวา)</h4>
+          <form>
+            <div class="flex justify-between text-sm">
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Areaslider.leftArea" (keydown.enter)="leftAreaChange($event)" (keypress)="validateNumberInput($event)"/>
+              <div class="flex flex-center">
+                <hr class="w-5 bg-grey h-1">
+              </div>
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Areaslider.rightArea" (keydown.enter)="rightAreaChange($event)" (keypress)="validateNumberInput($event)"/>
+            </div>
+          </form>
+          <div>
+            <mat-slider [min]="Areaslider.minArea" [max]="Areaslider.maxArea" class="w-full  m-0 " >
+              <input   [(ngModel)]="Areaslider.leftArea"  matSliderStartThumb >
+              <input [(ngModel)]="Areaslider.rightArea"    matSliderEndThumb>
+            </mat-slider>
+          </div>
+          <div class="flex items-center">
+            <h4>ข้อมูลขายเร็ว </h4> <mat-icon class="text-grey text-sm" aria-hidden="false"
+              aria-label="Example help icon" fontIcon="help_outline"></mat-icon><input type="checkbox"
+              class="toggle toggle-xs toggle-accent border-none  bg-white " 
+              value="fastsell" [checked]="fastsellState" (change)="onFastSellClick($event)" [id]=""/>
+            <p class="text-grey text-sm">เปิดใช้งาน</p>
+          </div>
+
+
+          <ul class="menu dropdown-content bg-white text-grey p-0  ">
+            <li>
+              <div><input id="lad" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="lad">เขตลาดกระบัง</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <input id="min" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="min">เขตมีนบุรี</label>
+              </div>
+            </li>
+            <li>
+              <div><input id="khong" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="khong">เขตคลองเตย</label>
+              </div>
+            </li>
+            <li>
+              <div><input id="wat" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="wat">เขตวัฒนา</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </details>
     </div>
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">
       <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" (click)="onCardClick(item)"

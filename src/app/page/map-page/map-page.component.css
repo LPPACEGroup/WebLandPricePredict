@@ -1,3 +1,12 @@
 .date-text {
-    font-size: 0.5rem;
+  font-size: 0.5rem;
+}
+
+.toggle:not(:checked) {
+  --tglbg: #ccc; /* Set to gray */
+}
+
+/* Checked state */
+.toggle:checked {
+  --tglbg: #00A76F; /* Green as defined */
 }
