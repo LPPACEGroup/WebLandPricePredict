@@ -208,9 +208,9 @@
             </div>
           </form>
           <div>
-            <mat-slider [min]="Priceslider.minPrice" [max]="Priceslider.maxPrice" class="w-full  m-0 slider">
-              <input  [(ngModel)]="Priceslider.leftPrice"  matSliderStartThumb>
-              <input   [(ngModel)]="Priceslider.rightPrice"  matSliderEndThumb>
+            <mat-slider [min]="Priceslider.minPrice" [max]="Priceslider.maxPrice"  class="w-full  m-0 slider">
+              <input  [(ngModel)]="Priceslider.leftPrice"  matSliderStartThumb (change)="handleSearch(this.searchValue)">
+              <input   [(ngModel)]="Priceslider.rightPrice"  matSliderEndThumb (change)="handleSearch(this.searchValue)">
             </mat-slider>
           </div>
 
@@ -226,8 +226,8 @@
           </form>
           <div>
             <mat-slider [min]="Areaslider.minArea" [max]="Areaslider.maxArea" class="w-full  m-0 " >
-              <input   [(ngModel)]="Areaslider.leftArea"  matSliderStartThumb >
-              <input [(ngModel)]="Areaslider.rightArea"    matSliderEndThumb>
+              <input   [(ngModel)]="Areaslider.leftArea"  matSliderStartThumb (change)="handleSearch(this.searchValue)">
+              <input [(ngModel)]="Areaslider.rightArea"    matSliderEndThumb (change)="handleSearch(this.searchValue)">
             </mat-slider>
           </div>
           <div class="flex items-center">

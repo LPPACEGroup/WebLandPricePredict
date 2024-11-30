@@ -60,6 +60,7 @@ export class MapPageComponent implements OnInit {
   matches: any[] = [];
   istoggleLandBar: boolean = false;
   fastsellState = false;
+  searchValue: string = '';
 
   Priceslider = new PriceSlider();
   Areaslider = new AreaSlider();
@@ -147,8 +148,8 @@ export class MapPageComponent implements OnInit {
 
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    const value = inputElement.value;
-    this.handleSearch(value);
+    this.searchValue = inputElement.value;
+    this.handleSearch(this.searchValue);
     
   }
 
@@ -166,22 +167,30 @@ export class MapPageComponent implements OnInit {
     // รวม location กับ description ของแต่ละที่ดินเข้าด้วยกันแล้ว ค้นหาด้วย inputValue
     if (inputValue && inputValue.length > 0) {
       this.matches  = [];
-      this.landList.map((land) => { 
+      this.matches= this.landList.filter((land) => { 
         const combinedText = `${land.location} ${land.description}`;
-        if(combinedText.includes(inputValue)) {
-          this.matches.push(land);
-        }
+        // if(combinedText.includes(inputValue)) {
+        //   this.matches.push(land);
+        // }
+        return combinedText.includes(inputValue)
       });
     }
     else {
       this.matches = this.landList;
     }
 
-    console.log(this.matches);
-    // update filteredLandList และ sortedLandList ด้วย matches ที่ได้
-    this.filteredLandList = this.matches;
+
+
+    const inrange = this.matches.filter(land =>{
+      const x =land.price >= this.Priceslider.leftPrice && land.price <= this.Priceslider.rightPrice && land.size >= this.Areaslider.leftArea && land.size <= this.Areaslider.rightArea;
+      return x
+    })
+
+    this.filteredLandList = this.matches &&inrange;
+    
     this.sortedLandList = this.markerSortService.sortByProximity(this.filteredLandList, this.markerCoord);
 
+    console.log('nigga');
     
   }
   onMapOptionChange(option: string): void {
@@ -207,7 +216,7 @@ export class MapPageComponent implements OnInit {
     else{
       this.Priceslider.leftPrice = value;
     }
-    
+    this.handleSearch(this.searchValue);
   }
   rightPriceChange(event: any){
     const inputElement = event.target as HTMLInputElement;
@@ -221,7 +230,7 @@ export class MapPageComponent implements OnInit {
     else{
       this.Priceslider.rightPrice = value;
     }
-    console.log(this.Priceslider.rightPrice);
+    this.handleSearch(this.searchValue);
     
   }
 
@@ -237,7 +246,8 @@ export class MapPageComponent implements OnInit {
     else{
       this.Areaslider.leftArea = value;
     }
-    
+        this.handleSearch(this.searchValue);
+
   }
   rightAreaChange(event: any){
     const inputElement = event.target as HTMLInputElement;
@@ -251,7 +261,7 @@ export class MapPageComponent implements OnInit {
     else{
       this.Areaslider.rightArea = value;
     }
-    console.log(this.Areaslider.rightArea);
+    this.handleSearch(this.searchValue);
     
   }
 
