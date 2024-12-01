@@ -1,5 +1,5 @@
-.bg{
-  background-image: url('.../../../../../assets/imgs/bg.png');
+.bg {
+  background-image: url(".../../../../../assets/imgs/bg.png");
   background-size: cover;
   position: fixed;
   inset: 0;
@@ -13,7 +13,7 @@
   position: relative;
   height: 100%;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .container {
@@ -32,18 +32,29 @@
   border-radius: 10px;
 }
 
+.box-content {
+  display: flex;
+}
+
 .left-content {
   display: flex;
   flex-direction: row; /* Align icon and list horizontally */
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+}
+
+.mid-content {
+  display: flex;
+  flex-direction: row; /* Align icon and list horizontally */
+  flex: 1;
+  align-items: center;
+  justify-content: left;
   border-right: 1px solid #e0e0e0; /* Optional: Add border to separate content visually */
 }
 
 .right-content {
-  flex: 1;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,21 +62,75 @@
 }
 
 .icon-container {
-  margin-right: 50px; /* Space between icon and list */
+  margin-right: 20px; /* Space between icon and list */
   display: flex;
   align-items: center;
   flex-direction: column;
+  fill: var(--blue);
 }
 
 .icon {
   width: 50px;
   height: 50px;
-  fill: #2749A3;
 }
-
 
 .icon-text {
   margin-top: 8px; /* Space between icon and text */
   font-size: 28px;
   text-align: center; /* Center text alignment */
+}
+
+.text-description {
+  font-size: 18px;
+  color: var(--grey);
+  text-align: center;
+  margin-bottom: 10px; /* Space between text and list */
+}
+
+.guide-box {
+  margin: 10px;
+  width: 250px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: var(--oceanBlue);
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+}
+
+/* Mobile devices (portrait and landscape) */
+@media (max-width: 768px) {
+  details[open] summary div svg {
+    stroke: #ff5733 !important;
+  }
+}
+
+/* Tablets (portrait and landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  details[open] summary div svg {
+    stroke: #33ff57 !important;
+  }
+}
+
+/* Laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  details[open] summary div svg {
+    stroke: #3357ff !important;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1441px) {
+  details[open] summary div svg {
+    stroke: #7623f3 !important;
+  }
 }

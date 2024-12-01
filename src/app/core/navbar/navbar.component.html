@@ -1,231 +1,100 @@
-<div class="h-20  bg-dark-blue navbar sticky top-0 z-50">
-  <h1 class="text-white font-LPPA text-5xl navbar-start">LPPM</h1>
-  <div class="  navbar-end">
-    <ul class="menu menu-horizontal">
+<div class="navbar">
+  <h1 class="text-white font-LPPA text-3xl navbar-start">LPPM</h1>
+  <div class="navbar-end">
 
-      <li class="hover:bg-transparent">
-        <div routerLink="home"
-          class="text-white  hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 24 24" fill="none">
-            <path opacity="0.1"
-              d="M17.7218 8.08382L14.7218 5.29811C13.4309 4.09937 12.7854 3.5 12 3.5C11.2146 3.5 10.5691 4.09937 9.2782 5.29811L6.2782 8.08382C5.64836 8.66867 5.33345 8.96109 5.16672 9.34342C5 9.72575 5 10.1555 5 11.015V16.9999C5 18.8856 5 19.8284 5.58579 20.4142C6.17157 20.9999 7.11438 20.9999 9 20.9999H9.75V16.9999C9.75 15.7573 10.7574 14.7499 12 14.7499C13.2426 14.7499 14.25 15.7573 14.25 16.9999V20.9999H15C16.8856 20.9999 17.8284 20.9999 18.4142 20.4142C19 19.8284 19 18.8856 19 16.9999L19 11.015C19 10.1555 19 9.72575 18.8333 9.34342C18.6666 8.96109 18.3516 8.66866 17.7218 8.08382Z"
-              fill="#323232" />
-            <path
-              d="M19 9L19 17C19 18.8856 19 19.8284 18.4142 20.4142C17.8284 21 16.8856 21 15 21L14 21L10 21L9 21C7.11438 21 6.17157 21 5.58579 20.4142C5 19.8284 5 18.8856 5 17L5 9"
-              stroke="white" stroke-width="1" stroke-linejoin="round" />
-            <path d="M3 11L7.5 7L10.6713 4.18109C11.429 3.50752 12.571 3.50752 13.3287 4.18109L16.5 7L21 11"
-              stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M10 21V17C10 15.8954 10.8954 15 12 15V15C13.1046 15 14 15.8954 14 17V21" stroke="white"
-              stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+    <!-- main menu -->
+    <ul class="menu menu-horizontal lg:flex min-w-full navbar-end">
+
+      <!-- Home btt -->
+      <li class="">
+        <div routerLink="home" class="text-white" routerLinkActive="">
+          <img src="assets\icons\home.svg" alt="Home" class="w-6 h-6 inline-block mr-2">
           <p>หน้าหลัก</p>
         </div>
       </li>
 
-      <li class="hover:bg-transparent">
-        <div routerLink="Map"
-          class="text-white flex hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0007 1.83337C15.3218 1.83337 17.4824 1.83337 18.8244 3.17537C19.2864 3.63737 19.5898 4.19654 19.7887 4.90696L4.90757 19.7881C4.19715 19.5892 3.63798 19.2858 3.17598 18.8238C1.83398 17.4827 1.83398 15.3212 1.83398 11C1.83398 6.67887 1.83398 4.51829 3.17598 3.17537C4.51982 1.83337 6.67948 1.83337 11.0007 1.83337ZM5.04232 8.02729C5.04232 9.66354 6.06623 11.573 7.66398 12.2559C8.03615 12.4145 8.46515 12.4145 8.83732 12.2559C10.4351 11.573 11.459 9.66354 11.459 8.02729C11.459 6.37821 10.0226 5.04171 8.25065 5.04171C6.47873 5.04171 5.04232 6.37821 5.04232 8.02729Z" fill="white"/>
-            <path d="M9.625 8.25C9.625 8.61467 9.48013 8.96441 9.22227 9.22227C8.96441 9.48013 8.61467 9.625 8.25 9.625C7.88533 9.625 7.53559 9.48013 7.27773 9.22227C7.01987 8.96441 6.875 8.61467 6.875 8.25C6.875 7.88533 7.01987 7.53559 7.27773 7.27773C7.53559 7.01987 7.88533 6.875 8.25 6.875C8.61467 6.875 8.96441 7.01987 9.22227 7.27773C9.48013 7.53559 9.625 7.88533 9.625 8.25Z" fill="white"/>
-            <path opacity="0.5" d="M20.0666 6.57434C20.1675 7.73026 20.1675 9.17217 20.1675 11C20.1675 14.7895 20.1675 16.9171 19.2627 18.2884L13.8058 12.8333L20.0666 6.57434ZM18.2901 19.261L12.8351 13.8059L6.57422 20.0649C7.73105 20.1667 9.17297 20.1667 11.0017 20.1667C14.7912 20.1667 16.9188 20.1667 18.2901 19.261Z" fill="white"/>
-
-          </svg>
+      <!-- Map btt -->
+      <li class="">
+        <div routerLink="Map" class="text-white flex " routerLinkActive="">
+          <img src="assets\icons\map.svg" alt="Map" class="nav-icon">
           <p>แผนที่</p>
         </div>
       </li>
 
-      <li class="hover:bg-transparent">
-        <div routerLink="Dashboard"
-          class="text-white  hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"
-            class="stroke-white" routerLinkActive="stroke-yellow">
-            <path opacity="0.32"
-              d="M19.5219 15.5561C19.2618 16.1567 18.6434 16.5 17.989 16.5H13.6869C13.7151 16.4216 13.7401 16.3413 13.7617 16.2592C14.0128 15.306 13.7484 14.3358 13.1424 13.655C13.3661 11.8334 13.5057 9.96716 13.591 8.49306C13.6333 7.7617 12.7373 7.51741 12.4146 8.17232C11.7641 9.49232 10.968 11.1795 10.2666 12.8709C9.40726 13.1522 8.70152 13.8579 8.45049 14.8111C8.29784 15.3908 8.33579 15.9767 8.52526 16.5H4.22324C3.56881 16.5 2.95043 16.1567 2.69036 15.5561C2.20723 14.4405 1.93945 13.2099 1.93945 11.9167C1.93945 6.85405 6.04351 2.75 11.1061 2.75C16.1687 2.75 20.2728 6.85405 20.2728 11.9167C20.2728 13.2099 20.005 14.4405 19.5219 15.5561Z"
-              fill="white" />
-            <path
-              d="M13.5903 8.4929C13.6326 7.76154 12.7366 7.51725 12.4139 8.17216C11.7635 9.49216 10.9673 11.1793 10.2659 12.8708C9.40661 13.152 8.70087 13.8577 8.44984 14.8109C8.05682 16.3033 8.92724 17.8373 10.3939 18.2372C11.8606 18.6371 13.3681 17.7514 13.7611 16.259C14.0121 15.3058 13.7477 14.3356 13.1417 13.6548C13.3654 11.8332 13.505 9.96699 13.5903 8.4929Z"
-              fill="white" />
-            <g>
-              <title>Layer 1</title>
-              <path stroke="null" id="svg_1" />
-            </g>
-          </svg>
+
+      <!-- Dashboard Button -->
+      <li class="">
+        <div routerLink="Dashboard" class="text-white flex" routerLinkActive="">
+          <img src="assets/icons/dashboard.svg" alt="Dashboard" class="w-6 h-6 inline-block mr-2">
           <p>แดชบอร์ด</p>
         </div>
       </li>
 
-      <li class="hover:bg-transparent">
-        <div routerLink="Blog"
-          class="text-white flex hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white "
-          routerLinkActive="text-yellow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
-            <g opacity="0.32">
-              <path
-                d="M19.3561 7.33333H12.0228C11.7797 7.33333 11.5465 7.23676 11.3746 7.06485C11.2027 6.89294 11.1061 6.65978 11.1061 6.41667C11.1061 6.17355 11.2027 5.94039 11.3746 5.76849C11.5465 5.59658 11.7797 5.5 12.0228 5.5H19.3561C19.5992 5.5 19.8324 5.59658 20.0043 5.76849C20.1762 5.94039 20.2728 6.17355 20.2728 6.41667C20.2728 6.65978 20.1762 6.89294 20.0043 7.06485C19.8324 7.23676 19.5992 7.33333 19.3561 7.33333ZM19.3561 11H12.0228C11.7797 11 11.5465 10.9034 11.3746 10.7315C11.2027 10.5596 11.1061 10.3264 11.1061 10.0833C11.1061 9.84022 11.2027 9.60706 11.3746 9.43515C11.5465 9.26324 11.7797 9.16667 12.0228 9.16667H19.3561C19.5992 9.16667 19.8324 9.26324 20.0043 9.43515C20.1762 9.60706 20.2728 9.84022 20.2728 10.0833C20.2728 10.3264 20.1762 10.5596 20.0043 10.7315C19.8324 10.9034 19.5992 11 19.3561 11Z"
-                fill="white" />
-              <path
-                d="M19.3561 14.6667H2.85612C2.613 14.6667 2.37985 14.5701 2.20794 14.3982C2.03603 14.2263 1.93945 13.9931 1.93945 13.75C1.93945 13.5069 2.03603 13.2737 2.20794 13.1018C2.37985 12.9299 2.613 12.8333 2.85612 12.8333H19.3561C19.5992 12.8333 19.8324 12.9299 20.0043 13.1018C20.1762 13.2737 20.2728 13.5069 20.2728 13.75C20.2728 13.9931 20.1762 14.2263 20.0043 14.3982C19.8324 14.5701 19.5992 14.6667 19.3561 14.6667ZM12.0228 18.3333H2.85612C2.613 18.3333 2.37985 18.2368 2.20794 18.0648C2.03603 17.8929 1.93945 17.6598 1.93945 17.4167C1.93945 17.1736 2.03603 16.9404 2.20794 16.7685C2.37985 16.5966 2.613 16.5 2.85612 16.5H12.0228C12.2659 16.5 12.4991 16.5966 12.671 16.7685C12.8429 16.9404 12.9395 17.1736 12.9395 17.4167C12.9395 17.6598 12.8429 17.8929 12.671 18.0648C12.4991 18.2368 12.2659 18.3333 12.0228 18.3333Z"
-                fill="white" />
-            </g>
-            <rect x="1.93945" y="3.6665" width="7.33333" height="7.33333" rx="2" fill="white" />
-            <defs>
-              <clipPath id="A">
-                <path id="svg_1" d="m0.018,0l30.021,0l0,30l-30.021,0l0,-30z" fill="#fff" />
-              </clipPath>
-            </defs>
-            <g>
-              <title>Layer 1</title>
-              <g stroke="" id="svg_2" stroke-width="1.5" clip-path="url(#A)">
-                <g stroke="null" id="svg_3" stroke-linejoin="round">
-                  <path stroke="null" id="svg_4"
-                    d="m22.83612,3.23129l-18.07941,0a1.95318,1.95318 0 0 0 -1.95474,1.95318l0,13.57226a1.95318,1.95318 0 0 0 1.95474,1.95318l18.07941,0a1.95318,1.95318 0 0 0 1.95474,-1.95318l0,-13.57226a1.95318,1.95318 0 0 0 -1.95474,-1.95318z" />
-                  <g stroke="null" id="svg_5" stroke-linecap="round">
-                    <path stroke="null" id="svg_6"
-                      d="m11.79753,20.70913l-1.00003,3.99542m0.00078,-0.00078l5.49703,0m-0.49845,-3.99464l0.99847,3.99542" />
-                    <path stroke="null" id="svg_7"
-                      d="m18.29458,24.70377l-8.99556,0m-6.49706,-7.50177l21.9889,0m-18.87631,-9.92137l2.21412,0m2.21569,0l1.32894,0" />
-                    <path stroke="null" id="svg_8"
-                      d="m5.91455,10.26665l1.32816,0m2.21569,0l2.21412,0m-5.75797,2.98524l5.75797,0m3.12509,-10.02059l0,13.9707m0,-3.21806l2.9829,-2.90633a2.86727,2.86727 0 0 1 3.43447,-0.08203l3.57744,2.98837" />
-                  </g>
-                </g>
-                <path stroke="null" id="svg_9"
-                  d="m18.28911,7.76892c-0.26954,0 -0.48829,-0.21876 -0.48829,-0.48829s0.21876,-0.48829 0.48829,-0.48829m-0.00078,0.97659c0.26954,0 0.48829,-0.21876 0.48829,-0.48829s-0.21876,-0.48829 -0.48829,-0.48829" />
-              </g>
-            </g>
-          </svg>
+
+      <!-- Blog Button -->
+      <li class="">
+        <div routerLink="Question" class="text-white flex" routerLinkActive="">
+          <img src="assets\icons\blog.svg" alt="Blog" class="w-6 h-6 inline-block mr-2">
           <p>บล็อก</p>
         </div>
       </li>
 
-
-      <li class="flex items-end">
-        <div class="drawer drawer-end">
-          <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-          <div class="drawer-content  ">
-            <!-- Page content here -->
-            <label for="my-drawer" class="">
-              <div
-                class="text-white flex hover:bg-transparent hover:bg-dark-blue active:bg-transparent focus:bg-dark-blue !active:text-yellow !focus:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
-                  <path opacity="0.32"
-                    d="M14.112 4.125H4.43232C3.56285 4.125 2.85547 4.63885 2.85547 5.27122C2.85547 5.90281 3.56285 6.41667 4.43232 6.41667H14.112C14.9814 6.41667 15.6888 5.90281 15.6888 5.27122C15.6888 4.63883 14.9814 4.125 14.112 4.125Z"
-                    fill="white" />
-                  <path
-                    d="M17.7787 9.854H8.09899C7.22952 9.854 6.52214 10.3679 6.52214 11.0002C6.52214 11.6318 7.22952 12.1457 8.09899 12.1457H17.7786C18.6481 12.1457 19.3555 11.6318 19.3555 11.0002C19.3555 10.3678 18.6481 9.854 17.7787 9.854Z"
-                    fill="white" />
-                  <defs>
-                    <path d="m9.877,15.938a0.47,0.47 0 0 1 -0.469,-0.469a0.47,0.47 0 0 1 0.469,-0.469" id="A" />
-                    <path d="m9.879,15.938a0.47,0.47 0 0 0 0.469,-0.469a0.47,0.47 0 0 0 -0.469,-0.469" id="B" />
-                  </defs>
-                  <g>
-                    <title>Layer 1</title>
-                    <g id="svg_1" stroke="">
-                      <g id="svg_2" stroke-width="1.5" stroke-linejoin="round">
-                        <path id="svg_3"
-                          d="m22.45001,0.938l-16.887,0c-1.036,0 -1.876,0.839 -1.876,1.875l0,24.375c0,1.035 0.84,1.875 1.876,1.875l16.887,0c1.036,0 1.876,-0.84 1.876,-1.875l0,-24.375c0,-1.036 -0.84,-1.875 -1.876,-1.875z" />
-                        <path id="svg_4"
-                          d="m19.63501,4.688l-11.258,0a0.94,0.94 0 0 0 -0.938,0.938l0,3.75a0.94,0.94 0 0 0 0.938,0.938l11.258,0a0.94,0.94 0 0 0 0.938,-0.937l0,-3.75a0.94,0.94 0 0 0 -0.938,-0.937l0,-0.002z" />
-                      </g>
-                      <g id="svg_5" stroke-width="1.5">
-                        <use x="-1.03199" y="0" id="svg_6" xlink:href="#A" />
-                        <use x="-1.03199" y="0" id="svg_7" xlink:href="#B" />
-                        <use x="-1.03199" id="svg_8" y="4.687" xlink:href="#A" />
-                        <use x="-1.03199" id="svg_9" y="4.687" xlink:href="#B" />
-                        <use x="-1.03199" id="svg_10" y="9.375" xlink:href="#A" />
-                        <use x="-1.03199" id="svg_11" y="9.375" xlink:href="#B" />
-                        <use y="0" id="svg_12" x="4.32401" xlink:href="#A" />
-                        <use y="0" id="svg_13" x="4.32101" xlink:href="#B" />
-                        <use id="svg_14" y="4.687" x="4.32401" xlink:href="#A" />
-                        <use id="svg_15" y="4.687" x="4.32101" xlink:href="#B" />
-                        <use id="svg_16" y="9.375" x="4.32401" xlink:href="#A" />
-                        <use id="svg_17" y="9.375" x="4.32101" xlink:href="#B" />
-                        <use y="0" id="svg_18" x="9.28901" xlink:href="#A" />
-                        <use y="0" id="svg_19" x="9.28601" xlink:href="#B" />
-                        <use id="svg_20" y="4.687" x="9.28901" xlink:href="#A" />
-                        <use id="svg_21" y="4.687" x="9.28601" xlink:href="#B" />
-                        <use id="svg_22" y="9.375" x="9.28901" xlink:href="#A" />
-                        <use id="svg_23" y="9.375" x="9.28601" xlink:href="#B" />
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-                <p>เพิ่มเติม</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                  <path
-                    d="M8.10502 10.334C7.94925 10.3343 7.79829 10.2801 7.67835 10.1807L3.67835 6.84735C3.39484 6.61171 3.35604 6.19086 3.59168 5.90735C3.82732 5.62385 4.24818 5.58505 4.53168 5.82069L8.10502 8.80735L11.6783 5.92735C11.8161 5.81551 11.9927 5.76317 12.1691 5.78194C12.3456 5.80071 12.5072 5.88903 12.6183 6.02735C12.7418 6.16593 12.8019 6.34967 12.7841 6.53439C12.7664 6.71911 12.6725 6.88809 12.525 7.00069L8.52502 10.2207C8.40163 10.3044 8.25375 10.3443 8.10502 10.334Z"
-                    fill="white" />
-                </svg>
-              </div>
-            </label>
-          </div>
-          <div class="drawer-side">
-            <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <ul class="menu p-4 w-80 min-h-full bg-white text-dark-blue">
-              <li><a>คู่มือการใช้งาน</a></li>
-              <li routerLink="Question"><a>คำถามที่พบบ่อย</a></li>
-              <li routerLink="Contact"><a>ติดต่อเรา</a></li>
-              <li routerLink="Subscription"><a>แพ็คเกจสมาชิก</a></li>
-
-              <li><a>ออกจากระบบ<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
-                      fill="#2749A3" />
-                  </svg>
-                </a></li>
-            </ul>
-          </div>
-        </div>
-      </li>
-
-    </ul>
-
-
-    <ul class="menu menu-horizontal flex items-center">
-
-
+      <!-- Dropdown for more menu -->
       <div class="flex-none">
         <div class="dropdown dropdown-end">
-          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-            <div class="w-10 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
-                <path opacity="0.32"
-                  d="M26.8555 16.9902V17.6942C26.8555 18.5392 27.0955 19.3652 27.5475 20.0682L28.6555 21.7912C29.6665 23.3652 28.8945 25.5042 27.1355 26.0012C22.5393 27.3032 17.6718 27.3032 13.0755 26.0012C11.3165 25.5042 10.5445 23.3652 11.5555 21.7912L12.6635 20.0682C13.1171 19.3596 13.3576 18.5356 13.3565 17.6942V16.9902C13.3565 13.1242 16.3785 9.99023 20.1055 9.99023C23.8325 9.99023 26.8555 13.1242 26.8555 16.9902Z"
-                  fill="white" />
-                <path
-                  d="M20.8547 13.9902C20.8547 13.7913 20.7756 13.6006 20.635 13.4599C20.4943 13.3193 20.3036 13.2402 20.1047 13.2402C19.9057 13.2402 19.715 13.3193 19.5743 13.4599C19.4337 13.6006 19.3547 13.7913 19.3547 13.9902V17.9902C19.3547 18.1891 19.4337 18.3799 19.5743 18.5206C19.715 18.6612 19.9057 18.7402 20.1047 18.7402C20.3036 18.7402 20.4943 18.6612 20.635 18.5206C20.7756 18.3799 20.8547 18.1891 20.8547 17.9902V13.9902ZM15.3477 26.5352C15.6744 27.5393 16.3105 28.4143 17.165 29.0348C18.0194 29.6553 19.0482 29.9894 20.1042 29.9894C21.1601 29.9894 22.189 29.6553 23.0434 29.0348C23.8978 28.4143 24.5339 27.5393 24.8607 26.5352C21.7157 27.1252 18.4937 27.1252 15.3477 26.5352Z"
-                  fill="white" />
-                <g>
-                  <title>Layer 1</title>
-                  <g stroke="null" id="svg_4">
-                  </g>
-                </g>
-              </svg>
+          <li tabindex="0" class="">
+            <div class="text-white flex">
+              <img src="assets\icons\moremenu.svg" alt="More" class="w-6 h-6 inline-block mr-2">
+              <p>เพิ่มเติม</p>
+              <img src="assets\icons\downarrow.svg" alt="More" class="w-6 h-6 inline-block mr-2">
             </div>
-          </div>
-          <app-noti class="z-10"></app-noti>
-        </div>
-      </div>
-
-
-      <div class="flex-none">
-        <div class="dropdown dropdown-end">
-          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-            <div class="w-10 rounded-full">
-              <img alt="" src="assets\imgs\default profile img.png" />
-            </div>
-          </div>
+          </li>
           <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-            <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>
-            <li routerLink=""><a>Logout</a></li>
+            <li routerLink="Calculator"><a>เครื่องคิดเลข</a></li>
+            <li><a>คู่มือการใช้งาน</a></li>
+            <li routerLink="Subscription"><a>แพ็คเกจสมาชิก</a></li>
+            <li routerLink="Contact"><a>ติดต่อเรา</a></li>
+
           </ul>
         </div>
       </div>
     </ul>
+
+    <!-- notification -->
+    <div class="lg:flex">
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img src="assets/icons/bell.svg" alt="Notifications" class="w-10 h-10">
+          </div>
+        </div>
+        <app-noti class="z-10"></app-noti>
+      </div>
+    </div>
+
+    <!-- profile btt -->
+    <div class="lg:flex">
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img src="assets\imgs\default profile img.png" alt="More" class="w-10 h-10">
+          </div>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>
+          <li routerLink="">
+            <a>ออกจากระบบ
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
+                  fill="#2749A3" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
 </div>

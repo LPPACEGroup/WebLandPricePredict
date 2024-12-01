@@ -11,7 +11,6 @@ describe('MapPageComponent', () => {
       imports: [MapPageComponent]
     })
     .compileComponents();
-
     fixture = TestBed.createComponent(MapPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

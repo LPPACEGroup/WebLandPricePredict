@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-
+import { CollapseComponent } from '../../core/collapse/collapse.component';
 
 import { dataSeries } from "./data-series";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CollapseComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -27,5 +27,13 @@ export class DashboardComponent {
 
   }
 
+  isDropdownVisible = false;
+  toggleDropdown() {
+
+    this.isDropdownVisible = !this.isDropdownVisible;
+
+  }
 
 }
+
+// Add this method to the DashboardComponent class

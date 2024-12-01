@@ -132,6 +132,7 @@
     </div>
 
   </dialog>
+
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-dark-blue"></span>
   </div>
@@ -276,6 +277,8 @@
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">
       <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" (click)="onCardClick(item)"
         onclick="my_modal_4.showModal()"></app-land-card>
+
     </div>
+
   </div>
 </div>

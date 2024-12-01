@@ -4,11 +4,13 @@ import { LoanCalculatorComponent } from './loan-calculator/loan-calculator.compo
 import { LoanCompareComponent } from './loan-compare/loan-compare.component';
 import { RefinanceComponent } from './refinance/refinance.component';
 import { APRComponent } from './apr/apr.component';
+import { MonthlyInstallmentComponent } from './monthly-installment/monthly-installment.component';
+import { LoanMaximumComponent } from './loan-maximum/loan-maximum.component';
 
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [MatTabsModule,LoanCalculatorComponent,LoanCompareComponent,RefinanceComponent,APRComponent],
+  imports: [MatTabsModule,LoanCalculatorComponent,LoanCompareComponent,RefinanceComponent,APRComponent,MonthlyInstallmentComponent,LoanMaximumComponent],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css'
 })

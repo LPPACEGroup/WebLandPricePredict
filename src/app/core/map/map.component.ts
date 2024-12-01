@@ -286,4 +286,5 @@ export class MapComponent implements OnChanges {
 
     return result;
   }
+
 }
