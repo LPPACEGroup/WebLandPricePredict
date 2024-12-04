@@ -45,6 +45,7 @@ export class AreaSlider{
 
 
 export class MapPageComponent implements OnInit {
+  
   coordinates: [number, number] | null = null;
   loading = false;
   isInputFocused: boolean = false;
@@ -91,6 +92,8 @@ export class MapPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.landListService.getData().subscribe(response => {
+      console.log(response);
+      
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
@@ -114,10 +117,15 @@ export class MapPageComponent implements OnInit {
       // Handle enter key if needed
     }
   }
-  onCardClick(land: any) {
-    this.selectedLand = land;
-  
-  
+  onCardClick(event: MouseEvent) {
+    const modal =document.getElementById('fullland_detail') as HTMLDialogElement;  
+    const target = event.target as HTMLElement;
+
+    if(!target.closest('.followbutton') ) {
+      modal.showModal();
+    }
+ 
+
   }
   toggleLandBar(){
     this.istoggleLandBar = !this.istoggleLandBar;

@@ -10,6 +10,6 @@ export class LandListService {
   constructor(private http:HttpClient) { }
 
   getData(): Observable<any> {
-    return this.http.get('http://localhost:5000/api/land');
+    return this.http.get('http://localhost:8000/api/land');
   }
 }

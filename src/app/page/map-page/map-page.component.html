@@ -3,7 +3,7 @@
     (markerCoordOutput)="markerCoordUpdate($event)">
 
   </app-map>
-  <dialog id="my_modal_4" class="modal">
+  <dialog id="fullland_detail" class="modal">
     <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll ">
       <div class="w-full h-24 overflow-clip flex-center"><img class="w-full "
           src="https://prod-mfp-imgsrv.tillitsdone.com/uploads/medium__2fb08de653.png" alt="">
@@ -137,7 +137,7 @@
     <span class="loading loading-spinner loading-lg text-dark-blue"></span>
   </div>
   <div
-    class="h-full w-1/4 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue  landBar landbar-active"
+    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue  landBar landbar-active"
     [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
     <div class="h-6 w-10 bg-white absolute left-0 top-12 -translate-x-full cursor-pointer flex" (click)="toggleLandBar()">
       <mat-icon class="text-ocean-blue opacity-50 " aria-hidden="false" aria-label="Example help icon" fontIcon="play_arrow
@@ -240,7 +240,7 @@
           </div>
 
 
-          <ul class="menu dropdown-content bg-white text-grey p-0  ">
+          <ul class=" bg-white text-grey p-0 w-fit">
             <li>
               <div><input id="lad" type="checkbox" class="radio w-4 h-4" name="area" />
 
@@ -274,9 +274,12 @@
         </div>
       </details>
     </div>
+    <div class="flex justify-start w-full">    <p *ngIf="fastsellState" class="font-bold text-gold ">แสดงข้อมูลขายเร็ว</p>
+    </div>
+
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">
-      <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" (click)="onCardClick(item)"
-        onclick="my_modal_4.showModal()"></app-land-card>
+      <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" (click)="onCardClick($event)"
+        ></app-land-card>
 
     </div>
 
