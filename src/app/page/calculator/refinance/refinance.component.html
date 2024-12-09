@@ -1,60 +1,66 @@
-<div class="w-full h-full bg-light-grey grid grid-cols-4 gap-2 items-center py-6">
-    <div class="col-span-2"></div>
-    <div class="col-span-2 text-2xl">
-        <p>สินเชื่อเดิม</p>
+<div class="w-full h-auto bg-light-grey grid grid-cols-4 gap-2 items-center py-6">
+  <div class="col-span-2"></div>
+  <div class="col-span-2 text-2xl">
+    <p>สินเชื่อเดิม</p>
+  </div>
+  <div class="text-end col-span-2">
+    <p>จำนวนเงินกู้</p>
+  </div>
+  <div class="col-span-2">
+    <input class="w-1/2 rounded-full font-medium px-5" title="จำนวนเงินกู้" placeholder="จำนวนเงินกู้" />
+  </div>
+  <div class="text-end col-span-2">
+    <p>อัตรดอกเบี้ย %</p>
+  </div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="อัตรดอกเบี้ย %"
+      placeholder="อัตรดอกเบี้ย %" /></div>
+  <div class="text-end col-span-2">
+    <p>ระยะเวลาเงินกู้</p>
+  </div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="ระยะเวลาเงินกู้"
+      placeholder="ระยะเวลาเงินกู้" /></div>
+  <div class="text-end col-span-2">
+    <p>ชำระเงินแล้ว (เดือน)</p>
+  </div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="ชำระเงินแล้ว (เดือน)"
+      placeholder="ชำระเงินแล้ว (เดือน)" /></div>
+  <div class="col-span-2"></div>
+  <div class="col-span-2 text-2xl">
+    <p>สินเชื่อใหม่</p>
+  </div>
+  <div class="text-end col-span-2">
+    <p>อัตราดอกเบี้ย</p>
+  </div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="อัตราดอกเบี้ย"
+      placeholder="อัตราดอกเบี้ย" /></div>
+  <div class="text-end col-span-2">
+    <p>ระยะเวลากู้</p>
+  </div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="ระยะเวลากู้"
+      placeholder="ระยะเวลากู้" /></div>
+  <div class="col-span-2"></div>
+  <div class="w-1/2 col-span-2">
+    <div class="text-end"><button
+        class="bg-dark-blue w-1/2 h-8 rounded-full  text-white  hover:bg-[gold] hover:text-black">คำนวณ</button>
     </div>
-    <div class="text-end col-span-2">
-        <p>จำนวนเงินกู้</p>
+  </div>
+  <div class="text-end row-span-3 ">ผลลัพธ์</div>
+  <div class="w-3/4 h-full col-span-3 row-span-3 rounded-xl font-medium bg-white grid grid-cols-2 p-5">
+    <div class="border-r-2 border-light-grey">
+      <p>สินเชื่อเก่า</p>
+      <p>ยอดเงินกู้ค้างชำระ : <span class="text-red-500">561,452</span> </p>
+      <p>ยอดผ่อนชำระต่อเดือน : <span class="text-red-500">188,712</span> </p>
+      <p>วงเงินกู้เดิมสุทธิ : <span class="text-red-500">11,322,740</span> </p>
     </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="จำนวนเงินกู้"
-            placeholder="จำนวนเงินกู้" /></div>
-    <div class="text-end col-span-2">
-        <p>อัตรดอกเบี้ย %</p>
+    <div class="px-3">
+      <p>สินเชื่อใหม่</p>
+      <p>ยอดผ่อนชำระต่อเดือน : <span class="text-red-500">186,430</span> </p>
+      <p>ยอดชำระทั้งสิ้น : <span class="text-red-500">11,185,812</span> </p>
     </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="อัตรดอกเบี้ย %"
-            placeholder="อัตรดอกเบี้ย %" /></div>
-    <div class="text-end col-span-2">
-        <p>ระยะเวลาเงินกู้</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="ระยะเวลาเงินกู้"
-            placeholder="ระยะเวลาเงินกู้" /></div>
-    <div class="text-end col-span-2">
-        <p>ชำระเงินแล้ว (เดือน)</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="ชำระเงินแล้ว (เดือน)"
-            placeholder="ชำระเงินแล้ว (เดือน)" /></div>
-    <div class="col-span-2"></div>
-    <div class="col-span-2 text-2xl">
-        <p>สินเชื่อใหม่</p>
-    </div>
-    <div class="text-end col-span-2">
-        <p>อัตราดอกเบี้ย</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="อัตราดอกเบี้ย"
-            placeholder="อัตราดอกเบี้ย" /></div>
-    <div class="text-end col-span-2">
-        <p>ระยะเวลากู้</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="ระยะเวลากู้"
-            placeholder="ระยะเวลากู้" /></div>
-    <div class="col-span-2"></div>
-    <div class="w-1/2 col-span-2">
-        <div class="text-end"><button
-                class="bg-dark-blue w-1/2 h-8 rounded-full  text-white  hover:bg-[gold] hover:text-black">คำนวณ</button>
-        </div>
-    </div>
-    <div class="text-end row-span-3 ">ผลลัพธ์</div>
-    <div class="w-3/4 h-full col-span-3 row-span-3 rounded-xl font-medium bg-white grid grid-cols-2 p-5">
-        <div class="border-r-2 border-light-grey">
-            <p>สินเชื่อเก่า</p>
-            <p>ยอดเงินกู้ค้างชำระ : <span class="text-red-500">561,452</span> </p>
-            <p>ยอดผ่อนชำระต่อเดือน : <span class="text-red-500">188,712</span> </p>
-            <p>วงเงินกู้เดิมสุทธิ : <span class="text-red-500">11,322,740</span> </p>
-        </div>
-        <div class="px-3">
-            <p>สินเชื่อใหม่</p>
-            <p>ยอดผ่อนชำระต่อเดือน : <span class="text-red-500">186,430</span> </p>
-            <p>ยอดชำระทั้งสิ้น : <span class="text-red-500">11,185,812</span> </p>
-        </div>
-    </div>
+  </div>
+  <div class="text-end row-span-3 ">ยอดเงินที่ประหยัดได้: </div>
+  <div class="w-3/4 h-full col-span-3 row-span-3 rounded-xl font-medium bg-white grid grid-cols-2 p-5">
+      <p><span class="text-red-500">35,800</span> </p>
+  </div>
+
 </div>

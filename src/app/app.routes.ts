@@ -8,6 +8,9 @@ import { ContactPageComponent } from './page/contact-page/contact-page.component
 import { ProfilePageComponent } from './page/profile-page/profile-page.component';
 import { SubscriptionPageComponent } from './page/subscription-page/subscription-page.component';
 import { MapPageComponent } from './page/map-page/map-page.component';
+import { AdminBlogComponent } from './admin/page/admin-blog/admin-blog.component';
+import { AdminSuggestComponent } from './admin/page/admin-suggest/admin-suggest.component';
+import { AdminUserManageComponent } from './admin/page/admin-user-manage/admin-user-manage.component';
 
 export const routes: Routes = [
     { path: 'Home', component: HomeComponent },
@@ -19,6 +22,9 @@ export const routes: Routes = [
     { path: 'Contact', component: ContactPageComponent },
     { path: 'Profile', component: ProfilePageComponent },
     { path: 'Subscription', component: SubscriptionPageComponent },
+    { path: 'AdminBlog', component: AdminBlogComponent },
+    { path: 'AdminSuggest', component: AdminSuggestComponent },
+    { path: 'AdminUserManage', component: AdminUserManageComponent },
 
     {path:'**',component:HomeComponent},
 ];

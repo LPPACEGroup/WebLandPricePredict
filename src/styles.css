@@ -25,7 +25,7 @@
   --grey: #7d7a83;
   --midGrey: #d2d2d2;
   --lightGrey: #e0e0e0;
-  --whiteGrey: #F4F6F8;
+  --whiteGrey: #f4f6f8;
   --white: #ffffff;
 }
 
@@ -62,12 +62,15 @@ textarea {
 }
 
 .mat-mdc-tab {
-  background-color: #fff !important;
+  background-color: var(--lightBlue) !important;
   border-radius: 15px 15px 0px 0px;
+  border-style: solid;
+  border-width: 10px 10px 0px 10px;
+  border-color: var(--black) !important;
 }
 
 .mdc-tab-indicator--active {
-  background-color: #86b6cd !important;
+  background-color: var(--lightGrey) !important;
 }
 
 .mdc-tab-indicator__content--underline {
@@ -92,4 +95,32 @@ textarea {
 }
 .select:focus {
   border: none;
+}
+
+/* Mobile devices (portrait and landscape) */
+@media (max-width: 768px) {
+  details[open] summary div svg {
+    stroke: #ff5733 !important;
+  }
+}
+
+/* Tablets (portrait and landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  details[open] summary div svg {
+    stroke: #33ff57 !important;
+  }
+}
+
+/* Laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  details[open] summary div svg {
+    stroke: #3357ff !important;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1441px) {
+  details[open] summary div svg {
+    stroke: #7623f3 !important;
+  }
 }

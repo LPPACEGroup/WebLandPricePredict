@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoanCalculatorComponent } from './loan-calculator.component';
+import { AdminBlogComponent } from './admin-blog.component';
 
-describe('LoanCalculatorComponent', () => {
-  let component: LoanCalculatorComponent;
-  let fixture: ComponentFixture<LoanCalculatorComponent>;
+describe('AdminBlogComponent', () => {
+  let component: AdminBlogComponent;
+  let fixture: ComponentFixture<AdminBlogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoanCalculatorComponent]
+      imports: [AdminBlogComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(LoanCalculatorComponent);
+    
+    fixture = TestBed.createComponent(AdminBlogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
