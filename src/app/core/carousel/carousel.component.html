@@ -1,19 +1,29 @@
 <div class="carousel-container">
+  <button class="prev" (click)="prevSlide()">&#10094;</button>
 
   <div class="carousel-slide">
-    <div [style.transform]="getTransform()">
-      <div *ngFor="let image of images">
-        <img [src]="image.src" [alt]="image.alt" title="{{image.alt}}">
-      </div>
+
+    <img src="assets/imgs/news1.png" alt="Blog Icon">
+
+
+    <div className="flex-1 bg-neutral-100 p-5 flex flex-col">
+      <h2 className="text-primary-950 text-lg font-semibold mb-2">
+        ศูนย์อสังหาริมทรัพย์ 2 จังหวัดชลบุรี “ลาญู หัวหิน” กับ “บ้านรีสอร์ท”
+      </h2>
+      <a href="/" className="text-primary-500 text-sm mb-3">
+        บันเทิงธุรกิจ-ลำปาง
+      </a>
+      <p className="text-neutral-950">
+        ศูนย์ฯ นี้ส่งเสริมการลงทุนต่อเนื่องของชุมชนในจังหวัดชลบุรีและหัวหิน
+        พร้อมสิ่งแวดล้อมที่ออกแบบเพื่อความยั่งยืน
+      </p>
+      <p className="text-neutral-500 mt-4">
+        วันที่ 19 สิงหาคม 2567 - 10:38 น.
+      </p>
     </div>
 
-    <div class="right-content">
-      <p>หมุเด้ง!</p>
-    </div>
 
-    <!-- Navigation -->
-    <button class="prev" (click)="prevSlide()">&#10094;</button>
-    <button class="next" (click)="nextSlide()">&#10095;</button>
   </div>
+  <button class="next" (click)="nextSlide()">&#10095;</button>
 
 </div>

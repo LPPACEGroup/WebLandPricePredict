@@ -1,0 +1,17 @@
+.bg {
+  background-image: url('.../../../../../assets/imgs/bg_1.png');
+  background-size: cover;
+  position: fixed;
+  inset: 0;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.scrollable-content {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.4);
+}

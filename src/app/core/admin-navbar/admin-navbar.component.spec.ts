@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollapseComponent } from './collapse.component';
+import { AdminNavbarComponent } from './admin-navbar.component';
 
-describe('CollapseComponent', () => {
-  let component: CollapseComponent;
-  let fixture: ComponentFixture<CollapseComponent>;
+describe('AdminNavbarComponent', () => {
+  let component: AdminNavbarComponent;
+  let fixture: ComponentFixture<AdminNavbarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CollapseComponent]
+      imports: [AdminNavbarComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(CollapseComponent);
+    
+    fixture = TestBed.createComponent(AdminNavbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -20,7 +20,4 @@ describe('CollapseComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });
-
-
