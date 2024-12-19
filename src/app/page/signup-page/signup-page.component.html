@@ -1,0 +1,247 @@
+<div class=" h-screen bg-blue flex-center">
+
+    <div class="bg-white w-1/2 h-2/3 rounded-xl "  *ngIf="currentStep ==1">
+        <form class="flex flex-col  items-center justify-center gap-3 h-full w-full" [formGroup] = "signupForm">
+            <h1 class="text-2xl font-bold pb-5">ลงทะเบียนผู้ใช้งาน</h1>
+
+
+            <ol
+                class="flex items-center w-9/12  text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-5 justify-between">
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+                <li class="w-[30%] h-[1px] bg-gray-300"></li>
+                <li class="rounded-full bg-slate-300 w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gray-300"></li>
+                <li class="rounded-full bg-slate-300 w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gray-300"></li>
+                <li class="rounded-full bg-slate-300 w-2 h-2"></li>
+
+            </ol>
+
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="username" class="input-label">ชื่อผู้ใช้งาน</label>
+                <input class="input-box" type="text" formControlName="username"
+                    placeholder="ชื่อผู้ใช้งาน">
+            </div>
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 w-full text-center" *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched">
+                    Email format is invalid. Please enter a valid email, e.g., LPPM&#64;email.com.
+                </div>
+                <label for="email" class=" input-label">อีเมล</label>
+                <input class="input-box" type="email" formControlName="email"
+                    placeholder="อีเมล">
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="password" class=" input-label">รหัสผ่าน</label>
+                <input class="input-box" type="password"
+                    formControlName="password" placeholder="รหัสผ่าน">
+            </div>
+
+              
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 w-full text-center" *ngIf="signupForm.get('confirmPassword')?.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched">
+                    Passwords do not match.
+                  </div>
+                <label for="confirmPassword"
+                    class=" input-label">ยืนยันรหัสผ่าน</label>
+                <input class="input-box" type="password" formControlName="confirmPassword"
+                    placeholder="อีเมล">
+            </div>
+
+            <div class="mt-6 flex gap-x-4 w-3/4 ">
+                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
+                    routerLink="/signin"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ยกเลิก</button>
+                <button type="submit " class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
+                    (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
+            </div>
+                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+        class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
+        </form>
+    </div>
+    <div class="bg-white w-1/2 h-5/6 rounded-xl "  *ngIf="currentStep ==2">
+        <form class="flex flex-col  items-center gap-3 h-full w-full" [formGroup] = "signupForm">
+            <h1 class="text-2xl font-bold pb-5">กรอกข้อมูลส่วนตัว</h1>
+            <ol
+                class="flex items-center w-9/12  text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-3 justify-between">
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+                <li class="w-[30%] h-[1px] bg-gold"></li>
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gray-300"></li>
+                <li class="rounded-full bg-slate-300 w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gray-300"></li>
+                <li class="rounded-full bg-slate-300 w-2 h-2"></li>
+
+            </ol>
+            <div class="bg-grey w-24 h-24 rounded-full"></div>
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="firstName" class=" input-label">ชื่อจริง</label>
+                <input class="input-box" type="text" formControlName="firstName"
+                    placeholder="ชื่อจริง">
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="lastName" class=" input-label">นามสกุล</label>
+                <input class="input-box" type="text" formControlName="lastName"
+                    placeholder="นามสกุล">
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="gender" class=" input-label">เพศ</label>
+                <select class="input-select" formControlName="gender">
+                    <option class="w-9/12 h-10 bg-light-blue" disabled selected>กรุณาระบุเพศ</option>
+                    <option class="w-9/12 h-10 bg-light-blue">ชาย</option>
+                    <option class="w-9/12 h-10 bg-light-blue">หญิง</option>
+                </select>
+            </div>
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('telephone')?.hasError('pattern') && signupForm.get('telephone')?.touched">
+                    Telephone number is invalid.
+                  </div>
+                <label for="telephone"
+                    class=" input-label appearance-none">เบอร์โทร</label>
+                <input class="input-box" type="number"
+                    formControlName="telephone" placeholder="เบอร์โทร">
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="birthDate" class=" input-label">วันเดือนปีเกิด</label>
+                <input class="input-select" type="date" formControlName="birthDate"
+                    placeholder="วันเดือนปีเกิด">
+            </div>
+
+            <div class="mt-6 flex gap-x-4 w-3/4">
+                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                    (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
+                <button type="submit " class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
+                    (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
+            </div>
+                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+        class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
+        </form>
+    </div>
+    <div class="bg-white w-1/2 h-5/6 rounded-xl "  *ngIf="currentStep ==3">
+        <form class="flex flex-col  items-center justify-around gap-3 h-full w-full" [formGroup] = "signupForm">
+            <h1 class="text-2xl font-bold pb-5">กรอกข้อมูลที่อยู่</h1>
+            <ol
+                class="flex items-center w-9/12  text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-3 justify-between">
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+                <li class="w-[30%] h-[1px] bg-gold"></li>
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gold"></li>
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gray-300"></li>
+                <li class="rounded-full bg-slate-300 w-2 h-2"></li>
+
+            </ol>
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 text-center w-full " *ngIf="signupForm.get('home_number')?.hasError('pattern') && signupForm.get('home_number')?.touched">
+                    "Home number is invalid. It must be a number or in the format '123/45'."
+                </div>
+                <label for="home_number" class=" input-label">บ้านเลขที่</label>
+                <input class="input-box " type="text" formControlName="home_number"
+                    placeholder="ที่อยู่">
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+                <label for="alley" class=" input-label">ถนน</label>
+                <input class="input-box " type="text" formControlName="alley"
+                    placeholder="ที่อยู่">
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+
+                <label for="sub_district" class=" input-label">ตำบล
+                </label>
+                <app-filterselect [label]="Sub_district" [myControl]="sub_districtControl" placeholder="ตำบล"/>
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+
+                <label for="district" class=" input-label">อำเภอ </label>
+                <app-filterselect [label]="District" [myControl]="districtControl" placeholder="อำเภอ"/>
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+
+                <label for="province" class=" input-label">จังหวัด</label>
+                <app-filterselect [label]="Province" [myControl]="provinceControl" placeholder="จังหวัด"/>
+            </div>
+            <div class="flex w-9/12 justify-center items-center">
+
+                <label for="postcode" class=" input-label">รหัสไปรษณีย์
+                </label>
+                <app-filterselect [label]="Postcode" [myControl]="postcodeControl" placeholder="รหัสไปรษณีย์"/>
+            </div>
+
+            <div class="mt-6 flex gap-x-4 w-3/4">
+                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                    (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
+                <button type="submit " class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
+                    (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
+            </div>
+                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+        class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
+        </form>
+    </div>
+    <div class="bg-white w-1/2 h-5/6 rounded-xl "  *ngIf="currentStep ==4">
+        <form class="flex flex-col  items-center justify-around gap-3 h-full w-full" [formGroup] = "signupForm">
+            <h1 class="text-2xl font-bold pb-5">กรอกข้อมูลส่วนตัว</h1>
+            <ol
+                class="flex items-center w-9/12  text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-3 justify-between">
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+                <li class="w-[30%] h-[1px] bg-gold"></li>
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gold"></li>
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+
+                <li class="w-[30%] h-[1px] bg-gold"></li>
+                <li class="rounded-full bg-gold w-2 h-2"></li>
+
+            </ol>
+            <div class="grid grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+                <div class="  h-40 w-32 flex flex-col">
+                    <div class="bg-blue w-full flex-1"></div>
+                    <div class="text-sm text-grey h-8 flex-center">ที่ดินติดถนน</div>
+                </div>
+
+            </div>
+            <!-- <a class="text-grey text-sm underline">กดข้ามขั้นตอนนี้</a> -->
+            <div class="mt-6 flex gap-x-4 w-3/4">
+                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                    (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
+                <button type="button"  class=" btn btn-sm h-10 flex-center bg-dark-blue text-white w-full"
+                    (click)="printForm()">สร้างบัญชี<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
+            </div>
+            <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+                class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
+        </form>
+    </div>
+
+</div>

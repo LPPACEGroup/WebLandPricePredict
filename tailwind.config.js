@@ -28,14 +28,14 @@ module.exports = {
         '8/10': '80%',
         '36rem': '36rem',
         '30rem': '30rem',
-        'nmax': 'calc(100vh - 80px)',
+        'nmax': 'calc(100vh - 64px)',
 
       },minHeight: {
         '9/10': '90%',
         '8/10': '80%',
         '36rem': '36rem',
         '30rem': '30rem',
-        'nmax': 'calc(100vh - 80px)',
+        'nmax': 'calc(100vh - 64px)',
       },
       width: {
         '9/10': '90%',

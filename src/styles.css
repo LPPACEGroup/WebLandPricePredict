@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Kodchasan&display=swap");
+@use '@angular/material' as mat;
 
 @tailwind base;
 @tailwind components;
@@ -27,6 +28,7 @@
   --lightGrey: #e0e0e0;
   --whiteGrey: #F4F6F8;
   --white: #ffffff;
+  /* mat.autocomplete-overrides styles removed */
 }
 
 .inset-x-0 {
@@ -117,3 +119,52 @@ textarea {
 }
 
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.mat-mdc-select{
+  /* display: none !important; */
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: #F0F8FF !important;
+}
+app-filterselect,mat-form-field {
+  width: 100%;
+}
+mat-mdc-text-field-wrapper{
+  border: none !important;
+  outline: none !important;
+}
+
+.--mdc-filled-text-field-active-indicator-color{
+  border: none !important;
+}
+.mdc-text-field{
+  --mdc-filled-text-field-active-indicator-color:rgba(0, 0, 0, 0)!important;
+  --mdc-filled-text-field-hover-active-indicator-color:rgba(0, 0, 0, 0)!important;
+  --mdc-filled-text-field-focus-active-indicator-color:rgba(0, 0, 0, 0)!important;
+}
+
+:root {
+  @include mat.autocomplete-overrides((
+    background-color: orange !important,
+  ));
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input{
+  color:#2749a3 !important;
+}
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+.mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
