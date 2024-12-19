@@ -50,4 +50,21 @@ export class ThaiLocationService {
       return Array.from(new Set(province));
     });
   }
+  getDetailsByPostcode(postcode: number) {
+    return this.http.get<ThaiLocationInterface[]>(this.dataUrl).toPromise().then(data => {
+      return data?.filter(item => item.zipcode === postcode);
+    });
+  }
+  getDetailbyDistrict(district: string) {
+    return this.http.get<ThaiLocationInterface[]>(this.dataUrl).toPromise().then(data => {
+      return data?.filter(item => item.district === district);
+    });
+  }
+  getDetailbyAmphoe(amphoe: string) {
+    return this.http.get<ThaiLocationInterface[]>(this.dataUrl).toPromise().then(data => {
+      
+      return data?.filter(item => item.amphoe === amphoe);
+  
+    });
+  }
 }

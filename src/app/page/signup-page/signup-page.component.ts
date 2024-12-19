@@ -14,9 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FilterselectComponent } from 'app/core/filterselect/filterselect.component';
 import { ThaiLocationService } from 'app/service/ThaiLocation/thai-location.service';
 import { ChangeDetectorRef } from '@angular/core';
-import { distinct } from 'rxjs';
 import { PasswordMatchValidator } from './confirm-password';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @Component({
   selector: 'app-signup-page',
   standalone: true,
@@ -25,7 +25,7 @@ import { PasswordMatchValidator } from './confirm-password';
     CommonModule,
     MatIconModule,
     ReactiveFormsModule,
-    FilterselectComponent,
+    FilterselectComponent,MatCardModule,MatCheckboxModule
   ],
   templateUrl: './signup-page.component.html',
   styleUrl: './signup-page.component.css',
@@ -38,8 +38,20 @@ export class SignupPageComponent {
   District: string[] = [];
   Sub_district: string[] = [];
   Postcode: number[] = [];
+  isUpdatingForm: boolean = false;
+  previousValue: any = {"sub_district": "", "postcode": 0,"district":""};
   private thaiLocationService?: ThaiLocationService;
 
+  items = [
+    { name: 'Item 1', description: 'Description of Item 1', image: 'path_to_image_1', selected: false },
+    { name: 'Item 2', description: 'Description of Item 2', image: 'path_to_image_2', selected: false },
+    { name: 'Item 3', description: 'Description of Item 3', image: 'path_to_image_3', selected: false },
+    { name: 'Item 1', description: 'Description of Item 1', image: 'path_to_image_1', selected: false },
+    { name: 'Item 2', description: 'Description of Item 2', image: 'path_to_image_2', selected: false },
+    { name: 'Item 3', description: 'Description of Item 3', image: 'path_to_image_3', selected: false },
+    { name: 'Item 2', description: 'Description of Item 2', image: 'path_to_image_2', selected: false },
+    { name: 'Item 3', description: 'Description of Item 3', image: 'path_to_image_3', selected: false },
+  ];
   @HostListener('wheel', ['$event'])
   onWheel(event: Event) {
     event.preventDefault();
@@ -69,9 +81,10 @@ export class SignupPageComponent {
       province: ['', Validators.required],
       district: ['', Validators.required],
       sub_district: ['', Validators.required],
-      postcode: [0, Validators.required],
-      home_number: ['', [Validators.required, Validators.pattern(/^\d+\/\d+$/)]],
+      postcode: ['', Validators.required],
+      home_number: ['', [Validators.required, Validators.pattern(/^\d+(\/*\d+)?$/)]],
       alley: ['', Validators.required],
+      interestLand : [''],
     },{
       validators: PasswordMatchValidator('password', 'confirmPassword')
     });
@@ -83,25 +96,25 @@ export class SignupPageComponent {
 
       if (this.currentStep ==1 ){
         const fieldsToValidate = ['username', 'email', 'password', 'confirmPassword'];
-        // fieldsToValidate.forEach((field) => {
-        //   const control = this.signupForm.get(field);
-        //   control?.markAsTouched(); // Mark the field as touched
-        //   if (control?.invalid) {
-        //     isValid = false;
-        //   }
-        // });
+        fieldsToValidate.forEach((field) => {
+          const control = this.signupForm.get(field);
+          control?.markAsTouched(); // Mark the field as touched
+          if (control?.invalid) {
+            isValid = false;
+          }
+        });
       }
       else if (this.currentStep == 2){
-        // const fieldsToValidate = ['firstName', 'lastName','gender','birthDate','telephone'];
-        // fieldsToValidate.forEach((field) => {
-        //   const control = this.signupForm.get(field);
-        //   control?.markAsTouched(); // Mark the field as touched
-        //   if (control?.invalid) {
-        //     console.log(control.invalid);
+        const fieldsToValidate = ['firstName', 'lastName','gender','birthDate','telephone'];
+        fieldsToValidate.forEach((field) => {
+          const control = this.signupForm.get(field);
+          control?.markAsTouched(); // Mark the field as touched
+          if (control?.invalid) {
+            console.log(control.invalid);
             
-        //     isValid = false;
-        //   }
-        // });
+            isValid = false;
+          }
+        });
       }
       else if (this.currentStep == 3){
         const fieldsToValidate = ['province', 'district','sub_district','postcode','home_number','alley'];
@@ -144,6 +157,7 @@ export class SignupPageComponent {
   }
 
   ngOnInit() {
+    
     this.thaiLocationService?.getProvince().then((data) => {
       this.Province = data;
       this.cdr.detectChanges();
@@ -160,6 +174,93 @@ export class SignupPageComponent {
       this.Postcode = data;
       this.cdr.detectChanges();
     });
+
+    this.signupForm.valueChanges.subscribe((value) => {
+      if (this.isUpdatingForm) {
+        this.previousValue.sub_district = this.signupForm.get('sub_district')?.value;
+        this.previousValue.postcode = this.signupForm.get('postcode')?.value;
+        this.previousValue.district = this.signupForm.get('district')?.value;
+        return; // Skip if currently updating the form
+      }
+      const selected_postcode = parseInt(value.postcode, 10)|value.postcode;
+      const selected_sub_district = value.sub_district;
+      const selected_district = value.district;
+      
+      // console.log(selected_sub_district,this.previousValue.sub_district ,"dddd");
+      // console.log(selected_postcode,this.previousValue.postcode , "pppp");
+      
+      if (selected_sub_district !== this.previousValue.sub_district) {
+        this.thaiLocationService?.getDetailbyDistrict(selected_sub_district).then((data) => {
+          console.log("sub_district");
+          
+          if (data && data.length > 0) {
+            
+            
+            this.isUpdatingForm = true;
+            this.signupForm.patchValue({
+              province: data[0].province,
+              district: data[0].amphoe,
+              postcode: data[0].zipcode
+              },{emitEvent: false});
+          }
+          this.previousValue.sub_district = this.signupForm.get('sub_district')?.value;
+          this.previousValue.postcode = this.signupForm.get('postcode')?.value;
+          this.previousValue.district = this.signupForm.get('district')?.value;
+          this.isUpdatingForm = false;
+    
+        });
+      }
+      else if (selected_postcode && (selected_postcode !== this.previousValue.postcode)) {
+        this.thaiLocationService?.getDetailsByPostcode(selected_postcode).then((data) => {
+          console.log("postcode");
+
+          if (data && data.length > 0) {
+            
+            let sub_district = data.map((item) => item.district);
+            
+            this.Sub_district = sub_district
+            this.isUpdatingForm = true;
+            this.signupForm.patchValue({
+              province: data[0].province,
+              district: data[0].amphoe,
+              sub_district: ""
+              },{emitEvent: false});
+          }
+          this.previousValue.sub_district = this.signupForm.get('sub_district')?.value;
+          this.previousValue.postcode = this.signupForm.get('postcode')?.value;
+          this.previousValue.district = this.signupForm.get('district')?.value;
+          this.isUpdatingForm = false;
+    
+        });
+      }
+      else if(selected_district !== this.previousValue.district){
+        this.thaiLocationService?.getDetailbyAmphoe(selected_district).then((data) => {
+          console.log("district");
+
+          if (data && data.length > 0) {
+            
+            console.log(data);
+
+            this.isUpdatingForm = true;
+            this.signupForm.patchValue({
+              province: data[0].province,
+              postcode: "",
+              sub_district: ""
+              },{emitEvent: false});
+          }
+          this.previousValue.sub_district = this.signupForm.get('sub_district')?.value;
+          this.previousValue.postcode = this.signupForm.get('postcode')?.value;
+          this.previousValue.district = this.signupForm.get('district')?.value;
+          this.isUpdatingForm = false;
+    
+        });
+      }
+
+
+      
+    }
+  );
+
   }
   get provinceControl(): FormControl {
     return this.signupForm.get('province') as FormControl;
