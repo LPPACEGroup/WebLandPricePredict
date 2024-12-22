@@ -11,6 +11,8 @@ import { MapPageComponent } from './page/map-page/map-page.component';
 import { AdminBlogComponent } from './page/admin-blog/admin-blog.component';
 import { AdminSuggestComponent } from './page/admin-suggest/admin-suggest.component';
 import { AdminUserManageComponent } from './page/admin-user-manage/admin-user-manage.component';
+import { AdminUserProfileComponent } from './page/admin-user-profile/admin-user-profile.component';
+
 
 export const routes: Routes = [
     { path: 'Home', component: HomeComponent },
@@ -25,6 +27,7 @@ export const routes: Routes = [
     { path: 'AdminBlog', component: AdminBlogComponent },
     { path: 'AdminSuggest', component: AdminSuggestComponent },
     { path: 'AdminUserManage', component: AdminUserManageComponent },
+    { path: 'AdminUserProfile', component: AdminUserProfileComponent },
 
     {path:'**',component:HomeComponent},
 ];

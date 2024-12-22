@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-carousel',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css']
 })
@@ -15,6 +16,7 @@ export class CarouselComponent implements OnInit {
   ];
 
   currentIndex = 0;
+  max = 2;
 
   constructor() {}
 
@@ -27,12 +29,21 @@ export class CarouselComponent implements OnInit {
   }
 
   prevSlide(): void {
-    this.currentIndex = (this.currentIndex === 0) ? this.images.length - 1 : this.currentIndex - 1;
+if (this.currentIndex>0){
+this.currentIndex--;
+}
+else {
+  this.currentIndex = this.max-1;
+}
   }
 
   nextSlide(): void {
-    this.currentIndex = (this.currentIndex === this.images.length - 1) ? 0 : this.currentIndex + 1;
-  }
+    if (this.currentIndex<this.max-1){
+      this.currentIndex++;
+      }
+      else {
+        this.currentIndex = 0;
+      }  }
 
   autoSlide(): void {
     setInterval(() => {

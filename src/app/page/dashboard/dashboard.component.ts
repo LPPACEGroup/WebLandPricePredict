@@ -4,10 +4,11 @@ import { dataSeries } from "./data-series";
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { PinnedPropertyExpandComponent } from "../../core/pinned-property-expand/pinned-property-expand.component";
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CollapseComponent],
+  imports: [CollapseComponent, PinnedPropertyExpandComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
