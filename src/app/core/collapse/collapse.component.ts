@@ -10,4 +10,11 @@ import { Component, Input } from '@angular/core';
 export class CollapseComponent {
   @Input() question_header!: string;
   @Input() content!: string;
+  
+  isContentVisible: boolean = false;
+
+  toggleContentVisibility() {
+    this.isContentVisible = !this.isContentVisible;
+  }
 }
+

@@ -1,70 +1,102 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from 'app/service/Auth/auth.service';
-import { catchError, map, Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+
+
+interface UserProfile {
+avatarUrl: any;
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  district: string;
+  province: string;
+  postalCode: string;
+  interests: string[];
+  tier: string;
+  paymentDate: string;
+}
+
 
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [MatIconModule, ReactiveFormsModule],
+  imports: [MatIconModule, CommonModule,],
+
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
 })
+
 export class ProfilePageComponent implements OnInit {
-  profileForm!: FormGroup;
-  userData: any;
-  constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.profileForm = this.fb.group(
-          {
-            username: ['', [Validators.required]], // Example: username with min length
-            password: ['', [Validators.required, Validators.minLength(8)]], // Example: password validation
-            confirmPassword: ['', [Validators.required, Validators.minLength(8)]], // Example: password
-            email: ['', [Validators.required, Validators.email],[this.emailExistsValidator.bind(this)]], // Email validation
-            firstName: ['', [
-              Validators.required,
-              Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
-            ]], // First name required
-            lastName: ['', [
-              Validators.required,
-              Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
-            ]], // Last name required
-            gender: ['', Validators.required], // Gender required
-            birthDate: ['', Validators.required], // Birth date required
-            telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
-            tier: ['Basic', Validators.required], // Tier required
-            notification: [true], // Default to true
-            notiNews: [false], // Default to false
-            role: ['User', Validators.required], // Role required
-            province: ['', Validators.required],
-            district: ['', Validators.required],
-            sub_district: ['', Validators.required],
-            postcode: ['', Validators.required],
-            home_number: [
-              '',
-              [Validators.required, Validators.pattern(/^\d+(\/*\d+)?$/)],
-            ],
-            alley: ['', Validators.required],
-            interestLand: [1],
-          },
-        );
-  }
-  ngOnInit(): void {
-    // Initialization logic here
-    this.authService.getUserData().subscribe({
-      next: (response: any) => {
-        this.userData = response;
-        console.log(response);
-      },
-      error: (error: any) => {
-        console.error(error);
-      },
+
+  sEditing = false;
+  profileForm: FormGroup;
+
+  profile: UserProfile = {
+    id: 'นาตาลี24',
+    name: 'นางสาวนาตาลี สุรินสา',
+    email: 'registrar@kmitl.ac.th',
+    phone: '099-984-2350',
+    address: '173 / 103 หมู่ 4 หมู่บ้านบางปลาร้องเรียง',
+    district: 'บ้านเกาะ',
+    province: 'สมุทรสาคร',
+    postalCode: '74000',
+    interests: ['ที่ดินติดถนน', 'ที่ดินใกล้ตัวเมือง', 'ที่ดินภายในเขตอุตสาหกรรม'],
+    tier: 'Tier 1',
+    paymentDate: 'ชำระเงินแล้ว เมื่อวันที่ 23/4/2022 เวลา 3.50 PM',
+    avatarUrl: undefined
+  };
+
+  constructor(private fb: FormBuilder) {
+    this.profileForm = this.fb.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      address: ['', Validators.required],
+      district: [''],
+      amphur: [''],
+      province: [''],
+      postalCode: ['']
     });
   }
-  emailExistsValidator(control: any): Observable<any> {
-      return this.authService.checkuserexist(control.value).pipe(
-        map(response => (response.exists ? { emailExists: true } : null)),
-        catchError(async () => null) // If there's an error (like server down), treat it as no existing email.
-      );
+
+  ngOnInit() {
+    this.resetForm();
+  }
+
+  startEditing() {
+    this.sEditing = true;
+    this.resetForm();
+  }
+
+  cancelEdit() {
+    this.sEditing = false;
+    this.resetForm();
+  }
+
+  saveChanges() {
+    if (this.profileForm.valid) {
+      this.profile = { ...this.profileForm.value };
+      this.sEditing = false;
     }
+  }
+
+
+  private resetForm() {
+    this.profileForm.patchValue({
+      id: this.profile.id,
+      name: this.profile.name,
+      email: this.profile.email,
+      phone: this.profile.phone,
+      address: this.profile.address,
+      district: this.profile.district,
+      province: this.profile.province,
+      postalCode: this.profile.postalCode
+    });
+  }
+
 }

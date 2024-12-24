@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CollapseComponent } from '../../core/collapse/collapse.component';
-
 import { dataSeries } from "./data-series";
-
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { PinnedPropertyExpandComponent } from "../../core/pinned-property-expand/pinned-property-expand.component";
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CollapseComponent],
+  imports: [CollapseComponent, PinnedPropertyExpandComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -35,5 +37,8 @@ export class DashboardComponent {
   }
 
 }
-
+export class SelectMultipleExample {
+  toppings = new FormControl('');
+  toppingList: string[] = ['แสดงเขตทั้งหมด', 'เขตลาดกระบัง', 'เขตมีนบุรี', 'เขตคลองเตย', 'เขตวัฒนา',];
+}
 // Add this method to the DashboardComponent class

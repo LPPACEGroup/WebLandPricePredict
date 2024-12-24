@@ -11,7 +11,7 @@ describe('CollapseComponent', () => {
       imports: [CollapseComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CollapseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +20,7 @@ describe('CollapseComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
+
+

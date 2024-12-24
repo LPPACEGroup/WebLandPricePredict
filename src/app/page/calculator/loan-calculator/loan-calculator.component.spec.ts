@@ -11,7 +11,7 @@ describe('LoanCalculatorComponent', () => {
       imports: [LoanCalculatorComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(LoanCalculatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
