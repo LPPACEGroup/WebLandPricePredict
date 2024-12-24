@@ -1,17 +1,39 @@
-<div class="h-52 w-full rounded-2xl grid grid-cols-2 overflow-clip border border-grey">
+<div class="h-fit w-full rounded-2xl grid grid-cols-2 overflow-clip border border-grey">
   <div class="w-full h-full"><img class="w-full h-full"
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhjfIax41C7jv5Ln0OTl2-D_-Ss07ghDpGyA&s" alt="">
   </div>
-  <div class="p-3 flex flex-col justify-between text-sm">
-    <div>
-      <p class="text-lg font-semibold">ชื่อ</p>
-      <p> ขนาดพื้นที่ {{item?.size}} ตร.ม. </p>
-      <p>{{item?.location}}</p>
+  <div class="p-3  text-sm ">
+    <div class="h-fit border-grey border-b pb-2">
+      <p class=" font-semibold">ที่อยู่</p>
+      <p class="font-semibold">เขต{{item?.location}} กรุงเทพ</p>
+    </div>
+    <div class=" w-full grid grid-cols-5 font-semibold gap-y-1 pt-2">
+      <p class="col-span-2 "> ขนาดพื้นที่ </p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.size}}</p>
+      <p class="col-span-2 font-semibold">ราคาขาย </p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.price}}</p>
+      <p class=" text-grey col-span-5">ราคา {{item?.price/item?.size}} บาทต่อตารางเมตร</p>
+      <br>
+    </div>
+    <div class="w-full flex justify-end">
+      <button class=" border-grey border rounded-xl flex justify-center items-center p-1 followbutton"
+        (click)="onfollow()" *ngIf="!fowllowState; else nowfollow"> <span><svg xmlns="http://www.w3.org/2000/svg"
+            height="24px" viewBox="0 -960 960 960" width="24px" fill="#2749A3">
+            <path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Z" />
+          </svg></span>
+        <p>ติดตาม</p>
 
+      </button>
+      <ng-template #nowfollow><button
+          class=" border-grey border rounded-xl flex justify-center items-center p-1 followbutton" (click)="onfollow()">
+          <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+              fill="#2749A3">
+              <path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Z" />
+            </svg></span>
+          <p>เลิกติดตาม</p>
+
+        </button></ng-template>
     </div>
-    <div class="flex justify-between w-full">
-      <p class="w-full">ราคาขาย </p>
-      <p>{{item?.pricePerWar}}</p>
-    </div>
+
   </div>
 </div>

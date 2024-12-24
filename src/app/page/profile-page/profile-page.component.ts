@@ -20,12 +20,14 @@ avatarUrl: any;
   paymentDate: string;
 }
 
+
 @Component({
   selector: 'app-profile-page',
   standalone: true,
   imports: [MatIconModule, CommonModule,],
+
   templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.css'
+  styleUrl: './profile-page.component.css',
 })
 
 export class ProfilePageComponent implements OnInit {
@@ -96,4 +98,5 @@ export class ProfilePageComponent implements OnInit {
       postalCode: this.profile.postalCode
     });
   }
+
 }

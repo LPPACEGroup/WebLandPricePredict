@@ -6,6 +6,7 @@ import { ContactPageComponent } from "../contact-page/contact-page.component";
   selector: 'app-home',
   standalone: true,
   imports: [SvgIconModule, ContactPageComponent],
+
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
