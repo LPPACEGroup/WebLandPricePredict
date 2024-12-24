@@ -28,6 +28,9 @@
                 <div class="text-red-500 w-full text-center" *ngIf="signupForm.get('email')?.hasError('email') && signupForm.get('email')?.touched">
                     Email format is invalid. Please enter a valid email, e.g., LPPM&#64;email.com.
                 </div>
+                <div class="text-red-500 w-full text-center" *ngIf="signupForm.get('email')?.hasError('emailExists') && signupForm.get('email')?.touched">
+                    This email is already taken. Please try another.
+                  </div>
                 <label for="email" class=" input-label">อีเมล</label>
                 <input class="input-box" type="email" formControlName="email"
                     placeholder="อีเมล">
@@ -76,12 +79,18 @@
 
             </ol>
             <div class="bg-grey w-24 h-24 rounded-full"></div>
-            <div class="flex w-9/12 justify-center items-center">
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('firstName')?.hasError('pattern') && signupForm.get('firstName')?.touched">
+                    Allows alphabetic characters and accented characters only
+                  </div>
                 <label for="firstName" class=" input-label">ชื่อจริง</label>
                 <input class="input-box" type="text" formControlName="firstName"
                     placeholder="ชื่อจริง">
             </div>
-            <div class="flex w-9/12 justify-center items-center">
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('lastName')?.hasError('pattern') && signupForm.get('lastName')?.touched">
+                    Allows alphabetic characters and accented characters only
+                  </div>
                 <label for="lastName" class=" input-label">นามสกุล</label>
                 <input class="input-box" type="text" formControlName="lastName"
                     placeholder="นามสกุล">
@@ -100,7 +109,7 @@
                   </div>
                 <label for="telephone"
                     class=" input-label appearance-none">เบอร์โทร</label>
-                <input class="input-box" type="number"
+                <input class="input-box" type="text"
                     formControlName="telephone" placeholder="เบอร์โทร">
             </div>
             <div class="flex w-9/12 justify-center items-center">

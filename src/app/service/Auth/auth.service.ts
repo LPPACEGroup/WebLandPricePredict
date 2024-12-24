@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'model/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,17 @@ export class AuthService {
     return this.http.get(`${this.apiURL}/auth/sign-out`, { withCredentials: true });
   }
 
+  signup(user: User): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiURL}/auth/sign-up`, user, {
+      headers: headers,
+      withCredentials: true
+    });
+  }
   getUserData(): Observable<any> {
     return this.http.get(`${this.apiURL}/auth/user`, { withCredentials: true });
   }
@@ -29,7 +41,11 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiURL}/auth/check`, { withCredentials: true });
   }
+  checkuserexist(email: string): Observable<any> {
+    return this.http.post(`${this.apiURL}/auth/exit`, { email }, { withCredentials: true})
+  }
 
+  
   private checkSignInStatus(): void {
     this.isAuthenticated().subscribe({
       next: () => this.signedIn.next(true),

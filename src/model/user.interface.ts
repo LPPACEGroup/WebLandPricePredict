@@ -1,38 +1,21 @@
 export interface User {
-    userId : string;
-    userName: string;
+    username: string;
     password: string;
     email: string;
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     gender: string;
-    birthDate: Date;
+    birth_date: Date;
     telephone: string;
-    Tier: string;
+    tier: string;
     notification: boolean;
-    notiNews: boolean;
-    addrID: string;
+    noti_news: boolean;
     role: string;
-    infoId?: number;
-}
-
-export interface Useraddress {
-    addrID: string;
-    Province: string;
-    District: string;
-    subDistrict: string;
-    postCode: string;
-    homeNubmer: string;
-    alley?: string;
-}
-
-export interface AboutLandInterests {
-    infoID: number;
-    landTypeFV: string;
-    landSizeFV: string;
-    areaInterest?: string;
-    budget: string;
-    landUse: string;
-    moreDetail: string;
-
+    province: string;
+    district: string;
+    sub_district: string;
+    post_code: string;
+    home_number: string;
+    alley: string;
+    area_interest: number;
 }
