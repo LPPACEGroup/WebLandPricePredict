@@ -4,7 +4,7 @@ input:focus-visible {
 
 .profile-container {
   background-image: url(/assets/imgs/profile_card.png);
-  height: fit-content;
+  height: 100%;
   width: 1356px;
   display: flex;
   /* align-items: center; */
@@ -15,12 +15,13 @@ input:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
   align-items: flex-start;
+  margin-top: 30px;
 }
 
 .bg {
   background-image: url(/assets/imgs/bg_profile.png);
   background-size: cover;
-  position: absolute;
+  /* position: absolute; */
   inset: 0;
   background-attachment: fixed;
   background-position: center;
@@ -32,7 +33,6 @@ input:focus-visible {
   position: relative;
   height: 100%;
   overflow-y: auto;
-  margin-top: 50px;
 }
 
 .box {
@@ -98,7 +98,6 @@ input:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 .left-content {
@@ -127,5 +126,4 @@ input:focus-visible {
   margin-top: 3%;
   margin-right: 10%;
   width: 85%;
-
 }
