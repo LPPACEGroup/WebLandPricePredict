@@ -1,17 +1,156 @@
 <div class="min-h-nmax relative">
-  <app-map [coordinates]="coordinates">
+  <app-map [coordinates]="coordinates" [landList]="landList" [selectedMapLayer]="selectedMapLayer"
+    (markerCoordOutput)="markerCoordUpdate($event)">
+
   </app-map>
+  <dialog id="fullland_detail" class="modal">
+    <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll ">
+      <div class="w-full h-24 overflow-clip flex-center"><img class="w-full "
+          src="https://prod-mfp-imgsrv.tillitsdone.com/uploads/medium__2fb08de653.png" alt="">
+      </div>
+      <div class="modal-action flex flex-col m-6">
+        <div class="border-b-2 py-5">
+          <p class="text-grey date-text">ข้อมูลเมื่อวันที่ 11 Aug 2022 9:00 PM</p>
+          <p class="font-semibold text-xl">ที่ดินเลขที่ 278</p>
+          <p class="text-xs">รหัสอสังหาริมทรัพย์: 0190ecdf-6651-7aa2-90f0-5a47933a869f</p>
+          <p class="text-xs">ที่ตั้ง : ถนนฉลองกรุง 8 เขตลาดกระบัง กรุงเทพ 10520</p>
+        </div>
+        <div class="border-b-2 py-5 font-medium">
+          <p class="text-lg">ราคาขาย</p>
+          <p class="text-lg">145,500</p>
+          <div class="grid grid-cols-2 text-base text-black">
+            <p>ราคาต่อตารางเมตร </p>
+            <p>145,500</p>
+            <p>ขนาดพื้นที่ </p>
+            <p>87</p>
+          </div>
+        </div>
+        <div class="border-b-2 py-5">
+          <p class="text-lg">ราคาขาย</p>
+          <div class="w-full h-50 overflow-clip flex-center"><img class="w-full "
+              src="https://media.discordapp.net/attachments/1194525658190204940/1290936467413143583/image.png?ex=66fe45c6&is=66fcf446&hm=eb75071f13ef6519b06ca2a0b8ecc12c7f78b0d89fd8c35ff369282d584be9b8&=&format=webp&quality=lossless&width=1440&height=360"
+              alt="">
+          </div>
+        </div>
+        <div class="border-b-2 py-5">
+          <p class="text-lg">สถานที่ใกล้เคียง</p>
+          <div class="grid grid-cols-2 text-base text-black">
+
+            <div class="flex flex-row">
+              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
+                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
+                  alt="">
+              </div>
+              <div>
+                <div class="font-semibold">สวนสาธารณะ</div>
+                <div>2 กม.</div>
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
+                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
+                  alt="">
+              </div>
+              <div>
+                <div class="font-semibold">สวนสาธารณะ</div>
+                <div>2 กม.</div>
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
+                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
+                  alt="">
+              </div>
+              <div>
+                <div class="font-semibold">สวนสาธารณะ</div>
+                <div>2 กม.</div>
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
+                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
+                  alt="">
+              </div>
+              <div>
+                <div class="font-semibold">สวนสาธารณะ</div>
+                <div>2 กม.</div>
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
+                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
+                  alt="">
+              </div>
+              <div>
+                <div class="font-semibold">สวนสาธารณะ</div>
+                <div>2 กม.</div>
+              </div>
+            </div>
+            <div class="flex flex-row">
+              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
+                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
+                  alt="">
+              </div>
+              <div>
+                <div class="font-semibold">สวนสาธารณะ</div>
+                <div>2 กม.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="border-b-2 py-5">
+          <p class="text-lg">สถานที่ใกล้เคียง</p>
+          <p class="text-black text-sm">-ที่ดิน ขนาด 10 ไร่ 110 ตารางวา<br>-หน้ากว้างติดถนน 80 ม. ยาวเลียบคลองธรรมชาติ
+            186 ม. คลองเเล่นเรือได้<br>
+            -ติดถนนจงถนอม-วัดต้นเชือก หมายเลข
+            5014<br>-ใกล้มอเตอร์เวย์บางใหญ่-กาญจนบุรี<br>-ใกล้โครงการถนนนครอินทร์-ศาลายา<br>
+            -ทางคู่ขนานลอยฟ้าถนนบรมราชชนนี<br>-ทางพิเศษประจิมรัถยา 15 ก.ม.</p>
+        </div>
+        <div class="p-5">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="fastsell_Confirm" class="modal">
+    <div class="modal-box relative">
+      <h3 class="text-lg font-bold text-gold"><mat-icon class="" aria-hidden="false"
+        aria-label="Example help icon" fontIcon="flash_on"/>&emsp; เปิดใช้งานการแสดงผลข้อมูลขายเร็ว!</h3>
+        <button class="" onclick="fastsell_Confirm.close()"><mat-icon class="absolute top-4 right-4 text-black" aria-hidden="false"
+          aria-label="Example help icon" fontIcon="close"/></button>
+      <p class="py-4 text-grey">หลังจากเปิดใช้งาน ข้อมูลที่นำมาแสดงจะมีเพียง 60% ของข้อมูลทั้งหมด และเป็นข้อมูลที่มาจากเว็บไซต์ InterHome เท่านั้น</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn text-white bg-dark-blue" (click)="confirmFastSell()">ยืนยันเปิดใช้งาน</button>
+          <button class="btn ml-7 text-black bg-white">ยกเลิก</button>
+        </form>
+        
+      </div>
+    </div>
+
+  </dialog>
 
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-dark-blue"></span>
   </div>
-  <div class="h-full w-96 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue ">
+  <div
+    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue  landBar landbar-active"
+    [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
+    <div class="h-6 w-10 bg-white absolute left-0 top-12 -translate-x-full cursor-pointer flex" (click)="toggleLandBar()">
+      <mat-icon class="text-ocean-blue opacity-50 " aria-hidden="false" aria-label="Example help icon" fontIcon="play_arrow
+        "></mat-icon>
+      <mat-icon class="text-ocean-blue   -translate-x-3" aria-hidden="false" aria-label="Example help icon"
+        fontIcon="chevron_right"></mat-icon>
+    </div>
     <div class="w-full search">
-      <input placeholder="เลขที่/เขต/แขวง/จังหวัด........"
-        class="input input-bordered w-full h-10  rounded-full placeholder-dark-blue" (keydown)="onKeyDown($event)"
-        (input)="onInput($event)" (focus)="onFocus()" #searchInput />
+      <input placeholder="ค้นหา ชื่อ/เขต/แขวง/จังหวัด........"
+        class="input input-bordered w-full h-10   placeholder-dark-blue" (keydown)="onKeyDown($event)"
+        (input)="onInput($event)" (foucs)="onFocus()" #searchInput />
       <div class="bg-white z-40 h-44 overflow-y-scroll w-full pt-2"
-        [ngClass]="{'block': isInputFocused, 'hidden': !isInputFocused}" #searchResults>
+        [ngClass]="{'block/': isInputFocused, 'hidden': !isInputFocused}" #searchResults>
         <div class=" h-12 w-full truncate hover:bg-light-grey" *ngFor="let result of results"
           (click)="changeCoord(result.lat, result.lon)">
           <p>{{result.display_name}}</p>
@@ -22,21 +161,126 @@
       </div>
     </div>
 
-    <div class=" w-full flex flex-row gap-2">
-      <select class="select select-bordered  max-w-xs rounded-full " title="Select an option">
-        <option disabled selected>เลือกแสดงข้อมูลแผนที่</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
-      </select>
-      <select class="select select-bordered w-8 max-w-xs rounded-full flex-1 " title="Select an option">
-        <option disabled selected>อื่นๆ</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
-      </select>
+    <div class=" w-full flex flex-row gap-2 ">
+      <details class="dropdown w-1/2">
+        <summary class="btn  bg-white  text-dark-blue font-normal  select-bordered m-0 w-full">เลือกแสดงข้อมูลแผนที่
+        </summary>
+        <ul class="menu dropdown-content bg-white">
+          <li>
+            <div><input id="osm" type="radio" name="mapOption" value="osm" (change)="onMapOptionChange('osm')"
+                checked />
+
+
+              <label for="osm">osm</label>
+            </div>
+          </li>
+          <li>
+            <div><input id="satellite" type="radio" name="mapOption" value="satellite"
+                (change)="onMapOptionChange('satellite')" />
+
+
+              <label for="satellite">ภาพถ่ายดาวเทียม</label>
+            </div>
+          </li>
+          <li>
+            <div><input id="colormap" type="radio" name="mapOption" value="colormap"
+                (change)="onMapOptionChange('colormap')" />
+
+
+              <label for="colormap">แผนที่สีผังเมือง</label>
+            </div>
+          </li>
+
+        </ul>
+      </details>
+      <details class="dropdown  w-1/2">
+        <summary class="btn  bg-white  text-dark-blue font-normal  select-bordered m-0 w-full ">ตั้งค่าแสดงรายการที่ดิน
+        </summary>
+        <div class="  m-0 p-5  dropdown-content w-11/12 bg-white ">
+          <h4>ช่วงราคา(ล้าน)</h4>
+          <form>
+            <div class="flex justify-between text-sm">
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Priceslider.leftPrice/1000000" (keydown.enter)="leftPriceChange($event)" (keypress)="validateNumberInput($event)"/>
+              <div class="flex flex-center">
+                <hr class="w-5 bg-grey h-1">
+              </div>
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Priceslider.rightPrice/1000000" (keydown.enter)="rightPriceChange($event)" (keypress)="validateNumberInput($event)"/>
+            
+            </div>
+          </form>
+          <div>
+            <mat-slider [min]="Priceslider.minPrice" [max]="Priceslider.maxPrice"  class="w-full  m-0 slider">
+              <input  [(ngModel)]="Priceslider.leftPrice"  matSliderStartThumb (change)="handleSearch(this.searchValue)">
+              <input   [(ngModel)]="Priceslider.rightPrice"  matSliderEndThumb (change)="handleSearch(this.searchValue)">
+            </mat-slider>
+          </div>
+
+          <h4>ขนาดพื้นที่(ตารางวา)</h4>
+          <form>
+            <div class="flex justify-between text-sm">
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Areaslider.leftArea" (keydown.enter)="leftAreaChange($event)" (keypress)="validateNumberInput($event)"/>
+              <div class="flex flex-center">
+                <hr class="w-5 bg-grey h-1">
+              </div>
+              <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Areaslider.rightArea" (keydown.enter)="rightAreaChange($event)" (keypress)="validateNumberInput($event)"/>
+            </div>
+          </form>
+          <div>
+            <mat-slider [min]="Areaslider.minArea" [max]="Areaslider.maxArea" class="w-full  m-0 " >
+              <input   [(ngModel)]="Areaslider.leftArea"  matSliderStartThumb (change)="handleSearch(this.searchValue)">
+              <input [(ngModel)]="Areaslider.rightArea"    matSliderEndThumb (change)="handleSearch(this.searchValue)">
+            </mat-slider>
+          </div>
+          <div class="flex items-center">
+            <h4>ข้อมูลขายเร็ว </h4> <mat-icon class="text-grey text-sm" aria-hidden="false"
+              aria-label="Example help icon" fontIcon="help_outline"></mat-icon><input type="checkbox"
+              class="toggle toggle-xs toggle-accent border-none  bg-white " 
+              value="fastsell" [checked]="fastsellState" (change)="onFastSellClick($event)" [id]=""/>
+            <p class="text-grey text-sm">เปิดใช้งาน</p>
+          </div>
+
+
+          <ul class=" bg-white text-grey p-0 w-fit">
+            <li>
+              <div><input id="lad" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="lad">เขตลาดกระบัง</label>
+              </div>
+            </li>
+            <li>
+              <div>
+                <input id="min" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="min">เขตมีนบุรี</label>
+              </div>
+            </li>
+            <li>
+              <div><input id="khong" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="khong">เขตคลองเตย</label>
+              </div>
+            </li>
+            <li>
+              <div><input id="wat" type="checkbox" class="radio w-4 h-4" name="area" />
+
+
+                <label for="wat">เขตวัฒนา</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </details>
     </div>
-    
+    <div class="flex justify-start w-full">    <p *ngIf="fastsellState" class="font-bold text-gold ">แสดงข้อมูลขายเร็ว</p>
+    </div>
+
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">
-      <app-land-card class="w-full" *ngFor="let item of landList" [item]="item"></app-land-card>
+      <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" (click)="onCardClick($event)"
+        ></app-land-card>
+
     </div>
 
   </div>
