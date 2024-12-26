@@ -1,86 +1,99 @@
 <div class="p-6">
-  <div class="w-full mb-6 bg-light-blue">
-    <div class="relative px-5 py-5">
-      <input type="text" placeholder="ค้นหา...."
-        class="w-full bg-white border border-neutral-200 rounded-md px-4 py-2 text-neutral-950 placeholder-neutral-500 focus:outline-none" />
+  <div class="bg-light-blue rounded-3xl p-4 mb-6">
+
+    <div class="flex justify-between items-center mb-4">
+      <div class="flex items-center border rounded-md px-4 py-2 w-full bg-white h-12">
+        <svg class="w-5 h-5 text-grey mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input type="text" placeholder="ค้นหา..." class="border-none outline-none w-full">
+      </div>
+
     </div>
-    <div class="overflow-x-auto px-5 py-5">
-      <table class="w-full border-collapse ">
+
+    <div class="mb-4 bg-white rounded-md shadow">
+      <table class="w-full border-collapse table-fixed">
         <thead>
-          <tr class="bg-primary-100 text-dark-blue">
-            <th class="py-3 px-4 text-left">ลำดับ</th>
-            <th class="py-3 px-4 text-left">ID</th>
-            <th class="py-3 px-4 text-left">ชื่อผู้ใช้</th>
-            <th class="py-3 px-4 text-left">ชื่อ-นามสกุล</th>
-            <th class="py-3 px-4 text-left">เบอร์โทร</th>
-            <th class="py-3 px-4 text-left">ระดับสมาชิก</th>
-            <th class="py-3 px-4 text-left">เวลาชำระเงิน</th>
-            <th class="py-3 px-4 text-left">สถานะตรวจสอบ</th>
+          <tr class="bg-white text-dark-blue">
+            <th class="text-center py-2 px-4 w-[2%]">ลำดับ</th>
+            <th class="text-center py-2 px-4 w-[10%]">ID</th>
+            <th class="text-center py-2 px-4 w-[12%]">ชื่อผู้ใช้</th>
+            <th class="text-center py-2 px-4 w-[25%]">ชื่อ-นามสกุล</th>
+            <th class="text-center py-2 px-4 w-[13%]">เบอร์โทร</th>
+            <th class="text-center py-2 px-4 w-[10%]">ระดับสมาชิก</th>
+            <th class="text-center py-2 px-4 w-[20%]">เวลาชำระเงิน</th>
+            <th class="text-center py-2 px-4 w-[15%]">สถานะตรวจสอบ</th>
           </tr>
         </thead>
-
-        <tbody>
-          <tr key={index} class="border-b border-neutral-100 hover:bg-neutral-50 text-black">
-            <td class="py-3 px-4">1</td>
-            <td class="py-3 px-4">001</td>
-            <td class="py-3 px-4">john123</td>
-            <td class="py-3 px-4">จอห์น สมิธ</td>
-            <td class="py-3 px-4">089-123-4567</td>
-            <td class="py-3 px-4">Tier 1</td>
-            <td class="py-3 px-4">2024-08-19 12:34:56</td>
-            <td class="py-3 px-4">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr key={index} class="border-b border-neutral-100 hover:bg-neutral-50 text-black">
-            <td class="py-3 px-4">1</td>
-            <td class="py-3 px-4">001</td>
-            <td class="py-3 px-4">john123</td>
-            <td class="py-3 px-4">จอห์น สมิธ</td>
-            <td class="py-3 px-4">089-123-4567</td>
-            <td class="py-3 px-4">Tier 1</td>
-            <td class="py-3 px-4">2024-08-19 12:34:56</td>
-            <td class="py-3 px-4">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr key={index} class="border-b border-neutral-100 hover:bg-neutral-50 text-black">
-            <td class="py-3 px-4">1</td>
-            <td class="py-3 px-4">001</td>
-            <td class="py-3 px-4">john123</td>
-            <td class="py-3 px-4">จอห์น สมิธ</td>
-            <td class="py-3 px-4">089-123-4567</td>
-            <td class="py-3 px-4">Tier 1</td>
-            <td class="py-3 px-4">2024-08-19 12:34:56</td>
-            <td class="py-3 px-4">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr key={index} class="border-b border-neutral-100 hover:bg-neutral-50 text-black">
-            <td class="py-3 px-4">1</td>
-            <td class="py-3 px-4">001</td>
-            <td class="py-3 px-4">john123</td>
-            <td class="py-3 px-4">จอห์น สมิธ</td>
-            <td class="py-3 px-4">089-123-4567</td>
-            <td class="py-3 px-4">Tier 1</td>
-            <td class="py-3 px-4">2024-08-19 12:34:56</td>
-            <td class="py-3 px-4">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr key={index} class="border-b border-neutral-100 hover:bg-neutral-50 text-black">
-            <td class="py-3 px-4">1</td>
-            <td class="py-3 px-4">001</td>
-            <td class="py-3 px-4">john123</td>
-            <td class="py-3 px-4">จอห์น สมิธ</td>
-            <td class="py-3 px-4">089-123-4567</td>
-            <td class="py-3 px-4">Tier 1</td>
-            <td class="py-3 px-4">2024-08-19 12:34:56</td>
-            <td class="py-3 px-4">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-
       </table>
     </div>
+
+    <div class="bg-white rounded-md shadow mb-4">
+      <table class="w-full border-collapse table-fixed">
+        <tbody>
+          <tr class="text-center text-black">
+            <td class="py-4 px-4 w-[2%]">1</td>
+            <td class="py-4 px-4 w-[10%] text-center">001</td>
+            <td class="py-4 px-4 w-[12%] text-center">john123</td>
+            <td class="py-4 px-4 w-[25%] text-center">จอห์น สมิธ</td>
+            <td class="py-4 px-4 w-[13%] text-center">089-123-4567</td>
+            <td class="py-4 px-4 w-[10%] text-center">Tier 1</td>
+            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
+            <td class="py-4 px-4 w-[15%] text-center">ตรวจสอบแล้ว</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-white rounded-md shadow mb-4">
+      <table class="w-full border-collapse table-fixed">
+        <tbody>
+          <tr class="text-center text-black">
+            <td class="py-4 px-4 w-[2%]">2</td>
+            <td class="py-4 px-4 w-[10%] text-center">002</td>
+            <td class="py-4 px-4 w-[12%] text-center">jane_doe</td>
+            <td class="py-4 px-4 w-[25%] text-center">เจน โด</td>
+            <td class="py-4 px-4 w-[13%] text-center">081-987-6543</td>
+            <td class="py-4 px-4 w-[10%] text-center">Tier 3</td>
+            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
+            <td class="py-4 px-4 w-[15%] text-center">ตรวจสอบแล้ว</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-white rounded-md shadow mb-4">
+      <table class="w-full border-collapse table-fixed">
+        <tbody>
+          <tr class="text-center text-black">
+            <td class="py-4 px-4 w-[2%]">3</td>
+            <td class="py-4 px-4 w-[10%] text-center">003</td>
+            <td class="py-4 px-4 w-[12%] text-center">mike88</td>
+            <td class="py-4 px-4 w-[25%] text-center">ไมค์ จอห์นสัน</td>
+            <td class="py-4 px-4 w-[13%] text-center">089-123-4567</td>
+            <td class="py-4 px-4 w-[10%] text-center">Basic</td>
+            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
+            <td class="py-4 px-4 w-[15%] text-center text-red">ยังไม่ตรวจสอบ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bg-white rounded-md shadow mb-4">
+      <table class="w-full border-collapse table-fixed">
+        <tbody>
+          <tr class="text-center text-black">
+            <td class="py-4 px-4 w-[2%]">4</td>
+            <td class="py-4 px-4 w-[10%] text-center">004</td>
+            <td class="py-4 px-4 w-[12%] text-center">john123</td>
+            <td class="py-4 px-4 w-[25%] text-center">จอห์น สมิธ</td>
+            <td class="py-4 px-4 w-[13%] text-center">089-123-4567</td>
+            <td class="py-4 px-4 w-[10%] text-center">Tier 1</td>
+            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
+            <td class="py-4 px-4 w-[15%] text-center">ตรวจสอบแล้ว</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 </div>

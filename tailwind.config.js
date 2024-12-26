@@ -7,18 +7,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'dark-blue': '#2749A3',
-        'ocean-blue': '#307DA2',
+        'darkBlue': '#2749A3',
+        'oceanBlue': '#307DA2',
         'blue': '#86B6CD',
-        'baby-blue': '#C6E6FF',
-        'alice-blue': '#F0F8FF',
+        'babyBlue': '#C6E6FF',
+        'lightBlue': '#F0F8FF',
+
+        'midGreen': '#00a76f',
+        'lightGreen': '#B8E3CA',
+        'darkRed': '#B71D18',
+        'brightRed': '#FF5630',
+        'lightOrange': '#E3B8B1',
+        'darkOrange': '#AF6A5F',
         'yellow': '#F3C762',
-        'light-blue': '#F0F8FF',
+
+        'black': '#000000',
         'grey': '#7D7A83',
+        'midGrey': '#d2d2d2',
         'light-grey': '#E0E0E0',
+        'whiteGrey': '#f4f6f8',
+        'white': '#ffffff',
+
         'lighter-grey': '#F4F2F2',
         'blue-2':"#9FC8D8",
-        'gold': '#F3C762',
       },
       fontFamily: {
         LPPA: ["Kodchasan", 'sans-serif'],
