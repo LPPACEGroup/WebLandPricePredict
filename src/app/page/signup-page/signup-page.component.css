@@ -2,9 +2,9 @@
     @apply text-grey  font-bold w-1/4 text-right pr-2
 }
 .input-box {
-    @apply input input-bordered w-9/12 h-8 bg-light-blue text-sm
+    @apply input input-bordered w-9/12 h-8 bg-lightBlue text-sm
 }
 
 .input-select {
-    @apply select select-bordered select-xs   w-9/12 h-8 bg-light-blue text-grey
+    @apply select select-bordered select-xs   w-9/12 h-8 bg-lightBlue text-grey
 }

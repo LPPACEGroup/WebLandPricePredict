@@ -124,20 +124,20 @@
       <p class="py-4 text-grey">หลังจากเปิดใช้งาน ข้อมูลที่นำมาแสดงจะมีเพียง 60% ของข้อมูลทั้งหมด และเป็นข้อมูลที่มาจากเว็บไซต์ InterHome เท่านั้น</p>
       <div class="modal-action">
         <form method="dialog">
-          <button class="btn text-white bg-dark-blue" (click)="confirmFastSell()">ยืนยันเปิดใช้งาน</button>
+          <button class="btn text-white bg-darkBlue" (click)="confirmFastSell()">ยืนยันเปิดใช้งาน</button>
           <button class="btn ml-7 text-black bg-white">ยกเลิก</button>
         </form>
-        
+
       </div>
     </div>
 
   </dialog>
 
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
-    <span class="loading loading-spinner loading-lg text-dark-blue"></span>
+    <span class="loading loading-spinner loading-lg text-darkBlue"></span>
   </div>
   <div
-    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-dark-blue  landBar landbar-active"
+    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active"
     [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
     <div class="h-6 w-10 bg-white absolute left-0 top-12 -translate-x-full cursor-pointer flex" (click)="toggleLandBar()">
       <mat-icon class="text-ocean-blue opacity-50 " aria-hidden="false" aria-label="Example help icon" fontIcon="play_arrow
@@ -147,7 +147,7 @@
     </div>
     <div class="w-full search">
       <input placeholder="ค้นหา ชื่อ/เขต/แขวง/จังหวัด........"
-        class="input input-bordered w-full h-10   placeholder-dark-blue" (keydown)="onKeyDown($event)"
+        class="input input-bordered w-full h-10   placeholder-darkBlue" (keydown)="onKeyDown($event)"
         (input)="onInput($event)" (foucs)="onFocus()" #searchInput />
       <div class="bg-white z-40 h-44 overflow-y-scroll w-full pt-2"
         [ngClass]="{'block/': isInputFocused, 'hidden': !isInputFocused}" #searchResults>
@@ -163,7 +163,7 @@
 
     <div class=" w-full flex flex-row gap-2 ">
       <details class="dropdown w-1/2">
-        <summary class="btn  bg-white  text-dark-blue font-normal  select-bordered m-0 w-full">เลือกแสดงข้อมูลแผนที่
+        <summary class="btn  bg-white  text-darkBlue font-normal  select-bordered m-0 w-full">เลือกแสดงข้อมูลแผนที่
         </summary>
         <ul class="menu dropdown-content bg-white">
           <li>
@@ -194,7 +194,7 @@
         </ul>
       </details>
       <details class="dropdown  w-1/2">
-        <summary class="btn  bg-white  text-dark-blue font-normal  select-bordered m-0 w-full ">ตั้งค่าแสดงรายการที่ดิน
+        <summary class="btn  bg-white  text-darkBlue font-normal  select-bordered m-0 w-full ">ตั้งค่าแสดงรายการที่ดิน
         </summary>
         <div class="  m-0 p-5  dropdown-content w-11/12 bg-white ">
           <h4>ช่วงราคา(ล้าน)</h4>
@@ -205,7 +205,7 @@
                 <hr class="w-5 bg-grey h-1">
               </div>
               <input class="border border-grey text-grey m-0  w-2/5 text-xs text-center" matInput [value]="Priceslider.rightPrice/1000000" (keydown.enter)="rightPriceChange($event)" (keypress)="validateNumberInput($event)"/>
-            
+
             </div>
           </form>
           <div>
@@ -234,7 +234,7 @@
           <div class="flex items-center">
             <h4>ข้อมูลขายเร็ว </h4> <mat-icon class="text-grey text-sm" aria-hidden="false"
               aria-label="Example help icon" fontIcon="help_outline"></mat-icon><input type="checkbox"
-              class="toggle toggle-xs toggle-accent border-none  bg-white " 
+              class="toggle toggle-xs toggle-accent border-none  bg-white "
               value="fastsell" [checked]="fastsellState" (change)="onFastSellClick($event)" [id]=""/>
             <p class="text-grey text-sm">เปิดใช้งาน</p>
           </div>
@@ -274,7 +274,7 @@
         </div>
       </details>
     </div>
-    <div class="flex justify-start w-full">    <p *ngIf="fastsellState" class="font-bold text-gold ">แสดงข้อมูลขายเร็ว</p>
+    <div class="flex justify-start w-full">    <p *ngIf="fastsellState" class="font-bold text-yellow ">แสดงข้อมูลขายเร็ว</p>
     </div>
 
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">

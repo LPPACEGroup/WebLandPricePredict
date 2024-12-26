@@ -41,9 +41,9 @@
                     formControlName="password" placeholder="รหัสผ่าน">
             </div>
 
-              
+
             <div class="flex w-9/12 justify-center items-center flex-wrap">
-                <div class="text-red-500 w-full text-center" *ngIf="signupForm.get('confirmPassword')?.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched">
+                <div class="text-brightRed w-full text-center" *ngIf="signupForm.get('confirmPassword')?.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.touched">
                     Passwords do not match.
                   </div>
                 <label for="confirmPassword"
@@ -53,13 +53,13 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4 ">
-                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
+                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
                     routerLink="/signin"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ยกเลิก</button>
-                <button type="submit " class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
+                <button type="submit" class=" btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
                     (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
-                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
-        class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
+                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin"
+        class="text-xl text-darkBlue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
         </form>
     </div>
     <div class="bg-white w-1/2 h-5/6 rounded-xl "  *ngIf="currentStep ==2">
@@ -67,9 +67,9 @@
             <h1 class="text-2xl font-bold pb-5">กรอกข้อมูลส่วนตัว</h1>
             <ol
                 class="flex items-center w-9/12  text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-3 justify-between">
-                <li class="rounded-full bg-gold w-2 h-2"></li>
+                <li class="rounded-full bg-yellow w-2 h-2"></li>
                 <li class="w-[30%] h-[1px] bg-gold"></li>
-                <li class="rounded-full bg-gold w-2 h-2"></li>
+                <li class="rounded-full bg-yellow w-2 h-2"></li>
 
                 <li class="w-[30%] h-[1px] bg-gray-300"></li>
                 <li class="rounded-full bg-slate-300 w-2 h-2"></li>
@@ -97,10 +97,10 @@
             </div>
             <div class="flex w-9/12 justify-center items-center">
                 <label for="gender" class=" input-label">เพศ</label>
-                <select class="input-select" formControlName="gender">
-                    <option class="w-9/12 h-10 bg-light-blue" disabled selected>กรุณาระบุเพศ</option>
-                    <option class="w-9/12 h-10 bg-light-blue">ชาย</option>
-                    <option class="w-9/12 h-10 bg-light-blue">หญิง</option>
+                <select class="input-select" formControlName="gender" title="Gender">
+                    <option class="w-9/12 h-10 bg-lightBlue" disabled selected>กรุณาระบุเพศ</option>
+                    <option class="w-9/12 h-10 bg-lightBlue">ชาย</option>
+                    <option class="w-9/12 h-10 bg-lightBlue">หญิง</option>
                 </select>
             </div>
             <div class="flex w-9/12 justify-center items-center flex-wrap">
@@ -119,12 +119,12 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4">
-                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                <button type="button" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
                     (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
-                <button type="submit " class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
+                <button type="submit" class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
                     (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
-                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin"
         class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
         </form>
     </div>
@@ -181,12 +181,12 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4">
-                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
                     (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
-                <button type="submit " class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
+                <button type="submit" class=" btn btn-sm h-10 flex-center bg-ocean-blue text-white w-full"
                     (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
-                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+                <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin"
         class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
         </form>
     </div>
@@ -243,12 +243,12 @@
             </div>
             <!-- <a class="text-grey text-sm underline">กดข้ามขั้นตอนนี้</a> -->
             <div class="mt-6 flex gap-x-4 w-3/4">
-                <button type="submit " class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
                     (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
                 <button type="button"  class=" btn btn-sm h-10 flex-center bg-dark-blue text-white w-full"
                     (click)="printForm()">สร้างบัญชี<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
-            <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin" 
+            <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a  routerLink="/Signin"
                 class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
         </form>
     </div>
