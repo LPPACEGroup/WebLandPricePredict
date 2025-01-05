@@ -127,3 +127,19 @@ input:focus-visible {
   margin-right: 10%;
   width: 85%;
 }
+
+select.input-select {
+  border: none; /* Remove the border */
+  outline: none; /* Remove the focus outline */
+  appearance: none; /* Remove native styles */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+}
+
+select.input-select:focus {
+  outline: none; /* Remove the focus outline */
+  box-shadow: none; /* Remove any shadow applied on focus */
+}
+
+input:disabled{
+}

@@ -34,15 +34,16 @@ export class AuthService {
       withCredentials: true
     });
   }
-  getUserData(): Observable<any> {
-    return this.http.get(`${this.apiURL}/auth/user`, { withCredentials: true });
+  getUserData(): Observable<any> {    
+    
+    return this.http.get(`${this.apiURL}/user`, { withCredentials: true });
   }
 
   isAuthenticated(): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiURL}/auth/check`, { withCredentials: true });
   }
   checkuserexist(email: string): Observable<any> {
-    return this.http.post(`${this.apiURL}/auth/exit`, { email }, { withCredentials: true})
+    return this.http.get(`${this.apiURL}/auth/check-email/${email}`, { withCredentials: true})
   }
 
   

@@ -7,7 +7,6 @@ export interface User {
     gender: string;
     birth_date: Date;
     telephone: string;
-    tier: string;
     notification: boolean;
     noti_news: boolean;
     role: string;

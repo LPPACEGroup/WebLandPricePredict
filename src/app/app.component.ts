@@ -33,7 +33,7 @@ export class AppComponent {
       next: (isAuthenticated: boolean) => {
         this.IsSignedIn = isAuthenticated;
         if (isAuthenticated) {
-          this.router.navigate(['/Home']); // Navigate to Home if authenticated
+          // this.router.navigate(['/Home']); 
         } else {
           this.router.navigate(['/Signin']); // Navigate to Signin if not authenticated
           console.log('Not authenticated');

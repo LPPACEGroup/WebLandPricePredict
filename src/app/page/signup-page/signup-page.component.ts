@@ -46,56 +46,7 @@ export class SignupPageComponent {
   previousValue: any = { sub_district: '', postcode: 0, district: '' };
   private thaiLocationService?: ThaiLocationService;
 
-  items = [
-    {
-      name: 'Item 1',
-      description: 'Description of Item 1',
-      image: 'path_to_image_1',
-      selected: false,
-    },
-    {
-      name: 'Item 2',
-      description: 'Description of Item 2',
-      image: 'path_to_image_2',
-      selected: false,
-    },
-    {
-      name: 'Item 3',
-      description: 'Description of Item 3',
-      image: 'path_to_image_3',
-      selected: false,
-    },
-    {
-      name: 'Item 1',
-      description: 'Description of Item 1',
-      image: 'path_to_image_1',
-      selected: false,
-    },
-    {
-      name: 'Item 2',
-      description: 'Description of Item 2',
-      image: 'path_to_image_2',
-      selected: false,
-    },
-    {
-      name: 'Item 3',
-      description: 'Description of Item 3',
-      image: 'path_to_image_3',
-      selected: false,
-    },
-    {
-      name: 'Item 2',
-      description: 'Description of Item 2',
-      image: 'path_to_image_2',
-      selected: false,
-    },
-    {
-      name: 'Item 3',
-      description: 'Description of Item 3',
-      image: 'path_to_image_3',
-      selected: false,
-    },
-  ];
+  
   @HostListener('wheel', ['$event'])
   onWheel(event: Event) {
     event.preventDefault();
@@ -126,7 +77,6 @@ export class SignupPageComponent {
         gender: ['', Validators.required], // Gender required
         birthDate: ['', Validators.required], // Birth date required
         telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
-        tier: ['Basic', Validators.required], // Tier required
         notification: [true], // Default to true
         notiNews: [false], // Default to false
         role: ['User', Validators.required], // Role required
@@ -234,7 +184,6 @@ export class SignupPageComponent {
       gender: this.signupForm.value.gender,
       birth_date: this.signupForm.value.birthDate,
       telephone: this.signupForm.value.telephone,
-      tier: this.signupForm.value.tier,
       notification: this.signupForm.value.notification,
       noti_news: this.signupForm.value.notiNews,
       role: this.signupForm.value.role,
