@@ -47,7 +47,7 @@ export class ProfilePageComponent implements OnInit {
   previousValue: any = { sub_district: '', postcode: 0, district: '' };
   isUpdatingForm: boolean = false;
   errorMessage: string = '';
-
+  loading: boolean = true;
   private thaiLocationService?: ThaiLocationService;
 
   
@@ -58,9 +58,7 @@ export class ProfilePageComponent implements OnInit {
     this.thaiLocationService = thaiLocationService;
     this.profileForm = this.fb.group({
       username: ['', [Validators.required]], // Example: username with min length
-      password: ['', [Validators.required, Validators.minLength(8)]], // Example: password validation
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]], // Example: password
-      email: ['', [Validators.required, Validators.email],[this.emailExistsValidator.bind(this)]], // Email validation
+      email: ['', [Validators.required, Validators.email]], // Email validation
       firstName: ['', [
         Validators.required,
         Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
@@ -74,7 +72,6 @@ export class ProfilePageComponent implements OnInit {
       telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
       notification: [true], // Default to true
       notiNews: [false], // Default to false
-      role: ['User', Validators.required], // Role required
       province: ['', Validators.required],
       district: ['', Validators.required],
       sub_district: ['', Validators.required],
@@ -133,10 +130,11 @@ export class ProfilePageComponent implements OnInit {
           gender : response.gender,
         })
         this.profileForm.disable();
-
+        this.loading = false;
       },
       error: (error: any) => {
         console.error(error);
+        this.loading = false;
       },
     });
 
@@ -262,31 +260,32 @@ export class ProfilePageComponent implements OnInit {
     this.profileForm.patchValue({
       postcode: this.profileForm.value.postcode.toString(),
     });
-    if (true) {
+    this.checkEmail(this.profileForm.value.email);
+
+    if (this.profileForm.valid) {
       
       this.sEditing = false;
 
       console.log("saveChanges");
       
       const profileUpdate: User = {
-        username: this.profileForm.value.username,
-        password: this.profileForm.value.password,
+        userName: this.profileForm.value.username,
+        password: "",
         email: this.profileForm.value.email,
-        first_name: this.profileForm.value.firstName,
-        last_name: this.profileForm.value.lastName,
+        firstName: this.profileForm.value.firstName,
+        lastName: this.profileForm.value.lastName,
         gender: this.profileForm.value.gender,
-        birth_date: this.profileForm.value.birthDate,
+        birthDate: this.profileForm.value.birthDate,
         telephone: this.profileForm.value.telephone,
         notification: this.profileForm.value.notification,
-        noti_news: this.profileForm.value.notiNews,
-        role: this.profileForm.value.role,
+        notinews: this.profileForm.value.notiNews,
         province: this.profileForm.value.province,
         district: this.profileForm.value.district,
-        sub_district: this.profileForm.value.sub_district,
-        post_code: this.profileForm.value.postcode,
+        subdistrict: this.profileForm.value.sub_district,
+        postcode: this.profileForm.value.postcode,
         home_number: this.profileForm.value.home_number,
         alley: this.profileForm.value.alley,
-        area_interest: this.profileForm.value.interestLand,
+        landTypeFV: this.profileForm.value.interestLand,
       };
 
       this.userService.updateUser(profileUpdate).subscribe({
@@ -302,26 +301,34 @@ export class ProfilePageComponent implements OnInit {
       this.profileForm.disable();
 
     }
-    console.log(this.profileForm.errors);
-    
+    else {
+
+        alert('Please fill in all required fields in the correct format');
+    }
+  
   }
 
 
   private resetForm() {
 
   }
-  emailExistsValidator(control: any): Observable<any> {
+  checkEmail(email: string): string | null {
+    let errorMessage: string | null = null;
     
-    return this.authService.checkuserexist(control.value).pipe(
-      map(() => null), // No error if the email does not exist
-      catchError((error) => {
-        if (error.status === 409) {
-          return of({ emailExists: true }); // Error if the email exists
-        }
-        console.error('Error in emailExistsValidator:', error); // Log unexpected errors
-        return of(null); // Treat other errors as valid
-      })
-    );
+    this.authService.checkDuplicateEmail(email).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+        console.log('Email is available');
+        
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        errorMessage = 'Email is already in use';
+        alert(errorMessage);
+
+      }
+    });
+    return errorMessage;
   }
   
 

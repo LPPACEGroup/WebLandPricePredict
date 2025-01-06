@@ -42,7 +42,7 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiURL}/auth/check`, { withCredentials: true });
   }
-  checkuserexist(email: string): Observable<any> {
+  checkDuplicateEmail(email: string): Observable<any> {
     return this.http.get(`${this.apiURL}/auth/check-email/${email}`, { withCredentials: true})
   }
 

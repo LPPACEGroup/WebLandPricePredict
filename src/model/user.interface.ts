@@ -1,20 +1,20 @@
 export interface User {
-    username: string;
+    userName: string;
     password: string;
     email: string;
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     gender: string;
-    birth_date: Date;
+    birthDate: Date;
     telephone: string;
     notification: boolean;
-    noti_news: boolean;
-    role: string;
+    notinews: boolean;
     province: string;
     district: string;
-    sub_district: string;
-    post_code: string;
+    subdistrict: string;
+    postcode: string;
     home_number: string;
     alley: string;
-    area_interest: number;
+    landTypeFV: number;
 }
+

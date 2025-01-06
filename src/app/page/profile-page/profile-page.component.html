@@ -1,4 +1,4 @@
-<form class="h-nmax" [formGroup]="profileForm">
+<form *ngIf="!loading" class="h-nmax" [formGroup]="profileForm">
   <div class="bg">
     <div class="scrollable-content">
       <div class="profile-container ">
@@ -170,3 +170,8 @@
   </footer>
 
 </form>
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+</div>
+

@@ -65,7 +65,7 @@ export class SignupPageComponent {
         username: ['', [Validators.required]], // Example: username with min length
         password: ['', [Validators.required, Validators.minLength(8)]], // Example: password validation
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]], // Example: password
-        email: ['', [Validators.required, Validators.email],[this.emailExistsValidator.bind(this)]], // Email validation
+        email: ['', [Validators.required, Validators.email]], // Email validation
         firstName: ['', [
           Validators.required,
           Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
@@ -79,7 +79,6 @@ export class SignupPageComponent {
         telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
         notification: [true], // Default to true
         notiNews: [false], // Default to false
-        role: ['User', Validators.required], // Role required
         province: ['', Validators.required],
         district: ['', Validators.required],
         sub_district: ['', Validators.required],
@@ -176,24 +175,23 @@ export class SignupPageComponent {
       postcode: this.signupForm.value.postcode.toString(),
     });
     const newuser: User = {
-      username: this.signupForm.value.username,
+      userName: this.signupForm.value.username,
       password: this.signupForm.value.password,
       email: this.signupForm.value.email,
-      first_name: this.signupForm.value.firstName,
-      last_name: this.signupForm.value.lastName,
+      firstName: this.signupForm.value.firstName,
+      lastName: this.signupForm.value.lastName,
       gender: this.signupForm.value.gender,
-      birth_date: this.signupForm.value.birthDate,
+      birthDate: this.signupForm.value.birthDate,
       telephone: this.signupForm.value.telephone,
       notification: this.signupForm.value.notification,
-      noti_news: this.signupForm.value.notiNews,
-      role: this.signupForm.value.role,
+      notinews: this.signupForm.value.notiNews,
       province: this.signupForm.value.province,
       district: this.signupForm.value.district,
-      sub_district: this.signupForm.value.sub_district,
-      post_code: this.signupForm.value.postcode,
+      subdistrict: this.signupForm.value.sub_district,
+      postcode: this.signupForm.value.postcode,
       home_number: this.signupForm.value.home_number,
       alley: this.signupForm.value.alley,
-      area_interest: this.signupForm.value.interestLand,
+      landTypeFV: this.signupForm.value.interestLand,
     };
     console.log(newuser);
     
@@ -327,11 +325,17 @@ export class SignupPageComponent {
       }
     });
   }
-  emailExistsValidator(control: any): Observable<any> {
-    return this.authService.checkuserexist(control.value).pipe(
-      map(response => (response.exists ? { emailExists: true } : null)),
-      catchError(async () => null) // If there's an error (like server down), treat it as no existing email.
-    );
+  checkEmail(email: string): void {
+    this.authService.checkDuplicateEmail(email).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+        // Handle successful response here
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        // Handle error here
+      }
+    });
   }
   get provinceControl(): FormControl {
     return this.signupForm.get('province') as FormControl;
