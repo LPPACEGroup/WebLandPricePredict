@@ -1,0 +1,28 @@
+<!-- <mat-form-field>
+    <input matInput placeholder="Ex. Pizza" value="Sushi">
+    <mat-select  >
+        <mat-option *ngFor="let item of items" [value]="item">
+        {{item}}
+        </mat-option>
+    </mat-select>
+</mat-form-field> -->
+
+<form class="example-form h-10 w-11/12  bg-light-blue mx-5 text-dark-blue">
+  <mat-form-field class="h-full">
+    <!-- <mat-label>{{placeholder}}</mat-label> -->
+    <input #input
+           type="text"
+           [placeholder]="placeholder"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           (input)="filter()"
+           (focus)="filter()" class="h-full">
+      
+    <mat-autocomplete requireSelection #auto="matAutocomplete">
+      @for (option of filteredOptions; track option) {
+        <mat-option [value]="option">{{option}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

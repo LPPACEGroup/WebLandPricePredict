@@ -1,19 +1,44 @@
 <div class="carousel-container">
+  <button class="prev " (click)="prevSlide()">&#10094;</button>
 
-  <div class="carousel-slide">
-    <div [style.transform]="getTransform()">
-      <div *ngFor="let image of images">
-        <img [src]="image.src" [alt]="image.alt" title="{{image.alt}}">
-      </div>
+  <div class="carousel-slide" *ngIf="currentIndex==0">
+    <img src="assets/imgs/news1.png" alt="Blog Icon">
+    <div class="flex-1 bg-neutral-100 p-5 flex flex-col">
+      <h2 class="text-primary-950 text-lg font-semibold mb-2">
+        ศุภาลัยลงทุนเพิ่ม 2 จังหวัดขายดีผุด “ลากูน หัวหิน” กับ “ปาล์มวิลล์”
+      </h2>
+      <a href="/" class="text-blue text-sm mb-3">
+        บันเทิงธุรกิจ-ลำปาง
+      </a>
+      <p class="text-neutral-950">
+        ศุภาลัย เชื่อมั่น ! ตลาดบ้านเดี่ยว 2 ชั้น กระแสตอบรับดี วางหมากเพิ่ม 2 จังหวัดขายดี ขานรับความต้องการลูกค้าในจังหวัดประจวบคีรีขันธ์กับลำปาง
+      </p>
+      <p class="text-neutral-500 mt-4 ">
+        วันที่ 19 สิงหาคม 2567 - 10:38 น.
+      </p>
     </div>
-
-    <div class="right-content">
-      <p>หมุเด้ง!</p>
-    </div>
-
-    <!-- Navigation -->
-    <button class="prev" (click)="prevSlide()">&#10094;</button>
-    <button class="next" (click)="nextSlide()">&#10095;</button>
   </div>
+
+  <div class="carousel-slide" *ngIf="currentIndex==1">
+    <img src="assets/imgs/news1.png" alt="Blog Icon" >
+    <div class="flex-1 bg-neutral-100 p-5 flex flex-col">
+      <h2 class="text-primary-950 text-lg font-semibold mb-2">
+        ศูนย์อสังหาริมทรัพย์ 2 จังหวัดชลบุรี “ลาญู หัวหิน” กับ “บ้านรีสอร์ท”
+      </h2>
+      <a href="/" class="text-primary-500 text-sm mb-3">
+        บันเทิงธุรกิจ-ลำปาง
+      </a>
+      <p class="text-neutral-950">
+        ศูนย์ฯ นี้ส่งเสริมการลงทุนต่อเนื่องของชุมชนในจังหวัดชลบุรีและหัวหิน
+        พร้อมสิ่งแวดล้อมที่ออกแบบเพื่อความยั่งยืน
+      </p>
+      <p class="text-neutral-500 mt-4">
+        วันที่ 30 สิงหาคม 2567 - 10:38 น.
+      </p>
+    </div>
+  </div>
+
+
+  <button class="next" (click)="nextSlide()">&#10095;</button>
 
 </div>

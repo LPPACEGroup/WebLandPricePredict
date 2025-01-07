@@ -1,0 +1,27 @@
+/* Mobile devices (portrait and landscape) */
+@media (max-width: 768px) {
+  details[open] summary div svg {
+    stroke: #ff5733 !important;
+  }
+}
+
+/* Tablets (portrait and landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  details[open] summary div svg {
+    stroke: #33ff57 !important;
+  }
+}
+
+/* Laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  details[open] summary div svg {
+    stroke: #3357ff !important;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1441px) {
+  details[open] summary div svg {
+    stroke: #7623f3 !important;
+  }
+}

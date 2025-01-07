@@ -11,7 +11,7 @@ describe('ProfilePageComponent', () => {
       imports: [ProfilePageComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ProfilePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +20,5 @@ describe('ProfilePageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

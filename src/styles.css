@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Kodchasan&display=swap");
+@use "@angular/material" as mat;
 
 @tailwind base;
 @tailwind components;
@@ -17,16 +18,25 @@
   --blue: #86b6cd;
   --babyBlue: #c6e6ff;
   --lightBlue: #f0f8ff;
+  --midGreen: #00a76f;
+  --lightGreen: #b8e3ca;
 
-  --accentYellow: #f3c762;
-  --accentGreen: #00a76f;
+  --darkRed: #b71d18;
+  --brightRed: #ff5630;
+  --lightOrange: #e3b8b1;
+  --darkOrange: #af6a5f;
+  --yellow: #f3c762;
 
   --black: #000000;
   --grey: #7d7a83;
   --midGrey: #d2d2d2;
   --lightGrey: #e0e0e0;
-  --whiteGrey: #F4F6F8;
+  --whiteGrey: #f4f6f8;
   --white: #ffffff;
+
+  --lighter-grey: #f4f2f2;
+  --blue-2: #9fc8d8;
+  /* mat.autocomplete-overrides styles removed */
 }
 
 .inset-x-0 {
@@ -62,12 +72,15 @@ textarea {
 }
 
 .mat-mdc-tab {
-  background-color: #fff !important;
+  background-color: var(--lightBlue) !important;
   border-radius: 15px 15px 0px 0px;
+  border-style: solid;
+  border-width: 10px 10px 0px 10px;
+  border-color: var(--black) !important;
 }
 
 .mdc-tab-indicator--active {
-  background-color: #86b6cd !important;
+  background-color: var(--lightGrey) !important;
 }
 
 .mdc-tab-indicator__content--underline {
@@ -93,27 +106,125 @@ textarea {
 .select:focus {
   border: none;
 }
-.select:focus{
-    border: none;
+
+/* Mobile devices (portrait and landscape) */
+@media (max-width: 768px) {
+  details[open] summary div svg {
+    stroke: #ff5733 !important;
+  }
 }
 
+/* Tablets (portrait and landscape) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  details[open] summary div svg {
+    stroke: #33ff57 !important;
+  }
+}
 
+/* Laptops and desktops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  details[open] summary div svg {
+    stroke: #3357ff !important;
+  }
+}
 
-.mdc-slider__thumb-knob{
-    width: 12px !important;
-    height: 12px !important;
-    border-radius: 50% !important;
-    background-color: #F3C762 !important;
-    border-color: #F3C762 !important;
+/* Large screens */
+@media (min-width: 1441px) {
+  details[open] summary div svg {
+    stroke: #7623f3 !important;
+  }
+}
+.select:focus {
+  border: none;
+}
+
+.mdc-slider__thumb-knob {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background-color: #f3c762 !important;
+  border-color: #f3c762 !important;
 }
 .mat-mdc-slider {
-    --mdc-slider-active-track-color: #ffecc0 !important;
-    --mdc-slider-inactive-track-color: #F3C762 !important;
-    --mdc-slider-inactive-track-height: 3px !important;
+  --mdc-slider-active-track-color: #ffecc0 !important;
+  --mdc-slider-inactive-track-color: #f3c762 !important;
+  --mdc-slider-inactive-track-height: 3px !important;
 }
 
 .mdc-slider__track--inactive {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.mat-mdc-select {
+  /* display: none !important; */
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #f0f8ff !important;
+}
+app-filterselect,
+mat-form-field {
+  width: 100%;
+}
+mat-mdc-text-field-wrapper {
+  border: none !important;
+  outline: none !important;
+}
+
+.--mdc-filled-text-field-active-indicator-color {
+  border: none !important;
+}
+.mdc-text-field {
+  --mdc-filled-text-field-active-indicator-color: rgba(0, 0, 0, 0) !important;
+  --mdc-filled-text-field-hover-active-indicator-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ) !important;
+  --mdc-filled-text-field-focus-active-indicator-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ) !important;
+}
+
+:root {
+  @include mat.autocomplete-overrides(
+    (
+      background-color: orange !important,
+    )
+  );
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: #2749a3 !important;
+}
+.mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+.mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
+.mdc-text-field--filled.mdc-text-field--disabled {
+  background-color: white !important; /* Change the background color */
+}
+input:disabled {
+  background-color: white !important; /* Change the background color */
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: white !important; /* Change the background color */
+}

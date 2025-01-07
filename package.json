@@ -25,6 +25,7 @@
     "leaflet-control-geocoder": "^1.8.3",
     "leaflet-search": "^4.0.0",
     "openrouteservice-js": "^0.4.1",
+    "primeng": "^17.18.12",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "web-land-price-predict": "file:",

@@ -1,37 +1,39 @@
 <div class="w-full h-full bg-light-grey grid grid-cols-4 gap-1 items-center py-16">
   <div class="text-end col-span-2">
-      <p>อะเย้</p>
+      <p>รายได้รวมต่อปี (บาท)</p>
   </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="Enter loan amount" /></div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="รายได้รวมต่อปี" /></div>
   <div class="text-end col-span-2">
-      <p>ระยะเวลากู้ยืม 1</p>
+      <p>ระยะเวลากู้</p>
   </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 1" placeholder="Enter loan term 1" /></div>
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 1" placeholder="ระยะเวลากู้" /></div>
   <div class="text-end col-span-2">
-      <p>ระยะเวลากู้ยืม 2</p>
+      <p>ระบุอัตราดอกเบี้ย (%)</p>
   </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 2" placeholder="Enter loan term 2" /></div>
-
+  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 2" placeholder="อัตราดอกเบี้ย" /></div>
+  <div class="text-end col-span-2">
+    <p>เปอร์เซ็นต์วงเงินกู้สูงสุดของรายได้ (%)</p>
+</div>
+<div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="% วงเงินกู้สูงสุด" /></div>
+<div class="text-end col-span-2">
+  <p>ภาระหนี้สินต่อเดือน (บาท) </p>
+</div>
+<div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="จำนวนหนี้สินต่อเดือน" /></div>
   <div class="col-span-2"></div>
   <div class="w-1/2 col-span-2">
       <div class="text-end"><button class="bg-dark-blue w-1/2 h-8 rounded-full  text-white  hover:bg-[gold] hover:text-black">คำนวณ</button></div>
   </div>
-  <div class="text-end">ผลลัพธ์</div>
-  <div class="w-2/3 rounded-xl font-medium px-5 bg-white row-span-6 h-full col-span-3 grid grid-cols-3 text-sm">
-      <div></div>
-      <div>ระยะเวลากู้ยืม 1</div>
-      <div>ระยะเวลากู้ยืม 2</div>
-      <div>การชำระเงินรายเดือน:</div>
-      <div class="text-red-500">166,666.67</div>
-      <div class="text-red-500">83,333.33</div>
-      <div>การชำระเงินทั้งหมด:</div>
-      <div class="text-red-500">10.000,000,00</div>
-      <div class="text-red-500">10,000,000.00</div>
-      <div>ดอกเบี้ยทั้งหมด:</div>
-      <div class="text-red-500">0.00</div>
-      <div class="text-red-500">0.00</div>
-      <div>การชำระเงินรายปี:</div>
-      <div class="text-red-500">2,000,000,0</div>
-      <div class="text-red-500">999,999.96</div>
+  <div class="text-end row-span-6">ผลลัพธ์</div>
+  <div class="w-3/4 rounded-xl  px-5 bg-white row-span-6 h-full col-span-3 flex items-center justify-center">
+    <div class="w-full h-auto">
+      <div class="flex justify-between">
+        <p>การชำระค่างวดสูงสุด:</p>
+        <span class="text-darkRed">561,452</span>
+      </div>
+      <div class="flex justify-between">
+        <p>วงเงินกู้สูงสุด:</p>
+        <span class="text-darkRed">188,712</span>
+      </div>
+    </div>
   </div>
 </div>

@@ -107,6 +107,14 @@
   border-radius: 30px;
 }
 
+.member-box {
+  height: 24rem; /* Equivalent to h-96 */
+  background-color: white;
+  margin: 5px;
+  border: 1px solid var(--lightGrey);
+  border-radius: 10px;
+}
+
 /* Mobile devices (portrait and landscape) */
 @media (max-width: 768px) {
   details[open] summary div svg {

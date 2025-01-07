@@ -1,9 +1,87 @@
-<div class="dropdown" (click)="toggleDropdown()">
-  Property Sale Detail
-</div>
-<div id="propertyDetail" class="dropdown-content" *ngIf="isDropdownVisible">
-  <p><strong>Name:</strong> Example Property</p>
-  <p><strong>Detail:</strong> This is a detailed description of the property.</p>
-  <p><strong>Map:</strong> <a href="https://www.google.com/maps" target="_blank" rel="noopener">View on Map</a></p>
-  <p><strong>Nearest Places:</strong> School, Hospital, Supermarket</p>
+<div class="px-4 pb-4">
+  <div class="grid grid-cols-5 text-center gap-4 mt-4">
+    <div class="bg-baby-blue p-4 rounded-lg">
+      <h4 class="text-lg text-dark-blue font-bold">2,400,000</h4>
+      <p class="text-sm text-dark-blue">ราคาขายจริง</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg">
+      <h4 class="text-lg text-ocean-blue font-bold">1,954,975</h4>
+      <p class="text-sm text-ocean-blue">ราคาเฉลี่ย</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg">
+      <h4 class="text-lg text-ocean-blue font-bold">2,200,500</h4>
+      <p class="text-sm text-ocean-blue">ราคาประเมิน</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg">
+      <h4 class="text-lg text-ocean-blue font-bold">2,004,975</h4>
+      <p class="text-sm text-ocean-blue">ราคาทำนาย</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg">
+      <h4 class="text-lg text-green-500 font-bold">ควรซื้อ</h4>
+      <p class="text-sm text-ocean-blue">ความน่าลงทุน</p>
+    </div>
+  </div>
+
+  <div class="p-6 rounded-md mt-4">
+    <div class="gap-4">
+      <div class="flex items-center pb-1">
+        <p class="box">ราคาต่อหน่วย</p>
+        <p class="pl-4">450,500 / ตร.วา</p>
+      </div>
+      <div class="flex items-center pb-1">
+        <p class="box">ที่ตั้ง</p>
+        <span class="pl-4">ถนนคลองบาง 8 เขตคลองเตย กรุงเทพมหานคร 10520</span>
+      </div>
+      <div class="flex items-center pb-1">
+        <p class="box">ขนาดพื้นที่</p>
+        <span class="pl-4">58 ตร.วา</span>
+      </div>
+      <div class="flex items-center pb-1">
+        <p class="box">สีพื้นที่</p>
+        <span class="pl-4 text-red-500">
+          <span class="pl-4 w-7 h-7 bg-red-500 rounded-full mr-2"></span>สีแดง - ที่ดินพาณิชย์</span>
+      </div>
+      <div class="pb-1">
+        <p class="box">รายละเอียด:</p>
+        <p> - ที่ดินขนาด 10 ไร่ </p>
+        <p> - ห่างถนน 10 ม. </p>
+        <p> - ใกล้โรงเรียน </p>
+      </div>
+      <div class="pb-1">
+        <p class="box-auto">สถานที่สำคัญบริเวณใกล้เคียง</p>
+        <img src="assets/imgs/nearby-map.png" alt="map" class="w-full h-64 object-cover rounded-md pt-2">
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="bg-white p-4 rounded-md flex items-center">
+          <img src="assets/icons/hospital-icon.png" alt="hospital icon" class="w-6 h-6 mr-2">
+          <div>
+            <p class="text-sm text-neutral-700">โรงพยาบาล</p>
+            <p class="text-sm text-neutral-950 font-bold">2 กม.</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-md flex items-center">
+          <img src="assets/icons/public-icon.png" alt="public icon" class="w-6 h-6 mr-2">
+          <div>
+            <p class="text-sm text-neutral-700">สาธารณะ</p>
+            <p class="text-sm text-neutral-950 font-bold">5 กม.</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-md flex items-center">
+          <img src="assets/icons/public-icon.png" alt="public icon" class="w-6 h-6 mr-2">
+          <div>
+            <p class="text-sm text-neutral-700">เซ็นทรัลลาดกระบัง</p>
+            <p class="text-sm text-neutral-950 font-bold">8 กม.</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-md flex items-center">
+          <img src="assets/icons/public-icon.png" alt="public icon" class="w-6 h-6 mr-2">
+          <div>
+            <p class="text-sm text-neutral-700">สถานีรถไฟ</p>
+            <p class="text-sm text-neutral-950 font-bold">10 กม.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

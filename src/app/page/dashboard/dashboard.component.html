@@ -1,10 +1,18 @@
-<div class="bg-cover bg-no-repeat min-h-nmax flex justify-center " style="background-color: white;">
+<div class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible" style="background-color: white;">
 
   <!-- Overall Report -->
   <div class="flex flex-col w-full px-7 pt-5 gap-5">
     <div class="flex justify-start">
       <p class="text-2xl font-bold mb-5">Overall Report</p>
       <div class=" w-auto h-full pl-5">
+        <!-- <mat-form-field>
+          <mat-label>เลือกเขตพื้นที่</mat-label>
+          <mat-select [formControl]="area" multiple>
+            &#64;for (area of areaList; track area) {
+              <mat-option [value]="topping">{{topping}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field> -->
         <select class="select select-bordered w-auto max-w-xs" title="เลือกเขตพื้นที่">
           <option>แสดงเขตทั้งหมด</option>
           <option>เขตลาดกระบัง</option>
@@ -94,66 +102,127 @@
     <div class="flex justify-start">
       <p class="text-2xl font-bold">Pinned Property</p>
     </div>
-    <!-- <div class="dropdown" (click)="toggleDropdown()">
-      Property Sale Detail
-    </div> -->
-    <!-- <div id="propertyDetail" class="dropdown-content"> -->
-    <!-- <div id="propertyDetail" class="dropdown-content" *ngIf="isDropdownVisible"> -->
-    <div class="bg-gray-100 p-6 rounded-lg">
-      <ul>
-        <li class="mb-4 flex justify-between items-center">
-          <app-collapse [question_header]="'หากผู้ขายไม่สามารถติดต่อได้ควรทำอย่างไร?'" [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
-ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
 
+
+    <details class=" bg-lighter-grey border border-neutral-200 rounded-md mb-3">
+      <summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-ocean-blue ">1</span>
           <div>
-            <div class="font-bold text-lg">ทรัพย์สิน</div>
-            <div class="text-sm">รหัสสินทรัพย์: 08fec647-1657-4a0b-9e70-5b3f396dd8e9</div>
+            <h3 class="font-semibold text-darkBlue">ถนนบางนา-ตราด</h3>
+            <p class="text-sm text-neutral-500">รหัสอสังหาริมทรัพย์: 086cef-6651-7a02-9ef0-5e47933a86f9</p>
           </div>
-          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg" title="Expand details">
-            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button class="flex items-center space-x-2 bg-yellow text-white text-sm font-semibold py-2 px-4 rounded-full">
+            <span class="material-symbols-outlined text-primary-500">
+              <img src="\assets\icons\pin.svg" alt="icon" class="w-6 h-6" />
+            </span>
+            <span>ยกเลิกติดตาม</span>
           </button>
-        </li>
-        <!-- Repeat the above li element for each item -->
-        <li class="mb-4 flex justify-between items-center">
+          <span class="material-symbols-outlined ">
+            <img src="\assets\icons\dropdown.svg" alt="dropdown icon" class="w-6 h-6" />
+          </span>
+        </div>
+      </summary>
+      <app-pinned-property-expand></app-pinned-property-expand>
+    </details>
+
+    <details class="bg-lighter-grey border border-neutral-200 rounded-md mb-6">
+      <summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-oceanBlue ">2</span>
           <div>
-            <div class="font-bold text-lg">ทรัพย์สิน 278</div>
-            <div class="text-sm">รหัสสินทรัพย์: 08fec647-1657-4a0b-9e70-5b3f396dd8f0</div>
+            <h3 class="font-semibold text-darkBlue">ที่ดินเลขที่ 278</h3>
+            <p class="text-sm text-neutral-500">รหัสอสังหาริมทรัพย์: 086cef-6651-7a02-9ef0-5e47933a86f9</p>
           </div>
-          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg " title="Expand details">
-            <i class="fas fa-chevron-down"></i>
+
+        </div>
+        <div class="flex items-center space-x-2">
+          <button class="flex items-center space-x-2 bg-yellow text-white text-sm font-semibold py-2 px-4 rounded-full">
+            <span class="material-symbols-outlined text-primary-500">
+              <img src="\assets\icons\pin.svg" alt="icon" class="w-6 h-6" />
+            </span>
+            <span>ยกเลิกติดตาม</span>
           </button>
-        </li>
-        <!-- Repeat for other items -->
-        <li class="mb-4 flex justify-between items-center">
+          <span class="material-symbols-outlined ">
+            <img src="\assets\icons\dropdown.svg" alt="dropdown icon" class="w-6 h-6" />
+          </span>
+        </div>
+      </summary>
+      <app-pinned-property-expand></app-pinned-property-expand>
+    </details>
+
+    <details class="bg-lighter-grey border border-neutral-200 rounded-md mb-3">
+      <summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-oceanBlue ">3</span>
           <div>
-            <div class="font-bold text-lg">ทรัพย์สิน 278</div>
-            <div class="text-sm">รหัสสินทรัพย์: 08fec647-1657-4a0b-9e70-5b3f396dd8f1</div>
+            <h3 class="font-semibold text-darkBlue">บ้านเลขที่ 54 หมู่บ้านบดินทร 1</h3>
+            <p class="text-sm text-neutral-500">รหัสอสังหาริมทรัพย์: 086cef-6651-7a02-9ef0-5e47933a86f9</p>
           </div>
-          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg" title="Expand details">
-            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button class="flex items-center space-x-2 bg-yellow text-white text-sm font-semibold py-2 px-4 rounded-full">
+            <span class="material-symbols-outlined text-primary-500">
+              <img src="\assets\icons\pin.svg" alt="icon" class="w-6 h-6" />
+            </span>
+            <span>ยกเลิกติดตาม</span>
           </button>
-        </li>
-        <li class="mb-4 flex justify-between items-center">
+          <span class="material-symbols-outlined ">
+            <img src="\assets\icons\dropdown.svg" alt="dropdown icon" class="w-6 h-6" />
+          </span>
+        </div>
+      </summary>
+      <app-pinned-property-expand></app-pinned-property-expand>
+    </details>
+
+    <details class="bg-lighter-grey border border-neutral-200 rounded-md mb-3">
+      <summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-oceanBlue ">4</span>
           <div>
-            <div class="font-bold text-lg">ทรัพย์สิน 278</div>
-            <div class="text-sm">รหัสสินทรัพย์: 08fec647-1657-4a0b-9e70-5b3f396dd8f2</div>
+            <h3 class="font-semibold text-darkBlue">บ้านเลขที่ 58/4</h3>
+            <p class="text-sm text-neutral-500">รหัสอสังหาริมทรัพย์: 086cef-6651-7a02-9ef0-5e47933a86f9</p>
           </div>
-          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg" title="Expand details">
-            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button class="flex items-center space-x-2 bg-yellow text-white text-sm font-semibold py-2 px-4 rounded-full">
+            <span class="material-symbols-outlined text-primary-500">
+              <img src="\assets\icons\pin.svg" alt="icon" class="w-6 h-6" />
+            </span>
+            <span>ยกเลิกติดตาม</span>
           </button>
-        </li>
-        <li class="flex justify-between items-center">
+          <span class="material-symbols-outlined ">
+            <img src="\assets\icons\dropdown.svg" alt="dropdown icon" class="w-6 h-6" />
+          </span>
+        </div>
+      </summary>
+      <app-pinned-property-expand></app-pinned-property-expand>
+    </details>
+
+    <details class="bg-lighter-grey rounded-md">
+      <summary class="p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-oceanBlue ">5</span>
           <div>
-            <div class="font-bold text-lg">ทรัพย์สิน 278</div>
-            <div class="text-sm">รหัสสินทรัพย์: 08fec647-1657-4a0b-9e70-5b3f396dd8f3</div>
+            <h3 class="font-semibold text-darkBlue">ที่ดินติดริมน้ำ เลขที่ 352/2</h3>
+            <p class="text-sm text-neutral-500">รหัสอสังหาริมทรัพย์: 086cef-6651-7a02-9ef0-5e47933a86f9</p>
           </div>
-          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg" title="Expand details">
-            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button class="flex items-center space-x-2 bg-yellow text-white text-sm font-semibold py-2 px-4 rounded-full">
+            <span class="material-symbols-outlined text-primary-500">
+              <img src="\assets\icons\pin.svg" alt="icon" class="w-6 h-6" />
+            </span>
+            <span>ยกเลิกติดตาม</span>
           </button>
-        </li>
-      </ul>
-    </div>
+          <span class="material-symbols-outlined ">
+            <img src="\assets\icons\dropdown.svg" alt="dropdown icon" class="w-6 h-6" />
+          </span>
+        </div>
+      </summary>
+      <app-pinned-property-expand></app-pinned-property-expand>
+    </details>
   </div>
-
-
 </div>
