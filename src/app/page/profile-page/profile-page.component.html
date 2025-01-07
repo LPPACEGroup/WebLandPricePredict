@@ -1,15 +1,15 @@
-<form *ngIf="!loading" class="h-nmax" [formGroup]="profileForm">
+<form *ngIf="!loading" class="min-h-nmax" [formGroup]="profileForm">
   <div class="bg">
     <div class="scrollable-content">
       <div class="profile-container ">
-        <div class="left-flex">
+        <div class="left-flex ">
 
           <div class="pt-4  border-8 border-white rounded-full">
             <img src="https://tools-api.webcrumbs.org/image-placeholder/120/120/avatars/1" alt="avatar"
               class="w-[240px] h-[240px] rounded-full object-contain" />
           </div>
 
-          <div class="left-content">
+          <div class="left-content text-darkBlue">
             <div class="mt-4">
               <div class="grid gap-4 font-bold">
                 <div class="bg-white p-3 rounded-md flex gap-2 items-center border border-light-grey">
@@ -126,7 +126,7 @@
                   <input id="address" class=" p-4 border rounded-md ml-2" rows="3" title="Address"
                     placeholder="Enter your address" defaultValue="173 / 103 หมู่ 4 หมู่บ้านบางปลารุ่งเรือง" formControlName ="alley">
                 </div>
-                <div *ngIf="Sub_district && Sub_district.length > 0" class="flex w-9/12 justify-center items-center">
+                <div *ngIf="Sub_district && Sub_district.length > 0" class="flex w-9/12 justify-center items-center ">
 
                   <label for="sub_district" class=" input-label">ตำบล
                   </label>

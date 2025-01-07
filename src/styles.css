@@ -218,3 +218,13 @@ mat-mdc-text-field-wrapper {
 .mat-mdc-form-field-infix {
   padding: 0 !important;
 }
+.mdc-text-field--filled.mdc-text-field--disabled {
+  background-color: white !important; /* Change the background color */
+}
+input:disabled {
+  background-color: white !important; /* Change the background color */
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled){
+  background-color: white !important; /* Change the background color */
+}
