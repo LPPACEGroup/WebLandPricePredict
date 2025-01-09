@@ -1,1 +1,101 @@
-<p>admin-navbar works!</p>
+<div class="navbar">
+    <h1 class="text-white font-LPPA text-3xl navbar-start">LPPM</h1>
+    <div class="navbar-end">
+  
+      <!-- main menu -->
+      <ul class="menu menu-horizontal lg:flex min-w-full navbar-end">
+  
+        <!-- Home btt -->
+        <li class="">
+          <div routerLink="Home" class="text-white" routerLinkActive="">
+            <img src="assets\icons\home.svg" alt="Home" class="w-6 h-6 inline-block mr-2">
+            <p>หน้าหลัก</p>
+          </div>
+        </li>
+  
+        <!-- Map btt -->
+        <li class="">
+          <div routerLink="Map" class="text-white flex " routerLinkActive="">
+            <img src="assets\icons\map.svg" alt="Map" class="nav-icon">
+            <p>แผนที่</p>
+          </div>
+        </li>
+  
+  
+        <!-- Dashboard Button -->
+        <li class="">
+          <div routerLink="Dashboard" class="text-white flex" routerLinkActive="">
+            <img src="assets/icons/dashboard.svg" alt="Dashboard" class="w-6 h-6 inline-block mr-2">
+            <p>แดชบอร์ด</p>
+          </div>
+        </li>
+  
+  
+        <!-- Blog Button -->
+        <li class="">
+          <div routerLink="Question" class="text-white flex" routerLinkActive="">
+            <img src="assets\icons\blog.svg" alt="Blog" class="w-6 h-6 inline-block mr-2">
+            <p>บล็อก</p>
+          </div>
+        </li>
+  
+        <!-- Dropdown for more menu -->
+        <div class="flex-none">
+          <div class="dropdown dropdown-end">
+            <li tabindex="0" class="">
+              <div class="text-white flex">
+                <img src="assets\icons\moremenu.svg" alt="More" class="w-6 h-6 inline-block mr-2">
+                <p>เพิ่มเติม</p>
+                <img src="assets\icons\downarrow.svg" alt="More" class="w-6 h-6 inline-block mr-2">
+              </div>
+            </li>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              <li routerLink="Calculator"><a>เครื่องคิดเลข</a></li>
+              <li><a>คู่มือการใช้งาน</a></li>
+              <li><a [routerLink]="['/home']" fragment="membership">แพ็คเกจสมาชิก</a></li>
+              <li routerLink="Contact"><a>ติดต่อเรา</a></li>
+  
+            </ul>
+          </div>
+        </div>
+      </ul>
+  
+      <!-- notification -->
+      <div class="lg:flex">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <img src="assets/icons/bell.svg" alt="Notifications" class="w-10 h-10">
+            </div>
+          </div>
+          <app-noti class="z-10"></app-noti>
+        </div>
+      </div>
+  
+      <!-- profile btt -->
+      <div class="lg:flex">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+            <div class="w-10 rounded-full">
+              <img src="assets\imgs\default profile img.png" alt="More" class="w-10 h-10">
+            </div>
+          </div>
+          <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+            <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>
+            <li (click)="signout()">
+              <a>ออกจากระบบ
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.37905 2.66859L12.0686 2.08881C15.2892 1.58272 16.8995 1.32967 17.9497 2.22779C19 3.12591 19 4.75596 19 8.01607V10.9996H13.0806L15.7809 7.62428L14.2191 6.37489L10.2191 11.3749L9.71938 11.9996L10.2191 12.6243L14.2191 17.6243L15.7809 16.3749L13.0806 12.9996H19V15.9831C19 19.2432 19 20.8733 17.9497 21.7714C16.8995 22.6695 15.2892 22.4165 12.0686 21.9104L8.37905 21.3306C6.76632 21.0771 5.95995 20.9504 5.47998 20.3891C5 19.8279 5 19.0116 5 17.3791V6.6201C5 4.98758 5 4.17132 5.47998 3.61003C5.95995 3.04874 6.76632 2.92202 8.37905 2.66859Z"
+                    fill="#2749A3" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>
+  

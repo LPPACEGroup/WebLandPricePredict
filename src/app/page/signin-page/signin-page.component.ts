@@ -41,17 +41,50 @@ export class SigninPageComponent {
       .signin(fromValue.email, fromValue.password)
       .subscribe({
         next: (response: any) => {
-          console.log(response);
+          console.log("Sign In Response : ",response);
           this.authService.updateSignInStatus(true);
-          this.router.navigate(['/Home']);
+          this.roleNavigate();
+
+          
         },
         error: (error: any) => {
           this.errorMessage = error.error.message||'sonething went wrong, Please try again';
         },
       });
+
     }
     else{
       this.errorMessage = 'Please enter valid email and password';
     }
+
+  }
+
+  roleNavigate(){
+    // this.authService.role$.subscribe((role) => {
+    //   console.log("Role : xx",role);
+      
+    //   if (role === 'Admin') {
+    //     this.router.navigate(['/AdminUserManage']);
+    //   }
+    //   else if (role === 'User') {
+    //     this.router.navigate(['/Home']);
+    //   }
+    // });
+    this.authService.checkRole().subscribe({
+      next: (response: any) => {
+        console.log("Role Response : ",response);
+        if (response.role === 'Admin') {
+          this.authService.updateUserRole(response.role);
+          this.router.navigate(['/AdminUserManage']);
+        }
+        else if (response.role === 'User') {
+          this.authService.updateUserRole(response.role);
+
+          this.router.navigate(['/Home']);
+        }
+      },
+      error: (error: any) => {
+        this.errorMessage = error.error.message||'sonething went wrong, Please try again';}
+    });
   }
 }

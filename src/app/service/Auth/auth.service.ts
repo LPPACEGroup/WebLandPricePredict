@@ -10,9 +10,12 @@ export class AuthService {
   apiURL = 'http://localhost:8000/api';
   private signedIn = new BehaviorSubject<boolean>(false);
   isSignedIn$ = this.signedIn.asObservable();
+  private role = new BehaviorSubject<string>('');
+  role$ = this.role.asObservable();
 
   constructor(private http: HttpClient) {
     this.checkSignInStatus(); // Automatically check sign-in status when the service is initialized
+    this.checkUserRole();
   }
 
   signin(email: string, password: string): Observable<any> {
@@ -56,5 +59,18 @@ export class AuthService {
 
   updateSignInStatus(status: boolean): void {
     this.signedIn.next(status); // Update BehaviorSubject directly by using in singin and signout flow
+  }
+  checkRole(): Observable<any> {
+    return this.http.get(`${this.apiURL}/auth/check-role`, { withCredentials: true });
+  }
+  private checkUserRole(): void {
+    this.checkRole().subscribe({
+      
+      next: (role) => {this.role.next(role['role'])
+      }
+    });
+  }
+  updateUserRole(role: string): void {
+    this.role.next(role);
   }
 }

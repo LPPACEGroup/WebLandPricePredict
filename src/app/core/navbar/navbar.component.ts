@@ -25,6 +25,7 @@ export class NavbarComponent {
       next: (response: any) => {
         console.log(response);
         this.authService.updateSignInStatus(false);
+        this.authService.updateUserRole('');
         this.router.navigate(['/Signin']);
       },
       error: (error: any) => {
