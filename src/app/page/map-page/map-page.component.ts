@@ -14,7 +14,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { FollowLand } from 'model/follow.interface';
 interface LocationResult {
   place_id: number;
   name: string;
@@ -62,6 +62,7 @@ export class MapPageComponent implements OnInit {
   istoggleLandBar: boolean = false;
   fastsellState = false;
   searchValue: string = '';
+  fowllowState = false;
 
   Priceslider = new PriceSlider();
   Areaslider = new AreaSlider();
@@ -74,7 +75,7 @@ export class MapPageComponent implements OnInit {
     private landListService: LandListService,
     private nearbyPlacesService: NearbyPlacesService, // Correct casing
     private getRouteService : GetRouteService,
-    private markerSortService: MarkersortService // Add the service to the constructor
+    private markerSortService: MarkersortService ,// Add the service to the constructor
   ) {}
 
 
@@ -101,6 +102,14 @@ export class MapPageComponent implements OnInit {
     
   }
 
+  onFollowChanged(event: any) {
+    this.landListService.getData().subscribe(response => {
+      
+      this.landList = response;
+      this.filteredLandList = this.landList;
+      this.sortedLandList = this.landList;
+    });  }
+
   onFocus() {
     this.isInputFocused = true;
     console.log('focus');
@@ -117,11 +126,22 @@ export class MapPageComponent implements OnInit {
       // Handle enter key if needed
     }
   }
-  onCardClick(event: MouseEvent) {
+  onfollow() {
+    this.fowllowState = !this.fowllowState;
+    const follow: FollowLand = {
+      LandDataID: this.selectedLand.LandDataID,
+      Follow: this.fowllowState
+    };
+    this.landListService.followLand(follow).subscribe();
+    this.onFollowChanged(follow);
+  }
+  onCardClick(item :any,event: MouseEvent) {
     const modal =document.getElementById('fullland_detail') as HTMLDialogElement;  
     const target = event.target as HTMLElement;
-
+    
     if(!target.closest('.followbutton') ) {
+      this.selectedLand = item;
+      this.fowllowState = this.selectedLand.Follow;
       modal.showModal();
     }
  
@@ -190,7 +210,7 @@ export class MapPageComponent implements OnInit {
 
 
     const inrange = this.matches.filter(land =>{
-      const x =land.price >= this.Priceslider.leftPrice && land.price <= this.Priceslider.rightPrice && land.size >= this.Areaslider.leftArea && land.size <= this.Areaslider.rightArea;
+      const x =land.Price >= this.Priceslider.leftPrice && land.Price <= this.Priceslider.rightPrice && land.Size >= this.Areaslider.leftArea && land.Size <= this.Areaslider.rightArea;
       return x
     })
 
@@ -198,7 +218,6 @@ export class MapPageComponent implements OnInit {
     
     this.sortedLandList = this.markerSortService.sortByProximity(this.filteredLandList, this.markerCoord);
 
-    console.log('nigga');
     
   }
   onMapOptionChange(option: string): void {
