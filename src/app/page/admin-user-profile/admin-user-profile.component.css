@@ -1,0 +1,9 @@
+.container {
+  background-image: url('/assets/imgs/adminpf.png');
+  border-radius: 30px;
+  -webkit-border-radius: 30;
+  -moz-border-radius: 30;
+  -ms-border-radius: 30;
+  -o-border-radius: 30;
+}
+
