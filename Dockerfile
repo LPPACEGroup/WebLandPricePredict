@@ -18,7 +18,7 @@ RUN ng build --configuration production
 FROM nginx:alpine
 
 # คัดลอกไฟล์ที่ Build แล้วไปยัง Nginx
-COPY --from=build-stage /app/dist/my-angular-app /usr/share/nginx/html
+COPY --from=build-stage /app/dist/web-land-price-predict /usr/share/nginx/html
 
 # เปิดพอร์ต 80 สำหรับเสิร์ฟ
 EXPOSE 80
