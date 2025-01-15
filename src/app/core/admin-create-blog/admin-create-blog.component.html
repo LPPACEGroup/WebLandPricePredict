@@ -1,0 +1,35 @@
+<div class="bg-black bg-opacity-50">
+  <div class="flex justify-center items-center px-[20%] py-[5%]">
+    <div class="w-full bg-white rounded-lg relative border border-grey p-20">
+      <button aria-label="Close" class="absolute top-4 right-4" (click)="closePopup()">
+        <span class="w-[36px] h-[36px] text-darkBlue font-extrabold text-[32px]">X</span>
+      </button>
+      <h2 class="text-center font-extrabold text-[32px] mb-6 text-darkBlue">สร้าง Blog</h2>
+      <form class="space-y-4">
+        <div>
+          <label htmlFor="title" class="block text-darkBlue text-[24px] font-bold mb-2">
+            หัวเรื่อง
+          </label>
+          <input type="text" id="title" title="หัวเรื่อง" placeholder="กรอกหัวเรื่อง"
+            class="w-full h-[48px] bg-lightBlue  rounded-md px-4" />
+        </div>
+        <div>
+          <label htmlFor="content" class="block text-darkBlue text-[24px] font-bold mb-2">
+            เนื้อหา
+          </label>
+          <textarea id="content" title="เนื้อหา" placeholder="กรอกเนื้อหา"
+            class="w-full h-[270px] bg-lightBlue  rounded-md px-4"></textarea>
+        </div>
+        <div class="flex justify-center pt-4">
+          <button type="submit"
+            class="h-[48px] w-[120px] text-white text-[18px] flex items-center justify-center bg-darkBlue rounded-[20px]">
+            สร้าง
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

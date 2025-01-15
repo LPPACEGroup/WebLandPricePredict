@@ -14,25 +14,36 @@ import { AdminUserManageComponent } from './page/admin-user-manage/admin-user-ma
 import { AdminUserProfileComponent } from './page/admin-user-profile/admin-user-profile.component';
 import { SigninPageComponent } from './page/signin-page/signin-page.component';
 import { SignupPageComponent } from './page/signup-page/signup-page.component';
+import { AdminCreateBlogComponent } from './core/admin-create-blog/admin-create-blog.component';
+import { AdminDelBlogComponent } from './core/admin-del-blog/admin-del-blog.component';
+import { ConfirmPaymentComponent } from './core/confirm-payment/confirm-payment.component';
+import { ConfirmLogoutComponent } from './core/confirm-logout/confirm-logout.component';
+
+
 import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
-    { path: 'Signin', component: SigninPageComponent },
-    { path: 'Signup', component: SignupPageComponent },
+  { path: 'Signin', component: SigninPageComponent },
+  { path: 'Signup', component: SignupPageComponent },
 
-    { path: 'Home', component: HomeComponent},
-    { path: 'Map', component: MapPageComponent},
-    { path: 'Dashboard', component: DashboardComponent},
-    { path: 'Monitor', component: MonitorComponent},
-    { path: 'Calculator', component: CalculatorComponent},
-    { path: 'Question', component: QuestionComponent},
-    { path: 'Contact', component: ContactPageComponent},
-    { path: 'Profile', component: ProfilePageComponent},
-    { path: 'Subscription', component: SubscriptionPageComponent},
-    { path: 'AdminBlog', component: AdminBlogComponent },
-    { path: 'AdminSuggest', component: AdminSuggestComponent },
-    { path: 'AdminUserManage', component: AdminUserManageComponent },
-    { path: 'AdminUserProfile', component: AdminUserProfileComponent },
+  { path: 'Home', component: HomeComponent },
+  { path: 'Map', component: MapPageComponent },
+  { path: 'Dashboard', component: DashboardComponent },
+  { path: 'Monitor', component: MonitorComponent },
+  { path: 'Calculator', component: CalculatorComponent },
+  { path: 'Question', component: QuestionComponent },
+  { path: 'Contact', component: ContactPageComponent },
+  { path: 'Profile', component: ProfilePageComponent },
+  { path: 'Subscription', component: SubscriptionPageComponent },
+  { path: 'AdminBlog', component: AdminBlogComponent },
+  { path: 'AdminSuggest', component: AdminSuggestComponent },
+  { path: 'AdminUserManage', component: AdminUserManageComponent },
+  { path: 'AdminUserProfile', component: AdminUserProfileComponent },
 
-    { path: '**', redirectTo: '/Signin' },
+  { path: 'AdminCreateBlog', component: AdminCreateBlogComponent },
+  { path: 'AdminDelBlog', component: AdminDelBlogComponent },
+  { path: 'ConfirmPayment', component: ConfirmPaymentComponent },
+  { path: 'ConfirmLogout', component: ConfirmLogoutComponent },
+
+  { path: '**', redirectTo: '/Signin' },
 ];
