@@ -1,0 +1,23 @@
+<details class=" bg-lighter-grey border border-neutral-200 rounded-md mb-3">
+    <summary class="p-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-ocean-blue ">1</span>
+        <div>
+          <h3 class="font-semibold text-darkBlue">{{land.LandTitle}}</h3>
+          <p class="text-sm text-neutral-500">รหัสอสังหาริมทรัพย์: 086cef-6651-7a02-9ef0-5e47933a86f9</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button class="flex items-center space-x-2 bg-yellow text-white text-sm font-semibold py-2 px-4 rounded-full" (click)="unfollowLand()">
+          <span class="material-symbols-outlined text-primary-500">
+            <img src="\assets\icons\pin.svg" alt="icon" class="w-6 h-6" />
+          </span>
+          <span>ยกเลิกติดตาม</span>
+        </button>
+        <span class="material-symbols-outlined ">
+          <img src="\assets\icons\dropdown.svg" alt="dropdown icon" class="w-6 h-6" />
+        </span>
+      </div>
+    </summary>
+    <app-pinned-property-expand [land]="land"></app-pinned-property-expand>
+  </details>

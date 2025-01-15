@@ -196,7 +196,7 @@ export class MapPageComponent implements OnInit {
     if (inputValue && inputValue.length > 0) {
       this.matches  = [];
       this.matches= this.landList.filter((land) => { 
-        const combinedText = `${land.location} ${land.description}`;
+        const combinedText = `${land.LocationName} ${land.Description} ${land.LandTitle}`;
         // if(combinedText.includes(inputValue)) {
         //   this.matches.push(land);
         // }

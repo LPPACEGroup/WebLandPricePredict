@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
 
 @Component({
   selector: 'app-pinned-property-expand',
@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './pinned-property-expand.component.css'
 })
 export class PinnedPropertyExpandComponent {
-
+ @Input() land: any;
   isDropdownVisible: boolean = false;
 
 

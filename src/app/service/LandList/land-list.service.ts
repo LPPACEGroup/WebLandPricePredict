@@ -21,4 +21,7 @@ export class LandListService {
         });
     return this.http.post(`${this.apiURL}/follow-land`,fr, { withCredentials: true,headers: headers });
   }
+  readFollowLand(): Observable<any> {
+    return this.http.get(`${this.apiURL}/follow-land`, { withCredentials: true });
+  }
 }
