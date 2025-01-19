@@ -1,27 +1,17 @@
-# Step 1: ใช้ Node.js เป็น Base Image สำหรับการ Build แอป
-FROM node:18 as build-stage
-
-# ตั้งค่า Working Directory
+### STAGE 1: Build ###
+FROM node:18.17.1-alpine AS build
 WORKDIR /app
-
-# คัดลอกไฟล์ทั้งหมดไปยัง Container
+COPY package*.json ./
+# RUN npx ngcc --properties es2023 browser module main --first-only --create-ivy-entry-points
 COPY . .
-
-# ติดตั้ง Angular CLI ทั่วไป
-RUN npm install -g @angular/cli
-
-# ติดตั้ง Dependencies และ Build แอป
 RUN npm install
-RUN ng build --configuration production
+RUN npm run build --prod
 
-# Step 2: ใช้ Nginx สำหรับเสิร์ฟแอปที่ Build เสร็จแล้ว
-FROM nginx:alpine
+FROM nginx:latest AS ngi
+COPY --from=build /app/dist/web-land-price-predict /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 
-# คัดลอกไฟล์ที่ Build แล้วไปยัง Nginx
-COPY --from=build-stage /app/dist/web-land-price-predict /usr/share/nginx/html
-
-# เปิดพอร์ต 80 สำหรับเสิร์ฟ
+# # Expose port 8080
 EXPOSE 80
-
-# คำสั่งสำหรับรัน Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
