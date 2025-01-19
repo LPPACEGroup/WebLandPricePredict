@@ -25,5 +25,13 @@ export class SuggestionService {
       { withCredentials: true }
     );
   }
+
+  getSuggestions(): Observable<any> {
+    return this.http.get(`${this.apiURL}/suggestion`, { withCredentials: true });
+  }
+
+  deleteSuggestion(id: number): Observable<any> {
+    return this.http.delete(`${this.apiURL}/suggestion/${id}`, { withCredentials: true });
+  }
   
 }
