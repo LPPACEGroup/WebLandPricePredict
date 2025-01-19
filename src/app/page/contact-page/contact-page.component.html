@@ -36,15 +36,21 @@
         </div>
 
 
-        <div class=" rounded-r-3xl flex flex-col items-center gap-y-5 relative">
-          <div class=" min-w-full h-48 ">
-            <p class="text-grey font-semibold font-LPPA">ข้อเสนอแนะ</p>
-            <textarea class="textarea w-full h-3/4 border-grey" placeholder="พิมข้อความของคุณได้ที่นี้!"></textarea>
-            <div class="w-full flex justify-end">
-              <button class="btn btn-sm bg-darkBlue text-white rounded-xl w-20">ส่ง</button>
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+          <div class=" rounded-r-3xl flex flex-col items-center gap-y-5 relative">
+            <div class=" min-w-full h-48 ">
+              <p class="text-grey font-semibold font-LPPA">ข้อเสนอแนะ</p>
+              <p *ngIf ="feedbackForm.invalid&& pressed" class="text-darkRed">กรุณากรอกข้อเสนอแนะก่อนกดส่ง</p>
+              <p *ngIf ="success" class="text-midGreen">ส่งข้อเสนอแนะสำเร็จ</p>
+
+              <textarea class="textarea w-full h-3/4 border-grey" placeholder="พิมข้อความของคุณได้ที่นี้!"         formControlName="feedback"
+              ></textarea>
+              <div class="w-full flex justify-end">
+                <button class="btn btn-sm bg-darkBlue text-white rounded-xl w-20">ส่ง</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
 
       </div>
     </div>
