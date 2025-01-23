@@ -73,4 +73,12 @@ export class AuthService {
   updateUserRole(role: string): void {
     this.role.next(role);
   }
+
+  forgetPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiURL}/auth/forget-password`, {email}, { withCredentials: true });
+  }
+  
+  resetPassword(token:string,new_password: string): Observable<any> {
+    return this.http.post(`${this.apiURL}/auth/reset-password`, {token,new_password}, { withCredentials: true });
+  }
 }

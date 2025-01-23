@@ -15,10 +15,14 @@ import { AdminUserProfileComponent } from './page/admin-user-profile/admin-user-
 import { SigninPageComponent } from './page/signin-page/signin-page.component';
 import { SignupPageComponent } from './page/signup-page/signup-page.component';
 import { AuthGuard } from './auth.guard';
+import { ForgetpasswordComponent } from './page/forgetpassword/forgetpassword.component';
+import { ResetpasswordComponent } from './page/resetpassword/resetpassword.component';
 
 export const routes: Routes = [
     { path: 'Signin', component: SigninPageComponent },
     { path: 'Signup', component: SignupPageComponent },
+    {path:'ForgotPassword',component:ForgetpasswordComponent},
+    {path: 'ResetPassword',component:ResetpasswordComponent},
 
     { path: 'Home', component: HomeComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
     { path: 'Map', component: MapPageComponent, canActivate: [AuthGuard] },
@@ -33,6 +37,8 @@ export const routes: Routes = [
     { path: 'AdminSuggest', component: AdminSuggestComponent, canActivate: [AuthGuard] ,data: { roles: ['Admin'] }},
     { path: 'AdminUserManage', component: AdminUserManageComponent , canActivate: [AuthGuard],data: { roles: ['Admin'] }},
     { path: 'AdminUserProfile', component: AdminUserProfileComponent, canActivate: [AuthGuard] ,data: { roles: ['Admin'] }},
+    
+
 
     { path: '**', redirectTo: '/Signin' },  
 ];
