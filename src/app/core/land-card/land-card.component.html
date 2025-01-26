@@ -4,15 +4,15 @@
   </div>
   <div class="p-3  text-sm ">
     <div class="h-fit border-grey border-b pb-2">
-      <p class=" font-semibold">ที่อยู่</p>
-      <p class="font-semibold">เขต{{item?.location}} กรุงเทพ</p>
+      <p class=" font-semibold">{{item?.LandTitle}}</p>
+      <p class="font-semibold">เขต{{item?.LocationName}} กรุงเทพ</p>
     </div>
     <div class=" w-full grid grid-cols-5 font-semibold gap-y-1 pt-2">
       <p class="col-span-2 "> ขนาดพื้นที่ </p>
-      <p class="col-span-3 bg-light-blue rounded-full">{{item?.size}}</p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Size*4}}</p>
       <p class="col-span-2 font-semibold">ราคาขาย </p>
-      <p class="col-span-3 bg-light-blue rounded-full">{{item?.price}}</p>
-      <p class=" text-grey col-span-5">ราคา {{item?.price/item?.size}} บาทต่อตารางเมตร</p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Price}}</p>
+      <p class=" text-grey col-span-5">ราคา {{item?.Price/item?.Size*4}} บาทต่อตารางเมตร</p>
       <br>
     </div>
     <div class="w-full flex justify-end">

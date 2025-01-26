@@ -10,9 +10,12 @@ export class AuthService {
   apiURL = 'http://localhost:8000/api';
   private signedIn = new BehaviorSubject<boolean>(false);
   isSignedIn$ = this.signedIn.asObservable();
+  private role = new BehaviorSubject<string>('');
+  role$ = this.role.asObservable();
 
   constructor(private http: HttpClient) {
     this.checkSignInStatus(); // Automatically check sign-in status when the service is initialized
+    this.checkUserRole();
   }
 
   signin(email: string, password: string): Observable<any> {
@@ -34,15 +37,16 @@ export class AuthService {
       withCredentials: true
     });
   }
-  getUserData(): Observable<any> {
-    return this.http.get(`${this.apiURL}/auth/user`, { withCredentials: true });
+  getUserData(): Observable<any> {    
+    
+    return this.http.get(`${this.apiURL}/user`, { withCredentials: true });
   }
 
   isAuthenticated(): Observable<boolean> {
     return this.http.get<boolean>(`${this.apiURL}/auth/check`, { withCredentials: true });
   }
-  checkuserexist(email: string): Observable<any> {
-    return this.http.post(`${this.apiURL}/auth/exit`, { email }, { withCredentials: true})
+  checkDuplicateEmail(email: string): Observable<any> {
+    return this.http.get(`${this.apiURL}/auth/check-email/${email}`, { withCredentials: true})
   }
 
   
@@ -55,5 +59,26 @@ export class AuthService {
 
   updateSignInStatus(status: boolean): void {
     this.signedIn.next(status); // Update BehaviorSubject directly by using in singin and signout flow
+  }
+  checkRole(): Observable<any> {
+    return this.http.get(`${this.apiURL}/auth/check-role`, { withCredentials: true });
+  }
+  private checkUserRole(): void {
+    this.checkRole().subscribe({
+      
+      next: (role) => {this.role.next(role['role'])
+      }
+    });
+  }
+  updateUserRole(role: string): void {
+    this.role.next(role);
+  }
+
+  forgetPassword(email: string): Observable<any> {
+    return this.http.post(`${this.apiURL}/auth/forget-password`, {email}, { withCredentials: true });
+  }
+  
+  resetPassword(token:string,new_password: string): Observable<any> {
+    return this.http.post(`${this.apiURL}/auth/reset-password`, {token,new_password}, { withCredentials: true });
   }
 }

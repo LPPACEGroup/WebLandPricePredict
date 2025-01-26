@@ -41,7 +41,7 @@ details[open] summary div svg {
 /* New CSS rule for the navbar class */
 .navbar {
   height: 2.5rem; /* Equivalent to h-10 */
-  background-color: var(--oceanBlue); /* Equivalent to bg-dark-blue */
+  background-color: var(--oceanBlue); /* Equivalent to bg-darkBlue */
   position: sticky;
   top: 0;
   z-index: 50;

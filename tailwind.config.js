@@ -33,6 +33,8 @@ module.exports = {
       },
       fontFamily: {
         LPPA: ["Kodchasan", 'sans-serif'],
+        Public_Sans : ["Public Sans", 'sans-serif'],
+
       },
       height: {
         '9/10': '90%',

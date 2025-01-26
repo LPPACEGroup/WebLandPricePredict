@@ -46,7 +46,7 @@
               </div>
               <div class="flex flex-col justify-center items-center">
                 <label class="input input-bordered flex items-center gap-2 w-full rounded-xl bg-white">
-                  <input type="text" class="grow text-left" placeholder="ค้นหาคำถามที่สนใจ" />
+                  <input type="text" class="grow text-left" placeholder="ค้นหาคำถามที่สนใจ" (input)="searchBlog($event)" />
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-8 h-8 fill-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                       class="w-4 h-4 opacity-70 fill-gray-500">
@@ -58,14 +58,8 @@
                 </label>
               </div>
 
-              <app-collapse [question_header]="'หากผู้ขายไม่สามารถติดต่อได้ควรทำอย่างไร?'" [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
-    ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
-
-              <app-collapse [question_header]="'ระบบสมาชิกโดนตัดเงินจากบัญชีไปแล้ว แต่ไม่ได้รับยศสมาชิกทำอย่างไร?'"
-                [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
-            ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
-              <app-collapse [question_header]="'หากลืมรหัสผ่านควรทำอย่างไร'" [content]="'ท่านสามารถติดต่อสอบถามได้ที่ Contact หรือ ติดต่อสอบถามมาได้ที่อีเมลหรือเบอร์โทรศัพท์
-          ของเราแล้วเราจะติดต่อกลับให้เร็วที่สุด ขอบคุณ'"></app-collapse>
+              <app-collapse *ngFor="let blog of searchBlogList" class="bg-lighter-grey" [question_header]="blog.Topic"
+                [content]="blog.Content"></app-collapse>
 
             </div>
           </div>

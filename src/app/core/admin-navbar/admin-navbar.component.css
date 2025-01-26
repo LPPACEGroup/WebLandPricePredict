@@ -1,0 +1,49 @@
+details[open] summary div svg {
+    stroke: #f3c762 !important;
+  }
+  
+  .nav-icon {
+    width: 1.5rem; /* Equivalent to w-6 */
+    height: 1.5rem; /* Equivalent to h-6 */
+    display: inline-block; /* Equivalent to inline-block */
+    margin-right: 0.5rem; /* Equivalent to mr-2 */
+    fill: white;
+  }
+  
+  /* Mobile devices (portrait and landscape) */
+  @media (max-width: 768px) {
+    details[open] summary div svg {
+      stroke: #ff5733 !important;
+    }
+  }
+  
+  /* Tablets (portrait and landscape) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    details[open] summary div svg {
+      stroke: #33ff57 !important;
+    }
+  }
+  
+  /* Laptops and desktops */
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    details[open] summary div svg {
+      stroke: #3357ff !important;
+    }
+  }
+  
+  /* Large screens */
+  @media (min-width: 1441px) {
+    details[open] summary div svg {
+      stroke: #7623f3 !important;
+    }
+  }
+  
+  /* New CSS rule for the navbar class */
+  .navbar {
+    height: 2.5rem; /* Equivalent to h-10 */
+    background-color: var(--darkBlue); /* Equivalent to bg-darkBlue */
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  

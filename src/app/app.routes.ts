@@ -22,24 +22,30 @@ import { PaymentComponent } from './page/payment/payment.component';
 
 
 import { AuthGuard } from './auth.guard';
+import { ForgetpasswordComponent } from './page/forgetpassword/forgetpassword.component';
+import { ResetpasswordComponent } from './page/resetpassword/resetpassword.component';
 
 export const routes: Routes = [
-  { path: 'Signin', component: SigninPageComponent },
-  { path: 'Signup', component: SignupPageComponent },
+    { path: 'Signin', component: SigninPageComponent },
+    { path: 'Signup', component: SignupPageComponent },
+    {path:'ForgotPassword',component:ForgetpasswordComponent},
+    {path: 'ResetPassword',component:ResetpasswordComponent},
 
-  { path: 'Home', component: HomeComponent },
-  { path: 'Map', component: MapPageComponent },
-  { path: 'Dashboard', component: DashboardComponent },
-  { path: 'Monitor', component: MonitorComponent },
-  { path: 'Calculator', component: CalculatorComponent },
-  { path: 'Question', component: QuestionComponent },
-  { path: 'Contact', component: ContactPageComponent },
-  { path: 'Profile', component: ProfilePageComponent },
-  { path: 'Subscription', component: SubscriptionPageComponent },
-  { path: 'AdminBlog', component: AdminBlogComponent },
-  { path: 'AdminSuggest', component: AdminSuggestComponent },
-  { path: 'AdminUserManage', component: AdminUserManageComponent },
-  { path: 'AdminUserProfile', component: AdminUserProfileComponent },
+    { path: 'Home', component: HomeComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
+    { path: 'Map', component: MapPageComponent, canActivate: [AuthGuard] },
+    { path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
+    { path: 'Monitor', component: MonitorComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
+    { path: 'Calculator', component: CalculatorComponent, canActivate: [AuthGuard],data: { roles: ['User'] } },
+    { path: 'Question', component: QuestionComponent, canActivate: [AuthGuard],data: { roles: ['User'] } },
+    { path: 'Contact', component: ContactPageComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
+    { path: 'Profile', component: ProfilePageComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
+    { path: 'Subscription', component: SubscriptionPageComponent, canActivate: [AuthGuard] ,data: { roles: ['User'] }},
+    { path: 'AdminBlog', component: AdminBlogComponent ,data: { roles: ['Admin'] }},
+    { path: 'AdminSuggest', component: AdminSuggestComponent, canActivate: [AuthGuard] ,data: { roles: ['Admin'] }},
+    { path: 'AdminUserManage', component: AdminUserManageComponent , canActivate: [AuthGuard],data: { roles: ['Admin'] }},
+    { path: 'AdminUserProfile', component: AdminUserProfileComponent, canActivate: [AuthGuard] ,data: { roles: ['Admin'] }},
+
+
 
   { path: 'AdminCreateBlog', component: AdminCreateBlogComponent },
   { path: 'AdminDelBlog', component: AdminDelBlogComponent },
