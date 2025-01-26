@@ -18,6 +18,7 @@ import { AdminCreateBlogComponent } from './core/admin-create-blog/admin-create-
 import { AdminDelBlogComponent } from './core/admin-del-blog/admin-del-blog.component';
 import { ConfirmPaymentComponent } from './core/confirm-payment/confirm-payment.component';
 import { ConfirmLogoutComponent } from './core/confirm-logout/confirm-logout.component';
+import { PaymentComponent } from './page/payment/payment.component';
 
 
 import { AuthGuard } from './auth.guard';
@@ -44,6 +45,7 @@ export const routes: Routes = [
   { path: 'AdminDelBlog', component: AdminDelBlogComponent },
   { path: 'ConfirmPayment', component: ConfirmPaymentComponent },
   { path: 'ConfirmLogout', component: ConfirmLogoutComponent },
+  { path: 'Payment', component: PaymentComponent },
 
   { path: '**', redirectTo: '/Signin' },
 ];

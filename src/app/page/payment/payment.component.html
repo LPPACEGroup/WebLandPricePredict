@@ -1,1 +1,48 @@
-<p>payment works!</p>
+<div class="min-h-screen flex items-center justify-center bg-neutral-100">
+  <div class="w-[1024px] bg-neutral-50 shadow-lg rounded-lg p-8 flex gap-6">
+    <div class="flex-1 bg-white p-6 rounded-lg justify-center">
+      <h1 class="text-darkBlue font-title text-2xl font-bold">การชำระเงิน</h1>
+      <p class="text-oceanBlue mt-2">โปรดชำระเงินผ่าน QR Code พร้อมทั้งกรอกข้อมูลด้านล่างเพื่อยืนยันการชำระเงิน</p>
+
+      <div class="grid grid-cols-2 gap-4 mt-6">
+        <div class="flex flex-col">
+          <label class="text-darkBlue mb-1" htmlFor="firstName">ชื่อ</label>
+          <input class="bg-lightBlue rounded-sm p-1" id="firstName" type="text" placeholder="กรอกชื่อ" />
+        </div>
+        <div class="flex flex-col">
+          <label class="text-darkBlue mb-1" htmlFor="lastName">นามสกุล</label>
+          <input class="bg-lightBlue rounded-sm p-1" id="lastName" type="text" title="กรอกนามสกุล"
+            placeholder="กรอกนามสกุล" />
+        </div>
+        <div class="flex flex-col col-span-2">
+          <label class="text-neutral-700 mb-1" htmlFor="phoneNumber">เบอร์โทรศัพท์</label>
+          <input class="bg-lightBlue rounded-sm p-1" id="phoneNumber" type="text" title="กรอกเบอร์โทรศัพท์"
+            placeholder="กรอกเบอร์โทรศัพท์" />
+        </div>
+      </div>
+
+      <p class="text-darkBlue font-bold mt-6">ระดับสมาชิกที่ต้องการ: <span class="font-bold">Tier 1</span></p>
+      <div
+        class="mt-4 border-2 border-blue bg-lightBlue rounded-md h-[200px] flex flex-col justify-center items-center">
+        <i class="fa-solid fa-camera text-primary-500 text-2xl"></i>
+        <img class="w-[100px] h-[100px] object-contain" src="assets\icons\Uploadimg.svg" alt="icon">
+      </div>
+
+      <div class="mt-6">
+        <label class="text-darkBlue mb-1" htmlFor="note">หมายเหตุ</label>
+        <input class="bg-lightBlue rounded-sm p-1 w-full" id="note" type="text" title="กรอกหมายเหตุ"
+          placeholder="กรอกหมายเหตุ" />
+      </div>
+      <div class="flex justify-end mt-4">
+        <button class="bg-darkBlue text-white rounded-full py-1 px-6">
+          ยืนยัน
+        </button>
+      </div>
+
+    </div>
+
+    <div class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+      <img class="w-full h-auto object-contain" src="assets\imgs\qr.jpg" alt="QR Code สำหรับการชำระเงิน">
+    </div>
+  </div>
+</div>
