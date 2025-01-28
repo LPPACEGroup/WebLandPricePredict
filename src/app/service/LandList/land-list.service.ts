@@ -15,6 +15,8 @@ export class LandListService {
     return this.http.get(`${this.apiURL}/land`, { withCredentials: true });
   }
   followLand(fr : FollowLand): Observable<any> {
+    console.log(fr);
+    
         const headers = new HttpHeaders({
           'Content-Type': 'application/json',
           'Accept': 'application/json'

@@ -1,4 +1,4 @@
-<div class="bg-white flex items-center justify-center p-4">
+<div class="bg-white flex items-center justify-center p-4" *ngIf="!loading">
 
   <div class="container">
     <div class="mx-4">
@@ -10,7 +10,8 @@
             <img src="\assets\imgs\default profile img.png" alt="Avatar"
               class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
             <button
-              class="absolute top-0 right-0 bg-red-500 text-white rounded-md text-sm px-4 py-2 flex items-center gap-2">
+              class="absolute top-0 right-0 bg-red-500 text-white rounded-md text-sm px-4 py-2 flex items-center gap-2"
+              onclick="event.preventDefault(); confirm_delete.showModal()">
               ลบบัญชีนี้
               <img src="\assets\icons\bin.svg" alt="Delete Icon" class="w-4 h-4" />
             </button>
@@ -19,32 +20,34 @@
             <div class="grid grid-cols-2 gap-4 text-sm px-10">
 
               <div class="font-bold text-darkBlue  text-[16px]">ID</div>
-              <div class="text-[16px] text-oceanBlue">64010000</div>
+              <div class="text-[16px] text-oceanBlue">{{userId}}</div>
 
               <div class="font-bold text-darkBlue  text-[16px]">ชื่อผู้ใช้งาน</div>
-              <div class="text-[16px] text-oceanBlue">victoria_s</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Username}}</div>
 
               <div class="font-bold text-darkBlue  text-[16px]">อีเมล</div>
-              <div class="text-[16px] text-oceanBlue">victoria.s&#64;example.com</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Email}}</div>
 
               <div class="font-bold text-darkBlue  text-[16px]">ชื่อ-นามสกุล</div>
-              <div class="text-[16px] text-oceanBlue">วิกตอเรีย สมิธ</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.FirstName}} {{userPaymentDetails.LastName}}
+              </div>
 
               <div class="font-bold text-darkBlue  text-[16px]">เพศ</div>
-              <div class="text-[16px] text-oceanBlue">หญิง</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Gender}}</div>
 
               <div class="font-bold text-darkBlue  text-[16px]">เกิดวันที่</div>
-              <div class="text-[16px] text-oceanBlue">2024-08-18</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.BirthDate}}</div>
 
               <div class="font-bold text-darkBlue  text-[16px]">อายุ</div>
-              <div class="text-[16px] text-oceanBlue">18</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Age}}</div>
 
               <div class="font-bold text-darkBlue  text-[16px]">เบอร์โทรศัพท์</div>
-              <div class="text-[16px] text-oceanBlue">0817394547</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Telephone}}</div>
             </div>
           </div>
           <button
-            class="bg-yellow font-bold rounded-[24px] w-[160px] h-[40px] mt-6 mx-auto flex items-center justify-center text-center">
+            class="bg-yellow font-bold rounded-[24px] w-[160px] h-[40px] mt-6 mx-auto flex items-center justify-center text-center"
+            onclick="event.preventDefault(); edit_user.showModal()" (click)="onEditUser()">
             แก้ไขข้อมูล
           </button>
         </section>
@@ -60,9 +63,9 @@
                     <img src="\assets\imgs\recipt.png" alt="receipt-picture" />
                   </div>
                 </div>
-                <div class="grid grid-cols-2 mt-2">
-                  <p class="text-[14px] font-bold text-darkBlue">เวลาในการชำระเงิน:</p>
-                  <p class="text-[14px] font-medium text-darkBlue">2024-08-05 13:55:40</p>
+                <div class="grid grid-cols-2 mt-2 ">
+                  <p class="text-[10px] font-bold text-darkBlue">เวลาในการชำระเงิน:</p>
+                  <p class="text-[10px] font-medium text-center" [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">{{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
                 </div>
               </div>
 
@@ -77,24 +80,33 @@
                     ระดับสมาชิกปัจจุบัน
                   </label>
                 </div>
-                <select id="membership" title="ระดับสมาชิกปัจจุบัน"
-                  class="w-full rounded-md p-2 bg-babyBlue font-bold text-darkBlue">
-                  <option class="bg-lightBlue font-bold">Basic</option>
-                  <option class="bg-lightBlue font-bold">Tier 1</option>
-                  <option class="bg-lightBlue font-bold">Tier 2</option>
-                  <option class="bg-lightBlue font-bold">Tier 3</option>
-                </select>
+                <form [formGroup]="tierForm">
+                  <select id="membership" title="ระดับสมาชิกปัจจุบัน"
+                    class="w-full rounded-md p-2 bg-babyBlue font-bold text-darkBlue" formControlName="Tier" (change)="tierUpdate()">
+                    <option class="bg-lightBlue font-bold">Basic</option>
+                    <option class="bg-lightBlue font-bold">Tier 1</option>
+                    <option class="bg-lightBlue font-bold">Tier 2</option>
+                    <option class="bg-lightBlue font-bold">Tier 3</option>
+                  </select>
+                </form>
 
                 <div class="mt-4 flex items-center gap-2">
                   <label htmlFor="status" class="block font-bold text-darkBlue text-[16px]">
                     สถานะการตรวจสอบ
                   </label>
                 </div>
-                <select id="status" title="สถานะการตรวจสอบ"
-                  class="w-full rounded-md p-2 bg-light-grey font-bold text-grey ">
-                  <option class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
-                  <option class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
-                </select>
+                <form [formGroup]="verifyForm" *ngIf="userPaymentDetails.SubmissionDate">
+                  <select id="status" title="สถานะการตรวจสอบ" formControlName="Verify"
+                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey "(change)="verficationUpdate()">
+                    <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
+                    <option [ngValue]="true" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
+                  </select>
+                                    <!-- <select id="status" title="สถานะการตรวจสอบ"
+                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey " >
+                    <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
+                    <option [ngValue]="true" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
+                  </select> -->
+                </form>
               </div>
 
             </div>
@@ -104,31 +116,125 @@
             <div class="grid grid-cols-2 gap-5 text-oceanBlue">
               <div class="grid grid-cols-2">
                 <strong class="text-darkBlue">บ้านเลขที่</strong>
-                <p>61/5</p>
+                <p>{{userPaymentDetails.HomeNumber}}</p>
               </div>
               <div class="grid grid-cols-2">
                 <strong class="text-darkBlue">ถนน</strong>
-                <p> สุขุมวิท ซอย 11</p>
+                <p> {{userPaymentDetails.Alley}}</p>
               </div>
               <div class="grid grid-cols-2">
                 <strong class="text-darkBlue">ตำบล</strong>
-                <p> คลองเตย</p>
+                <p> {{userPaymentDetails.Subdistrict}}</p>
               </div>
               <div class="grid grid-cols-2">
                 <strong class="text-darkBlue">อำเภอ</strong>
-                <p> คลองเตย</p>
+                <p> {{userPaymentDetails.District}}</p>
               </div>
               <div class="grid grid-cols-2">
                 <strong class="text-darkBlue">จังหวัด</strong>
-                <p> กรุงเทพมหานคร</p>
+                <p> {{userPaymentDetails.Province}}</p>
               </div>
               <div class="grid grid-cols-2">
                 <strong class="text-darkBlue">รหัสไปรษณีย์</strong>
-                <p> 10110</p>
+                <p> {{userPaymentDetails.PostCode}}</p>
               </div>
             </div>
           </div>
         </section>
       </div>
+      <dialog id="confirm_delete" class="modal">
+        <div class="modal-box bg-white p-6 rounded-3xl text-darkBlue ">
+          <div class="modal-action  flex justify-center flex-col items-center">
+            <form method="dialog" class="flex flex-col items-center">
+              <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              <img src="\assets\icons\warning.svg" alt="delete" class="w-20 h-20 mb-4">
+              <p>คุณต้องการจะลบ บัญชี นี้จริงๆ ใช่หรือไม่</p>
+              <div class="flex flex-row justify-around w-full mt-4">
+                <button class="btn bg-darkBlue text-white rounded-full px-6 py-1">ยืนยัน</button>
+                <button class="btn bg-babyBlue text-darkBlue rounded-full px-6 py-1">ยกเลิก</button>
+              </div>
+            </form>
 
+          </div>
+        </div>
+      </dialog>
+      <dialog id="edit_user" class="modal">
+        <div class="modal-box bg-white p-6 rounded-3xl text-darkBlue w-full max-w-5xl">
+          <form action="" class="w-full" [formGroup]="userupdateForm" (submit)="saveChange()">
+            <div class="modal-action flex flex-col gap-4">
+              <button type="button" class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2"
+                onclick="edit_user.close()">✕</button>
+              <h2 class="text-3xl text-center font-extrabold mb-4">แก้ไขข้อมูล</h2>
+
+              <!-- ใช้ Flexbox สำหรับ 2 คอลัมน์ -->
+              <div class="flex flex-wrap gap-4">
+                <!-- ชื่อผู้ใช้งาน -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="Username" class="font-bold">ชื่อผู้ใช้งาน</label>
+                  <input type="text" id="Username" name="Username"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="username" />
+                </div>
+
+                <!-- อีเมล -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="Email" class="font-bold">อีเมล</label>
+                  <input type="email" id="Email" name="Email"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="email" />
+                </div>
+
+                <!-- ชื่อ -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="FirstName" class="font-bold">ชื่อ</label>
+                  <input type="text" id="FirstName" name="FirstName"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="firstName" />
+                </div>
+
+                <!-- นามสกุล -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="LastName" class="font-bold">นามสกุล</label>
+                  <input type="text" id="LastName" name="LastName"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="lastName" />
+                </div>
+
+                <!-- เพศ -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="Gender" class="font-bold">เพศ</label>
+                  <select id="Gender" name="Gender" class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue"
+                    required formControlName="gender">
+                    <option value="ชาย">ชาย</option>
+                    <option value="หญิง">หญิง</option>
+                  </select>
+                </div>
+
+                <!-- วันเกิด -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="BirthDate" class="font-bold">เกิดวันที่</label>
+                  <input type="date" id="BirthDate" name="BirthDate"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="birthDate" />
+                </div>
+              </div>
+
+              <!-- เบอร์โทรศัพท์ (1 คอลัมน์) -->
+              <div class="flex flex-col gap-2">
+                <label for="Telephone" class="font-bold">เบอร์โทรศัพท์</label>
+                <input type="tel" id="Telephone" name="Telephone"
+                  class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                  formControlName="telephone" />
+              </div>
+
+              <!-- ปุ่มบันทึก -->
+              <button class="btn bg-darkBlue mt-3 text-white">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
+    </div>
+    <div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+      <span class="loading loading-spinner loading-lg text-darkBlue"></span>
     </div>

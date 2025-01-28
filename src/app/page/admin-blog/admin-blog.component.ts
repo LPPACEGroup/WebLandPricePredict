@@ -66,7 +66,7 @@ export class AdminBlogComponent {
       ID: 0,
       Topic: this.createBlogForm.get('Topic')?.value,
       Content: this.createBlogForm.get('Content')?.value,
-      Date: new Date().toISOString()
+      CreateDate: new Date().toISOString()
     }
     
     this.blogService.createBlog(newBlog).subscribe({
@@ -101,7 +101,7 @@ export class AdminBlogComponent {
         ID: this.selectedEditID,
         Topic: this.editBlogForm.get('Topic')?.value,
         Content: this.editBlogForm.get('Content')?.value,
-        Date: new Date().toISOString()
+        CreateDate: new Date().toISOString()
       }
       this.blogService.updateBlog(this.selectedEditID, editedBlog).subscribe({
         next: (response) => {
@@ -137,12 +137,23 @@ export class AdminBlogComponent {
     this.blogService.getBlogs().subscribe({
       next: (response) => {
         this.blogList = response;
-        // Update indexes based on the actual position in the array to prevent errors from expand row
+  
+        // Update indexes based on the actual position in the array
         this.blogList.forEach((blog, index) => {
           blog.index = index + 1;
         });
+  
+        const previousExpanded = this.expandedElement; // Preserve the expanded element
         this.dataSource = new MatTableDataSource<BlogData>(this.blogList);
         this.dataSource.paginator = this.paginator;
+  
+        // Restore expanded state if applicable
+        if (previousExpanded) {
+          this.expandedElement = this.blogList.find(
+            blog => blog.ID === previousExpanded.ID
+          ) || null;
+        }
+  
         const searchInput = document.getElementsByClassName('search_blog')[0] as HTMLInputElement;
         if (searchInput) {
           searchInput.value = '';
@@ -153,6 +164,11 @@ export class AdminBlogComponent {
       }
     });
   }
+  
+  toggleRow(row: BlogData) {
+    this.expandedElement = this.expandedElement === row ? null : row;
+  }
+  
   searchBlog(event: Event) {
     const searchValue = (event.target as HTMLInputElement).value;
     if (searchValue) {

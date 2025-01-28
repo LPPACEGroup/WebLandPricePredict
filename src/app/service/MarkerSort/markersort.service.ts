@@ -30,7 +30,7 @@ export class MarkersortService {
       );
       const minDistance = Math.min(...distances);
       // Check if within 10 km of any target coordinate
-      return { ...item, distance: minDistance, inRange: minDistance <= 10 };
+      return { ...item, distance: minDistance, inRange: minDistance <= 5 };
     })
     .sort((a, b) => {
       // Prioritize items in range, then by distance
