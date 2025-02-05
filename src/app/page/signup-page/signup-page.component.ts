@@ -45,6 +45,8 @@ export class SignupPageComponent {
   isUpdatingForm: boolean = false;
   previousValue: any = { sub_district: '', postcode: 0, district: '' };
   private thaiLocationService?: ThaiLocationService;
+  selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
 
   
   @HostListener('wheel', ['$event'])
@@ -171,9 +173,12 @@ export class SignupPageComponent {
   }
 
   printForm() {
+    // Ensure postcode is a string
     this.signupForm.patchValue({
       postcode: this.signupForm.value.postcode.toString(),
     });
+  
+    // Prepare the user data
     const newuser: User = {
       userName: this.signupForm.value.username,
       password: this.signupForm.value.password,
@@ -193,19 +198,60 @@ export class SignupPageComponent {
       alley: this.signupForm.value.alley,
       landTypeFV: this.signupForm.value.interestLand,
     };
-    console.log(newuser);
-    
+  
+    // Step 1: Create the user
     this.authService.signup(newuser).subscribe({
-      next: () => {
-        alert('User created successfully');
-        this.router.navigate(['/Signin']);
+      next: (response: any) => {
+        console.log('User created successfully:', response);
+        const userId = response.UserID;
+  
+        // Step 2: Upload the profile picture if selected
+        const profilePicture = this.selectedFile;
+        if (profilePicture) {
+          this.authService.uploadProfile(userId,profilePicture).subscribe({
+            next: (uploadResponse) => {
+              console.log('Profile picture uploaded successfully:', uploadResponse);
+              alert('User created and profile picture uploaded successfully');
+              this.router.navigate(['/Signin']);
+            },
+            error: (uploadError) => {
+              console.error('Profile picture upload failed:', uploadError);
+              alert('User created, but profile picture upload failed');
+            }
+          });
+        } else {
+          alert('User created successfully');
+          this.router.navigate(['/Signin']);
+        }
       },
       error: (error) => {
+        console.error('User creation failed:', error);
         this.errorMessage = error.error.message;
-      },
+      }
     });
   }
 
+ // Trigger file input when the button is clicked
+ triggerFileInput(): void {
+  const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
+  fileInput.click();
+}
+
+// Handle file selection
+onFileSelected(event: any): void {
+  const file: File = event.target.files[0];
+  if (file) {
+    // Update the form control
+    this.selectedFile = file;
+
+    // Read the file and create a preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
   ngOnInit() {
     this.thaiLocationService?.getProvince().then((data) => {
       this.Province = data;

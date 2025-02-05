@@ -49,7 +49,7 @@ export class ProfilePageComponent implements OnInit {
   errorMessage: string = '';
   loading: boolean = true;
   private thaiLocationService?: ThaiLocationService;
-
+  profilePicture: File | null = null;
   
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
@@ -110,6 +110,7 @@ export class ProfilePageComponent implements OnInit {
     this.Sub_district = (await this.thaiLocationService?.getdistrict()) || [];
     this.Postcode = (await this.thaiLocationService?.getPostcode()) || [];
 
+    // set data to form
     this.userService.getUserData().subscribe({
       next: (response: any) => {
         this.profileForm.enable();
@@ -130,7 +131,20 @@ export class ProfilePageComponent implements OnInit {
           gender : response.gender,
         })
         this.profileForm.disable();
+        const userID = response.Id;
+        // Get profile picture
+        this.userService.getProfilePicture(10).subscribe({
+          next: (response) => {
+            console.log('Profile picture:', response);
+            this.profilePicture = response;
+          },
+          error: (error) => {
+            console.error(error);
+            this.loading = false;
+          },
+        });
         this.loading = false;
+
       },
       error: (error: any) => {
         console.error(error);
@@ -344,4 +358,5 @@ export class ProfilePageComponent implements OnInit {
     get postcodeControl(): FormControl {
       return this.profileForm.get('postcode') as FormControl;
     }
+
 }

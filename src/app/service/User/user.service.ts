@@ -8,6 +8,7 @@ import { User } from 'model/user.interface';
   providedIn: 'root'
 })
 export class UserService {
+  private image_URL = 'http://192.168.1.7:30600';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -27,6 +28,9 @@ updateUser(user: User): Observable<any> {
       withCredentials: true
     });
   }
-
+  getProfilePicture(userID: number): Observable<any> {
+    // return this.http.get(`${this.image_URL}/get_profile/${userID}`);
+    return this.http.get('http://192.168.1.7:30600/get_profile/10')
+  }
    
 }
