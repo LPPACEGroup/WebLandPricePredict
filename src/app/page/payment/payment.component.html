@@ -23,10 +23,13 @@
 
       <p class="text-darkBlue font-bold mt-6">ระดับสมาชิกที่ต้องการ: <span class="font-bold">{{tier}}</span></p>
       <p class="text-darkBlue font-bold mt-6">ราคาที่ต้องจ่าย: <span class="font-bold">{{price}}</span></p>
-      <div
-        class="mt-4 border-2 border-blue bg-lightBlue rounded-md h-[200px] flex flex-col justify-center items-center">
+      <div (click)="triggerFileInput()"
+        class="mt-4 border-2 border-blue bg-lightBlue rounded-md h-[500px] flex flex-col justify-center items-center">
         <i class="fa-solid fa-camera text-primary-500 text-2xl"></i>
-        <img class="w-[100px] h-[100px] object-contain" src="assets\icons\Uploadimg.svg" alt="icon">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" id="profilePicture" class="hidden">
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Picture Preview" class="w-full h-full  ">
+
+        <img *ngIf="!imagePreview" class="w-[100px] h-[300px] object-contain" src="assets\icons\Uploadimg.svg" alt="icon" >
       </div>
 
       <div class="mt-6">
