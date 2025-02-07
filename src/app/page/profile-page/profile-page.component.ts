@@ -49,7 +49,7 @@ export class ProfilePageComponent implements OnInit {
   errorMessage: string = '';
   loading: boolean = true;
   private thaiLocationService?: ThaiLocationService;
-  profilePicture: File | null = null;
+  profilePicture: string = '';
   
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
@@ -131,18 +131,27 @@ export class ProfilePageComponent implements OnInit {
           gender : response.gender,
         })
         this.profileForm.disable();
+        // clear profile picture
+        if (this.profilePicture) {
+          URL.revokeObjectURL(this.profilePicture);
+        }
+
+
         const userID = response.Id;
         // Get profile picture
-        this.userService.getProfilePicture(10).subscribe({
+        this.userService.getProfilePicture(userID).subscribe({
           next: (response) => {
             console.log('Profile picture:', response);
-            this.profilePicture = response;
+        
+            const blob = new Blob([response], { type: response.type }); 
+            this.profilePicture = URL.createObjectURL(blob);
           },
           error: (error) => {
             console.error(error);
             this.loading = false;
           },
         });
+        
         this.loading = false;
 
       },
@@ -254,6 +263,13 @@ export class ProfilePageComponent implements OnInit {
       }
     });
     
+  }
+
+  // clear profile memory  when component is destroyed
+  ngOnDestroy() {
+    if (this.profilePicture) {
+      URL.revokeObjectURL(this.profilePicture);
+    }
   }
 
   startEditing() {

@@ -85,16 +85,18 @@ export class AuthService {
   }
 
   uploadProfile(userID: number, file: File): Observable<any> {
+    console.log(file);
+    
     const url = `${this.image_URL}/upload_profile`;
     const formData = new FormData();
     formData.append('UserID', userID.toString());
-    formData.append('file', file);
+    formData.append('profile_image', file);
     
     return this.http.post<any>(url, formData);
   }
 
   getTier(): Observable<any> {
-    return this.http.get(`${this.apiURL}/auth/tier`, { withCredentials: true });
+    return this.http.get(`${this.apiURL}/auth/tier` ,{ withCredentials: true });
   }
 
 

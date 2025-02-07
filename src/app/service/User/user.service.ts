@@ -28,15 +28,18 @@ updateUser(user: User): Observable<any> {
       withCredentials: true
     });
   }
-  getProfilePicture(userID: number): Observable<any> {
-    // return this.http.get(`${this.image_URL}/get_profile/${userID}`);
-    return this.http.get('http://192.168.1.7:30600/get_profile/10')
+  getProfilePicture(userID: number): Observable<Blob> {
+    return this.http.get(`http://192.168.1.7:30600/get_profile/${userID}`, {
+      responseType: 'blob'
+    });
   }
   uploadPaymentProof(userID: number,file: File): Observable<any> {
+
+    
     const url = `${this.image_URL}/submit_payment`;
     const formData = new FormData();
     formData.append('UserID', userID.toString());
-    formData.append('file', file);
+    formData.append('profile_image', file);
     
     return this.http.post<any>(url, formData);
 
