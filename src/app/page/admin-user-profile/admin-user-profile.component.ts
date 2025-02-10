@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UsermanagementService } from 'app/service/Usermanagement/usermanagement.service';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from 'app/service/User/user.service';
+import { Router } from '@angular/router';
 
 export interface UserPaymentDetails {
   UserID: string; // Assuming UserID is a string, change to number if necessary.
@@ -41,7 +43,11 @@ export class AdminUserProfileComponent {
   tierForm:FormGroup;
   verifyForm:FormGroup;
   loading:boolean =true;
-  constructor(private UMService:UsermanagementService,private route :ActivatedRoute ,private fb:FormBuilder) {
+  profilePicture: string = '';
+  paymentPicture: string | undefined ;
+  slipImage: string ='';
+
+  constructor(private UMService:UsermanagementService,private route :ActivatedRoute ,private fb:FormBuilder, private userService: UserService,private router :Router) {
     this.userupdateForm = fb.group({
       username: ['', [Validators.required]], // Example: username with min length
       email: ['', [Validators.required, Validators.email]], // Email validation
@@ -70,7 +76,32 @@ export class AdminUserProfileComponent {
     // Retrieve the ID from the route
     this.route.params.subscribe(params => {
       this.userId = +params['id']; // Convert the ID to a number
+      // Retrieve the profile picture after getting the user ID
+      this.userService.getProfilePicture(this.userId).subscribe({
+        next: (response) => {
+          const blob = new Blob([response], { type: response.type }); 
+          this.profilePicture = URL.createObjectURL(blob);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
+      const userID = this.userId.toString();
+      this.UMService.getLastPayment(userID).subscribe({
+        next: (response) => {
+      
+          const blob = new Blob([response], { type: response.type }); 
+          this.slipImage = URL.createObjectURL(blob);
+          console.log(this.slipImage);
+          
+
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
     })
+    
 
     // Retrieve the user details
     this.UMService.getUserPayment(this.userId).subscribe(
@@ -153,6 +184,13 @@ export class AdminUserProfileComponent {
     }
     this.UMService.updateverify(this.userId,newVerification).subscribe(res=>{
       console.log(res);
+      
+    })
+  }
+  deleteUser()
+  {
+    this.UMService.deleteUser(this.userId).subscribe(res=>{
+      this.router.navigate(['/AdminUserManage']);
       
     })
   }

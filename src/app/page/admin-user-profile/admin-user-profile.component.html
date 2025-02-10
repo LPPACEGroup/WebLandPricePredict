@@ -7,7 +7,9 @@
 
         <section class="w-[50%] bg-white rounded-lg shadow p-6">
           <div class="relative">
-            <img src="\assets\imgs\default profile img.png" alt="Avatar"
+            <img *ngIf="!profilePicture" src="\assets\imgs\default profile img.png" alt="Avatar"
+              class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
+              <img *ngIf="profilePicture" [src]="profilePicture" alt="avatar"
               class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
             <button
               class="absolute top-0 right-0 bg-red-500 text-white rounded-md text-sm px-4 py-2 flex items-center gap-2"
@@ -58,11 +60,10 @@
             <div class="flex justify-between items-start">
 
               <div class="w-[50%] flex flex-col items-center">
-                <div class="w-full h-full flex items-center justify-center bg-lightBlue p-4">
-                  <div class="">
-                    <img src="\assets\imgs\recipt.png" alt="receipt-picture" />
-                  </div>
+                <div *ngIf="slipImage===''" class="w-[280px] h-[300px] flex items-center justify-center bg-lightBlue p-4">
+                  <p>ไม่มีรูปภาพ</p>
                 </div>
+                <img *ngIf="slipImage!=''" [src] = "slipImage"/>
                 <div class="grid grid-cols-2 mt-2 ">
                   <p class="text-[10px] font-bold text-darkBlue">เวลาในการชำระเงิน:</p>
                   <p class="text-[10px] font-medium text-center" [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">{{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
@@ -150,7 +151,7 @@
               <img src="\assets\icons\warning.svg" alt="delete" class="w-20 h-20 mb-4">
               <p>คุณต้องการจะลบ บัญชี นี้จริงๆ ใช่หรือไม่</p>
               <div class="flex flex-row justify-around w-full mt-4">
-                <button class="btn bg-darkBlue text-white rounded-full px-6 py-1">ยืนยัน</button>
+                <button class="btn bg-darkBlue text-white rounded-full px-6 py-1" (click)="deleteUser()">ยืนยัน</button>
                 <button class="btn bg-babyBlue text-darkBlue rounded-full px-6 py-1">ยกเลิก</button>
               </div>
             </form>

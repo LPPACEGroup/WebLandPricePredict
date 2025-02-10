@@ -80,13 +80,13 @@
                 <!-- Gray Circle (Fallback if no image is selected) -->
                 <div *ngIf="!imagePreview" class="bg-grey w-24 h-24 rounded-full"></div>
                 <!-- Hidden File Input -->
-                <input type="file" (change)="onFileSelected($event)" accept="image/*" id="profilePicture" class="hidden">
+                <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden" >
                 <!-- Upload Button -->
                 <button type="button" class="btn btn-sm absolute -bottom-2 -right-2 bg-white text-grey border-gray-400 rounded-full p-2 shadow-md" (click)="triggerFileInput()">
                     <mat-icon fontIcon="image"></mat-icon>
                 </button>
             </div>
-    
+            <p>ไฟล์ต้องเป็น jpg และ png เท่านั้น</p>
             <!-- Rest of the Form -->
             <div class="flex w-9/12 justify-center items-center flex-wrap">
                 <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('firstName')?.hasError('pattern') && signupForm.get('firstName')?.touched">
