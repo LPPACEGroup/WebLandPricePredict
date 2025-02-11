@@ -83,7 +83,9 @@ export class MapPageComponent implements OnInit {
   Areaslider = new AreaSlider();
   total_followLand = 0;
   landImage: any;
-  image_URL = ""
+  image_URL = '';
+  currentIndex = 0;
+  max = 2;
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
@@ -129,15 +131,39 @@ export class MapPageComponent implements OnInit {
       this.sortedLandList = this.landList;
     });
 
-    this.landListService.getLandImage(1).subscribe((response) => {
-      this.landImage = response;
-      this.image_URL = this.landImage.images[0].file_path;
-      console.log(this.landImage);
-      
-      console.log(this.image_URL);
-      
-    }
-  );
+    // this.landListService.getLandImage(1).subscribe((response) => {
+    //   this.landImage = response;
+    //   this.image_URL = this.landImage.images[0].file_path;
+    //   console.log(this.landImage);
+
+    //   console.log(this.image_URL);
+    // });
+
+  }
+
+  images: { index: number; id: string; mimeType: string; filePath: string; blobUrl?: string }[] = [];
+
+  fetchLandImages(landDataId:string): void {
+    this.landListService.getLandImages(landDataId).subscribe(
+      (response) => {
+        console.log('Total images:', response.total_images);
+        this.images = response.images.map((img: { image_id: any; mime_type: any; file_path: any; }, index: number) => ({
+          index: index , // Start from 1 instead of 0
+          id: img.image_id,
+          mimeType: img.mime_type,
+          filePath: img.file_path
+        }));
+        this.max = this.images.length;
+
+        // Fetch image blobs
+        this.images.forEach(image => {
+          this.landListService.getLandImage(image.id).subscribe(blob => {
+            image.blobUrl = URL.createObjectURL(blob);
+          });
+        });
+      },
+      (error) => console.error('Error fetching land images:', error)
+    );
   }
 
   onFollowChanged(event: any) {
@@ -226,6 +252,7 @@ export class MapPageComponent implements OnInit {
     if (!target.closest('.followbutton')) {
       this.selectedLand = item;
       this.fowllowState = this.selectedLand.Follow;
+      this.fetchLandImages(item.LandDataID);
       modal.showModal();
     }
   }
@@ -377,4 +404,27 @@ export class MapPageComponent implements OnInit {
       event.preventDefault(); // Block disallowed keys
     }
   }
+
+  prevSlide(): void {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    } else {
+      this.currentIndex = this.max - 1;
+    }
+  }
+
+  nextSlide(): void {
+    if (this.currentIndex < this.max - 1) {
+      this.currentIndex++;
+    } else {
+      this.currentIndex = 0;
+    }
+  }
+
+  autoSlide(): void {
+    setInterval(() => {
+      this.nextSlide();
+    }, 3000);
+  }
+
 }

@@ -16,6 +16,9 @@ export class LandCardComponent {
   fowllowState = false;
   tier!: string;
   isFollowingInProgress: boolean = false;
+  images: { id: string; mimeType: string; filePath: string; blobUrl?: string }[] = [];
+  imageBlobUrls: string = '';
+
 
   constructor(
     private landListService: LandListService,
@@ -84,8 +87,33 @@ export class LandCardComponent {
     );
   }
 
+
+
   ngOnInit() {
 
     this.fowllowState = this.item.Follow;
+
+    this.landListService.getLandImages(this.item.LandDataID).subscribe(
+      (response: { total_images: any; images: { image_id: any; mime_type: any; file_path: any; }[]; }) => {
+        // console.log('Total images:', response.total_images);
+        this.images = response.images.map((img: { image_id: any; mime_type: any; file_path: any; }) => ({
+          id: img.image_id,
+          mimeType: img.mime_type,
+          filePath: img.file_path
+        }));
+        this.landListService.getLandImage(this.images[0].id).subscribe(
+          (blob: Blob) => {
+            const url = URL.createObjectURL(blob);
+            this.imageBlobUrls = url;
+          },
+          (error: any) => {
+            console.error('Error getting land image:', error);
+          }
+        );
+      },
+      (error: any) => {
+        console.error('Error getting land images:', error);
+      }
+    );
   }
 }

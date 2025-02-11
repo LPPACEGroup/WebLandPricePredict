@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { FollowLand } from 'model/follow.interface';
 import { AuthService } from '../Auth/auth.service';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +36,14 @@ export class LandListService {
     return this.http.get(`${this.apiURL}/total-follow`, { withCredentials: true });
   }
 
-  getLandImage(id: number): Observable<any> {
-    return this.http.get(`${this.image_URL}/get_land_images/fe461e28-f839-4575-ad1b-6e149f05ba60`);
+  getLandImages(landDataId: string): Observable<any> {
+    const url = `${this.image_URL}/get_land_images/${landDataId}`;
+    return this.http.get<any>(url);
+  }
+
+  // Fetch single land image by image_id
+  getLandImage(imageId: string): Observable<Blob> {
+    const url = `${this.image_URL}/get_land_image/${imageId}`;
+    return this.http.get(url, { responseType: 'blob' });
   }
 }

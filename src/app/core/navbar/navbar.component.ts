@@ -77,6 +77,7 @@ export class NavbarComponent {
   }
 
   public triggerMarkAllAsRead() {
+    this.hasUnreadNews = false;
     if (this.notiComponent) {
       this.notiComponent.markAllAsRead();
     }
