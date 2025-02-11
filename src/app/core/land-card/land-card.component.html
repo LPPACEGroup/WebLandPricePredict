@@ -1,6 +1,6 @@
 <div class="h-fit w-full rounded-2xl grid grid-cols-2 overflow-clip border border-grey">
-  <div class="w-full h-full"><img class="w-full h-full"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhjfIax41C7jv5Ln0OTl2-D_-Ss07ghDpGyA&s" alt="">
+  <div class="w-full h-full"><img *ngIf="imageBlobUrls !==''" class="w-full h-full" [src]="imageBlobUrls" alt="">
+    <div *ngIf="imageBlobUrls ===''" class="w-full h-full flex justify-center items-center bg-lightBlue ">ไม่มีรูปภาพตัวอย่าง</div>
   </div>
   <div class="p-3  text-sm ">
     <div class="h-fit border-grey border-b pb-2">

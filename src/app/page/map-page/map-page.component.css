@@ -10,3 +10,48 @@
 .toggle:checked {
   --tglbg: #00A76F; /* Green as defined */
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.carousel-container {
+  width: 100%;
+  height: 325px;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-slide {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+
+
+.c-bth {
+  position: absolute;
+  height: fit-content;
+  width: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+

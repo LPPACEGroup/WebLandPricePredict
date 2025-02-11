@@ -49,8 +49,10 @@ export class ProfilePageComponent implements OnInit {
   errorMessage: string = '';
   loading: boolean = true;
   private thaiLocationService?: ThaiLocationService;
-
-  
+  profilePicture: string = '';
+  selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
+  userId  :number = -1;
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
   ) {
@@ -110,6 +112,7 @@ export class ProfilePageComponent implements OnInit {
     this.Sub_district = (await this.thaiLocationService?.getdistrict()) || [];
     this.Postcode = (await this.thaiLocationService?.getPostcode()) || [];
 
+    // set data to form
     this.userService.getUserData().subscribe({
       next: (response: any) => {
         this.profileForm.enable();
@@ -130,7 +133,32 @@ export class ProfilePageComponent implements OnInit {
           gender : response.gender,
         })
         this.profileForm.disable();
-        this.loading = false;
+        // clear profile picture
+        if (this.profilePicture) {
+          URL.revokeObjectURL(this.profilePicture);
+        }
+
+
+        this.userId = response.Id;
+        
+        // Get profile picture
+        this.userService.getProfilePicture(this.userId).subscribe({
+          next: (response) => {
+            console.log('Profile picture:', response);
+        
+            const blob = new Blob([response], { type: response.type }); 
+            this.profilePicture = URL.createObjectURL(blob);
+            console.log(this.profilePicture);
+            this.loading = false;
+
+          },
+          error: (error) => {
+            console.error(error);
+            this.loading = false;
+          },
+        });
+        
+
       },
       error: (error: any) => {
         console.error(error);
@@ -242,9 +270,33 @@ export class ProfilePageComponent implements OnInit {
     
   }
 
+  // clear profile memory  when component is destroyed
+  ngOnDestroy() {
+    if (this.profilePicture) {
+      URL.revokeObjectURL(this.profilePicture);
+    }
+  }
+
+// Handle file selection
+onFileSelected(event: any): void {
+  const file: File = event.target.files[0];
+  if (file) {
+    // Update the form control
+    this.selectedFile = file;
+
+    // Read the file and create a preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
   startEditing() {
     this.sEditing = true;
     this.resetForm();
+    this.imagePreview = this.profilePicture;
     this.profileForm.enable();
     
   }
@@ -291,7 +343,23 @@ export class ProfilePageComponent implements OnInit {
       this.userService.updateUser(profileUpdate).subscribe({
         next: () => {
           alert('Profile Update successfully');
-          window.location.reload();
+
+          if(this.selectedFile){
+            this.authService.uploadProfile(this.userId,this.selectedFile).subscribe({
+              next: (response) => {
+                console.log(response);
+                window.location.reload();
+
+              },
+              error: (error) => {
+                console.error(error);
+              },
+            });
+          }
+          else{
+            window.location.reload();
+          }
+          
         },
         error: (error) => {
           this.errorMessage = error.error.message;
@@ -308,7 +376,10 @@ export class ProfilePageComponent implements OnInit {
   
   }
 
-
+triggerFileInput(): void {
+  const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
+  fileInput.click();
+}
   private resetForm() {
 
   }
@@ -344,4 +415,5 @@ export class ProfilePageComponent implements OnInit {
     get postcodeControl(): FormControl {
       return this.profileForm.get('postcode') as FormControl;
     }
+
 }
