@@ -8,7 +8,6 @@ import { PinnedPropertyExpandComponent } from "../../core/pinned-property-expand
 import { DashboardFollowComponent } from 'app/core/dashboard-follow/dashboard-follow.component';
 import { LandListService } from 'app/service/LandList/land-list.service';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexStroke, ApexGrid } from 'ng-apexcharts';
 import { appConfig } from 'app/app.config';
 
@@ -21,9 +20,7 @@ export type ChartOptions = {
   grid: ApexGrid;
 };
 
-=======
 import { DashboardService } from 'app/service/Dashboard/dashboard.service';
->>>>>>> 5e414c2c8184ab4ccc59207c74473886c7959577
 @Component({
   selector: 'app-dashboard',
   standalone: true,
