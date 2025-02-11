@@ -7,6 +7,8 @@ import { Observable, throwError } from 'rxjs';
 export class UsermanagementService {
 
   apiURL = 'http://localhost:8000/api';
+  private image_URL = 'http://192.168.1.7:30600';
+
   constructor(private http: HttpClient) {
 
    }
@@ -31,4 +33,9 @@ export class UsermanagementService {
     updateverify(userID: number, verification: any): Observable<any> {
       return this.http.put(`${this.apiURL}/user-management/${userID}/verification`, verification, { withCredentials: true });
     }
+    getLastPayment(userID: string): Observable<any> {
+      return this.http.get(`${this.image_URL}/get_latest_slip/${userID}`, {       responseType: 'blob'
+      });
+    }
+
 }

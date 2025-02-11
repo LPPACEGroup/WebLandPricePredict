@@ -1,12 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-notislot',
+  standalone: true,
+  imports: [],
   templateUrl: './notislot.component.html',
-  styleUrls: ['./notislot.component.css'] // Use styleUrls instead of styleUrl
+  styleUrl: './notislot.component.css'
 })
 export class NotislotComponent {
-  @Input() data!: string;
-  @Input() newsType!: string;
-  @Input() date!: string;
+  @Input() Topic: string = ''
+  @Input() Date : Date = new Date()
+  @Input() Link: string = '';
+  
+
+  constructor() {
+    
+  }
+
+  ngOnInit() {
+    
+  }
+
 }

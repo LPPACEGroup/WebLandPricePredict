@@ -22,7 +22,7 @@ export class MarkersortService {
   }
 
   // Method to sort data based on proximity to target coordinates
-  sortByProximity(data: any[], targetCoords: [number, number][]): any[] {
+  sortByProximity(data: any[], targetCoords: [number, number][],maxdistance:number): any[] {
     return data.map(item => {
       // Calculate the minimum distance to any target coordinate
       const distances = targetCoords.map(([lat, lon]) =>
@@ -30,7 +30,7 @@ export class MarkersortService {
       );
       const minDistance = Math.min(...distances);
       // Check if within 10 km of any target coordinate
-      return { ...item, distance: minDistance, inRange: minDistance <= 5 };
+      return { ...item, distance: minDistance, inRange: minDistance <= maxdistance };
     })
     .sort((a, b) => {
       // Prioritize items in range, then by distance
