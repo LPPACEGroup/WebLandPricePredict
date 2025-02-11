@@ -60,14 +60,15 @@
     </ul>
 
     <!-- notification -->
-    <div class="lg:flex">
-      <div class="dropdown dropdown-end">
+    <div class="lg:flex" >
+      <div class="dropdown dropdown-end" (click)="triggerMarkAllAsRead()">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-          <div class="w-10 rounded-full">
+          <div class="w-10 rounded-full relative">
             <img src="assets/icons/bell.svg" alt="Notifications" class="w-10 h-10">
+            <div *ngIf="hasUnreadNews" class="bg-red-500 rounded-full w-3 h-3 absolute bottom-1 right-1"></div>
           </div>
         </div>
-        <app-noti class="z-10"></app-noti>
+        <app-noti class="z-10" (unreadNews)="updateUnreadNewsStatus($event)"></app-noti>
       </div>
     </div>
 

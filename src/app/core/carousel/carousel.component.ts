@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BlogService } from 'app/service/Blog/blog.service';
 
 
 @Component({
@@ -10,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent implements OnInit {
+  news :any;
+  loading = true;
 
   images = [
     { src: '/assets/imgs/news1.png', alt: 'Slide 1' },
@@ -18,10 +21,21 @@ export class CarouselComponent implements OnInit {
   currentIndex = 0;
   max = 2;
 
-  constructor() {}
+  constructor(private blogService:BlogService) {}
 
   ngOnInit(): void {
     this.autoSlide();
+    this.blogService.getNews(10).subscribe({
+      next: (data) => {
+        this.news = data.map((item: any, index: number) => ({...item, index: index}));
+        this.loading = false;
+        this.max = this.news.length;
+        console.log(this.news);
+        console.log(this.max);
+        
+        
+      }
+    });
   }
 
   getTransform(): string {
@@ -48,6 +62,6 @@ else {
   autoSlide(): void {
     setInterval(() => {
       this.nextSlide();
-    }, 3000); // Auto-slide every 3 seconds
+    }, 3000); 
   }
 }

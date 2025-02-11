@@ -10,6 +10,8 @@ import { AuthService } from '../Auth/auth.service';
 export class LandListService {
 
   apiURL = 'http://localhost:8000/api';
+  private image_URL = 'http://192.168.1.7:30600';
+
   constructor(private http:HttpClient, private auth :AuthService) { }
 
   getData(): Observable<any> {
@@ -30,5 +32,9 @@ export class LandListService {
 
   getTotalFollowLand(): Observable<any> {
     return this.http.get(`${this.apiURL}/total-follow`, { withCredentials: true });
+  }
+
+  getLandImage(id: number): Observable<any> {
+    return this.http.get(`${this.image_URL}/get_land_images/fe461e28-f839-4575-ad1b-6e149f05ba60`);
   }
 }

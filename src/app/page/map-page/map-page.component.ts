@@ -82,6 +82,8 @@ export class MapPageComponent implements OnInit {
   Priceslider = new PriceSlider();
   Areaslider = new AreaSlider();
   total_followLand = 0;
+  landImage: any;
+  image_URL = ""
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
@@ -126,6 +128,16 @@ export class MapPageComponent implements OnInit {
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
     });
+
+    this.landListService.getLandImage(1).subscribe((response) => {
+      this.landImage = response;
+      this.image_URL = this.landImage.images[0].file_path;
+      console.log(this.landImage);
+      
+      console.log(this.image_URL);
+      
+    }
+  );
   }
 
   onFollowChanged(event: any) {
