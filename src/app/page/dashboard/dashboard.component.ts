@@ -8,14 +8,30 @@ import { PinnedPropertyExpandComponent } from "../../core/pinned-property-expand
 import { DashboardFollowComponent } from 'app/core/dashboard-follow/dashboard-follow.component';
 import { LandListService } from 'app/service/LandList/land-list.service';
 import { CommonModule } from '@angular/common';
+import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexStroke, ApexGrid } from 'ng-apexcharts';
+import { appConfig } from 'app/app.config';
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  colors: string[];
+  grid: ApexGrid;
+};
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [  DashboardFollowComponent,CommonModule],
+  imports: [  DashboardFollowComponent,CommonModule,ChartComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
+
+
+
 export class DashboardComponent {
+
   public data1: { date: string, value: number }[] = [];
   public data2: { date: string, value: number }[] = [];
   followedLand = [];
@@ -45,15 +61,15 @@ export class DashboardComponent {
     this.landListService.readFollowLand().subscribe((data) => {
       this.followedLand = data;
       console.log(this.followedLand);
-      
+
     });
   }
 
   onFollowChanged() {
     this.landListService.readFollowLand().subscribe(response => {
-      
+
       this.followedLand = response;
-      
+
     });  }
 
 }
@@ -62,3 +78,35 @@ export class SelectMultipleExample {
   toppingList: string[] = ['แสดงเขตทั้งหมด', 'เขตลาดกระบัง', 'เขตมีนบุรี', 'เขตคลองเตย', 'เขตวัฒนา',];
 }
 // Add this method to the DashboardComponent class
+
+export class DashboardGraphComponent {
+  public chartOptions: Partial<ChartOptions>;
+
+  constructor() {
+    this.chartOptions = {
+      series: [
+        {
+          name: "Desktops",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "line"
+      },
+      xaxis: {
+        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+      },
+      stroke: {
+        curve: "smooth"
+      },
+      colors: ["#FF1654", "#247BA0"],
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+          opacity: 0.5
+        }
+      }
+    };
+  }
+}
