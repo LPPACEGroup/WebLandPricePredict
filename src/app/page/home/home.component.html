@@ -9,22 +9,23 @@
       </div>
 
       <div class="container">
-        <div class="guide-box">
-          <a href="#main-features" class="guid-link">แนะนำเมนูหลัก</a>
+        <div class="guide-box cursor-pointer" (click)="scrollToElementbyId('main-features')">
+          <a  class="guid-link">แนะนำเมนูหลัก</a>
         </div>
 
-        <div class="guide-box">
-          <a href="#other-features" class="guid-link">ฟีเจอร์อื่น ๆ</a>
+        <div class="guide-box cursor-pointer" (click)="scrollToElementbyId('other-features')">
+          <a  class="guid-link">ฟีเจอร์อื่น ๆ</a>
         </div>
-        <div class="guide-box">
-          <a href="#intro" class="guid-link">ที่มาโครงงาน</a>
+        <div class="guide-box cursor-pointer" (click)="scrollToElementbyId('intro')">
+          <a  class="guid-link">ที่มาโครงงาน</a>
         </div>
-        <div class="guide-box">
-          <a href="#team" class="guid-link">ทีมผู้พัฒนา</a>
+        <div class="guide-box cursor-pointer" (click)="scrollToElementbyId('membership')">
+          <a  class="guid-link">แพ็คเกจสมาชิก</a>
         </div>
-        <div class="guide-box">
-          <a href="#membership" class="guid-link">แพ็คเกจสมาชิก</a>
+        <div class="guide-box cursor-pointer" (click)="scrollToElementbyId('team')">
+          <a  class="guid-link">ทีมผู้พัฒนา</a>
         </div>
+
       </div>
 
       <div class="container">
@@ -277,7 +278,8 @@
                 </li>
 
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"   [routerLink]="['/Payment', 'Tier1']"
+
                 style="bottom: 10px;">899 B</button>
             </div>
           </div>
@@ -318,7 +320,7 @@
                   <span>รัศมีรอบได้ 2 km</span>
                 </li>
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white">1499
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white" [routerLink]="['/Payment', 'Tier2']">1499
                 B</button>
             </div>
           </div>
@@ -359,7 +361,7 @@
                   <span>รัศมีรอบได้ 3 km</span>
                 </li>
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white">1499
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white" [routerLink]="['/Payment', 'Tier3']">2599
                 B</button>
             </div>
           </div>

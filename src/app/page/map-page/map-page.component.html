@@ -5,8 +5,24 @@
   </app-map>
   <dialog id="fullland_detail" class="modal">
     <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll ">
-      <div class="w-full h-24 overflow-clip flex-center"><img class="w-full "
-          src="https://prod-mfp-imgsrv.tillitsdone.com/uploads/medium__2fb08de653.png" alt="">
+      <div class="w-full h-[400px] overflow-clip flex-center">
+        <div *ngIf="!loading" class="carousel-container">
+          <button class="prev c-bth" (click)="prevSlide()">&#10094;</button>
+        
+          
+
+        
+          <ng-container *ngFor="let image of images" class="w-full h-full ">
+            <div *ngIf="currentIndex === image.index" class=" w-full h-full flex justify-center items-center">
+              <img [src]="image.blobUrl" class=" object-center" alt="Land Image">
+            </div>
+
+          </ng-container>
+        
+        
+          <button class="next c-bth" (click)="nextSlide()">&#10095;</button>
+        
+        </div>
       </div>
       <div class="modal-action flex flex-col m-6">
         <div class="border-b-2 py-5 flex flex-row">
@@ -313,5 +329,16 @@
 
     </div>
 
+    <!-- <img [src]="image_URL"/> -->
+    <!-- <div *ngIf="images.length > 0">
+      <h2>Land Images</h2>
+      <div *ngFor="let image of images">
+        <p><b>Image ID:</b> {{ image.id }}</p>
+        <p><b>MIME Type:</b> {{ image.mimeType }}</p>
+        <p><b>File Path:</b> {{ image.filePath }}</p>
+        <img *ngIf="image.blobUrl" [src]="image.blobUrl" [alt]="'Image ' + image.id" width="300">
+      </div>
+    </div> -->
+    
   </div>
 </div>

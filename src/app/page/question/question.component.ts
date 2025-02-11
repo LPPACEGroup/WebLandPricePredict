@@ -31,6 +31,8 @@ export class QuestionComponent {
         this.searchBlogList = data;
       }
     });
+
+
   }
 
   searchBlog(event: Event) {

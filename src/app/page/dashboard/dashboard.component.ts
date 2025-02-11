@@ -8,6 +8,7 @@ import { PinnedPropertyExpandComponent } from "../../core/pinned-property-expand
 import { DashboardFollowComponent } from 'app/core/dashboard-follow/dashboard-follow.component';
 import { LandListService } from 'app/service/LandList/land-list.service';
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
 import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexXAxis, ApexStroke, ApexGrid } from 'ng-apexcharts';
 import { appConfig } from 'app/app.config';
 
@@ -20,6 +21,9 @@ export type ChartOptions = {
   grid: ApexGrid;
 };
 
+=======
+import { DashboardService } from 'app/service/Dashboard/dashboard.service';
+>>>>>>> 5e414c2c8184ab4ccc59207c74473886c7959577
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -36,7 +40,7 @@ export class DashboardComponent {
   public data2: { date: string, value: number }[] = [];
   followedLand = [];
 
-  constructor(   private landListService: LandListService,
+  constructor(   private landListService: LandListService,private dashBoardService: DashboardService,
   ) {
     // ts2 คือเวลา
     let ts2 = 1484418600000;
@@ -60,8 +64,16 @@ export class DashboardComponent {
   ngOnInit() {
     this.landListService.readFollowLand().subscribe((data) => {
       this.followedLand = data;
-      console.log(this.followedLand);
+      // console.log(this.followedLand);
 
+    });
+    this.dashBoardService.getDashboardData(4).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.error('Error:', error);
+      }
     });
   }
 

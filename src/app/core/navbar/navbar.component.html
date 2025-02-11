@@ -52,8 +52,6 @@
           <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-darkBlue">
             <li routerLink="Calculator"><a>เครื่องคิดเลข</a></li>
             <li><a>คู่มือการใช้งาน</a></li>
-            <li><a [routerLink]="['/home']" fragment="membership">แพ็คเกจสมาชิก</a></li>
-            <li routerLink="Contact"><a>ติดต่อเรา</a></li>
 
           </ul>
         </div>
@@ -61,14 +59,15 @@
     </ul>
 
     <!-- notification -->
-    <div class="lg:flex">
-      <div class="dropdown dropdown-end">
+    <div class="lg:flex" >
+      <div class="dropdown dropdown-end" (click)="triggerMarkAllAsRead()">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-          <div class="w-10 rounded-full">
+          <div class="w-10 rounded-full relative">
             <img src="assets/icons/bell.svg" alt="Notifications" class="w-10 h-10">
+            <div *ngIf="hasUnreadNews" class="bg-red-500 rounded-full w-3 h-3 absolute bottom-1 right-1"></div>
           </div>
         </div>
-        <app-noti class="z-10"></app-noti>
+        <app-noti class="z-10" (unreadNews)="updateUnreadNewsStatus($event)"></app-noti>
       </div>
     </div>
 
@@ -77,8 +76,8 @@
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img src="assets\imgs\default profile img.png" alt="More" class="w-10 h-10">
-          </div>
+            <img [src]="profilePicture" alt="avatar"
+              class="w-10 h-10 rounded-full object-cover " />          </div>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
           <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>

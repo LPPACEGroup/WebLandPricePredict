@@ -8,6 +8,8 @@ import { User } from 'model/user.interface';
 })
 export class AuthService {
   apiURL = 'http://localhost:8000/api';
+  private image_URL = 'http://192.168.1.7:30600';
+
   private signedIn = new BehaviorSubject<boolean>(false);
   isSignedIn$ = this.signedIn.asObservable();
   private role = new BehaviorSubject<string>('');
@@ -81,4 +83,21 @@ export class AuthService {
   resetPassword(token:string,new_password: string): Observable<any> {
     return this.http.post(`${this.apiURL}/auth/reset-password`, {token,new_password}, { withCredentials: true });
   }
+
+  uploadProfile(userID: number, file: File): Observable<any> {
+    
+    const url = `${this.image_URL}/upload_profile`;
+    const formData = new FormData();
+    formData.append('UserID', userID.toString());
+    formData.append('profile_image', file);
+    
+    
+    return this.http.post<any>(url, formData);
+  }
+
+  getTier(): Observable<any> {
+    return this.http.get(`${this.apiURL}/auth/tier` ,{ withCredentials: true });
+  }
+
+
 }
