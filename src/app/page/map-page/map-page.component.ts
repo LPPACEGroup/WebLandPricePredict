@@ -22,6 +22,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FollowLand } from 'model/follow.interface';
 import { AuthService } from 'app/service/Auth/auth.service';
+import { AfterViewInit } from '@angular/core';
+
 interface LocationResult {
   place_id: number;
   name: string;
@@ -59,13 +61,12 @@ export class AreaSlider {
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
 })
-export class MapPageComponent implements OnInit {
+export class MapPageComponent implements OnInit, AfterViewInit {
   coordinates: [number, number] | null = null;
-  loading = false;
   isInputFocused: boolean = false;
   results: LocationResult[] = [];
   selectedLand: any;
-  nearbyPlaces: Element[] = []; // Change to Element[] type
+  nearbyPlaces: any;
   selectedMapLayer: string = 'osm';
   activeMarker: any[] = [];
   markerCoord: any[] = [];
@@ -86,6 +87,8 @@ export class MapPageComponent implements OnInit {
   image_URL = '';
   currentIndex = 0;
   max = 2;
+  loading: boolean = true;
+
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
@@ -253,6 +256,14 @@ export class MapPageComponent implements OnInit {
       this.selectedLand = item;
       this.fowllowState = this.selectedLand.Follow;
       this.fetchLandImages(item.LandDataID);
+      this.landListService.getNearbyLandMark(this.selectedLand.LandDataID).subscribe(
+        (response) => {
+          this.nearbyPlaces = response;
+          console.log('Nearby places:', response);
+          
+        },
+        (error) => console.error('Error fetching nearby places:', error)
+      );
       modal.showModal();
     }
   }
@@ -425,6 +436,10 @@ export class MapPageComponent implements OnInit {
     setInterval(() => {
       this.nextSlide();
     }, 3000);
+  }
+
+  ngAfterViewInit () {
+    this.loading = false;
   }
 
 }
