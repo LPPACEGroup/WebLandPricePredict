@@ -38,8 +38,13 @@
       </div>
       <div class="flex items-center pb-1">
         <p class="box">สีพื้นที่</p>
-        <span class="pl-4 text-red-500">
-          <span class="pl-4 w-7 h-7 bg-red-500 rounded-full mr-2"></span>สีแดง - ที่ดินพาณิชย์</span>
+        <div *ngIf="land.Land_CityColor">
+          <span class="pl-4 text-red-500">
+            <span class="pl-4 w-7 h-7 bg-red-500 rounded-full mr-2"></span>{{land.Land_CityColor}}</span>
+        </div>
+        <div *ngIf="!land.Land_CityColor" class="text-black px-4">
+          ไม่ทราบสีพื้นที่
+        </div>
       </div>
       <div class="pb-1">
         <p class="box">รายละเอียด:</p>
@@ -47,9 +52,13 @@
       </div>
       <div class="pb-1">
         <p class="box-auto">สถานที่สำคัญบริเวณใกล้เคียง</p>
-        <img src="assets/imgs/nearby-map.png" alt="map" class="w-full h-64 object-cover rounded-md pt-2">
-      </div>
 
+      </div>
+      <a [href]="'https://www.google.com/maps?q=' + land.Latitude + ',' + land.Longitude" target="_blank" class="text-xl font-bold underline">
+        <!-- <img [src]="'https://staticmap.openstreetmap.de/staticmap.php?center=' + land.Latitude + ',' + land.Longitude + '&zoom=15&size=600x300&markers=' + land.Latitude + ',' + land.Longitude" /> -->
+         ดูบน Google Maps
+
+      </a>
       <div class="grid grid-cols-2 gap-4 mt-4">
         <div class="bg-white p-4 rounded-md flex items-center">
           <img src="assets/icons/hospital-icon.png" alt="hospital icon" class="w-6 h-6 mr-2">

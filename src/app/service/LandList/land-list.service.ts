@@ -46,4 +46,8 @@ export class LandListService {
     const url = `${this.image_URL}/get_land_image/${imageId}`;
     return this.http.get(url, { responseType: 'blob' });
   }
+
+  getNearbyLandMark(land_id:string): Observable<any> {
+    return this.http.get(`${this.apiURL}/nearby-land/${land_id}`, { withCredentials: true });
+  }
 }

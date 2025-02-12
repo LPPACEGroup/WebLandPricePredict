@@ -72,68 +72,18 @@
         </div> -->
         <div class="border-b-2 py-5">
           <p class="text-lg text-darkBlue">สถานที่ใกล้เคียง</p>
-          <div class="grid grid-cols-2 text-base text-black">
+          <div *ngIf="nearbyPlaces !== []" class="grid grid-cols-2 text-base text-black" >
 
-            <div class="flex flex-row">
-              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
-                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
-                  alt="">
-              </div>
-              <div>
-                <div class="font-semibold">สวนสาธารณะ</div>
-                <div>2 กม.</div>
-              </div>
+            
+            <div *ngFor="let nearby of nearbyPlaces" class="flex flex-col col-span-1">
+              <div class="font-semibold">{{nearby.Name}}</div>
+              <div>{{nearby.Distance}} กม.</div>
             </div>
-            <div class="flex flex-row">
-              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
-                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
-                  alt="">
-              </div>
-              <div>
-                <div class="font-semibold">สวนสาธารณะ</div>
-                <div>2 กม.</div>
-              </div>
-            </div>
-            <div class="flex flex-row">
-              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
-                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
-                  alt="">
-              </div>
-              <div>
-                <div class="font-semibold">สวนสาธารณะ</div>
-                <div>2 กม.</div>
-              </div>
-            </div>
-            <div class="flex flex-row">
-              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
-                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
-                  alt="">
-              </div>
-              <div>
-                <div class="font-semibold">สวนสาธารณะ</div>
-                <div>2 กม.</div>
-              </div>
-            </div>
-            <div class="flex flex-row">
-              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
-                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
-                  alt="">
-              </div>
-              <div>
-                <div class="font-semibold">สวนสาธารณะ</div>
-                <div>2 กม.</div>
-              </div>
-            </div>
-            <div class="flex flex-row">
-              <div class="w-12 h-12 overflow-x-clip flex-center mx-5"><img class=" "
-                  src="https://media.discordapp.net/attachments/1194525658190204940/1290938089845555202/image.png?ex=66fe4749&is=66fcf5c9&hm=21542cf19162d24c466126fd061d34339f0e893bc96da3928969cbadeed49e77&=&format=webp&quality=lossless&width=100&height=100"
-                  alt="">
-              </div>
-              <div>
-                <div class="font-semibold">สวนสาธารณะ</div>
-                <div>2 กม.</div>
-              </div>
-            </div>
+
+          </div>
+
+          <div *ngIf="nearbyPlaces ===[]">
+            <p>ไม่พบสถานที่ใกล้เคียง</p>
           </div>
 
         </div>
@@ -173,7 +123,7 @@
     <span class="loading loading-spinner loading-lg text-darkBlue"></span>
   </div>
   <div
-    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active"
+    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active min-w-[500px]"
     [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
     <div class="h-6 w-10 bg-white absolute left-0 top-12 -translate-x-full cursor-pointer flex"
       (click)="toggleLandBar()">
@@ -341,4 +291,8 @@
     </div> -->
     
   </div>
+</div>
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>
