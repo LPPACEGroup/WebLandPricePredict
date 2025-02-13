@@ -27,7 +27,7 @@
         <div (click)="triggerFileInput()"
           class="mt-4 border-2 border-blue bg-lightBlue rounded-md h-[500px] flex flex-col justify-center items-center">
           <i class="fa-solid fa-camera text-primary-500 text-2xl"></i>
-          <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden">
+          <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden" title="Upload Picture">
           <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Picture Preview" class="w-full h-full  ">
 
           <img *ngIf="!imagePreview" class="w-[100px] h-[300px] object-contain" src="assets\icons\Uploadimg.svg" alt="icon" >
