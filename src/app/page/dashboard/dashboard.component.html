@@ -3,7 +3,7 @@
   <!-- Overall Report -->
   <div class="flex flex-col w-full px-7 pt-5 gap-5 pb-16">
     <div class="flex justify-start">
-      <p class="text-2xl font-bold mb-5">Overall Report</p>
+      <p class="text-2xl font-bold mb-5 text-darkBlue">Overall Report</p>
       <div class=" w-auto h-full pl-5">
         <!-- <mat-form-field>
           <mat-label>เลือกเขตพื้นที่</mat-label>
@@ -46,7 +46,9 @@
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาเฉลี่ยเขตที่ดิน</div>
-          <div class="bg-white m-2"></div>
+          <div class="bg-white m-2">
+            <!-- <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke" [colors]="chartOptions.colors" [grid]="chartOptions.grid"></apx-chart> -->
+          </div>
         </div>
       </div>
     </div>
@@ -58,30 +60,30 @@
           <thead>
             <tr>
               <th class="px-4 py-2 text-left" style="background-color: var(--whiteGrey);">เขตพื้นที่</th>
-              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาทำนาย</th>
-              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาเฉลี่ย</th>
+              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาเฉลี่ย (ล่าสุด)</th>
+              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาทำนาย (หนึ่งเดือนข้างหน้า)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="px-4 py-2 text-left">ลาดกระบัง</td>
               <td class="px-4 py-2 text-center">400,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
-            </tr>
+                <td class="px-4 py-2 text-center">400,000 <span class="text-sm text-darkRed pl-2">10%</span></td>
+              </tr>
             <tr>
               <td class="px-4 py-2 text-left">มีนบุรี</td>
               <td class="px-4 py-2 text-center">450,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">400,000  <span class="text-sm text-darkRed pl-2">10%</span></td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">คลองเตย</td>
               <td class="px-4 py-2 text-center">400,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">400,000  <span class="text-sm text-darkRed pl-2">10%</span></td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">วัฒนา</td>
               <td class="px-4 py-2 text-center">450,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">400,000  <span class="text-sm text-darkRed pl-2">10%</span></td>
             </tr>
           </tbody>
         </table>
@@ -89,7 +91,7 @@
     </div>
 
     <div class="flex justify-start">
-      <p class="text-2xl font-bold mb-5">Property Report</p>
+      <p class="text-2xl font-bold mb-5 text-darkBlue">Property Report</p>
       <div class=" w-auto h-full pl-5">
         <select class="select select-bordered w-auto max-w-xs" title="เลือกพื้นที่ที่ต้องการ">
           <option>แสดงเขตทั้งหมด</option>
@@ -112,7 +114,7 @@
 
     <!-- Pinned Property   -->
     <div class="flex justify-start">
-      <p class="text-2xl font-bold">Pinned Property</p>
+      <p class="text-2xl font-bold text-darkBlue">Pinned Property</p>
     </div>
 
     <app-dashboard-follow *ngFor="let land of followedLand"  [land]="land" (followChanged)="onFollowChanged()"></app-dashboard-follow>

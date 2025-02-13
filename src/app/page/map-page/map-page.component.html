@@ -1,27 +1,27 @@
 <div class="min-h-nmax relative">
   <app-map [coordinates]="coordinates" [landList]="landList" [selectedMapLayer]="selectedMapLayer"
     (markerCoordOutput)="markerCoordUpdate($event)">
-
   </app-map>
+
   <dialog id="fullland_detail" class="modal">
     <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll ">
       <div class="w-full h-[400px] overflow-clip flex-center">
         <div *ngIf="!loading" class="carousel-container">
           <button class="prev c-bth" (click)="prevSlide()">&#10094;</button>
-        
-          
 
-        
+
+
+
           <ng-container *ngFor="let image of images" class="w-full h-full ">
             <div *ngIf="currentIndex === image.index" class=" w-full h-full flex justify-center items-center">
               <img [src]="image.blobUrl" class=" object-center" alt="Land Image">
             </div>
 
           </ng-container>
-        
-        
+
+
           <button class="next c-bth" (click)="nextSlide()">&#10095;</button>
-        
+
         </div>
       </div>
       <div class="modal-action flex flex-col m-6">
@@ -74,7 +74,7 @@
           <p class="text-lg text-darkBlue">สถานที่ใกล้เคียง</p>
           <div *ngIf="nearbyPlaces !== []" class="grid grid-cols-2 text-base text-black" >
 
-            
+
             <div *ngFor="let nearby of nearbyPlaces" class="flex flex-col col-span-1">
               <div class="font-semibold">{{nearby.Name}}</div>
               <div>{{nearby.Distance}} กม.</div>
@@ -100,6 +100,7 @@
       </div>
     </div>
   </dialog>
+
   <dialog id="fastsell_Confirm" class="modal">
     <div class="modal-box relative">
       <h3 class="text-lg font-bold text-gold"><mat-icon class="" aria-hidden="false" aria-label="Example help icon"
@@ -122,6 +123,85 @@
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-darkBlue"></span>
   </div>
+
+
+  <!-- mf -->
+  <div class="p-1 absolute left-0 top-0 flex flex-col items-center z-50  ">
+    <button
+      class="min-h-28 bg-white first-letter:hover:shadow-md transition-shadow w-5 p-1 rounded-bl-lg rounded-tl-lg"
+      title="Zoom In">
+      <img src="assets\icons\ic-double-arrow.svg" class="w-8 h-8" alt="Zoom In Icon" />
+    </button>
+  </div>
+
+  <div class="p-1 absolute left-8 top-0 flex flex-col items-start z-50">
+    <div class="grid grid-cols-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
+      <div class="bg-white p-2 rounded w-40">
+        <div class="flex justify-center text-darkBlue ">
+          <span>คลองเตย</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border  border-white">
+          <span>QoQ</span>
+          <span class="text-red-500">↓ 20%</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+          <span>YoY</span>
+          <span class="text-green-500">↑ 20%</span>
+        </div>
+      </div>
+      <div class="bg-white p-2 rounded">
+        <div class="flex justify-center text-darkBlue ">
+          <span>วัฒนา</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
+          <span>QoQ</span>
+          <span class="text-red-500">↓ 20%</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+          <span>YoY</span>
+          <span class="text-green-500">↑ 20%</span>
+        </div>
+      </div>
+      <div class="bg-white p-2 rounded">
+        <div class="flex justify-center text-darkBlue ">
+          <span>ลาดกระบัง</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
+          <span>QoQ</span>
+          <span class="text-red-500">↓ 20%</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+          <span>YoY</span>
+          <span class="text-green-500">↑ 20%</span>
+        </div>
+      </div>
+      <div class="bg-white p-2 rounded">
+        <div class="flex justify-center text-darkBlue ">
+          <span>มึนบุรี</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
+          <span>QoQ</span>
+          <span class="text-red-500">↓ 20%</span>
+        </div>
+        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+          <span>YoY</span>
+          <span class="text-green-500">↑ 20%</span>
+        </div>
+      </div>
+      <button class="bg-white p-2 rounded shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-center gap-2 text-darkBlue">
+          <span>Index Land</span>
+        </div>
+        <div class="flex items-center justify-center gap-2">
+          <span> <img src="assets\icons\ic-graph.svg" class="w-12 h-12" alt="Zoom In Icon" />
+          </span>
+        </div>
+        <div class="text-center text-midGrey text-xs">กดแสดงกราฟ</div>
+      </button>
+    </div>
+  </div>
+  <!-- mf -->
+
   <div
     class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active min-w-[500px]"
     [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
@@ -289,7 +369,7 @@
         <img *ngIf="image.blobUrl" [src]="image.blobUrl" [alt]="'Image ' + image.id" width="300">
       </div>
     </div> -->
-    
+
   </div>
 </div>
 
