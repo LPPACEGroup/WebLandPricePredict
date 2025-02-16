@@ -132,7 +132,6 @@
 
       </div>
     </div>
-
   </dialog>
 
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
@@ -140,82 +139,100 @@
   </div>
 
 
-  <!-- mf -->
-  <div class="p-1 absolute left-0 top-0 flex flex-col items-center z-50  ">
-    <button
-      class="min-h-28 bg-white first-letter:hover:shadow-md transition-shadow w-5 p-1 rounded-bl-lg rounded-tl-lg"
-      title="Zoom In">
-      <img src="assets\icons\ic-double-arrow.svg" class="w-8 h-8" alt="Zoom In Icon" />
+  <!-- mf down -->
+  <div class="p-1 absolute left-0 top-0 flex flex-col items-center z-50 " (click)="togglePriceBox()">
+    <button class=" bg-white first-letter:hover:shadow-md transition-shadow p-1 rounded" title="button"
+      aria-hidden="false">
+      <img src="assets\icons\ic-double-arrow.svg" class="w-4 h-5" alt="Zoom In Icon" />
     </button>
   </div>
+  <div class=" pricebox pricebox-active  landBar landbar-active"
+    [ngClass]="{'translate-x-full':istogglePriceBox,'':!istogglePriceBox}">
+    <div class="p-1 absolute left-7 top-0 flex flex-col items-start z-50">
+      <div class="grid grid-cols-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
 
-  <div class="p-1 absolute left-8 top-0 flex flex-col items-start z-50">
-    <div class="grid grid-cols-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2">
-      <div class="bg-white p-2 rounded w-40">
-        <div class="flex justify-center text-darkBlue ">
-          <span>คลองเตย</span>
+        <div class="bg-white p-2 rounded w-[150px] h-fit">
+          <div class="flex justify-center text-darkBlue ">
+            <span>คลองเตย</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border  border-white">
+            <span>QoQ</span>
+            <span class="text-red-500">↓ 20%</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+            <span>YoY</span>
+            <span class="text-green-500">↑ 20%</span>
+          </div>
         </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border  border-white">
-          <span>QoQ</span>
-          <span class="text-red-500">↓ 20%</span>
+        <div class="bg-white p-2 rounded w-[150px] h-fit">
+          <div class="flex justify-center text-darkBlue ">
+            <span>วัฒนา</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
+            <span>QoQ</span>
+            <span class="text-red-500">↓ 20%</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+            <span>YoY</span>
+            <span class="text-green-500">↑ 20%</span>
+          </div>
         </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
-          <span>YoY</span>
-          <span class="text-green-500">↑ 20%</span>
+        <div class="bg-white p-2 rounded w-[150px] h-fit">
+          <div class="flex justify-center text-darkBlue ">
+            <span>ลาดกระบัง</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
+            <span>QoQ</span>
+            <span class="text-red-500">↓ 20%</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+            <span>YoY</span>
+            <span class="text-green-500">↑ 20%</span>
+          </div>
         </div>
+        <div class="bg-white p-2 rounded w-[150px] h-fit">
+          <div class="flex justify-center text-darkBlue ">
+            <span>มึนบุรี</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
+            <span>QoQ</span>
+            <span class="text-red-500">↓ 20%</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+            <span>YoY</span>
+            <span class="text-green-500">↑ 20%</span>
+          </div>
+        </div>
+
+        <button class="bg-white p-2 rounded shadow-sm hover:shadow-md transition-shadow w-[150px] "
+          onclick="document.getElementById('indexLandPopup').showModal()">
+          <div class="flex items-center justify-center gap-2 text-darkBlue">
+            <span>Index Land</span>
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <span> <img src="assets\icons\ic-graph.svg" class="w-12 h-12" alt="Zoom In Icon" />
+            </span>
+          </div>
+          <div class="text-center text-midGrey text-xs">กดแสดงกราฟ
+            <img class="absolute right-1 bottom-1" src="assets\icons\open-pop.svg" alt="Open Popup Icon">
+          </div>
+        </button>
+        <dialog id="indexLandPopup" class="modal">
+          <div class="modal-box w-2/4">
+            <div class="absolute top-4 right-4">
+              <button class="text-black text-sm " onclick="document.getElementById('indexLandPopup').close()">
+                <mat-icon aria-hidden="false" aria-label="Close icon" fontIcon="close"></mat-icon>
+              </button>
+            </div>
+
+            <h3 class="text-lg font-bold text-darkBlue text-center p-2">กราฟแสดงดัชนีราคาที่ดินเปล่า</h3>
+            <p class="py-4 text-grey">กราฟไหน</p>
+          </div>
+        </dialog>
       </div>
-      <div class="bg-white p-2 rounded">
-        <div class="flex justify-center text-darkBlue ">
-          <span>วัฒนา</span>
-        </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
-          <span>QoQ</span>
-          <span class="text-red-500">↓ 20%</span>
-        </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
-          <span>YoY</span>
-          <span class="text-green-500">↑ 20%</span>
-        </div>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <div class="flex justify-center text-darkBlue ">
-          <span>ลาดกระบัง</span>
-        </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
-          <span>QoQ</span>
-          <span class="text-red-500">↓ 20%</span>
-        </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
-          <span>YoY</span>
-          <span class="text-green-500">↑ 20%</span>
-        </div>
-      </div>
-      <div class="bg-white p-2 rounded">
-        <div class="flex justify-center text-darkBlue ">
-          <span>มึนบุรี</span>
-        </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
-          <span>QoQ</span>
-          <span class="text-red-500">↓ 20%</span>
-        </div>
-        <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
-          <span>YoY</span>
-          <span class="text-green-500">↑ 20%</span>
-        </div>
-      </div>
-      <button class="bg-white p-2 rounded shadow-sm hover:shadow-md transition-shadow">
-        <div class="flex items-center justify-center gap-2 text-darkBlue">
-          <span>Index Land</span>
-        </div>
-        <div class="flex items-center justify-center gap-2">
-          <span> <img src="assets\icons\ic-graph.svg" class="w-12 h-12" alt="Zoom In Icon" />
-          </span>
-        </div>
-        <div class="text-center text-midGrey text-xs">กดแสดงกราฟ</div>
-      </button>
     </div>
   </div>
-  <!-- mf -->
+  <!-- mf up-->
 
   <div
     class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active"
@@ -322,11 +339,13 @@
               <input [(ngModel)]="Areaslider.rightArea" matSliderEndThumb (change)="handleSearch(this.searchValue)">
             </mat-slider>
           </div>
+
           <div class="flex items-center">
-            <h4>ข้อมูลขายเร็ว </h4> <mat-icon class="text-grey text-sm" aria-hidden="false"
-              aria-label="Example help icon" fontIcon="help_outline"></mat-icon><input type="checkbox"
-              class="toggle toggle-xs toggle-accent border-none  bg-white " value="fastsell" [checked]="fastsellState"
-              (change)="onFastSellClick($event)" [id]="" />
+            <h4>ข้อมูลขายเร็ว </h4>
+            <mat-icon class="text-grey text-sm" aria-hidden="false" aria-label="Example help icon"
+              fontIcon="help_outline"></mat-icon>
+            <input type="checkbox" class="toggle toggle-xs toggle-accent border-none  bg-white " value="fastsell"
+              [checked]="fastsellState" (change)="onFastSellClick($event)" [id]="" />
             <p class="text-grey text-sm">เปิดใช้งาน</p>
           </div>
 

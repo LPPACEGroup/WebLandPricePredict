@@ -45,7 +45,7 @@ export class AreaSlider{
 
 
 export class MapPageComponent implements OnInit {
-  
+
   coordinates: [number, number] | null = null;
   loading = false;
   isInputFocused: boolean = false;
@@ -60,6 +60,7 @@ export class MapPageComponent implements OnInit {
   filteredLandList: any[] = [];
   matches: any[] = [];
   istoggleLandBar: boolean = false;
+  istogglePriceBox: boolean = false;
   fastsellState = false;
   searchValue: string = '';
 
@@ -93,12 +94,12 @@ export class MapPageComponent implements OnInit {
   ngOnInit(): void {
     this.landListService.getData().subscribe(response => {
       console.log(response);
-      
+
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
     });
-    
+
   }
 
   onFocus() {
@@ -118,23 +119,27 @@ export class MapPageComponent implements OnInit {
     }
   }
   onCardClick(event: MouseEvent) {
-    const modal =document.getElementById('fullland_detail') as HTMLDialogElement;  
+    const modal =document.getElementById('fullland_detail') as HTMLDialogElement;
     const target = event.target as HTMLElement;
 
     if(!target.closest('.followbutton') ) {
       modal.showModal();
     }
- 
+
 
   }
   toggleLandBar(){
     this.istoggleLandBar = !this.istoggleLandBar;
-    
+
+  }
+  togglePriceBox(){
+    this.istogglePriceBox = !this.istogglePriceBox;
+
   }
   onFastSellClick(event: Event){
     const toggleSwitch = event.target as HTMLInputElement;
-    const modal =document.getElementById('fastsell_Confirm') as HTMLDialogElement;  
-    toggleSwitch.checked = !toggleSwitch.checked;  
+    const modal =document.getElementById('fastsell_Confirm') as HTMLDialogElement;
+    toggleSwitch.checked = !toggleSwitch.checked;
     if (!toggleSwitch.checked){
       modal.showModal();
 
@@ -143,22 +148,22 @@ export class MapPageComponent implements OnInit {
       toggleSwitch.checked = false;
       this.fastsellState = false;
     }
-    
+
   }
   
 
   confirmFastSell(){
     this.fastsellState = true;
-    
+
   }
 
-  
+
 
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     this.searchValue = inputElement.value;
     this.handleSearch(this.searchValue);
-    
+
   }
 
   createRange(number: number) {
@@ -175,7 +180,7 @@ export class MapPageComponent implements OnInit {
     // รวม location กับ description ของแต่ละที่ดินเข้าด้วยกันแล้ว ค้นหาด้วย inputValue
     if (inputValue && inputValue.length > 0) {
       this.matches  = [];
-      this.matches= this.landList.filter((land) => { 
+      this.matches= this.landList.filter((land) => {
         const combinedText = `${land.location} ${land.description}`;
         // if(combinedText.includes(inputValue)) {
         //   this.matches.push(land);
@@ -195,11 +200,11 @@ export class MapPageComponent implements OnInit {
     })
 
     this.filteredLandList = this.matches &&inrange;
-    
+
     this.sortedLandList = this.markerSortService.sortByProximity(this.filteredLandList, this.markerCoord);
 
     console.log('nigga');
-    
+
   }
   onMapOptionChange(option: string): void {
     this.selectedMapLayer = option;
@@ -209,8 +214,8 @@ export class MapPageComponent implements OnInit {
     // console.log(this.markerCoord);
     // console.log(this.landList);
     this.sortedLandList = this.markerSortService.sortByProximity(this.filteredLandList, this.markerCoord);
-    
-    
+
+
   }
   leftPriceChange(event: any){
     const inputElement = event.target as HTMLInputElement;
@@ -239,7 +244,7 @@ export class MapPageComponent implements OnInit {
       this.Priceslider.rightPrice = value;
     }
     this.handleSearch(this.searchValue);
-    
+
   }
 
   leftAreaChange(event: any){
@@ -270,7 +275,7 @@ export class MapPageComponent implements OnInit {
       this.Areaslider.rightArea = value;
     }
     this.handleSearch(this.searchValue);
-    
+
   }
 
 
@@ -278,18 +283,18 @@ export class MapPageComponent implements OnInit {
   validateNumberInput(event: KeyboardEvent): void {
     const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab']; // Allow navigation keys
     const inputChar = event.key;
-  
+
     // Allow digits, one dot, and minus sign only at the start
     const currentValue = (event.target as HTMLInputElement).value;
     if (
       !allowedKeys.includes(inputChar) &&
-      !(/^\d$/.test(inputChar) || 
-        (inputChar === '.' && !currentValue.includes('.')) || 
+      !(/^\d$/.test(inputChar) ||
+        (inputChar === '.' && !currentValue.includes('.')) ||
         (inputChar === '-' && currentValue === ''))
     ) {
       event.preventDefault(); // Block disallowed keys
     }
   }
-  
-  
+
+
 }
