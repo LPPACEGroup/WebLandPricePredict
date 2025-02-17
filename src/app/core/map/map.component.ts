@@ -144,8 +144,8 @@ export class MapComponent implements OnChanges {
     console.log(this.markerCoord.length);
     
     if (
-      (this.tier === 'Tier1' && this.markerCoord.length+1 > 3) ||
-      (this.tier === 'Tier2' && this.markerCoord.length+1 > 5) ||
+      (this.tier === 'Tier1' && this.markerCoord.length+1 > 1) ||
+      (this.tier === 'Tier2' && this.markerCoord.length+1 > 3) ||
       (this.tier === 'Tier3' && this.markerCoord.length+1 > 10)
     ) {
       alert('You have reached the limit of your tier (' + this.tier + '). Please upgrade your account to a higher tier to add more markers.');

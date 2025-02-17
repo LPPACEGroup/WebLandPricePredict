@@ -49,8 +49,8 @@ export class LandCardComponent {
           this.isFollowingInProgress = false; // Unlock before exiting
           return;
         } else if (
-          (this.tier === 'Tier1' && response < 3) ||
-          (this.tier === 'Tier2' && response < 5) ||
+          (this.tier === 'Tier1' && response < 1) ||
+          (this.tier === 'Tier2' && response < 3) ||
           (this.tier === 'Tier3' && response < 10) ||this.fowllowState === true
         ) {
           this.fowllowState = !this.fowllowState;

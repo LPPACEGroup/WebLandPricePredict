@@ -29,7 +29,7 @@ export class MarkersortService {
         this.haversine(item.latitude, item.longitude, lat, lon)
       );
       const minDistance = Math.min(...distances);
-      // Check if within 10 km of any target coordinate
+      // Check if within maxdistnace km of any target coordinate
       return { ...item, distance: minDistance, inRange: minDistance <= maxdistance };
     })
     .sort((a, b) => {
