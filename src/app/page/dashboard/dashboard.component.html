@@ -1,4 +1,5 @@
-<div *ngIf="!loading" class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible" style="background-color: white;">
+<div *ngIf="!loading" class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible"
+  style="background-color: white;">
 
   <!-- Overall Report -->
   <div class="flex flex-col w-full px-7 pt-5 gap-5 pb-16">
@@ -13,7 +14,8 @@
             }
           </mat-select>
         </mat-form-field> -->
-        <select class="select select-bordered w-auto max-w-xs" title="เลือกเขตพื้นที่" [(ngModel)]="selectedArea" (ngModelChange)="onAreaChange($event)">
+        <select class="select select-bordered w-auto max-w-xs" title="เลือกเขตพื้นที่" [(ngModel)]="selectedArea"
+          (ngModelChange)="onAreaChange($event)">
           <option>แสดงเขตทั้งหมด</option>
           <option>เขตลาดกระบัง</option>
           <option>เขตมีนบุรี</option>
@@ -27,18 +29,15 @@
         <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
-            ราคาทำนาย</div>
-            <app-line-chart [label]="'ราคาทำนาย'" [labels]="labels" [values]="selected_Data"  color="red" pointColor="green"></app-line-chart>
-
-
-
-        </div>
+            ราคาเฉลี่ยเขตที่ดิน</div>
+            <app-line-chart [data]="AVG_Data" [labels]="AVG_DATE" [selectedArea]="selectedArea"></app-line-chart>
+          </div>
         <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
           <div class="text-grey h-14 text-xl font-semibold flex-center"
-            style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;"
-            >
-            ราคาเฉลี่ยเขตที่ดิน</div>
-          <app-line-chart [label]="'ราคาที่ดินเฉลี่ย'"  [color]="'green'" pointColor="red"></app-line-chart>
+            style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+            ราคาทำนาย</div>
+          <app-line-chart [data]="PRED_Data" [labels]="PRED_DATE" [selectedArea]="selectedArea"></app-line-chart>
+
         </div>
       </div>
     </div>
@@ -109,12 +108,12 @@
       <p class="text-2xl font-bold text-darkBlue">Pinned Property</p>
     </div>
 
-    <app-dashboard-follow *ngFor="let land of followedLand"  [land]="land" (followChanged)="onFollowChanged()"></app-dashboard-follow>
+    <app-dashboard-follow *ngFor="let land of followedLand" [land]="land"
+      (followChanged)="onFollowChanged()"></app-dashboard-follow>
   </div>
 
-  
+
 </div>
 <div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>
-

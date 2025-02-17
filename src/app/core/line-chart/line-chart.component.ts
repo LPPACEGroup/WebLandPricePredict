@@ -1,11 +1,12 @@
 import { Component, input, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [NgChartsModule],
+  imports: [NgChartsModule,CommonModule],
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css'],
 })
@@ -13,10 +14,9 @@ export class LineChartComponent implements OnChanges {
   @Input() labels: string[] = [];
   @Input() values: number[] = [];
   @Input() chartHeight: number = 350; // Default height
-  @Input() color = 'red'; // Default color
-  @Input() label = 'ราคา'; // Default label
-  @Input() pointColor = 'red'; // Default point color
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  @Input() data: any;
+  @Input() selectedArea: string = 'แสดงเขตทั้งหมด';
 
   public lineChartData: ChartData<'line'> = {
     labels: [],
@@ -31,8 +31,11 @@ export class LineChartComponent implements OnChanges {
         borderWidth: 1,
         pointBackgroundColor: 'red',
       },
+      
     ],
   };
+
+  
 
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
@@ -52,22 +55,91 @@ export class LineChartComponent implements OnChanges {
     if (changes['labels']) {
       this.lineChartData.labels = this.labels;
     }
-    if (changes['values']) {
-      this.lineChartData.datasets[0].data = this.values;
+  
+    // if (changes['data'] && this.data) {
+    //   this.lineChartData.datasets[0].data = this.data[0]; // Default single dataset
+    // }
+  
+    if (changes['selectedArea'] && this.data) {
+      
+      if (changes['selectedArea'].currentValue === 'แสดงเขตทั้งหมด') {
+        this.lineChartConfig.data = {
+          labels: this.labels, // Ensure labels are set
+          datasets: [
+            {
+              label: 'มีนบุรี',
+              data: this.data[0] || [],
+              borderColor: 'blue',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+            {
+              label: 'ลาดกระบัง',
+              data: this.data[1] || [],
+              borderColor: 'orange',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+            {
+              label: 'คลองเตย',
+              data: this.data[2] || [],
+              borderColor: 'green',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+            {
+              label: 'วัฒนา',
+              data: this.data[3] || [],
+              borderColor: 'brown',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+          ],
+        };
+      } else {
+
+        // Select only one dataset based on the area
+        let areaIndex = 0;
+        if (changes['selectedArea'].currentValue === 'เขตมีนบุรี') areaIndex = 0;
+        else if (changes['selectedArea'].currentValue === 'เขตลาดกระบัง') areaIndex = 1;
+        else if (changes['selectedArea'].currentValue === 'เขตวัฒนา') areaIndex = 2;
+        else if (changes['selectedArea'].currentValue === 'เขตคลองเตย') areaIndex = 3;
+  
+        this.lineChartConfig.data = {
+          labels: this.labels,
+          datasets: [
+            {
+              label: this.selectedArea,
+              data: this.data[areaIndex] || [],
+              borderColor: areaIndex === 0 ? 'blue' : areaIndex === 1 ? 'orange' : areaIndex === 2 ? 'green' : 'brown',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            
+            },
+          ],
+        };
+      }
     }
-    if (changes['color']) {
-      this.lineChartData.datasets[0].borderColor = this.color;
-    }
-   if (changes['label']) {
-      this.lineChartData.datasets[0].label = this.label;
-   }
-    if (changes['pointColor']) {
-        this.lineChartData.datasets[0].pointBackgroundColor = this.pointColor;
-    }
-    
-    if(this.chart) {
+  
+    // Update the chart
+    if (this.chart) {
       this.chart.chart?.update();
     }
-    
   }
+  
 }

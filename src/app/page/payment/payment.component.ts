@@ -45,11 +45,11 @@ export class PaymentComponent {
       this.tier = params['tier'];
     });
     if (this.tier === 'Tier1') {
-      this.price = 899;
+      this.price = 99;
     } else if (this.tier === 'Tier2') {
-      this.price = 1499;
+      this.price = 299;
     } else if (this.tier === 'Tier3') {
-      this.price = 2599;
+      this.price = 499;
     }
   }
 
@@ -57,6 +57,8 @@ export class PaymentComponent {
     // check payment verified to prevent user from submitting payment proof multiple times while the previous payment is still being processed
     this.userService.checkVerifyPayment().subscribe(
       (data) => {
+        console.log(data);
+        
         if (data === 1) {
           this.paymentVerified = true;
         } else {

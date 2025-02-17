@@ -119,11 +119,11 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     this.auth.getTier().subscribe((response) => {
       this.tier = response;
       if (this.tier === 'Tier1') {
-        this.maxdistance = 1;
-      } else if (this.tier === 'Tier2') {
         this.maxdistance = 2;
+      } else if (this.tier === 'Tier2') {
+        this.maxdistance = 4;
       } else if (this.tier === 'Tier3') {
-        this.maxdistance = 3;
+        this.maxdistance = 8;
       } else {
         this.maxdistance = 0;
       }
@@ -204,6 +204,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     this.auth.getTier().subscribe((data) => {
       this.tier = data;
     });
+    // restrict user follow land based on tier
     this.landListService.getTotalFollowLand().subscribe(
       (response) => {
         console.log(response, this.tier);
@@ -215,8 +216,8 @@ export class MapPageComponent implements OnInit, AfterViewInit {
           );
           return;
         } else if (
-          (this.tier === 'Tier1' && response < 3) ||
-          (this.tier === 'Tier2' && response < 5) ||
+          (this.tier === 'Tier1' && response < 1) ||
+          (this.tier === 'Tier2' && response < 3) ||
           (this.tier === 'Tier3' && response < 10) ||
           this.fowllowState === true
         ) {
