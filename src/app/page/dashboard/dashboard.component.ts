@@ -37,12 +37,15 @@ export class DashboardComponent implements OnChanges {
   M_Data_AVG: any[] = [];
   K_Data_AVG: any[] = [];
   W_Data_AVG: any[] = [];
-  
+  AVG_Data: any;
+  PRED_Data: any;
   labels: any[] = [];
+  AVG_DATE: any[] = [];
+  PRED_DATE: any[] = [];
   selected_Data: any[] = [];
   selectedArea = 'แสดงเขตทั้งหมด';
   loading = true;
-  last_month_avg : any;
+  last_month_avg: any;
 
   followedLand = [];
 
@@ -89,13 +92,51 @@ export class DashboardComponent implements OnChanges {
     //     this.loading = false;
     //   },
     // });
+
     // เป็น 0 เพราะดึงข้อมูลเดือนล่าสุดที่มีใน database เพราะเราไม่มีข้อมูลเดือนก่อน
-    this.dashBoardService.getPriceAvg(0).subscribe({
+
+
+    this.dashBoardService.getPriceAvg(47).subscribe({
       next: (response) => {
-        this.last_month_avg = response;
-        this.loading = false;
-        console.log(this.last_month_avg[0]['data'][0]['price_avg']);
-        
+        this.AVG_Data = this.transformData(response);
+        // console.log(this.AVG_Data);
+        this.AVG_DATE = response.map((entry: any) => entry.year_month);
+        this.dashBoardService.getDashboardData(4).subscribe({
+          next: (response) => {
+            console.log(response);
+            const pred = this.transformData2(response);
+            console.log(pred);
+            console.log(this.AVG_Data);
+
+            this.PRED_Data = this.AVG_Data.map((arr: number[], index: number) => arr.concat(pred[index]));
+            console.log(this.PRED_Data);
+            
+            const pred_date = response.predictions.dates.map((date: string | any[]) => {
+              const yearMonth = date.slice(0, 7); // Extracts 'YYYY-MM' part from 'YYYY-MM-DD'
+              return yearMonth;
+            });
+            this.PRED_DATE= this.AVG_DATE.concat(pred_date);
+
+
+            this.dashBoardService.getPriceAvg(0).subscribe({
+              next: (response) => {
+                this.last_month_avg = response;
+                this.loading = false;
+                console.log(this.last_month_avg[0]['data'][0]['price_avg']);
+              },
+              error: (error) => {
+                console.error('Error:', error);
+                this.loading = false;
+              },
+            });
+
+            // this.loading = false;
+          },
+          error: (error) => {
+            console.error('Error:', error);
+            this.loading = false;
+          },
+        });
       },
       error: (error) => {
         console.error('Error:', error);
@@ -103,6 +144,42 @@ export class DashboardComponent implements OnChanges {
       },
     });
   }
+
+  transformData(data: MonthlyData[]): number[][] {
+    const transformedData: number[][] = [];
+  
+    data.forEach((entry) => {
+      entry.data.forEach((location) => {
+        const locationIndex = location.LocationID - 1; // Ensure the index starts from 0
+  
+        // Initialize the array for that location if it doesn't exist
+        if (!transformedData[locationIndex]) {
+          transformedData[locationIndex] = [];
+        }
+  
+        // Push the price_avg into the array for that location
+        transformedData[locationIndex].push(location.price_avg);
+      });
+    });
+  
+    return transformedData;
+  }
+
+  transformData2(data: any) {
+    const transformedData2: number[][] = [[], [], [], []]; // Array for 4 locations
+  
+    const priceData = data.predictions.values; // Array of objects
+  
+    priceData.forEach((entry: any) => {
+      transformedData2[0].push(entry['price_avg_Min Buri']);
+      transformedData2[1].push(entry['price_avg_Lat Krabang']);
+      transformedData2[2].push(entry['price_avg_Watthana']);
+      transformedData2[3].push(entry['price_avg_Khlong Toei']);
+    });
+  
+    return transformedData2;
+  }
+  
 
   onFollowChanged() {
     this.landListService.readFollowLand().subscribe((response) => {
@@ -115,37 +192,37 @@ export class DashboardComponent implements OnChanges {
   }
   onAreaChange(selectedArea: string): void {
     console.log(selectedArea);
-  
-    if (selectedArea === 'แสดงเขตทั้งหมด') {
-      this.selected_Data = this.L_Data_PRED;
-    } else if (selectedArea === 'เขตลาดกระบัง') {
-      this.selected_Data = this.L_Data_PRED;
-    } else if (selectedArea === 'เขตมีนบุรี') {
-      this.selected_Data = this.M_Data_PRED;
-    } else if (selectedArea === 'เขตคลองเตย') {
-      this.selected_Data = this.K_Data_PRED;
-    } else if (selectedArea === 'เขตวัฒนา') {
-      this.selected_Data = this.W_Data_PRED;
-    }
+
+    // if (selectedArea === 'แสดงเขตทั้งหมด') {
+    //   this.selected_Data = this.L_Data_PRED;
+    // } else if (selectedArea === 'เขตลาดกระบัง') {
+    //   this.selected_Data = this.L_Data_PRED;
+    // } else if (selectedArea === 'เขตมีนบุรี') {
+    //   this.selected_Data = this.M_Data_PRED;
+    // } else if (selectedArea === 'เขตคลองเตย') {
+    //   this.selected_Data = this.K_Data_PRED;
+    // } else if (selectedArea === 'เขตวัฒนา') {
+    //   this.selected_Data = this.W_Data_PRED;
+    // }
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.selectedArea);
 
-    if (changes['selectedArea']) {
-      console.log(this.selectedArea);
+    // if (changes['selectedArea']) {
+    //   console.log(this.selectedArea);
 
-      if (this.selectedArea === 'แสดงเขตทั้งหมด') {
-        this.selected_Data = this.L_Data_PRED;
-      } else if (this.selectedArea === 'เขตลาดกระบัง') {
-        this.selected_Data = this.L_Data_PRED;
-      } else if (this.selectedArea === 'เขตมีนบุรี') {
-        this.selected_Data = this.M_Data_PRED;
-      } else if (this.selectedArea === 'เขตคลองเตย') {
-        this.selected_Data = this.K_Data_PRED;
-      } else if (this.selectedArea === 'เขตวัฒนา') {
-        this.selected_Data = this.W_Data_PRED;
-      }
-    }
+    //   if (this.selectedArea === 'แสดงเขตทั้งหมด') {
+    //     this.selected_Data = this.L_Data_PRED;
+    //   } else if (this.selectedArea === 'เขตลาดกระบัง') {
+    //     this.selected_Data = this.L_Data_PRED;
+    //   } else if (this.selectedArea === 'เขตมีนบุรี') {
+    //     this.selected_Data = this.M_Data_PRED;
+    //   } else if (this.selectedArea === 'เขตคลองเตย') {
+    //     this.selected_Data = this.K_Data_PRED;
+    //   } else if (this.selectedArea === 'เขตวัฒนา') {
+    //     this.selected_Data = this.W_Data_PRED;
+    //   }
+    // }
   }
 }
 export class SelectMultipleExample {
@@ -162,4 +239,14 @@ export class SelectMultipleExample {
 
 export class DashboardGraphComponent {
   constructor() {}
+}
+
+interface LocationData {
+  LocationID: number;
+  price_avg: number;
+}
+
+interface MonthlyData {
+  year_month: string;
+  data: LocationData[];
 }
