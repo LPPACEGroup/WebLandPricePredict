@@ -75,6 +75,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   filteredLandList: any[] = [];
   matches: any[] = [];
   istoggleLandBar: boolean = false;
+  istogglePriceBox: boolean = false;
   fastsellState = false;
   searchValue: string = '';
   fowllowState = false;
@@ -260,7 +261,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
         (response) => {
           this.nearbyPlaces = response;
           console.log('Nearby places:', response);
-          
+
         },
         (error) => console.error('Error fetching nearby places:', error)
       );
@@ -269,6 +270,11 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   }
   toggleLandBar() {
     this.istoggleLandBar = !this.istoggleLandBar;
+
+  }
+  togglePriceBox(){
+    this.istogglePriceBox = !this.istogglePriceBox;
+
   }
   onFastSellClick(event: Event) {
     const toggleSwitch = event.target as HTMLInputElement;

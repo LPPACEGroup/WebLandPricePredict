@@ -63,10 +63,14 @@
                 <div *ngIf="slipImage===''" class="w-[280px] h-[300px] flex items-center justify-center bg-lightBlue p-4">
                   <p>ไม่มีรูปภาพ</p>
                 </div>
-                <img *ngIf="slipImage!=''" [src] = "slipImage"/>
+                <img *ngIf="slipImage!=''" [src]="slipImage" alt="Slip Image"/>
                 <div class="grid grid-cols-2 mt-2 ">
                   <p class="text-[10px] font-bold text-darkBlue">เวลาในการชำระเงิน:</p>
                   <p class="text-[10px] font-medium text-center" [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">{{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
+                </div>
+                <div class="grid grid-cols-2 mt-2">
+                  <p class="text-[14px] font-bold text-darkBlue">Tier ที่ร้องขอ:</p>
+                  <p class="text-[14px] font-medium text-darkBlue">3</p>
                 </div>
               </div>
 
