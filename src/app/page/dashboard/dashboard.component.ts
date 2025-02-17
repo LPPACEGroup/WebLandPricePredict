@@ -37,6 +37,7 @@ export class DashboardComponent implements OnChanges {
   M_Data_AVG: any[] = [];
   K_Data_AVG: any[] = [];
   W_Data_AVG: any[] = [];
+  
   labels: any[] = [];
   selected_Data: any[] = [];
   selectedArea = 'แสดงเขตทั้งหมด';
