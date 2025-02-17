@@ -1,110 +1,73 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexTitleSubtitle,
-  ApexDataLabels,
-  ApexFill,
-  ApexMarkers,
-  ApexYAxis,
-  ApexXAxis,
-  ApexTooltip,
-  NgApexchartsModule
-} from "ng-apexcharts";
+import { Component, input, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
+import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [NgApexchartsModule],
+  imports: [NgChartsModule],
   templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css']
+  styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnChanges {
-  @Input() dataSeries: { date: string, value: number }[] = [];
+  @Input() labels: string[] = [];
+  @Input() values: number[] = [];
   @Input() chartHeight: number = 350; // Default height
+  @Input() color = 'red'; // Default color
+  @Input() label = 'ราคา'; // Default label
+  @Input() pointColor = 'red'; // Default point color
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  public series!: ApexAxisChartSeries;
-  public chart!: ApexChart;
-  public dataLabels!: ApexDataLabels;
-  public markers!: ApexMarkers;
-  public title!: ApexTitleSubtitle;
-  public fill!: ApexFill;
-  public yaxis!: ApexYAxis;
-  public xaxis!: ApexXAxis;
-  public tooltip!: ApexTooltip;
-
-  constructor() {
-    this.initChartData();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['dataSeries'] || changes['chartHeight']) {
-      this.initChartData();
-    }
-  }
-
-  public initChartData(): void {
-    const dates = this.dataSeries.map(item => [new Date(item.date).getTime(), item.value]);
-
-    this.series = [
+  public lineChartData: ChartData<'line'> = {
+    labels: [],
+    datasets: [
       {
-        name: "XYZ MOTORS",
-        data: dates
-      }
-    ];
-    this.chart = {
-      type: "area",
-      stacked: false,
-      height: this.chartHeight,
-      zoom: {
-        type: "x",
-        enabled: true,
-        autoScaleYaxis: true
+        label: 'ราคา',
+        data: [],
+        borderColor: 'red',
+        backgroundColor: 'transparent',
+        fill: false,
+        tension: 0.4, 
+        borderWidth: 1,
+        pointBackgroundColor: 'red',
       },
-      toolbar: {
-        autoSelected: "zoom"
-      }
-    };
-    this.dataLabels = {
-      enabled: false
-    };
-    this.markers = {
-      size: 0
-    };
-    this.title = {
-      text: "Stock Price Movement",
-      align: "left"
-    };
-    this.fill = {
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 1,
-        inverseColors: false,
-        opacityFrom: 0.5,
-        opacityTo: 0,
-        stops: [0, 90, 100]
-      }
-    };
-    this.yaxis = {
-      labels: {
-        formatter: function(val) {
-          return (val / 1000000).toFixed(0);
-        }
-      },
-      title: {
-        text: "Price"
-      }
-    };
-    this.xaxis = {
-      type: "datetime"
-    };
-    this.tooltip = {
-      shared: false,
-      y: {
-        formatter: function(val) {
-          return (val / 1000000).toFixed(0);
-        }
-      }
-    };
+    ],
+  };
+
+  public lineChartOptions: ChartOptions<'line'> = {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+    },
+  };
+
+  public lineChartConfig: ChartConfiguration<'line'> = {
+    type: 'line',
+    data: this.lineChartData,
+    options: this.lineChartOptions,
+  };
+
+  // Detect changes in @Input() and update the chart
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['labels']) {
+      this.lineChartData.labels = this.labels;
+    }
+    if (changes['values']) {
+      this.lineChartData.datasets[0].data = this.values;
+    }
+    if (changes['color']) {
+      this.lineChartData.datasets[0].borderColor = this.color;
+    }
+   if (changes['label']) {
+      this.lineChartData.datasets[0].label = this.label;
+   }
+    if (changes['pointColor']) {
+        this.lineChartData.datasets[0].pointBackgroundColor = this.pointColor;
+    }
+    
+    if(this.chart) {
+      this.chart.chart?.update();
+    }
+    
   }
 }

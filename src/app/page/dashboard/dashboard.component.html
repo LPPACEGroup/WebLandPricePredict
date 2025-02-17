@@ -1,4 +1,4 @@
-<div class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible" style="background-color: white;">
+<div *ngIf="!loading" class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible" style="background-color: white;">
 
   <!-- Overall Report -->
   <div class="flex flex-col w-full px-7 pt-5 gap-5 pb-16">
@@ -13,7 +13,7 @@
             }
           </mat-select>
         </mat-form-field> -->
-        <select class="select select-bordered w-auto max-w-xs" title="เลือกเขตพื้นที่">
+        <select class="select select-bordered w-auto max-w-xs" title="เลือกเขตพื้นที่" [(ngModel)]="selectedArea" (ngModelChange)="onAreaChange($event)">
           <option>แสดงเขตทั้งหมด</option>
           <option>เขตลาดกระบัง</option>
           <option>เขตมีนบุรี</option>
@@ -28,25 +28,17 @@
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาทำนาย</div>
-          <!-- <div class="bg-white m-2"></div>
-            <div>
-              <apx-chart
-                [series]="chartOptions.series"
-                [chart]="chartOptions.chart"
-                [xaxis]="chartOptions.xaxis"
-                [stroke]="chartOptions.stroke"
-                [colors]="chartOptions.colors"
-                [grid]="chartOptions.grid">
-              </apx-chart>
-            </div> -->
+            <app-line-chart [label]="'ราคาทำนาย'" [labels]="labels" [values]="selected_Data"  color="red" pointColor="green"></app-line-chart>
+
 
 
         </div>
         <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
           <div class="text-grey h-14 text-xl font-semibold flex-center"
-            style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
+            style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;"
+            >
             ราคาเฉลี่ยเขตที่ดิน</div>
-          <div class="bg-white m-2"></div>
+          <app-line-chart [label]="'ราคาที่ดินเฉลี่ย'"  [color]="'green'" pointColor="red"></app-line-chart>
         </div>
       </div>
     </div>
@@ -58,30 +50,33 @@
           <thead>
             <tr>
               <th class="px-4 py-2 text-left" style="background-color: var(--whiteGrey);">เขตพื้นที่</th>
-              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาทำนาย</th>
-              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาเฉลี่ย</th>
+              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาเฉลี่ย (ล่าสุด)</th>
+              <th class="px-4 py-2" style="background-color: var(--whiteGrey);">ราคาทำนาย (หนึ่งเดือนข้างหน้า)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="px-4 py-2 text-left">ลาดกระบัง</td>
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][1]['price_avg']}}</td>
               <td class="px-4 py-2 text-center">400,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">มีนบุรี</td>
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][0]['price_avg']}}</td>
               <td class="px-4 py-2 text-center">450,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">คลองเตย</td>
-              <td class="px-4 py-2 text-center">400,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']}}</td>
+              <td class="px-4 py-2 text-center">450,000</td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">วัฒนา</td>
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']}}</td>
               <td class="px-4 py-2 text-center">450,000</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+
             </tr>
           </tbody>
         </table>
@@ -117,4 +112,10 @@
 
     <app-dashboard-follow *ngFor="let land of followedLand"  [land]="land" (followChanged)="onFollowChanged()"></app-dashboard-follow>
   </div>
+
+  
 </div>
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+</div>
+
