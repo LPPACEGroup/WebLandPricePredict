@@ -57,24 +57,24 @@
             <tr>
               <td class="px-4 py-2 text-left">ลาดกระบัง</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][1]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[0][0]}} <span [ngClass]="pred_table[0][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[0][1]}}</span></td>
 
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">มีนบุรี</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][0]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[1][0]}} <span [ngClass]="pred_table[1][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[1][1]}}</span></td>
 
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">คลองเตย</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[2][0]}} <span [ngClass]="pred_table[2][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[2][1]}}</span></td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">วัฒนา</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[3][0]}} <span [ngClass]="pred_table[3][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[3][1]}}</span></td>
             </tr>
           </tbody>
         </table>

@@ -46,6 +46,7 @@ export class DashboardComponent implements OnChanges {
   selectedArea = 'แสดงเขตทั้งหมด';
   loading = true;
   last_month_avg: any;
+  pred_table: any;
 
   followedLand = [];
 
@@ -105,11 +106,18 @@ export class DashboardComponent implements OnChanges {
           next: (response) => {
             console.log(response);
             const pred = this.transformData2(response);
-            console.log(pred);
-            console.log(this.AVG_Data);
+            //try to get key because to access object value 
+            const first_key = Object.keys(response.percentage_changes)[0];
+
+            this.pred_table = [[response.predictions.values[0]['price_avg_Min Buri'],response.percentage_changes[first_key]['Min Buri']],
+            [response.predictions.values[0]['price_avg_Lat Krabang'],response.percentage_changes[first_key]['Lat Krabang']],
+            [response.predictions.values[0]['price_avg_Watthana'],response.percentage_changes[first_key]['Watthana']],
+            [response.predictions.values[0]['price_avg_Khlong Toei'],response.percentage_changes[first_key]['Khlong Toei']]];
+
+            
+            
 
             this.PRED_Data = this.AVG_Data.map((arr: number[], index: number) => arr.concat(pred[index]));
-            console.log(this.PRED_Data);
             
             const pred_date = response.predictions.dates.map((date: string | any[]) => {
               const yearMonth = date.slice(0, 7); // Extracts 'YYYY-MM' part from 'YYYY-MM-DD'
