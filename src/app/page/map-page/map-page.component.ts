@@ -23,6 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FollowLand } from 'model/follow.interface';
 import { AuthService } from 'app/service/Auth/auth.service';
 import { AfterViewInit } from '@angular/core';
+import { DashboardService } from 'app/service/Dashboard/dashboard.service';
+import { LineChart2Component } from 'app/core/line-chart-2/line-chart-2.component';
 
 interface LocationResult {
   place_id: number;
@@ -57,6 +59,7 @@ export class AreaSlider {
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
+    LineChart2Component
   ],
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
@@ -88,8 +91,21 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   image_URL = '';
   currentIndex = 0;
   max = 2;
+  date: any;
+  value: any;
   loading: boolean = true;
-
+  qoq = {
+    'Min Buri': 0,
+    'Lat Krabang': 0,
+    'Khlong Toei': 0,
+    Watthana: 0,
+  };
+  yoy = {
+    'Min Buri': 0,
+    'Lat Krabang': 0,
+    'Khlong Toei': 0,
+    Watthana: 0,
+  };
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
@@ -99,7 +115,8 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     private nearbyPlacesService: NearbyPlacesService, // Correct casing
     private getRouteService: GetRouteService,
     private markerSortService: MarkersortService, // Add the service to the constructor
-    private auth: AuthService
+    private auth: AuthService,
+    private dashBoardService: DashboardService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -133,6 +150,64 @@ export class MapPageComponent implements OnInit, AfterViewInit {
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
+      this.dashBoardService.goodSale('Min Buri').subscribe((data) => {
+        console.log(data);
+        // console.log(data.data['Min Buri'].quarterly_analytics[data.data['Min Buri'].quarterly_analytics.length]);
+        // console.log(data.data['Min Buri'].quarterly_analytics.length);
+
+        this.yoy['Min Buri'] =
+          data.data['Min Buri'].quarterly_analytics[
+            data.data['Min Buri'].quarterly_analytics.length - 1
+          ].yoy;
+        this.qoq['Min Buri'] =
+          data.data['Min Buri'].quarterly_analytics[
+            data.data['Min Buri'].quarterly_analytics.length - 1
+          ].qoq;
+        this.date = data.data['Min Buri'].monthly_indices.map(
+          ({ month, year }: { month: number; year: number }) =>
+            `${year}-${month.toString().padStart(2, '0')}`
+        );
+        this.date = this.date.reverse();
+
+        this.value = data.data['Min Buri'].monthly_indices.map(
+          ({ index }: { index: number }) => index );
+        
+        this.value = this.value.reverse();
+        
+
+        this.dashBoardService.goodSale('Lat Krabang').subscribe((data) => {
+          console.log(data);
+
+          this.yoy['Lat Krabang'] =
+            data.data['Lat Krabang'].quarterly_analytics[
+              data.data['Lat Krabang'].quarterly_analytics.length - 1
+            ].yoy;
+          this.qoq['Lat Krabang'] =
+            data.data['Lat Krabang'].quarterly_analytics[
+              data.data['Lat Krabang'].quarterly_analytics.length - 1
+            ].qoq;
+          this.dashBoardService.goodSale('Khlong Toei').subscribe((data) => {
+            this.yoy['Khlong Toei'] =
+              data.data['Khlong Toei'].quarterly_analytics[
+                data.data['Khlong Toei'].quarterly_analytics.length - 1
+              ].yoy;
+            this.qoq['Khlong Toei'] =
+              data.data['Khlong Toei'].quarterly_analytics[
+                data.data['Khlong Toei'].quarterly_analytics.length - 1
+              ].qoq;
+            this.dashBoardService.goodSale('Watthana').subscribe((data) => {
+              this.yoy['Watthana'] =
+                data.data['Watthana'].quarterly_analytics[
+                  data.data['Watthana'].quarterly_analytics.length - 1
+                ].yoy;
+              this.qoq['Watthana'] =
+                data.data['Watthana'].quarterly_analytics[
+                  data.data['Watthana'].quarterly_analytics.length - 1
+                ].qoq;
+            });
+          });
+        });
+      });
     });
 
     // this.landListService.getLandImage(1).subscribe((response) => {
@@ -142,26 +217,36 @@ export class MapPageComponent implements OnInit, AfterViewInit {
 
     //   console.log(this.image_URL);
     // });
-
   }
 
-  images: { index: number; id: string; mimeType: string; filePath: string; blobUrl?: string }[] = [];
+  images: {
+    index: number;
+    id: string;
+    mimeType: string;
+    filePath: string;
+    blobUrl?: string;
+  }[] = [];
 
-  fetchLandImages(landDataId:string): void {
+  fetchLandImages(landDataId: string): void {
     this.landListService.getLandImages(landDataId).subscribe(
       (response) => {
         console.log('Total images:', response.total_images);
-        this.images = response.images.map((img: { image_id: any; mime_type: any; file_path: any; }, index: number) => ({
-          index: index , // Start from 1 instead of 0
-          id: img.image_id,
-          mimeType: img.mime_type,
-          filePath: img.file_path
-        }));
+        this.images = response.images.map(
+          (
+            img: { image_id: any; mime_type: any; file_path: any },
+            index: number
+          ) => ({
+            index: index, // Start from 1 instead of 0
+            id: img.image_id,
+            mimeType: img.mime_type,
+            filePath: img.file_path,
+          })
+        );
         this.max = this.images.length;
 
         // Fetch image blobs
-        this.images.forEach(image => {
-          this.landListService.getLandImage(image.id).subscribe(blob => {
+        this.images.forEach((image) => {
+          this.landListService.getLandImage(image.id).subscribe((blob) => {
             image.blobUrl = URL.createObjectURL(blob);
           });
         });
@@ -258,24 +343,23 @@ export class MapPageComponent implements OnInit, AfterViewInit {
       this.selectedLand = item;
       this.fowllowState = this.selectedLand.Follow;
       this.fetchLandImages(item.LandDataID);
-      this.landListService.getNearbyLandMark(this.selectedLand.LandDataID).subscribe(
-        (response) => {
-          this.nearbyPlaces = response;
-          console.log('Nearby places:', response);
-
-        },
-        (error) => console.error('Error fetching nearby places:', error)
-      );
+      this.landListService
+        .getNearbyLandMark(this.selectedLand.LandDataID)
+        .subscribe(
+          (response) => {
+            this.nearbyPlaces = response;
+            console.log('Nearby places:', response);
+          },
+          (error) => console.error('Error fetching nearby places:', error)
+        );
       modal.showModal();
     }
   }
   toggleLandBar() {
     this.istoggleLandBar = !this.istoggleLandBar;
-
   }
-  togglePriceBox(){
+  togglePriceBox() {
     this.istogglePriceBox = !this.istogglePriceBox;
-
   }
   onFastSellClick(event: Event) {
     const toggleSwitch = event.target as HTMLInputElement;
@@ -445,8 +529,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     }, 3000);
   }
 
-  ngAfterViewInit () {
+  ngAfterViewInit() {
     this.loading = false;
   }
-
 }

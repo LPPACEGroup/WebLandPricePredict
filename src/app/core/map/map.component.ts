@@ -12,6 +12,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
 import { GetJsonService } from 'app/service/GetJson/get-json.service';
 import { style } from '@angular/animations';
 import { AuthService } from 'app/service/Auth/auth.service';
+import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 
 @Component({
   selector: 'app-map',
@@ -38,6 +39,7 @@ export class MapComponent implements OnChanges {
   // private p3 = L.geoJSON();
   // private p4 = L.geoJSON();
   private colorMap = L.featureGroup();
+
   tier = "Basic";
   // Initialize the map
   private initMap(): void {
@@ -206,7 +208,7 @@ export class MapComponent implements OnChanges {
 
     }
   }
-  constructor(private getJsonService: GetJsonService, private auth: AuthService) {
+  constructor(private getJsonService: GetJsonService, private auth: AuthService ,private dashBoardService: DashboardService) {
     this.getJsonService
       .getJson('assets/layers/latkrabang.geojson')
       .subscribe((data:any) => {
@@ -270,6 +272,7 @@ export class MapComponent implements OnChanges {
       this.tier = data;
       
     });
+    
   }
   clickZoomin() {
     this.map.zoomIn();

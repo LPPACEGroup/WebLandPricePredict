@@ -4,7 +4,7 @@
   <!-- Overall Report -->
   <div class="flex flex-col w-full px-7 pt-5 gap-5 pb-16">
     <div class="flex justify-start">
-      <p class="text-2xl font-bold mb-5 text-darkBlue">Overall Report</p>
+      <p class="text-2xl font-bold mb-5 text-darkBlue">รายงานราคาเฉลี่ยตามเขต</p>
       <div class=" w-auto h-full pl-5">
         <!-- <mat-form-field>
           <mat-label>เลือกเขตพื้นที่</mat-label>
@@ -25,20 +25,23 @@
       </div>
     </div>
     <div class="  w-full flex flex-col gap-y-5">
-      <div class="  w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
-        <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+      <div class="  w-full grid  gap-5">
+        <!-- <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาเฉลี่ยเขตที่ดิน</div>
             <app-line-chart [data]="AVG_Data" [labels]="AVG_DATE" [selectedArea]="selectedArea"></app-line-chart>
-          </div>
-        <div class="h-96" style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
+          </div> -->
+
+        <div class="h-96 " style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาทำนาย</div>
           <app-line-chart [data]="PRED_Data" [labels]="PRED_DATE" [selectedArea]="selectedArea"></app-line-chart>
 
         </div>
+        <div class="text-red-500 flex text-center">*ก่อนเส้นคือราคาเฉลี่ย หลังเส้นคือราคาทำนาย</div>
+
       </div>
     </div>
 
@@ -57,24 +60,24 @@
             <tr>
               <td class="px-4 py-2 text-left">ลาดกระบัง</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][1]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">400,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[0][0]}} <span [ngClass]="pred_table[0][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[0][1]}}</span></td>
 
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">มีนบุรี</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][0]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[1][0]}} <span [ngClass]="pred_table[1][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[1][1]}}</span></td>
 
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">คลองเตย</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[2][0]}} <span [ngClass]="pred_table[2][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[2][1]}}</span></td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">วัฒนา</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">450,000</td>
+              <td class="px-4 py-2 text-center">{{pred_table[3][0]}} <span [ngClass]="pred_table[3][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg">{{pred_table[3][1]}}</span></td>
             </tr>
           </tbody>
         </table>
@@ -82,7 +85,7 @@
     </div>
 
     <div class="flex justify-start">
-      <p class="text-2xl font-bold mb-5 text-darkBlue">Property Report</p>
+      <p class="text-2xl font-bold mb-5 text-darkBlue">กราฟเปรียบเทียบราคาที่ดิน</p>
       <div class=" w-auto h-full pl-5">
         <select class="select select-bordered w-auto max-w-xs" title="เลือกพื้นที่ที่ต้องการ">
           <option>แสดงเขตทั้งหมด</option>
@@ -95,17 +98,15 @@
       </div>
     </div>
     <div class=" w-full flex flex-col gap-y-5">
-      <div class="  w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
-        <div class="h-96 bg-white ">
-          <div class="text-black h-14 text-xl font-semibold flex-center flex items-center justify-center">กราฟ</div>
+        <div class="h-96 w-full bg-white ">
+          <div class="text-black text-xl font-semibold w-full h-full p-5"><app-bar-chart [data]="comparePrice"/></div>
         </div>
-      </div>
     </div>
 
 
     <!-- Pinned Property   -->
     <div class="flex justify-start">
-      <p class="text-2xl font-bold text-darkBlue">Pinned Property</p>
+      <p class="text-2xl font-bold text-darkBlue">ที่ดินที่กดติดตาม</p>
     </div>
 
     <app-dashboard-follow *ngFor="let land of followedLand" [land]="land"

@@ -1,7 +1,11 @@
 import { Component, input, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
-import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartOptions,Chart } from 'chart.js';
 import { CommonModule } from '@angular/common';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+Chart.register(annotationPlugin);  // Register the annotation plugin
+
 
 @Component({
   selector: 'app-line-chart',
@@ -17,6 +21,7 @@ export class LineChartComponent implements OnChanges {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   @Input() data: any;
   @Input() selectedArea: string = 'แสดงเขตทั้งหมด';
+
 
   public lineChartData: ChartData<'line'> = {
     labels: [],
@@ -41,6 +46,19 @@ export class LineChartComponent implements OnChanges {
     responsive: true,
     plugins: {
       legend: { position: 'top' },
+      annotation: {
+        annotations: {
+          line1: {
+            type: 'line',
+            xMax:48,
+            xMin:48,
+            borderColor: 'red',
+            borderWidth: 2,
+
+
+          },
+        },
+      },
     },
   };
 
@@ -49,6 +67,8 @@ export class LineChartComponent implements OnChanges {
     data: this.lineChartData,
     options: this.lineChartOptions,
   };
+  
+
 
   // Detect changes in @Input() and update the chart
   ngOnChanges(changes: SimpleChanges): void {

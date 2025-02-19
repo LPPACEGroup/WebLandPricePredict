@@ -138,56 +138,62 @@
 
         <div class="bg-white p-2 rounded w-[150px] h-fit">
           <div class="flex justify-center text-darkBlue ">
-            <span>คลองเตย</span>
-          </div>
-          <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border  border-white">
-            <span>QoQ</span>
-            <span class="text-red-500">↓ 20%</span>
-          </div>
-          <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
-            <span>YoY</span>
-            <span class="text-green-500">↑ 20%</span>
-          </div>
-        </div>
-        <div class="bg-white p-2 rounded w-[150px] h-fit">
-          <div class="flex justify-center text-darkBlue ">
-            <span>วัฒนา</span>
+            <span>มึนบุรี</span>
           </div>
           <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
             <span>QoQ</span>
-            <span class="text-red-500">↓ 20%</span>
+            <span  [ngClass]="qoq['Min Buri']<0?'text-red-500':'text-green-500'">{{qoq['Min Buri']<0?'↓':'↑'}} {{qoq['Min Buri']}}%</span>
           </div>
           <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
             <span>YoY</span>
-            <span class="text-green-500">↑ 20%</span>
+            <span [ngClass]="yoy['Min Buri']<0?'text-red-500':'text-green-500'">{{yoy['Min Buri']<0?'↓':'↑'}} {{yoy['Min Buri']}}%</span>
           </div>
         </div>
+
         <div class="bg-white p-2 rounded w-[150px] h-fit">
           <div class="flex justify-center text-darkBlue ">
             <span>ลาดกระบัง</span>
           </div>
           <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
             <span>QoQ</span>
-            <span class="text-red-500">↓ 20%</span>
+            <span [ngClass]="qoq['Lat Krabang']<0?'text-red-500':'text-green-500'">{{qoq['Lat Krabang']<0?'↓':'↑'}} {{qoq['Lat Krabang']}}%</span>
           </div>
           <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
             <span>YoY</span>
-            <span class="text-green-500">↑ 20%</span>
+            <span [ngClass]="yoy['Lat Krabang']<0?'text-red-500':'text-green-500'">{{yoy['Lat Krabang']<0?'↓':'↑'}} {{yoy['Lat Krabang']}}%</span>
           </div>
         </div>
+        
+        
         <div class="bg-white p-2 rounded w-[150px] h-fit">
           <div class="flex justify-center text-darkBlue ">
-            <span>มึนบุรี</span>
+            <span>วัฒนา</span>
           </div>
           <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border border-white">
             <span>QoQ</span>
-            <span class="text-red-500">↓ 20%</span>
+            <span [ngClass]="qoq['Khlong Toei']<0?'text-red-500':'text-green-500'">{{qoq['Khlong Toei']<0?'↓':'↑'}} {{qoq['Khlong Toei']}}%</span>
           </div>
           <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
             <span>YoY</span>
-            <span class="text-green-500">↑ 20%</span>
+            <span [ngClass]="yoy['Khlong Toei']<0?'text-red-500':'text-green-500'">{{yoy['Khlong Toei']<0?'↓':'↑'}} {{yoy['Khlong Toei']}}%</span>
           </div>
         </div>
+
+        <div class="bg-white p-2 rounded w-[150px] h-fit">
+          <div class="flex justify-center text-darkBlue ">
+            <span>คลองเตย</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1 text-oceanBlue border  border-white">
+            <span>QoQ</span>
+            <span [ngClass]="qoq['Watthana']<0?'text-red-500':'text-green-500'">{{qoq['Watthana']<0?'↓':'↑'}} {{qoq['Watthana']}}%</span>
+          </div>
+          <div class="flex justify-around bg-lighter-grey rounded p-1  text-oceanBlue border border-white">
+            <span>YoY</span>
+            <span [ngClass]="yoy['Watthana']<0?'text-red-500':'text-green-500'">{{yoy['Watthana']<0?'↓':'↑'}} {{yoy['Watthana']}}%</span>
+          </div>
+        </div>
+        
+        
 
         <button class="bg-white p-2 rounded shadow-sm hover:shadow-md transition-shadow w-[150px] "
           onclick="document.getElementById('indexLandPopup').showModal()">
@@ -203,15 +209,15 @@
           </div>
         </button>
         <dialog id="indexLandPopup" class="modal">
-          <div class="modal-box w-2/4">
+          <div class="modal-box w-3/4 h-3/5 max-w-full ">
             <div class="absolute top-4 right-4">
               <button class="text-black text-sm " onclick="document.getElementById('indexLandPopup').close()">
                 <mat-icon aria-hidden="false" aria-label="Close icon" fontIcon="close"></mat-icon>
               </button>
             </div>
 
-            <h3 class="text-lg font-bold text-darkBlue text-center p-2">กราฟแสดงดัชนีราคาที่ดินเปล่า</h3>
-            <p class="py-4 text-grey">กราฟไหน</p>
+            <h3 class="text-lg font-bold text-darkBlue text-center p-2 ">กราฟแสดงดัชนีราคาที่ดินเปล่า</h3>
+            <app-line-chart-2 [labels]="date" [values]="value"/>
           </div>
         </dialog>
       </div>

@@ -14,6 +14,7 @@ import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
 import { LineChartComponent } from '../../core/line-chart/line-chart.component';
+import { BarChartComponent } from 'app/core/bar-chart/bar-chart.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,19 +25,13 @@ import { LineChartComponent } from '../../core/line-chart/line-chart.component';
     NgChartsModule,
     LineChartComponent,
     FormsModule,
+    BarChartComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnChanges {
-  L_Data_PRED: any[] = [];
-  M_Data_PRED: any[] = [];
-  K_Data_PRED: any[] = [];
-  W_Data_PRED: any[] = [];
-  L_Data_AVG: any[] = [];
-  M_Data_AVG: any[] = [];
-  K_Data_AVG: any[] = [];
-  W_Data_AVG: any[] = [];
+
   AVG_Data: any;
   PRED_Data: any;
   labels: any[] = [];
@@ -46,8 +41,21 @@ export class DashboardComponent implements OnChanges {
   selectedArea = 'แสดงเขตทั้งหมด';
   loading = true;
   last_month_avg: any;
-
+  pred_table: any;
   followedLand = [];
+  comparePrice: {
+    averagePrice: number[];
+    sellPrice: number[];
+    predictPrice: number[];
+    labels: string[];
+  } = {
+    averagePrice: [],
+    sellPrice: [],
+    predictPrice: [],
+    labels: [],
+
+  };
+  
 
   constructor(
     private landListService: LandListService,
@@ -60,40 +68,8 @@ export class DashboardComponent implements OnChanges {
   }
 
   ngOnInit() {
-    this.landListService.readFollowLand().subscribe((data) => {
-      this.followedLand = data;
-      // console.log(this.followedLand);
-    });
-    // this.dashBoardService.getDashboardData(12).subscribe({
-    //   next: (response) => {
-    //     this.L_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Lat Krabang']
-    //     );
-    //     this.M_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Min Buri']
-    //     );
-    //     this.K_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Khlong Toei']
-    //     );
-    //     this.W_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Watthana']
-    //     );
 
-    //     this.labels = response.predictions.dates.map((date: any) =>
-    //       new Date(date).toLocaleString('en-US', { month: 'short' })
-    //     );
-
-    //     console.log(this.selectedArea);
-
-    //     this.loading = false;
-    //   },
-    //   error: (error: any) => {
-    //     console.error('Error:', error);
-    //     this.loading = false;
-    //   },
-    // });
-
-    // เป็น 0 เพราะดึงข้อมูลเดือนล่าสุดที่มีใน database เพราะเราไม่มีข้อมูลเดือนก่อน
+  
 
 
     this.dashBoardService.getPriceAvg(47).subscribe({
@@ -101,15 +77,34 @@ export class DashboardComponent implements OnChanges {
         this.AVG_Data = this.transformData(response);
         // console.log(this.AVG_Data);
         this.AVG_DATE = response.map((entry: any) => entry.year_month);
+
+        this.landListService.readFollowLand().subscribe((data) => {
+          this.followedLand = data;
+          console.log(this.followedLand);
+          this.comparePrice.sellPrice = ((this.followedLand as{Price:number}[] ).map((land) => land.Price));
+          this.comparePrice.predictPrice = ((this.followedLand as{EstimatePrice:number}[] ).map((land) => land.EstimatePrice));
+          this.comparePrice.labels = (this.followedLand ).map((_, index) => `พื้นที่ ${index + 1}`);
+
+          console.log(this.comparePrice,"sssss");
+          
+        });
+
         this.dashBoardService.getDashboardData(4).subscribe({
           next: (response) => {
             console.log(response);
             const pred = this.transformData2(response);
-            console.log(pred);
-            console.log(this.AVG_Data);
+            //try to get key because to access object value 
+            const first_key = Object.keys(response.percentage_changes)[0];
+
+            this.pred_table = [[response.predictions.values[0]['price_avg_Min Buri'],response.percentage_changes[first_key]['Min Buri']],
+            [response.predictions.values[0]['price_avg_Lat Krabang'],response.percentage_changes[first_key]['Lat Krabang']],
+            [response.predictions.values[0]['price_avg_Watthana'],response.percentage_changes[first_key]['Watthana']],
+            [response.predictions.values[0]['price_avg_Khlong Toei'],response.percentage_changes[first_key]['Khlong Toei']]];
+
+            
+            
 
             this.PRED_Data = this.AVG_Data.map((arr: number[], index: number) => arr.concat(pred[index]));
-            console.log(this.PRED_Data);
             
             const pred_date = response.predictions.dates.map((date: string | any[]) => {
               const yearMonth = date.slice(0, 7); // Extracts 'YYYY-MM' part from 'YYYY-MM-DD'
@@ -122,7 +117,9 @@ export class DashboardComponent implements OnChanges {
               next: (response) => {
                 this.last_month_avg = response;
                 this.loading = false;
-                console.log(this.last_month_avg[0]['data'][0]['price_avg']);
+                this.comparePrice.averagePrice = ((this.followedLand as {LocationID:number}[]).map((land) => this.getAveragePricebyLocationId(land.LocationID)));
+                console.log(this.comparePrice,"sssss");
+
               },
               error: (error) => {
                 console.error('Error:', error);
@@ -143,6 +140,19 @@ export class DashboardComponent implements OnChanges {
         this.loading = false;
       },
     });
+  }
+
+  getAveragePricebyLocationId(locationId: number) {
+
+    if(locationId === 1){
+      return this.last_month_avg[0]['data'][0]['price_avg'];
+    }else if(locationId === 2){
+      return this.last_month_avg[0]['data'][1]['price_avg'];
+    }else if(locationId === 3){
+      return this.last_month_avg[0]['data'][2]['price_avg'];
+    }else if(locationId === 4){
+      return this.last_month_avg[0]['data'][3]['price_avg'];
+    }
   }
 
   transformData(data: MonthlyData[]): number[][] {
