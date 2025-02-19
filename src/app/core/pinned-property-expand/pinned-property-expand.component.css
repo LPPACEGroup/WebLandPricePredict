@@ -22,3 +22,59 @@
   font-size: 15px;
   color: var(--white);
 }
+
+.bgc-red {
+  background-color: #ff0000;
+}
+.textc-red {
+  color: #ff0000;
+}
+
+.bgc-green {
+  background-color: green;
+}
+.textc-green {
+  color: green;
+}
+
+.bgc-brown {
+  background-color: brown;
+}
+.textc-brown {
+  color: brown;
+}
+
+.bgc-orange {
+  background-color: orange;
+}
+.textc-orange {
+  color: orange;
+}
+
+.bgc-lightgreen {
+  background-color: lightgreen;
+}
+.textc-lightgreen  {
+  color: lightgreen;
+}
+
+.bgc-yellow {
+  background-color: yellow;
+}
+.textc-yellow  {
+  color: yellow;
+}
+
+.bgc-purple {
+  background-color: purple;
+}
+.textc-purple  {
+  color: purple;
+}
+
+.bgc-blue {
+  background-color: blue;
+}
+.textc-blue  {
+  color: blue;
+}

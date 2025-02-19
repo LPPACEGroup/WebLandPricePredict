@@ -14,6 +14,7 @@ import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
 import { LineChartComponent } from '../../core/line-chart/line-chart.component';
+import { BarChartComponent } from 'app/core/bar-chart/bar-chart.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ import { LineChartComponent } from '../../core/line-chart/line-chart.component';
     NgChartsModule,
     LineChartComponent,
     FormsModule,
+    BarChartComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -63,38 +65,11 @@ export class DashboardComponent implements OnChanges {
   ngOnInit() {
     this.landListService.readFollowLand().subscribe((data) => {
       this.followedLand = data;
+      console.log(this.followedLand);
+      
       // console.log(this.followedLand);
     });
-    // this.dashBoardService.getDashboardData(12).subscribe({
-    //   next: (response) => {
-    //     this.L_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Lat Krabang']
-    //     );
-    //     this.M_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Min Buri']
-    //     );
-    //     this.K_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Khlong Toei']
-    //     );
-    //     this.W_Data = response.predictions.values.map(
-    //       (value: any) => value['price_avg_Watthana']
-    //     );
-
-    //     this.labels = response.predictions.dates.map((date: any) =>
-    //       new Date(date).toLocaleString('en-US', { month: 'short' })
-    //     );
-
-    //     console.log(this.selectedArea);
-
-    //     this.loading = false;
-    //   },
-    //   error: (error: any) => {
-    //     console.error('Error:', error);
-    //     this.loading = false;
-    //   },
-    // });
-
-    // เป็น 0 เพราะดึงข้อมูลเดือนล่าสุดที่มีใน database เพราะเราไม่มีข้อมูลเดือนก่อน
+  
 
 
     this.dashBoardService.getPriceAvg(47).subscribe({
