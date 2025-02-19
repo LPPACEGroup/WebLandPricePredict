@@ -31,14 +31,7 @@ import { BarChartComponent } from 'app/core/bar-chart/bar-chart.component';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnChanges {
-  L_Data_PRED: any[] = [];
-  M_Data_PRED: any[] = [];
-  K_Data_PRED: any[] = [];
-  W_Data_PRED: any[] = [];
-  L_Data_AVG: any[] = [];
-  M_Data_AVG: any[] = [];
-  K_Data_AVG: any[] = [];
-  W_Data_AVG: any[] = [];
+
   AVG_Data: any;
   PRED_Data: any;
   labels: any[] = [];
@@ -49,8 +42,20 @@ export class DashboardComponent implements OnChanges {
   loading = true;
   last_month_avg: any;
   pred_table: any;
-
   followedLand = [];
+  comparePrice: {
+    averagePrice: number[];
+    sellPrice: number[];
+    predictPrice: number[];
+    labels: string[];
+  } = {
+    averagePrice: [],
+    sellPrice: [],
+    predictPrice: [],
+    labels: [],
+
+  };
+  
 
   constructor(
     private landListService: LandListService,
@@ -63,12 +68,7 @@ export class DashboardComponent implements OnChanges {
   }
 
   ngOnInit() {
-    this.landListService.readFollowLand().subscribe((data) => {
-      this.followedLand = data;
-      console.log(this.followedLand);
-      
-      // console.log(this.followedLand);
-    });
+
   
 
 
@@ -77,6 +77,18 @@ export class DashboardComponent implements OnChanges {
         this.AVG_Data = this.transformData(response);
         // console.log(this.AVG_Data);
         this.AVG_DATE = response.map((entry: any) => entry.year_month);
+
+        this.landListService.readFollowLand().subscribe((data) => {
+          this.followedLand = data;
+          console.log(this.followedLand);
+          this.comparePrice.sellPrice = ((this.followedLand as{Price:number}[] ).map((land) => land.Price));
+          this.comparePrice.predictPrice = ((this.followedLand as{EstimatePrice:number}[] ).map((land) => land.EstimatePrice));
+          this.comparePrice.labels = (this.followedLand ).map((_, index) => `พื้นที่ ${index + 1}`);
+
+          console.log(this.comparePrice,"sssss");
+          
+        });
+
         this.dashBoardService.getDashboardData(4).subscribe({
           next: (response) => {
             console.log(response);
@@ -105,7 +117,9 @@ export class DashboardComponent implements OnChanges {
               next: (response) => {
                 this.last_month_avg = response;
                 this.loading = false;
-                console.log(this.last_month_avg[0]['data'][0]['price_avg']);
+                this.comparePrice.averagePrice = ((this.followedLand as {LocationID:number}[]).map((land) => this.getAveragePricebyLocationId(land.LocationID)));
+                console.log(this.comparePrice,"sssss");
+
               },
               error: (error) => {
                 console.error('Error:', error);
@@ -126,6 +140,19 @@ export class DashboardComponent implements OnChanges {
         this.loading = false;
       },
     });
+  }
+
+  getAveragePricebyLocationId(locationId: number) {
+
+    if(locationId === 1){
+      return this.last_month_avg[0]['data'][0]['price_avg'];
+    }else if(locationId === 2){
+      return this.last_month_avg[0]['data'][1]['price_avg'];
+    }else if(locationId === 3){
+      return this.last_month_avg[0]['data'][2]['price_avg'];
+    }else if(locationId === 4){
+      return this.last_month_avg[0]['data'][3]['price_avg'];
+    }
   }
 
   transformData(data: MonthlyData[]): number[][] {

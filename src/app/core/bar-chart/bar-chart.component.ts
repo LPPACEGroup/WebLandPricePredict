@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartOptions, ChartData, ChartType } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 
@@ -9,7 +9,10 @@ import { NgChartsModule } from 'ng2-charts';
   templateUrl: './bar-chart.component.html',
   styleUrl: './bar-chart.component.css'
 })
-export class BarChartComponent {
+export class BarChartComponent implements OnChanges {
+  @Input() data: any;
+
+
 barChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false, // Disable aspect ratio
@@ -36,4 +39,20 @@ barChartOptions: ChartOptions = {
       { label: 'ราคาประเมิน', data: [2.8, 2.6, 2.5, 3.0, 3.1,2.5, 2.1, 2.3, 2.8, 3.2], backgroundColor: '#2749A3' }
     ]
   };
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if(changes['data'])
+      {
+        this.barChartData =
+        {
+          labels: this.data.labels,
+          datasets: [
+            { label: 'ราคาเฉลี่ย', data:this.data.averagePrice, backgroundColor: '#86B6CD' },
+            { label: 'ราคาขาย', data: this.data.sellPrice, backgroundColor: '#C6E6FF' },
+            { label: 'ราคาประเมิน', data: this.data.EstimatePrice, backgroundColor: '#2749A3' }
+          ]
+        };
+      }
+  }
+
 }
