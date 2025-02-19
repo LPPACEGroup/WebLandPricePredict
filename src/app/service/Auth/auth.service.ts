@@ -7,7 +7,8 @@ import { User } from 'model/user.interface';
   providedIn: 'root',
 })
 export class AuthService {
-  apiURL = 'http://localhost:8000/api';
+  // ต้องเปลี่ยนเป็น ชื่อ service backend ที่เราตั้งไว้
+  apiURL = 'http://192.168.1.7:30080/api';
   private signedIn = new BehaviorSubject<boolean>(false);
   isSignedIn$ = this.signedIn.asObservable();
   private role = new BehaviorSubject<string>('');

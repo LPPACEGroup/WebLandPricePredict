@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LandListService {
+  private apiURL = 'http://192.168.1.7:30080/api';
 
   constructor(private http:HttpClient) { }
 
   getData(): Observable<any> {
-    return this.http.get('http://localhost:8000/api/land');
+    return this.http.get(`${this.apiURL}/land`, { withCredentials: true });
   }
 }
