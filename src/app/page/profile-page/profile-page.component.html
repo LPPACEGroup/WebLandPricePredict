@@ -4,9 +4,17 @@
       <div class="profile-container ">
         <div class="left-flex ">
 
-          <div class="pt-4  border-8 border-white rounded-full">
-            <img src="https://tools-api.webcrumbs.org/image-placeholder/120/120/avatars/1" alt="avatar"
-              class="w-[240px] h-[240px] rounded-full object-contain" />
+          <div class="pt-4  border-8 border-white rounded-full relative">
+            <img *ngIf="profileForm.disabled" [src]="profilePicture" alt="avatar"
+              class="w-[240px] h-[240px] rounded-full object-cover " />
+              <img *ngIf="!profileForm.disabled&&imagePreview" [src]="imagePreview" alt="avatar"
+              class="w-[240px] h-[240px] rounded-full object-cover " />
+              <div *ngIf="!profileForm.disabled&&!imagePreview" class="bg-grey w-[240px] h-[240px]  rounded-full"></div>
+
+              <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden">
+              <button *ngIf="!profileForm.disabled" type="button" class="btn btn-sm absolute -bottom-2 -right-2 bg-white text-grey border-gray-400 rounded-full p-2 shadow-md" (click)="triggerFileInput()">
+                <mat-icon fontIcon="image"></mat-icon>
+            </button>
           </div>
 
           <div class="left-content text-darkBlue">

@@ -1,10 +1,5 @@
 <div class="dropdown dropdown-end">
   <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-    <li> <app-notislot [newsType]="'NEWS!'!" [data]="'ห้างใหม่ใกล้ลาดกระบัง'" [date]="'04/09/2564'"></app-notislot>
-    </li>
-    <li> <app-notislot [newsType]="'NEWS!'!" [data]="'ห้างใหม่ใกล้ลาดกระบัง'" [date]="'04/09/2564'"></app-notislot>
-    </li>
-    <li> <app-notislot [newsType]="'NEWS!'!" [data]="'ห้างใหม่ใกล้ลาดกระบัง'" [date]="'04/09/2564'"></app-notislot>
-    </li>
+    <li *ngFor="let item of news"><app-notislot [Link]="item.Link" [Date]="item.Date" [Topic]="item.Topic" ></app-notislot></li>
   </ul>
 </div>

@@ -11,6 +11,8 @@ import 'leaflet-control-geocoder';
 import 'leaflet-control-geocoder/dist/Control.Geocoder.js';
 import { GetJsonService } from 'app/service/GetJson/get-json.service';
 import { style } from '@angular/animations';
+import { AuthService } from 'app/service/Auth/auth.service';
+import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 
 @Component({
   selector: 'app-map',
@@ -38,6 +40,7 @@ export class MapComponent implements OnChanges {
   // private p4 = L.geoJSON();
   private colorMap = L.featureGroup();
 
+  tier = "Basic";
   // Initialize the map
   private initMap(): void {
     this.map = L.map('map', {
@@ -140,7 +143,18 @@ export class MapComponent implements OnChanges {
     });
 
     const marker = L.marker([latitude, longitude], { icon: customIcon });
+    console.log(this.markerCoord.length);
+    
+    if (
+      (this.tier === 'Tier1' && this.markerCoord.length+1 > 1) ||
+      (this.tier === 'Tier2' && this.markerCoord.length+1 > 3) ||
+      (this.tier === 'Tier3' && this.markerCoord.length+1 > 10)
+    ) {
+      alert('You have reached the limit of your tier (' + this.tier + '). Please upgrade your account to a higher tier to add more markers.');
+      return;
+    }
     this.markerCoord.push([latitude, longitude]);
+    
     // marker.bindPopup(
     //   `<b>Custom Location</b><br>Latitude: ${latitude}, Longitude: ${longitude}`
     // );
@@ -151,7 +165,6 @@ export class MapComponent implements OnChanges {
           (coord) => coord[0] !== latitude && coord[1] !== longitude
         );
         this.markerCoordOutput.emit(this.markerCoord);
-        console.log(this.checkColor(e.latlng.lat, e.latlng.lng));
       }
     });
 
@@ -195,7 +208,7 @@ export class MapComponent implements OnChanges {
 
     }
   }
-  constructor(private getJsonService: GetJsonService) {
+  constructor(private getJsonService: GetJsonService, private auth: AuthService ,private dashBoardService: DashboardService) {
     this.getJsonService
       .getJson('assets/layers/latkrabang.geojson')
       .subscribe((data:any) => {
@@ -254,7 +267,13 @@ export class MapComponent implements OnChanges {
       });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.getTier().subscribe((data) => {
+      this.tier = data;
+      
+    });
+    
+  }
   clickZoomin() {
     this.map.zoomIn();
   }
@@ -267,7 +286,15 @@ export class MapComponent implements OnChanges {
     this.initMap();
   }
   toggleMaker(): void {
-    this.markerManage = !this.markerManage;
+    console.log(this.tier);
+    
+    if (this.tier === 'Basic') {
+      alert('your are now tier ' + this.tier + '. Please upgrade your account to Tier1 or higher to use this feature');
+    }
+    else {
+      this.markerManage = !this.markerManage;
+
+    }
   }
   checkColor(lat: number, lng: number): string {
     const point = L.latLng(lat, lng);

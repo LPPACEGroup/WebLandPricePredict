@@ -8,92 +8,61 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
-        <input type="text" placeholder="ค้นหา..." class="border-none outline-none w-full">
+        <input type="text" placeholder="ค้นหา..." class="border-none outline-none w-full" (input)="searchUser($event)">
       </div>
 
     </div>
 
-    <div class="mb-4 bg-white rounded-md shadow">
-      <table class="w-full border-collapse table-fixed">
-        <thead>
-          <tr class="bg-white text-darkBlue">
-            <th class="text-center py-2 px-4 w-[2%]">ลำดับ</th>
-            <th class="text-center py-2 px-4 w-[10%]">ID</th>
-            <th class="text-center py-2 px-4 w-[12%]">ชื่อผู้ใช้</th>
-            <th class="text-center py-2 px-4 w-[25%]">ชื่อ-นามสกุล</th>
-            <th class="text-center py-2 px-4 w-[13%]">เบอร์โทร</th>
-            <th class="text-center py-2 px-4 w-[10%]">ระดับสมาชิก</th>
-            <th class="text-center py-2 px-4 w-[20%]">เวลาชำระเงิน</th>
-            <th class="text-center py-2 px-4 w-[15%]">สถานะตรวจสอบ</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-
-    <div class="bg-white rounded-md shadow mb-4">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">1</td>
-            <td class="py-4 px-4 w-[10%] text-center">001</td>
-            <td class="py-4 px-4 w-[12%] text-center">john123</td>
-            <td class="py-4 px-4 w-[25%] text-center">จอห์น สมิธ</td>
-            <td class="py-4 px-4 w-[13%] text-center">089-123-4567</td>
-            <td class="py-4 px-4 w-[10%] text-center">Tier 1</td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
-            <td class="py-4 px-4 w-[15%] text-center text-midGreen">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-white rounded-md shadow mb-4">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">2</td>
-            <td class="py-4 px-4 w-[10%] text-center">002</td>
-            <td class="py-4 px-4 w-[12%] text-center">jane_doe</td>
-            <td class="py-4 px-4 w-[25%] text-center">เจน โด</td>
-            <td class="py-4 px-4 w-[13%] text-center">081-987-6543</td>
-            <td class="py-4 px-4 w-[10%] text-center">Tier 3</td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
-            <td class="py-4 px-4 w-[15%] text-center text-midGreen">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-white rounded-md shadow mb-4">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">3</td>
-            <td class="py-4 px-4 w-[10%] text-center">003</td>
-            <td class="py-4 px-4 w-[12%] text-center">mike88</td>
-            <td class="py-4 px-4 w-[25%] text-center">ไมค์ จอห์นสัน</td>
-            <td class="py-4 px-4 w-[13%] text-center">089-123-4567</td>
-            <td class="py-4 px-4 w-[10%] text-center">Basic</td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
-            <td class="py-4 px-4 w-[15%] text-center text-darkRed">ยังไม่ตรวจสอบ</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-white rounded-md shadow mb-4">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">4</td>
-            <td class="py-4 px-4 w-[10%] text-center">004</td>
-            <td class="py-4 px-4 w-[12%] text-center">john123</td>
-            <td class="py-4 px-4 w-[25%] text-center">จอห์น สมิธ</td>
-            <td class="py-4 px-4 w-[13%] text-center">089-123-4567</td>
-            <td class="py-4 px-4 w-[10%] text-center">Tier 1</td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
-            <td class="py-4 px-4 w-[15%] text-center text-midGreen">ตรวจสอบแล้ว</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table *ngIf="UserList" mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="Order">
+        <th mat-header-cell *matHeaderCellDef> ลำดับ. </th>
+        <td mat-cell *matCellDef="let element"> {{element.Order}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="UserID">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.UserID}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Username">
+        <th mat-header-cell *matHeaderCellDef> ชื่อผู้ใช้ </th>
+        <td mat-cell *matCellDef="let element"> {{element.Username}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> ชื่อ-นามสกุล  </th>
+        <td mat-cell *matCellDef="let element"> {{element.FirstName}} {{element.LastName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Telephon">
+        <th mat-header-cell *matHeaderCellDef> เบอร์โทร </th>
+        <td mat-cell *matCellDef="let element"> {{element.Telephone}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Tier">
+        <th mat-header-cell *matHeaderCellDef >ระดับสมาชิก </th>
+        <td mat-cell *matCellDef="let element"><p [ngClass]="element.Tier =='Basic'?'text-oceanBlue':''"> {{element.Tier}}</p> </td>
+      </ng-container>
+      <ng-container matColumnDef="SubmissionDate">
+        <th mat-header-cell *matHeaderCellDef> เวลาชำระเงิน </th>
+        <td mat-cell *matCellDef="let element" > {{element.SubmissionDate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Verified">
+        <th mat-header-cell *matHeaderCellDef> สถานะตรวจสอบ </th>
+        <td mat-cell *matCellDef="let element"> <p [ngClass]="element.Verified ? 'text-midGreen' : 'text-brightRed'">
+          {{ element.Verified ? 'ตรวจสอบแล้ว' : 'ยังไม่ตรวจสอบ' }}
+        </p> </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"(click) = "userClicked(row.UserID)"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
 
   </div>
+</div>
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>

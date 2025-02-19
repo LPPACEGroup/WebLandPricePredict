@@ -20,6 +20,7 @@ interface SignInData {
 export class SigninPageComponent {
   errorMessage: string = '';
   siginForm: FormGroup;
+  loginFailed: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -49,6 +50,10 @@ export class SigninPageComponent {
         },
         error: (error: any) => {
           this.errorMessage = error.error.message||'sonething went wrong, Please try again';
+          if (error.status === 401) {
+            this.errorMessage = 'Invalid email or password';
+            this.loginFailed = true;
+          }
         },
       });
 

@@ -1,7 +1,7 @@
-<div class="carousel-container">
+<div *ngIf="!loading" class="carousel-container">
   <button class="prev " (click)="prevSlide()">&#10094;</button>
 
-  <div class="carousel-slide" *ngIf="currentIndex==0">
+  <!-- <div class="carousel-slide" *ngIf="currentIndex==0">
     <img src="assets/imgs/news1.png" alt="Blog Icon">
     <div class="flex-1 bg-neutral-100 p-5 flex flex-col">
       <h2 class="text-primary-950 text-lg font-semibold mb-2">
@@ -36,7 +36,33 @@
         วันที่ 30 สิงหาคม 2567 - 10:38 น.
       </p>
     </div>
+    
+  </div> -->
+  <div>
+
   </div>
+
+  <ng-container *ngFor="let item of news">
+    <a [href]="item.Link" target="_blank">
+      <div *ngIf="currentIndex === item.index" class="carousel-slide">
+        <img [src]="item.Pic" alt="Blog Icon">
+        <div class="flex-1 bg-neutral-100 p-5 flex flex-col">
+          <h2 class="text-primary-950 text-lg font-semibold mb-2">
+            {{item.Topic}}
+          </h2>
+          <!-- <a href="/" class="text-blue text-sm mb-3">
+        บันเทิงธุรกิจ-ลำปาง
+      </a> -->
+          <p class="text-neutral-950">
+            {{item.Content}}
+          </p>
+          <p class="text-neutral-500 mt-4 ">
+            {{item.Date}}
+          </p>
+        </div>
+      </div>
+    </a>
+  </ng-container>
 
 
   <button class="next" (click)="nextSlide()">&#10095;</button>

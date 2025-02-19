@@ -5,3 +5,71 @@ details {
 summary {
   list-style: none;
 }
+th {
+  color:darkblue;
+  font-weight: 600 !important;
+  font-family: "Kodchasan", sans-serif;
+  font-size: 1.1rem;
+}
+td{
+  font-family: "Kodchasan", sans-serif;
+  font-size: 1rem;
+  color: black;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+/* blog.component.scss or styles within component */
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+  cursor: pointer;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+.expanded-row {
+  background: #f5f5f5;
+}
+.detail-row {
+  height: 0;
+}
+
+.detail-row-hidden {
+  display: none;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+  cursor: pointer;
+}
+
+.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-detail {
+  overflow: hidden;
+}
+
+.expanded-row {
+  background: #f5f5f5;
+}

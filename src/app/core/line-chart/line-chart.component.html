@@ -1,12 +1,7 @@
-<apx-chart
-  [series]="series"
-  [chart]="chart"
-  [dataLabels]="dataLabels"
-  [markers]="markers"
-  [title]="title"
-  [fill]="fill"
-  [yaxis]="yaxis"
-  [xaxis]="xaxis"
-  [tooltip]="tooltip"
-  [autoUpdateSeries]="true"
-></apx-chart>
+<div class="w-5/6 h-5/6 flex justify-center">
+  <canvas baseChart
+    [data]="lineChartConfig.data"
+    [options]="lineChartConfig.options"
+    [type]="lineChartConfig.type">
+  </canvas>
+</div>

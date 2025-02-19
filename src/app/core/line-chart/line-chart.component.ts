@@ -1,110 +1,165 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexTitleSubtitle,
-  ApexDataLabels,
-  ApexFill,
-  ApexMarkers,
-  ApexYAxis,
-  ApexXAxis,
-  ApexTooltip,
-  NgApexchartsModule
-} from "ng-apexcharts";
+import { Component, input, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
+import { ChartConfiguration, ChartData, ChartOptions,Chart } from 'chart.js';
+import { CommonModule } from '@angular/common';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+Chart.register(annotationPlugin);  // Register the annotation plugin
+
 
 @Component({
   selector: 'app-line-chart',
   standalone: true,
-  imports: [NgApexchartsModule],
+  imports: [NgChartsModule,CommonModule],
   templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css']
+  styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnChanges {
-  @Input() dataSeries: { date: string, value: number }[] = [];
+  @Input() labels: string[] = [];
+  @Input() values: number[] = [];
   @Input() chartHeight: number = 350; // Default height
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  @Input() data: any;
+  @Input() selectedArea: string = 'แสดงเขตทั้งหมด';
 
-  public series!: ApexAxisChartSeries;
-  public chart!: ApexChart;
-  public dataLabels!: ApexDataLabels;
-  public markers!: ApexMarkers;
-  public title!: ApexTitleSubtitle;
-  public fill!: ApexFill;
-  public yaxis!: ApexYAxis;
-  public xaxis!: ApexXAxis;
-  public tooltip!: ApexTooltip;
 
-  constructor() {
-    this.initChartData();
-  }
+  public lineChartData: ChartData<'line'> = {
+    labels: [],
+    datasets: [
+      {
+        label: 'ราคา',
+        data: [],
+        borderColor: 'red',
+        backgroundColor: 'transparent',
+        fill: false,
+        tension: 0.4, 
+        borderWidth: 1,
+        pointBackgroundColor: 'red',
+      },
+      
+    ],
+  };
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['dataSeries'] || changes['chartHeight']) {
-      this.initChartData();
+  
+
+  public lineChartOptions: ChartOptions<'line'> = {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      annotation: {
+        annotations: {
+          line1: {
+            type: 'line',
+            xMax:48,
+            xMin:48,
+            borderColor: 'red',
+            borderWidth: 2,
+
+
+          },
+        },
+      },
+    },
+  };
+
+  public lineChartConfig: ChartConfiguration<'line'> = {
+    type: 'line',
+    data: this.lineChartData,
+    options: this.lineChartOptions,
+  };
+  
+
+
+  // Detect changes in @Input() and update the chart
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['labels']) {
+      this.lineChartData.labels = this.labels;
+    }
+  
+    // if (changes['data'] && this.data) {
+    //   this.lineChartData.datasets[0].data = this.data[0]; // Default single dataset
+    // }
+  
+    if (changes['selectedArea'] && this.data) {
+      
+      if (changes['selectedArea'].currentValue === 'แสดงเขตทั้งหมด') {
+        this.lineChartConfig.data = {
+          labels: this.labels, // Ensure labels are set
+          datasets: [
+            {
+              label: 'มีนบุรี',
+              data: this.data[0] || [],
+              borderColor: 'blue',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+            {
+              label: 'ลาดกระบัง',
+              data: this.data[1] || [],
+              borderColor: 'orange',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+            {
+              label: 'คลองเตย',
+              data: this.data[2] || [],
+              borderColor: 'green',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+            {
+              label: 'วัฒนา',
+              data: this.data[3] || [],
+              borderColor: 'brown',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+          ],
+        };
+      } else {
+
+        // Select only one dataset based on the area
+        let areaIndex = 0;
+        if (changes['selectedArea'].currentValue === 'เขตมีนบุรี') areaIndex = 0;
+        else if (changes['selectedArea'].currentValue === 'เขตลาดกระบัง') areaIndex = 1;
+        else if (changes['selectedArea'].currentValue === 'เขตวัฒนา') areaIndex = 2;
+        else if (changes['selectedArea'].currentValue === 'เขตคลองเตย') areaIndex = 3;
+  
+        this.lineChartConfig.data = {
+          labels: this.labels,
+          datasets: [
+            {
+              label: this.selectedArea,
+              data: this.data[areaIndex] || [],
+              borderColor: areaIndex === 0 ? 'blue' : areaIndex === 1 ? 'orange' : areaIndex === 2 ? 'green' : 'brown',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            
+            },
+          ],
+        };
+      }
+    }
+  
+    // Update the chart
+    if (this.chart) {
+      this.chart.chart?.update();
     }
   }
-
-  public initChartData(): void {
-    const dates = this.dataSeries.map(item => [new Date(item.date).getTime(), item.value]);
-
-    this.series = [
-      {
-        name: "XYZ MOTORS",
-        data: dates
-      }
-    ];
-    this.chart = {
-      type: "area",
-      stacked: false,
-      height: this.chartHeight,
-      zoom: {
-        type: "x",
-        enabled: true,
-        autoScaleYaxis: true
-      },
-      toolbar: {
-        autoSelected: "zoom"
-      }
-    };
-    this.dataLabels = {
-      enabled: false
-    };
-    this.markers = {
-      size: 0
-    };
-    this.title = {
-      text: "Stock Price Movement",
-      align: "left"
-    };
-    this.fill = {
-      type: "gradient",
-      gradient: {
-        shadeIntensity: 1,
-        inverseColors: false,
-        opacityFrom: 0.5,
-        opacityTo: 0,
-        stops: [0, 90, 100]
-      }
-    };
-    this.yaxis = {
-      labels: {
-        formatter: function(val) {
-          return (val / 1000000).toFixed(0);
-        }
-      },
-      title: {
-        text: "Price"
-      }
-    };
-    this.xaxis = {
-      type: "datetime"
-    };
-    this.tooltip = {
-      shared: false,
-      y: {
-        formatter: function(val) {
-          return (val / 1000000).toFixed(0);
-        }
-      }
-    };
-  }
+  
 }

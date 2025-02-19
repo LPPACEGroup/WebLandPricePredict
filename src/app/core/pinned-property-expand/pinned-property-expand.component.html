@@ -1,57 +1,66 @@
 <div class="px-4 pb-4">
   <div class="grid grid-cols-5 text-center gap-4 mt-4">
-    <div class="bg-baby-blue p-4 rounded-lg">
-      <h4 class="text-lg text-dark-blue font-bold">2,400,000</h4>
-      <p class="text-sm text-dark-blue">ราคาขายจริง</p>
+    <div class="bg-babyBlue p-4 rounded-lg">
+      <h4 class="text-lg text-darkBlue font-bold">{{land.Price}}</h4>
+      <p class="text-sm text-darkBlue">ราคาขายจริง</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-ocean-blue font-bold">1,954,975</h4>
-      <p class="text-sm text-ocean-blue">ราคาเฉลี่ย</p>
+      <h4 class="text-lg text-oceanBlue font-bold">1,954,975</h4>
+      <p class="text-sm text-oceanBlue">ราคาเฉลี่ย</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-ocean-blue font-bold">2,200,500</h4>
-      <p class="text-sm text-ocean-blue">ราคาประเมิน</p>
+      <h4 class="text-lg text-oceanBlue font-bold">{{land.EstimatePrice}}</h4>
+      <p class="text-sm text-oceanBlue">ราคาประเมิน</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-ocean-blue font-bold">2,004,975</h4>
-      <p class="text-sm text-ocean-blue">ราคาทำนาย</p>
+      <h4 class="text-lg text-oceanBlue font-bold">2,004,975</h4>
+      <p class="text-sm text-oceanBlue">ราคาทำนาย</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-green-500 font-bold">ควรซื้อ</h4>
-      <p class="text-sm text-ocean-blue">ความน่าลงทุน</p>
+      <h4 class="text-lg text-midGreen font-bold">น่าสนใจ</h4>
+      <p class="text-sm text-oceanBlue">ความน่าสนใจ</p>
     </div>
   </div>
 
   <div class="p-6 rounded-md mt-4">
-    <div class="gap-4">
+    <div class="gap-4 text-darkBlue">
       <div class="flex items-center pb-1">
         <p class="box">ราคาต่อหน่วย</p>
-        <p class="pl-4">450,500 / ตร.วา</p>
+        <p class="pl-4">{{land.Price/land.Size}} / ตร.วา</p>
       </div>
       <div class="flex items-center pb-1">
         <p class="box">ที่ตั้ง</p>
-        <span class="pl-4">ถนนคลองบาง 8 เขตคลองเตย กรุงเทพมหานคร 10520</span>
+        <span class="pl-4">{{land.LandTitle}} {{land.LocationName}} กรุงเทพมหานคร </span>
       </div>
       <div class="flex items-center pb-1">
         <p class="box">ขนาดพื้นที่</p>
-        <span class="pl-4">58 ตร.วา</span>
+        <span class="pl-4">{{land.Size}} ตร.วา</span>
       </div>
       <div class="flex items-center pb-1">
         <p class="box">สีพื้นที่</p>
-        <span class="pl-4 text-red-500">
-          <span class="pl-4 w-7 h-7 bg-red-500 rounded-full mr-2"></span>สีแดง - ที่ดินพาณิชย์</span>
+        <div *ngIf="land.Land_CityColor" class="flex flex-row items-center pl-4">
+          <div class="pl-1 w-4 h-4 rounded-full mr-2" [ngClass]="'bgc-' + land.Land_CityColor.toLowerCase()"></div>
+          <span class="pl-1 " [ngClass]="'textc-' + land.Land_CityColor.toLowerCase()">
+            {{land.Land_CityColor}}</span>
+        </div>
+        <div *ngIf="!land.Land_CityColor" class="text-black px-4">
+          ไม่ทราบสีพื้นที่
+        </div>
       </div>
       <div class="pb-1">
         <p class="box">รายละเอียด:</p>
-        <p> - ที่ดินขนาด 10 ไร่ </p>
-        <p> - ห่างถนน 10 ม. </p>
-        <p> - ใกล้โรงเรียน </p>
+        {{land.Description}}
       </div>
       <div class="pb-1">
         <p class="box-auto">สถานที่สำคัญบริเวณใกล้เคียง</p>
-        <img src="assets/imgs/nearby-map.png" alt="map" class="w-full h-64 object-cover rounded-md pt-2">
-      </div>
 
+      </div>
+      <a [href]="'https://www.google.com/maps?q=' + land.Latitude + ',' + land.Longitude" target="_blank"
+        class="text-xl font-bold underline">
+        <!-- <img [src]="'https://staticmap.openstreetmap.de/staticmap.php?center=' + land.Latitude + ',' + land.Longitude + '&zoom=15&size=600x300&markers=' + land.Latitude + ',' + land.Longitude" /> -->
+        ดูบน Google Maps
+
+      </a>
       <div class="grid grid-cols-2 gap-4 mt-4">
         <div class="bg-white p-4 rounded-md flex items-center">
           <img src="assets/icons/hospital-icon.png" alt="hospital icon" class="w-6 h-6 mr-2">

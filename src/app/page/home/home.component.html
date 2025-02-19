@@ -9,25 +9,26 @@
       </div>
 
       <div class="container">
-        <div class="guide-box">
-          <a href="#main-features" class="guid-link">แนะนำเมนูหลัก</a>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('main-features')">
+          <a  class="guid-link">แนะนำเมนูหลัก</a>
         </div>
 
-        <div class="guide-box">
-          <a href="#other-features" class="guid-link">ฟีเจอร์อื่น ๆ</a>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('other-features')">
+          <a  class="guid-link">ฟีเจอร์อื่น ๆ</a>
         </div>
-        <div class="guide-box">
-          <a href="#intro" class="guid-link">ที่มาโครงงาน</a>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('intro')">
+          <a  class="guid-link">ที่มาโครงงาน</a>
         </div>
-        <div class="guide-box">
-          <a href="#team" class="guid-link">ทีมผู้พัฒนา</a>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('membership')">
+          <a  class="guid-link">แพ็คเกจสมาชิก</a>
         </div>
-        <div class="guide-box">
-          <a href="#membership" class="guid-link">แพ็คเกจสมาชิก</a>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('team')">
+          <a  class="guid-link">ทีมผู้พัฒนา</a>
         </div>
+
       </div>
 
-      <div class="container">
+      <div class="container ">
         <div class="box" id="main-features">
 
           <div class="left-content">
@@ -256,20 +257,20 @@
                   <span class="text-green-400 pr-2">
                     <img src="assets/icons/check.svg" alt="Check" class="h-4 w-4"></span>
                   <span>
-                    ปักหมุดได้ 3 ที่
+                    ปักหมุดได้ 1 ที่
 
                   </span>
                 </li>
                 <li class="flex items-center justify-center py-2">
                   <span class="text-green-400 pr-2">
                     <img src="assets/icons/check.svg" alt="Check" class="h-4 w-4"></span>
-                  <span>มอนิเตอร์ได้ 3 ที่
+                  <span>มอนิเตอร์ได้ 1 ที่
                   </span>
                 </li>
                 <li class="flex items-center justify-center py-2">
                   <span class="text-green-400 pr-2"><img src="assets/icons/check.svg" alt="Check" class="h-4 w-4">
                   </span>
-                  <span>รัศมีรอบได้ 1 km</span>
+                  <span>รัศมีรอบได้ 2 km</span>
                 </li>
 
                 <li class="flex items-center justify-center py-2">
@@ -277,8 +278,9 @@
                 </li>
 
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
-                style="bottom: 10px;">899 B</button>
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"   [routerLink]="['/Payment', 'Tier1']"
+
+                style="bottom: 10px;">99 B</button>
             </div>
           </div>
 
@@ -297,14 +299,14 @@
                   <span class="text-green-400 pr-2"><img src="assets/icons/check.svg" alt="Check" class="h-4 w-4">
                   </span>
                   <span>
-                    ปักหมุดได้ 5 ที่
+                    ปักหมุดได้ 3 ที่
 
                   </span>
                 </li>
                 <li class="flex items-center justify-left py-2">
                   <span class="text-green-400 pr-2"><img src="assets/icons/check.svg" alt="Check" class="h-4 w-4">
                   </span>
-                  <span>มอนิเตอร์ได้ 5 ที่
+                  <span>มอนิเตอร์ได้ 3 ที่
                   </span>
                 </li>
                 <li class="flex items-center justify-left py-2">
@@ -315,10 +317,10 @@
                 <li class="flex items-center justify-left py-2">
                   <span class="text-green-400 pr-2"><img src="assets/icons/check.svg" alt="Check" class="h-4 w-4">
                   </span>
-                  <span>รัศมีรอบได้ 2 km</span>
+                  <span>รัศมีรอบได้ 4 km</span>
                 </li>
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white">1499
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white" [routerLink]="['/Payment', 'Tier2']">299
                 B</button>
             </div>
           </div>
@@ -356,10 +358,10 @@
                 <li class="flex items-center justify-left py-2">
                   <span class="text-green-400 pr-2"><img src="assets/icons/check.svg" alt="Check" class="h-4 w-4">
                   </span>
-                  <span>รัศมีรอบได้ 3 km</span>
+                  <span>รัศมีรอบได้ 8 km</span>
                 </li>
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white">1499
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white" [routerLink]="['/Payment', 'Tier3']">499
                 B</button>
             </div>
           </div>

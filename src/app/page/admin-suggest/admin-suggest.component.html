@@ -1,83 +1,40 @@
-<div class="p-6">
-  <div class="bg-lightBlue rounded-3xl p-4 mb-6">
-
-    <div class="mb-4 bg-white rounded-md shadow">
-      <table class="w-full border-collapse table-fixed">
-        <thead>
-          <tr class="bg-white text-darkBlue">
-            <th class="text-center py-2 px-4 w-[2%]">ลำดับ</th>
-            <th class="text-center py-2 px-4 w-[15%]">ชื่อผู้ใช้</th>
-            <th class="text-center py-2 px-4 w-[55%]">ข้อเสนอแนะ</th>
-            <th class="text-center py-2 px-4 w-[20%]">เวลาส่ง</th>
-            <th class="text-center py-2 px-4 w-[8%]">ลบ</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-
-    <div class="bg-white rounded-md shadow mb-4">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">1</td>
-            <td class="py-4 px-4 w-[15%] truncate">tommy_lee</td>
-            <td class="py-4 px-4 w-[55%] text-start">
-              <details>
-                <summary class="cursor-pointer truncate">
-                  ควรพัฒนาช่องค้นหารายการที่ดิน ให้ดีกว่านี้ ยังไม่สามารถค้นหาที่ดินที่ต้องการได้ตรงใจ
-                </summary>
-              </details>
-            </td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-19 12:34:56</td>
-            <td class="py-4 px-4 w-[8%]">
-              <button class="bg-brightRed text-white rounded-md px-4 py-2">ลบ</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-white rounded-md shadow mb-4">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">2</td>
-            <td class="py-4 px-4 w-[15%] truncate">anna_b</td>
-            <td class="py-4 px-4 w-[55%] text-start">
-              <details>
-                <summary class="cursor-pointer truncate">
-                  โอนเงินค่าสมัครสมาชิกแล้ว แต่ใช้เวลาอนุมัตินานเกินไปค่ะ </summary>
-              </details>
-            </td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-18 14:22:33</td>
-            <td class="py-4 px-4 w-[8%]">
-              <button class="bg-brightRed text-white rounded-md px-4 py-2">ลบ</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="bg-white rounded-md shadow">
-      <table class="w-full border-collapse table-fixed">
-        <tbody>
-          <tr class="text-center text-black">
-            <td class="py-4 px-4 w-[2%]">3</td>
-            <td class="py-4 px-4 w-[15%] truncate">steve_rog</td>
-            <td class="py-4 px-4 w-[55%] text-start">
-              <details>
-                <summary class="cursor-pointer truncate">
-                  อยากให้มีแพ็คเกจให้เลือกมากกว่านี้ เพราะมีความสนใจดูที่ดินหลายที่
-                  และอยากให้ช่วยเพิ่มขอบเขตความสามารถแต่ละ tier ขอบคุณคับบบบบ
-                </summary>
-              </details>
-            </td>
-            <td class="py-4 px-4 w-[20%] truncate">2024-08-18 14:23:43</td>
-            <td class="py-4 px-4 w-[8%]">
-              <button class="bg-brightRed text-white rounded-md px-4 py-2">ลบ</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
+<div class="h-nmax bg-white flex flex-center">
+  <div  class="mat-elevation-z8 w-9/10 h-9/10 rounded-xl p-12 bg-babyBlue shadow-inner ">
+    <table *ngIf="userSuggestions" mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="CommentID">
+        <th mat-header-cell *matHeaderCellDef> ลำดับ. </th>
+        <td mat-cell *matCellDef="let element"> {{element.CommentID}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="UserID">
+        <th mat-header-cell *matHeaderCellDef> หมายเลขผู้ใช้งาน </th>
+        <td mat-cell *matCellDef="let element"> {{element.UserID}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Content">
+        <th mat-header-cell *matHeaderCellDef> ข้อเสนอแนะ </th>
+        <td mat-cell *matCellDef="let element"> {{element.Content}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> เวลาส่ง </th>
+        <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell  *matHeaderCellDef > ลบ </th>
+        <td mat-cell *matCellDef="let row" >
+          <button mat-button (click)="deleteSuggestion(row.CommentID)" class="btn bg-[#FF5630] text-white btn-sm">ลบ</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
   </div>
+  
 </div>
