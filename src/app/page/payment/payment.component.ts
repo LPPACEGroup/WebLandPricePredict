@@ -35,8 +35,7 @@ export class PaymentComponent {
     private userService: UserService
   ) {
     this.paymentForm = this.fb.group({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      AccName: new FormControl('', Validators.required),
       phoneNumber: new FormControl('', Validators.required),
       detail: new FormControl('', Validators.required),
     });
@@ -114,8 +113,7 @@ export class PaymentComponent {
         const submitPayment: SunmitPayment = {
           UserID: data.toString(),
           BuyTier: this.tier,
-          FirstName: this.paymentForm.value.firstName,
-          LastName: this.paymentForm.value.lastName,
+          AccName: this.paymentForm.value.AccName,
           Telephone: this.paymentForm.value.phoneNumber,
           Detail: this.paymentForm.value.detail,
         };

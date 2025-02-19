@@ -42,8 +42,7 @@ updateUser(user: User): Observable<any> {
     formData.append('slip_image', file);
     formData.append('UserID', submit_payment.UserID);
     formData.append('BuyTier', submit_payment.BuyTier);
-    formData.append('FirstName', submit_payment.FirstName);
-    formData.append('LastName', submit_payment.LastName);
+    formData.append('AccName', submit_payment.AccName);
     formData.append('Telephone', submit_payment.Telephone);
     formData.append('Detail', submit_payment.Detail);
     

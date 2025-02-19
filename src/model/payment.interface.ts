@@ -1,8 +1,7 @@
 export interface SunmitPayment {
     UserID: string;
     BuyTier: string;
-    FirstName: string;
-    LastName: string;
+    AccName: string;
     Telephone: string;
     Detail: string;
 }
