@@ -5,3 +5,15 @@ details {
 summary {
   list-style: none;
 }
+
+th {
+  color:darkblue;
+  font-weight: 600 !important;
+  font-family: "Kodchasan", sans-serif;
+  font-size: 1.1rem;
+}
+td{
+  font-family: "Kodchasan", sans-serif;
+  font-size: 1rem;
+  color: black;
+}

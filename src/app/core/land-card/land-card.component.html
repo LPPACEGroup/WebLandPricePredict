@@ -1,18 +1,18 @@
 <div class="h-fit w-full rounded-2xl grid grid-cols-2 overflow-clip border border-grey">
-  <div class="w-full h-full"><img class="w-full h-full"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhjfIax41C7jv5Ln0OTl2-D_-Ss07ghDpGyA&s" alt="">
+  <div class="w-full h-full"><img *ngIf="imageBlobUrls !==''" class="w-full h-full" [src]="imageBlobUrls" alt="">
+    <div *ngIf="imageBlobUrls ===''" class="w-full h-full flex justify-center items-center bg-lightBlue ">ไม่มีรูปภาพตัวอย่าง</div>
   </div>
   <div class="p-3  text-sm ">
     <div class="h-fit border-grey border-b pb-2">
-      <p class=" font-semibold">ที่อยู่</p>
-      <p class="font-semibold">เขต{{item?.location}} กรุงเทพ</p>
+      <p class=" font-semibold">{{item?.LandTitle}}</p>
+      <p class="font-semibold">เขต{{item?.LocationName}} กรุงเทพ</p>
     </div>
     <div class=" w-full grid grid-cols-5 font-semibold gap-y-1 pt-2">
       <p class="col-span-2 "> ขนาดพื้นที่ </p>
-      <p class="col-span-3 bg-light-blue rounded-full">{{item?.size}}</p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Size*4}}</p>
       <p class="col-span-2 font-semibold">ราคาขาย </p>
-      <p class="col-span-3 bg-light-blue rounded-full">{{item?.price}}</p>
-      <p class=" text-grey col-span-5">ราคา {{item?.price/item?.size}} บาทต่อตารางเมตร</p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Price}}</p>
+      <p class=" text-grey col-span-5">ราคา {{item?.Price/item?.Size*4}} บาทต่อตารางเมตร</p>
       <br>
     </div>
     <div class="w-full flex justify-end">

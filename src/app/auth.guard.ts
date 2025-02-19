@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.checkRole().pipe(
       map((userRole) => {
         userRole = userRole['role'];
-        
+
         if (requiredRoles.length === 0 || requiredRoles.includes(userRole)) {
           // Grant access if no roles are defined or the user's role matches
           return true;

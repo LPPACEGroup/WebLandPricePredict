@@ -1,96 +1,245 @@
-<div class="flex gap-6">
-  <div class="bg-white w-[400px] rounded-lg shadow p-6">
-    <div class="relative">
-      <img class="w-[100px] h-[100px] rounded-full object-contain mx-auto mb-4"
-        src="https://tools-api.webcrumbs.org/image-placeholder/100/100/avatars/1" alt="user avatar" />
-      <button
-        class="absolute top-0 right-0 bg-brightRed text-white w-auto h-auto flex items-center justify-center rounded-sm">
-        <i class="material-symbols-outlined">ลบบัญชีนี้</i>
-      </button>
-    </div>
-    <ul class="text-primary-950 text-sm space-y-1">
-      <li>
-        <strong>ID:</strong> 64010000
-      </li>
-      <li>
-        <strong>ชื่อผู้ใช้งาน:</strong> victoria_s
-      </li>
-      <li>
-        <strong>อีเมล:</strong> victoria.s&#64;example.com
-      </li>
-      <li>
-        <strong>ชื่อ-นามสกุล:</strong> วิคตอเรีย สมิธ
-      </li>
-      <li>
-        <strong>เพศ:</strong> หญิง
-      </li>
-      <li>
-        <strong>เกิดวันที่:</strong> 2024-08-18 <strong>อายุ:</strong> 18
-      </li>
-      <li>
-        <strong>เบอร์โทรศัพท์:</strong> 0817394547
-      </li>
-    </ul>
-    <button class="w-full mt-6 bg-primary-500 text-primary-50 rounded-md py-2">
-      แก้ไขข้อมูล
-    </button>
-  </div>
-  <div class="flex-1 grid grid-cols-1 gap-6">
-    <div class="bg-white rounded-lg shadow p-6">
-      <h2 class="font-title text-primary-950 text-lg mb-4">
-        ข้อมูลสมาชิก:
-      </h2>
-      <div class="flex justify-between items-center bg-neutral-50 rounded-md px-4 py-2 mb-4">
-        <span class="font-light">ระดับสมาชิกปัจจุบัน</span>
-        <details class="relative">
-          <summary class="cursor-pointer">Basic</summary>
-          <div class="absolute left-0 w-[150px] bg-white rounded-md shadow mt-2 z-10">
-            <ul>
-              <li class="px-4 py-2 hover:bg-neutral-100 cursor-pointer">Basic</li>
-              <li class="px-4 py-2 hover:bg-neutral-100 cursor-pointer">Tier1</li>
-              <li class="px-4 py-2 hover:bg-neutral-100 cursor-pointer">Tier2</li>
-              <li class="px-4 py-2 hover:bg-neutral-100 cursor-pointer">Tier3</li>
+<div class="bg-white flex items-center justify-center p-4" *ngIf="!loading">
 
-            </ul>
+  <div class="container">
+    <div class="mx-4">
+
+      <div class="p-8 flex gap-8">
+
+        <section class="w-[50%] bg-white rounded-lg shadow p-6">
+          <div class="relative">
+            <img *ngIf="!profilePicture" src="\assets\imgs\default profile img.png" alt="Avatar"
+              class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
+              <img *ngIf="profilePicture" [src]="profilePicture" alt="avatar"
+              class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
+            <button
+              class="absolute top-0 right-0 bg-red-500 text-white rounded-md text-sm px-4 py-2 flex items-center gap-2"
+              onclick="event.preventDefault(); confirm_delete.showModal()">
+              ลบบัญชีนี้
+              <img src="\assets\icons\bin.svg" alt="Delete Icon" class="w-4 h-4" />
+            </button>
           </div>
-        </details>
-      </div>
-      <div class="flex justify-between items-center bg-neutral-50 rounded-md px-4 py-2">
-        <span class="font-light">สถานะการตรวจสอบ</span>
-        <details class="relative">
-          <summary class="cursor-pointer">ตรวจสอบแล้ว</summary>
-          <div class="absolute left-0 w-[150px] bg-white rounded-md shadow mt-2 z-10">
-            <ul>
-              <li class="px-4 py-2 hover:bg-neutral-100 cursor-pointer">ตรวจสอบแล้ว</li>
-              <li class="px-4 py-2 hover:bg-neutral-100 cursor-pointer">ไม่ได้ตรวจสอบ</li>
-            </ul>
+          <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm px-10">
+
+              <div class="font-bold text-darkBlue  text-[16px]">ID</div>
+              <div class="text-[16px] text-oceanBlue">{{userId}}</div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">ชื่อผู้ใช้งาน</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Username}}</div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">อีเมล</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Email}}</div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">ชื่อ-นามสกุล</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.FirstName}} {{userPaymentDetails.LastName}}
+              </div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">เพศ</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Gender}}</div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">เกิดวันที่</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.BirthDate}}</div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">อายุ</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Age}}</div>
+
+              <div class="font-bold text-darkBlue  text-[16px]">เบอร์โทรศัพท์</div>
+              <div class="text-[16px] text-oceanBlue">{{userPaymentDetails.Telephone}}</div>
+            </div>
           </div>
-        </details>
+          <button
+            class="bg-yellow font-bold rounded-[24px] w-[160px] h-[40px] mt-6 mx-auto flex items-center justify-center text-center"
+            onclick="event.preventDefault(); edit_user.showModal()" (click)="onEditUser()">
+            แก้ไขข้อมูล
+          </button>
+        </section>
+
+
+        <section class="w-[50%] h-full flex flex-col gap-6">
+          <div class="w-full h-auto bg-white rounded-lg shadow p-6">
+            <div class="flex justify-between items-start">
+
+              <div class="w-[50%] flex flex-col items-center">
+                <div *ngIf="slipImage===''" class="w-[280px] h-[300px] flex items-center justify-center bg-lightBlue p-4">
+                  <p>ไม่มีรูปภาพ</p>
+                </div>
+                <img *ngIf="slipImage!=''" [src]="slipImage" alt="Slip Image"/>
+                <div class="grid grid-cols-2 mt-2 ">
+                  <p class="text-[10px] font-bold text-darkBlue">เวลาในการชำระเงิน:</p>
+                  <p class="text-[10px] font-medium text-center" [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">{{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
+                </div>
+                <div class="grid grid-cols-2 mt-2">
+                  <p class="text-[14px] font-bold text-darkBlue">Tier ที่ร้องขอ:</p>
+                  <p class="text-[14px] font-medium text-darkBlue">3</p>
+                </div>
+              </div>
+
+              <div class="w-[50%] p-4 space-y-5">
+                <div class="grid grid-cols-2 mt-2">
+                  <p class="font-bold text-darkBlue text-[16px]">ร้องขอสมาชิก:</p>
+                  <p class="font-medium text-darkBlue text-[16px]">Tier 3</p>
+                </div>
+
+                <div class="flex items-center">
+                  <label htmlFor="membership" class="block font-bold text-darkBlue text-[16px]">
+                    ระดับสมาชิกปัจจุบัน
+                  </label>
+                </div>
+                <form [formGroup]="tierForm">
+                  <select id="membership" title="ระดับสมาชิกปัจจุบัน"
+                    class="w-full rounded-md p-2 bg-babyBlue font-bold text-darkBlue" formControlName="Tier" (change)="tierUpdate()">
+                    <option class="bg-lightBlue font-bold">Basic</option>
+                    <option class="bg-lightBlue font-bold">Tier1</option>
+                    <option class="bg-lightBlue font-bold">Tier2</option>
+                    <option class="bg-lightBlue font-bold">Tier3</option>
+                  </select>
+                </form>
+
+                <div class="mt-4 flex items-center gap-2">
+                  <label htmlFor="status" class="block font-bold text-darkBlue text-[16px]">
+                    สถานะการตรวจสอบ
+                  </label>
+                </div>
+                <form [formGroup]="verifyForm" *ngIf="userPaymentDetails.SubmissionDate">
+                  <select id="status" title="สถานะการตรวจสอบ" formControlName="Verify"
+                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey "(change)="verficationUpdate()">
+                    <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
+                    <option [ngValue]="true" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
+                  </select>
+                                    <!-- <select id="status" title="สถานะการตรวจสอบ"
+                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey " >
+                    <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
+                    <option [ngValue]="true" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
+                  </select> -->
+                </form>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="w-full h-auto bg-white rounded-lg shadow p-6">
+            <div class="grid grid-cols-2 gap-5 text-oceanBlue">
+              <div class="grid grid-cols-2">
+                <strong class="text-darkBlue">บ้านเลขที่</strong>
+                <p>{{userPaymentDetails.HomeNumber}}</p>
+              </div>
+              <div class="grid grid-cols-2">
+                <strong class="text-darkBlue">ถนน</strong>
+                <p> {{userPaymentDetails.Alley}}</p>
+              </div>
+              <div class="grid grid-cols-2">
+                <strong class="text-darkBlue">ตำบล</strong>
+                <p> {{userPaymentDetails.Subdistrict}}</p>
+              </div>
+              <div class="grid grid-cols-2">
+                <strong class="text-darkBlue">อำเภอ</strong>
+                <p> {{userPaymentDetails.District}}</p>
+              </div>
+              <div class="grid grid-cols-2">
+                <strong class="text-darkBlue">จังหวัด</strong>
+                <p> {{userPaymentDetails.Province}}</p>
+              </div>
+              <div class="grid grid-cols-2">
+                <strong class="text-darkBlue">รหัสไปรษณีย์</strong>
+                <p> {{userPaymentDetails.PostCode}}</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      <img class="w-[150px] h-[70px] object-contain mt-4 mx-auto" src="" alt="payment" />
+      <dialog id="confirm_delete" class="modal">
+        <div class="modal-box bg-white p-6 rounded-3xl text-darkBlue ">
+          <div class="modal-action  flex justify-center flex-col items-center">
+            <form method="dialog" class="flex flex-col items-center">
+              <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              <img src="\assets\icons\warning.svg" alt="delete" class="w-20 h-20 mb-4">
+              <p>คุณต้องการจะลบ บัญชี นี้จริงๆ ใช่หรือไม่</p>
+              <div class="flex flex-row justify-around w-full mt-4">
+                <button class="btn bg-darkBlue text-white rounded-full px-6 py-1" (click)="deleteUser()">ยืนยัน</button>
+                <button class="btn bg-babyBlue text-darkBlue rounded-full px-6 py-1">ยกเลิก</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </dialog>
+      <dialog id="edit_user" class="modal">
+        <div class="modal-box bg-white p-6 rounded-3xl text-darkBlue w-full max-w-5xl">
+          <form action="" class="w-full" [formGroup]="userupdateForm" (submit)="saveChange()">
+            <div class="modal-action flex flex-col gap-4">
+              <button type="button" class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2"
+                onclick="edit_user.close()">✕</button>
+              <h2 class="text-3xl text-center font-extrabold mb-4">แก้ไขข้อมูล</h2>
+
+              <!-- ใช้ Flexbox สำหรับ 2 คอลัมน์ -->
+              <div class="flex flex-wrap gap-4">
+                <!-- ชื่อผู้ใช้งาน -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="Username" class="font-bold">ชื่อผู้ใช้งาน</label>
+                  <input type="text" id="Username" name="Username"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="username" />
+                </div>
+
+                <!-- อีเมล -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="Email" class="font-bold">อีเมล</label>
+                  <input type="email" id="Email" name="Email"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="email" />
+                </div>
+
+                <!-- ชื่อ -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="FirstName" class="font-bold">ชื่อ</label>
+                  <input type="text" id="FirstName" name="FirstName"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="firstName" />
+                </div>
+
+                <!-- นามสกุล -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="LastName" class="font-bold">นามสกุล</label>
+                  <input type="text" id="LastName" name="LastName"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="lastName" />
+                </div>
+
+                <!-- เพศ -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="Gender" class="font-bold">เพศ</label>
+                  <select id="Gender" name="Gender" class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue"
+                    required formControlName="gender">
+                    <option value="ชาย">ชาย</option>
+                    <option value="หญิง">หญิง</option>
+                  </select>
+                </div>
+
+                <!-- วันเกิด -->
+                <div class="flex flex-col gap-2 flex-1 min-w-[45%]">
+                  <label for="BirthDate" class="font-bold">เกิดวันที่</label>
+                  <input type="date" id="BirthDate" name="BirthDate"
+                    class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                    formControlName="birthDate" />
+                </div>
+              </div>
+
+              <!-- เบอร์โทรศัพท์ (1 คอลัมน์) -->
+              <div class="flex flex-col gap-2">
+                <label for="Telephone" class="font-bold">เบอร์โทรศัพท์</label>
+                <input type="tel" id="Telephone" name="Telephone"
+                  class="w-full border border-gray-300 rounded-lg p-2 bg-lightBlue" required
+                  formControlName="telephone" />
+              </div>
+
+              <!-- ปุ่มบันทึก -->
+              <button class="btn bg-darkBlue mt-3 text-white">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
     </div>
-    <div class="bg-white rounded-lg shadow p-6">
-      <h2 class="font-title text-primary-950 text-lg mb-4">ที่อยู่</h2>
-      <div class="grid grid-cols-2 gap-2 text-sm text-primary-950">
-        <div>
-          <strong>บ้านเลขที่:</strong> 61/5
-        </div>
-        <div>
-          <strong>ถนน:</strong> สุขุมวิท ซอย 11
-        </div>
-        <div>
-          <strong>ตำบล:</strong> คลองเตย
-        </div>
-        <div>
-          <strong>อำเภอ:</strong> คลองเตย
-        </div>
-        <div>
-          <strong>จังหวัด:</strong> กรุงเทพฯ
-        </div>
-        <div>
-          <strong>รหัสไปรษณีย์:</strong> 10110
-        </div>
-      </div>
+    <div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+      <span class="loading loading-spinner loading-lg text-darkBlue"></span>
     </div>
-  </div>
-</div>

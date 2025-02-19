@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Kodchasan&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 @use "@angular/material" as mat;
 
 @tailwind base;
@@ -23,7 +25,7 @@
 
   --darkRed: #b71d18;
   --brightRed: #ff5630;
-  --lightOrange: #e3b8b1;
+  --lightOrange: #e8d1ce;
   --darkOrange: #af6a5f;
   --yellow: #f3c762;
 
