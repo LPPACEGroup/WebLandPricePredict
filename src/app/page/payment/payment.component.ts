@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -32,7 +32,8 @@ export class PaymentComponent {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router : Router
   ) {
     this.paymentForm = this.fb.group({
       AccName: new FormControl('', Validators.required),
@@ -116,6 +117,7 @@ export class PaymentComponent {
           AccName: this.paymentForm.value.AccName,
           Telephone: this.paymentForm.value.phoneNumber,
           Detail: this.paymentForm.value.detail,
+          PaidPrice: this.price.toString(),
         };
         
         if (this.selectedFile) {
@@ -123,7 +125,7 @@ export class PaymentComponent {
             .uploadPaymentProof(submitPayment, this.selectedFile)
             .pipe(first())
             .subscribe((data) => {
-              console.log(data);
+              this.router.navigate(['/Home']);
             });
         }
       });
