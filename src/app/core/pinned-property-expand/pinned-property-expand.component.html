@@ -51,18 +51,19 @@
         <p class="box">รายละเอียด:</p>
         {{land.Description}}
       </div>
-      <div class="pb-1">
-        <p class="box-auto">สถานที่สำคัญบริเวณใกล้เคียง</p>
 
-      </div>
       <a [href]="'https://www.google.com/maps?q=' + land.Latitude + ',' + land.Longitude" target="_blank"
         class="text-xl font-bold underline">
         <!-- <img [src]="'https://staticmap.openstreetmap.de/staticmap.php?center=' + land.Latitude + ',' + land.Longitude + '&zoom=15&size=600x300&markers=' + land.Latitude + ',' + land.Longitude" /> -->
         ดูบน Google Maps
 
       </a>
+      <div class="pb-1">
+        <p class="box-auto">สถานที่สำคัญบริเวณใกล้เคียง</p>
+
+      </div>
       <div class="grid grid-cols-2 gap-4 mt-4">
-        <div class="bg-white p-4 rounded-md flex items-center">
+        <!-- <div class="bg-white p-4 rounded-md flex items-center">
           <img src="assets/icons/hospital-icon.png" alt="hospital icon" class="w-6 h-6 mr-2">
           <div>
             <p class="text-sm text-neutral-700">โรงพยาบาล</p>
@@ -88,6 +89,16 @@
           <div>
             <p class="text-sm text-neutral-700">สถานีรถไฟ</p>
             <p class="text-sm text-neutral-950 font-bold">10 กม.</p>
+          </div>
+        </div> -->
+        <div *ngFor="let place of nearbyPlaces" class="bg-white p-4 rounded-md flex items-center">
+          <div class=" h-full flex items-center">
+            <mat-icon  class="text-darkBlue w-10 h-10  flex-shrink-0 text-4xl" aria-hidden="false" aria-label="Example help icon" [fontIcon]="getIconName(place.PlaceType)" ></mat-icon>
+
+          </div>
+          <div>
+            <p class="text-sm text-neutral-700">{{place.Name}}</p>
+            <p class="text-sm text-neutral-950 font-bold">{{place.Distance}}</p>
           </div>
         </div>
       </div>

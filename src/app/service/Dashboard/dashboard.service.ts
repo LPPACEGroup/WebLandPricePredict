@@ -23,4 +23,37 @@ export class DashboardService {
     return this.http.get(`http://192.168.1.7:30600/get_goodsale_analytics?districts=${districts}`);
   }
 
+  getIconName(placeType: string): string {
+        
+    switch (placeType) {
+      case 'university':
+        return 'school';
+      case 'tourist_attraction':
+        return 'attractions';
+      case 'station':
+        return 'train';
+      case 'shopping':
+        return 'shopping_bag';
+      case 'school':
+        return 'school';
+      case 'public_transport':
+        return 'directions_bus';
+      case 'park':
+        return 'park';
+      case 'other':
+        return 'category';
+      case 'main_road':
+        return 'add_road';
+      case 'hospital':
+        return 'local_hospital';
+      case 'historic_site':
+        return 'account_balance';
+      case 'commercial':
+        return 'storefront';
+      default:
+        return 'place';
+    }
+  }
+  
+
 }

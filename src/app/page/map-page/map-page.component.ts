@@ -64,7 +64,7 @@ export class AreaSlider {
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
 })
-export class MapPageComponent implements OnInit, AfterViewInit {
+export class MapPageComponent implements OnInit {
   coordinates: [number, number] | null = null;
   isInputFocused: boolean = false;
   results: LocationResult[] = [];
@@ -79,7 +79,6 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   matches: any[] = [];
   istoggleLandBar: boolean = false;
   istogglePriceBox: boolean = false;
-  fastsellState = false;
   searchValue: string = '';
   fowllowState = false;
   tier = 'Basic';
@@ -133,6 +132,12 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false;
+      console.log(' stop loading', this.loading);
+      
+    }, 3000);
+
     this.auth.getTier().subscribe((response) => {
       this.tier = response;
       if (this.tier === 'Tier1') {
@@ -361,23 +366,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   togglePriceBox() {
     this.istogglePriceBox = !this.istogglePriceBox;
   }
-  onFastSellClick(event: Event) {
-    const toggleSwitch = event.target as HTMLInputElement;
-    const modal = document.getElementById(
-      'fastsell_Confirm'
-    ) as HTMLDialogElement;
-    toggleSwitch.checked = !toggleSwitch.checked;
-    if (!toggleSwitch.checked) {
-      modal.showModal();
-    } else {
-      toggleSwitch.checked = false;
-      this.fastsellState = false;
-    }
-  }
 
-  confirmFastSell() {
-    this.fastsellState = true;
-  }
 
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -529,7 +518,11 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     }, 3000);
   }
 
-  ngAfterViewInit() {
-    this.loading = false;
+ 
+
+  getIconName(placeType: string): string {
+    
+    return this.dashBoardService.getIconName(placeType);
+    // return 'place';
   }
 }

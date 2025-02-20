@@ -72,12 +72,18 @@
         </div> -->
         <div class="border-b-2 py-5">
           <p class="text-lg text-darkBlue">สถานที่ใกล้เคียง</p>
-          <div *ngIf="nearbyPlaces !== []" class="grid grid-cols-2 text-base text-black" >
+          <div *ngIf="nearbyPlaces !== []" class="grid grid-cols-2 text-base text-black " >
 
 
-            <div *ngFor="let nearby of nearbyPlaces" class="flex flex-col col-span-1">
-              <div class="font-semibold">{{nearby.Name}}</div>
+            <div *ngFor="let nearby of nearbyPlaces" class="flex flex-row col-span-1">
+              <div class=" h-full flex items-center">
+                <mat-icon  class="text-darkBlue w-10 h-10  flex-shrink-0 text-4xl" aria-hidden="false" aria-label="Example help icon" [fontIcon]="getIconName(nearby.PlaceType)" ></mat-icon>
+
+              </div>
+              <div>
+                <div class="font-semibold">{{nearby.Name}}</div>
               <div>{{nearby.Distance}} กม.</div>
+              </div>
             </div>
 
           </div>
@@ -101,23 +107,7 @@
     </div>
   </dialog>
 
-  <dialog id="fastsell_Confirm" class="modal">
-    <div class="modal-box relative">
-      <h3 class="text-lg font-bold text-gold"><mat-icon class="" aria-hidden="false" aria-label="Example help icon"
-          fontIcon="flash_on" />&emsp; เปิดใช้งานการแสดงผลข้อมูลขายเร็ว!</h3>
-      <button class="" onclick="fastsell_Confirm.close()"><mat-icon class="absolute top-4 right-4 text-black"
-          aria-hidden="false" aria-label="Example help icon" fontIcon="close" /></button>
-      <p class="py-4 text-grey">หลังจากเปิดใช้งาน ข้อมูลที่นำมาแสดงจะมีเพียง 60% ของข้อมูลทั้งหมด
-        และเป็นข้อมูลที่มาจากเว็บไซต์ InterHome เท่านั้น</p>
-      <div class="modal-action">
-        <form method="dialog">
-          <button class="btn text-white bg-darkBlue" (click)="confirmFastSell()">ยืนยันเปิดใช้งาน</button>
-          <button class="btn ml-7 text-black bg-white">ยกเลิก</button>
-        </form>
 
-      </div>
-    </div>
-  </dialog>
 
   <div *ngIf="loading" class=" bg-white min-h-nmax w-full flex-center absolute z-50">
     <span class="loading loading-spinner loading-lg text-darkBlue"></span>
@@ -131,7 +121,7 @@
       <img src="assets\icons\ic-double-arrow.svg" class="w-4 h-5" alt="Zoom In Icon" />
     </button>
   </div>
-  <div class=" pricebox pricebox-active  landBar landbar-active"
+  <div *ngIf="!loading" class=" pricebox pricebox-active  landBar landbar-active "
     [ngClass]="{'translate-x-full':istogglePriceBox,'':!istogglePriceBox}">
     <div class="p-1 absolute left-7 top-0 flex flex-col items-start z-50">
       <div class="grid grid-cols-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
@@ -204,9 +194,9 @@
             <span> <img src="assets\icons\ic-graph.svg" class="w-12 h-12" alt="Zoom In Icon" />
             </span>
           </div>
-          <div class="text-center text-midGrey text-xs">กดแสดงกราฟ
+          <!-- <div class="text-center text-midGrey text-xs">กดแสดงกราฟ
             <img class="absolute right-1 bottom-1" src="assets\icons\open-pop.svg" alt="Open Popup Icon">
-          </div>
+          </div> -->
         </button>
         <dialog id="indexLandPopup" class="modal">
           <div class="modal-box w-3/4 h-3/5 max-w-full ">
@@ -330,14 +320,7 @@
             </mat-slider>
           </div>
 
-          <div class="flex items-center">
-            <h4>ข้อมูลขายเร็ว </h4>
-            <mat-icon class="text-grey text-sm" aria-hidden="false" aria-label="Example help icon"
-              fontIcon="help_outline"></mat-icon>
-            <input type="checkbox" class="toggle toggle-xs toggle-accent border-none  bg-white " value="fastsell"
-              [checked]="fastsellState" (change)="onFastSellClick($event)" [id]="" />
-            <p class="text-grey text-sm">เปิดใช้งาน</p>
-          </div>
+
 
 
           <ul class=" bg-white text-grey p-0 w-fit">
@@ -374,9 +357,7 @@
         </div>
       </details>
     </div>
-    <div class="flex justify-start w-full">
-      <p *ngIf="fastsellState" class="font-bold text-yellow ">แสดงข้อมูลขายเร็ว</p>
-    </div>
+
 
     <div class="flex flex-col gap-2 w-full overflow-y-scroll">
       <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item"
@@ -398,6 +379,6 @@
   </div>
 </div>
 
-<div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>
