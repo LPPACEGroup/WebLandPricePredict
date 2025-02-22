@@ -125,6 +125,7 @@ export class PaymentComponent {
             .uploadPaymentProof(submitPayment, this.selectedFile)
             .pipe(first())
             .subscribe((data) => {
+              alert('การชำระเงินของคุณได้รับการยืนยันแล้ว กรุณารอการตรวจสอบจากทางเจ้าหน้าที่');
               this.router.navigate(['/Home']);
             });
         }

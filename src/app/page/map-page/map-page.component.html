@@ -58,9 +58,9 @@
           <p class="text-lg">{{selectedLand?.Price}}</p>
           <div class="grid grid-cols-2 text-base text-black">
             <p>ราคาต่อตารางเมตร </p>
-            <p>{{selectedLand?.Price/selectedLand?.Size*4}}</p>
+            <p>{{selectedLand?.Price/selectedLand?.Size*4}} บาท</p>
             <p>ขนาดพื้นที่ </p>
-            <p>{{selectedLand?.Size*4}}</p>
+            <p>{{selectedLand?.Size}} ตรว.</p>
           </div>
         </div>
         <!-- <div class="border-b-2 py-5">
@@ -118,10 +118,11 @@
   <div class="p-1 absolute left-0 top-0 flex flex-col items-center z-50 " (click)="togglePriceBox()">
     <button class=" bg-white first-letter:hover:shadow-md transition-shadow p-1 rounded" title="button"
       aria-hidden="false">
-      <img src="assets\icons\ic-double-arrow.svg" class="w-4 h-5" alt="Zoom In Icon" />
+      <img [ngClass]="{'transform scale-x-[-1]':istogglePriceBox,'':!istogglePriceBox}" src="assets\icons\ic-double-arrow.svg" class="w-4 h-5" alt="Zoom In Icon" />
+      
     </button>
   </div>
-  <div *ngIf="!loading" class=" pricebox pricebox-active  landBar landbar-active "
+  <div *ngIf="!loading" class=" pricebox pricebox-active  landBar landbar-active transition-transform duration-300 ease-in-out"
     [ngClass]="{'translate-x-full':istogglePriceBox,'':!istogglePriceBox}">
     <div class="p-1 absolute left-7 top-0 flex flex-col items-start z-50">
       <div class="grid grid-cols-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
@@ -216,14 +217,12 @@
   <!-- mf up-->
 
   <div
-    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active min-w-[500px]"
+    class="h-full w-4/12 bg-white absolute right-0 z-10 flex flex-col items-center p-5 gap-2 text-darkBlue  landBar landbar-active min-w-[500px] transition-transform duration-300 ease-in-out"
     [ngClass]="{'translate-x-full':istoggleLandBar,'':!istoggleLandBar}">
-    <div class="h-6 w-10 bg-white absolute left-0 top-12 -translate-x-full cursor-pointer flex"
+    <div class="h-6 w-6 flex justify-center items-center bg-white absolute left-0 top-12 -translate-x-full cursor-pointer "
       (click)="toggleLandBar()">
-      <mat-icon class="text-ocean-blue opacity-50 " aria-hidden="false" aria-label="Example help icon" fontIcon="play_arrow
-        "></mat-icon>
-      <mat-icon class="text-ocean-blue   -translate-x-3" aria-hidden="false" aria-label="Example help icon"
-        fontIcon="chevron_right"></mat-icon>
+      <img [ngClass]="{'transform scale-x-[-1]':!istoggleLandBar,'':istoggleLandBar}" src="assets\icons\ic-double-arrow.svg" class="w-4 h-5" alt="Zoom In Icon" />
+
     </div>
     <div class="w-full search">
       <input placeholder="ค้นหา ชื่อ/เขต/แขวง/จังหวัด........"

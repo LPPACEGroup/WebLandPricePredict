@@ -53,6 +53,7 @@ export class ProfilePageComponent implements OnInit {
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
   userId  :number = -1;
+  tier: string = '';
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
   ) {
@@ -132,6 +133,8 @@ export class ProfilePageComponent implements OnInit {
           birthDate: response.birthDate,
           gender : response.gender,
         })
+        this.tier = response.tier;
+        
         this.profileForm.disable();
         // clear profile picture
         if (this.profilePicture) {
