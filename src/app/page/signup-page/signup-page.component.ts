@@ -70,11 +70,11 @@ export class SignupPageComponent {
         email: ['', [Validators.required, Validators.email]], // Email validation
         firstName: ['', [
           Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
+          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
         ]], // First name required
         lastName: ['', [
           Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
+          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
         ]], // Last name required
         gender: ['', Validators.required], // Gender required
         birthDate: ['', Validators.required], // Birth date required
@@ -156,7 +156,7 @@ export class SignupPageComponent {
 
       if (!isValid) {
         alert(
-          'Please fill all required fields and ensure all inputs are valid.'
+          'กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง'
         );
         return; // Stop if any visible field is invalid
       }
@@ -211,21 +211,21 @@ export class SignupPageComponent {
           this.authService.uploadProfile(userId,profilePicture).subscribe({
             next: (uploadResponse) => {
               console.log('Profile picture uploaded successfully:', uploadResponse);
-              alert('User created and profile picture uploaded successfully');
+              alert('การสมัครสมาชิกเสร็จสิ้น');
               this.router.navigate(['/Signin']);
             },
             error: (uploadError) => {
               console.error('Profile picture upload failed:', uploadError);
-              alert('User created, but profile picture upload failed');
+              alert('การสมัครสมาชิกเสร็จสิ้นแต่รูปภาพอัพโหลดไม่สำเร็จ');
             }
           });
         } else {
-          alert('User created successfully');
+          alert('การสมัครสมาชิกเสร็จสิ้น');
           this.router.navigate(['/Signin']);
         }
       },
       error: (error) => {
-        console.error('User creation failed:', error);
+        console.error('การสมัครสมาชิกล้มเหลว', error);
         this.errorMessage = error.error.message;
       }
     });
