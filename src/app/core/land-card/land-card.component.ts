@@ -44,7 +44,7 @@ export class LandCardComponent {
         if (this.tier === 'Basic') {
           console.log('enter basic');
           alert(
-            'Please upgrade your account to Tier1 or higher to use this feature'
+            'กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้'
           );
           this.isFollowingInProgress = false; // Unlock before exiting
           return;
@@ -75,7 +75,7 @@ export class LandCardComponent {
         } else {
           console.log('enter tier');
           alert(
-            'You have reached the limit of follow land for your current tier in land card'
+            'คุณได้ถึงขีดจำกัดจำนวนที่ follow ได้ของ Tier ปัจจุบัน'
           );
           this.isFollowingInProgress = false; // Unlock before exiting
         }

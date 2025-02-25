@@ -23,7 +23,6 @@ import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 })
 export class MapComponent implements OnChanges {
   @Input() coordinates: [number, number] | null = null; // Input property to receive coordinates
-  @Input() landList: any[] = [];
   @Input() selectedMapLayer: string = 'osm'; // Default map layer
   @Output() markerCoordOutput = new EventEmitter<any[]>();
 
@@ -150,7 +149,7 @@ export class MapComponent implements OnChanges {
       (this.tier === 'Tier2' && this.markerCoord.length+1 > 3) ||
       (this.tier === 'Tier3' && this.markerCoord.length+1 > 10)
     ) {
-      alert('You have reached the limit of your tier (' + this.tier + '). Please upgrade your account to a higher tier to add more markers.');
+      alert('คุณถึงขีดจำกัดของ (' + this.tier + '). กรุณาอัพเกรด Tier  เพื่อใช้หมุดเพิ่มเติม.');
       return;
     }
     this.markerCoord.push([latitude, longitude]);
@@ -289,7 +288,7 @@ export class MapComponent implements OnChanges {
     console.log(this.tier);
     
     if (this.tier === 'Basic') {
-      alert('your are now tier ' + this.tier + '. Please upgrade your account to Tier1 or higher to use this feature');
+      alert('ตอนนี้ระดับสมาชิกของคุณคือ ' + this.tier + '. กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้');
     }
     else {
       this.markerManage = !this.markerManage;

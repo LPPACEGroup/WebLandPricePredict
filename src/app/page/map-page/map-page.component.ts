@@ -4,6 +4,7 @@ import {
   HostListener,
   ViewChild,
   OnInit,
+  
 } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../../core/map/map.component';
@@ -108,6 +109,8 @@ export class MapPageComponent implements OnInit {
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
 
+  
+
   constructor(
     private searchApiService: SearchApiService,
     private landListService: LandListService,
@@ -132,6 +135,7 @@ export class MapPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     setTimeout(() => {
       this.loading = false;
       console.log(' stop loading', this.loading);
@@ -152,6 +156,7 @@ export class MapPageComponent implements OnInit {
     });
 
     this.landListService.getData().subscribe((response) => {
+      
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
@@ -215,13 +220,7 @@ export class MapPageComponent implements OnInit {
       });
     });
 
-    // this.landListService.getLandImage(1).subscribe((response) => {
-    //   this.landImage = response;
-    //   this.image_URL = this.landImage.images[0].file_path;
-    //   console.log(this.landImage);
 
-    //   console.log(this.image_URL);
-    // });
   }
 
   images: {
@@ -264,6 +263,8 @@ export class MapPageComponent implements OnInit {
     // Check if the user is on the Basic tier
 
     this.landListService.getData().subscribe((response) => {
+      console.log(response);
+      
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
@@ -302,7 +303,7 @@ export class MapPageComponent implements OnInit {
         if (this.tier === 'Basic') {
           console.log('enter basic');
           alert(
-            'Please upgrade your account to Tier1 or higher to use this feature'
+            'กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้'
           );
           return;
         } else if (
@@ -321,7 +322,7 @@ export class MapPageComponent implements OnInit {
         } else {
           console.log('enter tier');
           alert(
-            'You have reached the limit of follow land for your current tier in land card'
+            'คุณได้ถึงขีดจำกัดจำนวนที่ follow ได้ของ Tier ปัจจุบัน'
           );
         }
       },
@@ -409,10 +410,10 @@ export class MapPageComponent implements OnInit {
 
     this.filteredLandList = this.matches && inrange;
 
-    this.sortedLandList = this.markerSortService.sortByProximity(
-      this.filteredLandList,
-      this.markerCoord,
-      this.maxdistance
+
+
+    this.sortedLandList = this.markerSortService.sortByClosestReference(
+      this.filteredLandList,this.markerCoord,this.maxdistance
     );
   }
   onMapOptionChange(option: string): void {
@@ -420,13 +421,14 @@ export class MapPageComponent implements OnInit {
   }
   markerCoordUpdate(coord: any): void {
     this.markerCoord = coord;
-    // console.log(this.markerCoord);
-    // console.log(this.landList);
-    this.sortedLandList = this.markerSortService.sortByProximity(
-      this.filteredLandList,
-      this.markerCoord,
-      this.maxdistance
+
+    
+    this.sortedLandList = this.markerSortService.sortByClosestReference(
+      this.filteredLandList,this.markerCoord,this.maxdistance
     );
+
+    
+    
   }
   leftPriceChange(event: any) {
     const inputElement = event.target as HTMLInputElement;
@@ -515,6 +517,7 @@ export class MapPageComponent implements OnInit {
   autoSlide(): void {
     setInterval(() => {
       this.nextSlide();
+      
     }, 3000);
   }
 
@@ -525,4 +528,5 @@ export class MapPageComponent implements OnInit {
     return this.dashBoardService.getIconName(placeType);
     // return 'place';
   }
+
 }
