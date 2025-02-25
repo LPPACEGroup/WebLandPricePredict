@@ -18,7 +18,7 @@ export class UserService {
     return this.http.get(`${this.authService.apiURL}/user`, { withCredentials: true });
   }
    
-updateUser(user: User): Observable<any> {
+updateUser(user: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'

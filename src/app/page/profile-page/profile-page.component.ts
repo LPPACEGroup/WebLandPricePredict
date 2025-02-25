@@ -323,24 +323,23 @@ onFileSelected(event: any): void {
 
       console.log("saveChanges");
       
-      const profileUpdate: User = {
-        userName: this.profileForm.value.username,
-        password: "",
-        email: this.profileForm.value.email,
-        firstName: this.profileForm.value.firstName,
-        lastName: this.profileForm.value.lastName,
-        gender: this.profileForm.value.gender,
-        birthDate: this.profileForm.value.birthDate,
-        telephone: this.profileForm.value.telephone,
-        notification: this.profileForm.value.notification,
-        notinews: this.profileForm.value.notiNews,
-        province: this.profileForm.value.province,
-        district: this.profileForm.value.district,
-        subdistrict: this.profileForm.value.sub_district,
-        postcode: this.profileForm.value.postcode,
-        home_number: this.profileForm.value.home_number,
-        alley: this.profileForm.value.alley,
-        landTypeFV: this.profileForm.value.interestLand,
+      const profileUpdate: any = {
+        Username: this.profileForm.value.username,
+        Email: this.profileForm.value.email,
+        FirstName: this.profileForm.value.firstName,
+        LastName: this.profileForm.value.lastName,
+        Gender: this.profileForm.value.gender,
+        BirthDate: this.profileForm.value.birthDate,
+        Telephone: this.profileForm.value.telephone,
+        Notification: this.profileForm.value.notification,
+        NotiNews: this.profileForm.value.notiNews,
+        Province: this.profileForm.value.province,
+        District: this.profileForm.value.district,
+        Subdistrict: this.profileForm.value.sub_district,
+        PostCode: this.profileForm.value.postcode,
+        HomeNumber: this.profileForm.value.home_number,
+        Alley: this.profileForm.value.alley,
+        LandTypeFV: this.profileForm.value.interestLand,
       };
 
       this.userService.updateUser(profileUpdate).subscribe({
