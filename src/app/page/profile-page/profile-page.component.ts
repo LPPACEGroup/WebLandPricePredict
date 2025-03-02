@@ -54,6 +54,7 @@ export class ProfilePageComponent implements OnInit {
   imagePreview: string | ArrayBuffer | null = null;
   userId  :number = -1;
   tier: string = '';
+  emailerrMessage: string = '';
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
   ) {
@@ -344,7 +345,8 @@ onFileSelected(event: any): void {
 
       this.userService.updateUser(profileUpdate).subscribe({
         next: () => {
-          alert('Profile Update successfully');
+          const modal = document.getElementById('noti_profile_update') as HTMLDialogElement;
+          modal.showModal();
 
           if(this.selectedFile){
             this.authService.uploadProfile(this.userId,this.selectedFile).subscribe({
@@ -373,7 +375,8 @@ onFileSelected(event: any): void {
     }
     else {
 
-        alert('Please fill in all required fields in the correct format');
+        const modal = document.getElementById('warning_profile_update') as HTMLDialogElement;
+        modal.showModal();
     }
   
   }
@@ -397,7 +400,9 @@ triggerFileInput(): void {
       error: (err) => {
         console.error('Error:', err);
         errorMessage = 'Email is already in use';
-        alert(errorMessage);
+        this.emailerrMessage = errorMessage;
+        const modal = document.getElementById('err_profile_update') as HTMLDialogElement;
+        modal.showModal();
 
       }
     });

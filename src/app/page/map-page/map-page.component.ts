@@ -271,10 +271,10 @@ export class MapPageComponent implements OnInit,OnDestroy {
         console.log(response, this.tier);
 
         if (this.tier === 'Basic') {
-          console.log('enter basic');
-          alert(
-            'กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้'
-          );
+
+          const modal = document.getElementById('warn_follow_1') as HTMLDialogElement;
+          modal.showModal();
+          
           return;
         } else if (
           (this.tier === 'Tier1' && response < 1) ||
@@ -291,9 +291,9 @@ export class MapPageComponent implements OnInit,OnDestroy {
           this.onFollowChanged(follow);
         } else {
           console.log('enter tier');
-          alert(
-            'คุณได้ถึงขีดจำกัดจำนวนที่ follow ได้ของ Tier ปัจจุบัน'
-          );
+
+          const modal = document.getElementById('warn_follow_2') as HTMLDialogElement;
+          modal.showModal();
         }
       },
       (error) => {
@@ -331,6 +331,9 @@ export class MapPageComponent implements OnInit,OnDestroy {
       modal.showModal();
     }
   }
+
+ 
+
   toggleLandBar() {
     this.istoggleLandBar = !this.istoggleLandBar;
   }

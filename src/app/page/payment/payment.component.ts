@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormControl,
@@ -15,7 +15,7 @@ import { UserService } from 'app/service/User/user.service';
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css',
 })
@@ -125,8 +125,8 @@ export class PaymentComponent {
             .uploadPaymentProof(submitPayment, this.selectedFile)
             .pipe(first())
             .subscribe((data) => {
-              alert('การชำระเงินของคุณได้รับการยืนยันแล้ว กรุณารอการตรวจสอบจากทางเจ้าหน้าที่');
-              this.router.navigate(['/Home']);
+              const modal = document.getElementById('noti_payment') as HTMLDialogElement;
+              modal.showModal();
             });
         }
       });

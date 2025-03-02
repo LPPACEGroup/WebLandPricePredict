@@ -149,7 +149,8 @@ export class MapComponent implements OnChanges {
       (this.tier === 'Tier2' && this.markerCoord.length+1 > 3) ||
       (this.tier === 'Tier3' && this.markerCoord.length+1 > 10)
     ) {
-      alert('คุณถึงขีดจำกัดของ (' + this.tier + '). กรุณาอัพเกรด Tier  เพื่อใช้หมุดเพิ่มเติม.');
+      const modal = document.getElementById('warn_marker_1') as HTMLDialogElement;
+      modal.showModal();
       return;
     }
     this.markerCoord.push([latitude, longitude]);
@@ -288,7 +289,8 @@ export class MapComponent implements OnChanges {
     console.log(this.tier);
     
     if (this.tier === 'Basic') {
-      alert('ตอนนี้ระดับสมาชิกของคุณคือ ' + this.tier + '. กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้');
+      const modal = document.getElementById('warn_marker_2') as HTMLDialogElement;
+      modal.showModal();
     }
     else {
       this.markerManage = !this.markerManage;

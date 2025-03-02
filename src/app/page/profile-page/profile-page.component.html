@@ -129,13 +129,13 @@
                 </div>
                 <div *ngIf="Sub_district && Sub_district.length > 0" class="flex w-9/12 justify-center items-center ">
 
-                  <label for="sub_district" class=" input-label">ตำบล
+                  <label for="sub_district" class=" input-label">ตำบล/แขวง
                   </label>
                   <app-filterselect [label]="Sub_district" [myControl]="sub_districtControl" placeholder="ตำบล" />
                 </div>
                 <div *ngIf="District && District.length > 0" class="flex w-9/12 justify-center items-center">
 
-                  <label for="district" class=" input-label">อำเภอ </label>
+                  <label for="district" class=" input-label">อำเภอ/เขต </label>
                   <app-filterselect [label]="District" [myControl]="districtControl" placeholder="อำเภอ" />
                 </div>
                 <div *ngIf="Province && Province.length > 0" class="flex w-9/12 justify-center items-center">
@@ -176,3 +176,39 @@
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>
 
+
+<!-- modal for notify  -->
+<dialog id="noti_profile_update" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">อัพเดทโปรไฟล์สำเร็จ</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white" routerLink="Home">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<!-- modal for warning  -->
+<dialog id="warning_profile_update" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">โปรดกรอกข้อมูลให้ครบถ้วนและถูกต้อง</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white" routerLink="Home">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<!-- modal for err  -->
+<dialog id="err_profile_update" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">{{errorMessage}}</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white" routerLink="Home">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>

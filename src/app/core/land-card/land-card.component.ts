@@ -42,10 +42,10 @@ export class LandCardComponent {
         console.log(response,this.tier);
         
         if (this.tier === 'Basic') {
-          console.log('enter basic');
-          alert(
-            'กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้'
-          );
+
+          const modal = document.getElementById('warn_follow_1') as HTMLDialogElement;
+          modal.showModal();
+          // this.modalEvent.emit(modal);
           this.isFollowingInProgress = false; // Unlock before exiting
           return;
         } else if (
@@ -73,10 +73,8 @@ export class LandCardComponent {
             }
           );
         } else {
-          console.log('enter tier');
-          alert(
-            'คุณได้ถึงขีดจำกัดจำนวนที่ follow ได้ของ Tier ปัจจุบัน'
-          );
+          const modal = document.getElementById('warn_follow_2') as HTMLDialogElement;
+          modal.showModal();
           this.isFollowingInProgress = false; // Unlock before exiting
         }
       },

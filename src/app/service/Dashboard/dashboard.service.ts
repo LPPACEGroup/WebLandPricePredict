@@ -23,6 +23,10 @@ export class DashboardService {
     return this.http.get(`http://192.168.1.7:30600/get_goodsale_analytics?districts=${districts}`);
   }
 
+  interestLevel(id:string): Observable<any> {
+    return this.http.get(`http://192.168.1.7:30500/api/land/estimate/${id}`);
+  }
+
   getIconName(placeType: string): string {
         
     switch (placeType) {

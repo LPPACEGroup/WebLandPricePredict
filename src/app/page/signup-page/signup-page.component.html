@@ -163,13 +163,13 @@
             </div>
             <div class="flex w-9/12 justify-center items-center">
 
-                <label for="sub_district" class=" input-label">ตำบล
+                <label for="sub_district" class=" input-label">ตำบล/แขวง
                 </label>
                 <app-filterselect [label]="Sub_district" [myControl]="sub_districtControl" placeholder="ตำบล" />
             </div>
             <div class="flex w-9/12 justify-center items-center">
 
-                <label for="district" class=" input-label">อำเภอ </label>
+                <label for="district" class=" input-label">อำเภอ/เขต </label>
                 <app-filterselect [label]="District" [myControl]="districtControl" placeholder="อำเภอ" />
             </div>
             <div class="flex w-9/12 justify-center items-center">
@@ -197,3 +197,49 @@
     
 
 </div>
+
+
+<!-- modal sign up update -->
+<dialog id="signup_sucess" class="modal ">
+    <div class="modal-box  text-darkBlue">
+      <p class="py-4">การสมัครสมาชิกเสร็จสิ้น</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn bg-darkBlue text-white" routerLink="Signin">รับทราบ</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="signup_warning_1" class="modal ">
+    <div class="modal-box  text-darkBlue">
+      <p class="py-4">กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn bg-darkBlue text-white">รับทราบ</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="signup_err_1" class="modal ">
+    <div class="modal-box  text-darkBlue">
+      <p class="py-4">การสมัครสมาชิกเสร็จสิ้นแต่รูปภาพอัพโหลดไม่สำเร็จ</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn bg-darkBlue text-white">รับทราบ</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="signup_err_2" class="modal ">
+    <div class="modal-box  text-darkBlue">
+      <p class="py-4">อีเมลนี้มีอยู่ในระบบอยู่แล้ว</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn bg-darkBlue text-white">รับทราบ</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
