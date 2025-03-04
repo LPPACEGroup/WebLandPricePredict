@@ -63,7 +63,8 @@ export class AreaSlider {
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
-    LineChart2Component
+    LineChart2Component,
+    FormsModule
   ],
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
@@ -110,6 +111,12 @@ export class MapPageComponent implements OnInit,OnDestroy {
     'Khlong Toei': 0,
     Watthana: 0,
   };
+  districtSelect = {
+    MinBuri: false,
+    LatKrabang: false,
+    KhlongToei: false,
+    Watthana: false,
+  }
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
   
@@ -238,10 +245,8 @@ export class MapPageComponent implements OnInit,OnDestroy {
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
+      this.handleSearch(this.searchValue);
 
-      // Perform the follow action here
-      // For example:
-      // this.landListService.followLand(event.landId).subscribe(...);
     });
   }
 
@@ -332,6 +337,10 @@ export class MapPageComponent implements OnInit,OnDestroy {
     }
   }
 
+  districtSelectChange(event: any) {
+    this.handleSearch(this.searchValue);
+  }
+
  
 
   toggleLandBar() {
@@ -357,6 +366,7 @@ export class MapPageComponent implements OnInit,OnDestroy {
     console.log(this.coordinates);
   }
 
+  // ใช้เพื่อปรับ landlist เมื่อมีการ filter หรือ sort เปลี่ยน
   handleSearch(inputValue: string) {
     // รวม location กับ description ของแต่ละที่ดินเข้าด้วยกันแล้ว ค้นหาด้วย inputValue
     if (inputValue && inputValue.length > 0) {
@@ -382,13 +392,44 @@ export class MapPageComponent implements OnInit,OnDestroy {
     });
 
     this.filteredLandList = this.matches && inrange;
-
+    this.filteredLandList = this.filterLands();
+    
+    console.log(this.filteredLandList);
+    
 
 
     this.sortedLandList = this.markerSortService.sortByClosestReference(
       this.filteredLandList,this.markerCoord,this.maxdistance
     );
+
   }
+
+  filterLands() {
+    // Mapping English district keys to Thai names
+    const districtMapping: { [key: string]: string } = {
+      MinBuri: "มีนบุรี",
+      LatKrabang: "ลาดกระบัง",
+      KhlongToei: "คลองเตย",
+      Watthana: "วัฒนา",
+    };
+  
+    // Get selected districts in Thai
+    const selectedDistricts = Object.keys(this.districtSelect)
+      .filter(district => this.districtSelect[district as keyof typeof this.districtSelect])
+      .map(district => districtMapping[district]); // Convert to Thai
+  
+      
+    // If no districts are selected, return all lands
+    if (selectedDistricts.length === 0) {
+      return this.filteredLandList;
+    }
+  
+    // Filter lands based on selected districts
+    return this.filteredLandList.filter(land => selectedDistricts.includes(land.LocationName));
+  }
+  
+  
+
   onMapOptionChange(option: string): void {
     this.selectedMapLayer = option;
   }

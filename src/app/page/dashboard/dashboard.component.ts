@@ -45,6 +45,7 @@ export class DashboardComponent implements OnChanges,OnDestroy {
   last_month_avg: any;
   pred_table: any;
   followedLand = [];
+  
   private destroy$ = new Subject<void>();
   selectedLabels: boolean[] = [];
 
@@ -101,15 +102,20 @@ export class DashboardComponent implements OnChanges,OnDestroy {
 
 
         // Extracting prediction data
-        const first_key = Object.keys(dashboardData.percentage_changes)[0];
+        const keys = Object.keys(dashboardData.percentage_changes);
+        const last_key = keys[keys.length - 1]; 
+        
+
         this.pred_table = [
-          [dashboardData.predictions.values[0]['price_avg_Min Buri'], dashboardData.percentage_changes[first_key]['Min Buri']],
-          [dashboardData.predictions.values[0]['price_avg_Lat Krabang'], dashboardData.percentage_changes[first_key]['Lat Krabang']],
-          [dashboardData.predictions.values[0]['price_avg_Watthana'], dashboardData.percentage_changes[first_key]['Watthana']],
-          [dashboardData.predictions.values[0]['price_avg_Khlong Toei'], dashboardData.percentage_changes[first_key]['Khlong Toei']]
+          [dashboardData.predictions.values[3]['price_avg_Min Buri'], dashboardData.percentage_changes[last_key]['Min Buri']],
+          [dashboardData.predictions.values[3]['price_avg_Lat Krabang'], dashboardData.percentage_changes[last_key]['Lat Krabang']],
+          [dashboardData.predictions.values[3]['price_avg_Watthana'], dashboardData.percentage_changes[last_key]['Watthana']],
+          [dashboardData.predictions.values[3]['price_avg_Khlong Toei'], dashboardData.percentage_changes[last_key]['Khlong Toei']]
         ];
 
         const pred = this.transformData2(dashboardData);
+        console.log(dashboardData, "pred");
+        
         this.PRED_Data = this.AVG_Data.map((arr: number[], index: number) => arr.concat(pred[index]));
 
         const pred_date = dashboardData.predictions.dates.map((date: string) => date.slice(0, 7));
@@ -198,36 +204,11 @@ export class DashboardComponent implements OnChanges,OnDestroy {
   onAreaChange(selectedArea: string): void {
     console.log(selectedArea);
 
-    // if (selectedArea === 'แสดงเขตทั้งหมด') {
-    //   this.selected_Data = this.L_Data_PRED;
-    // } else if (selectedArea === 'เขตลาดกระบัง') {
-    //   this.selected_Data = this.L_Data_PRED;
-    // } else if (selectedArea === 'เขตมีนบุรี') {
-    //   this.selected_Data = this.M_Data_PRED;
-    // } else if (selectedArea === 'เขตคลองเตย') {
-    //   this.selected_Data = this.K_Data_PRED;
-    // } else if (selectedArea === 'เขตวัฒนา') {
-    //   this.selected_Data = this.W_Data_PRED;
-    // }
+
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.selectedArea);
 
-    // if (changes['selectedArea']) {
-    //   console.log(this.selectedArea);
-
-    //   if (this.selectedArea === 'แสดงเขตทั้งหมด') {
-    //     this.selected_Data = this.L_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตลาดกระบัง') {
-    //     this.selected_Data = this.L_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตมีนบุรี') {
-    //     this.selected_Data = this.M_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตคลองเตย') {
-    //     this.selected_Data = this.K_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตวัฒนา') {
-    //     this.selected_Data = this.W_Data_PRED;
-    //   }
-    // }
   }
 
 

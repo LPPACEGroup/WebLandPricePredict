@@ -17,7 +17,7 @@
       <p class="text-sm text-oceanBlue">ราคาทำนาย</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-midGreen font-bold" [ngClass]="interestLevelColor">{{interestLevel}}</h4>
+      <h4 class="text-lg  font-bold" [ngClass]="interestLevelColor">{{interestLevel}}</h4>
       <p class="text-sm text-oceanBlue">ความน่าสนใจ</p>
     </div>
   </div>
@@ -41,12 +41,53 @@
         <div *ngIf="land.Land_CityColor" class="flex flex-row items-center pl-4">
           <div class="pl-1 w-4 h-4 rounded-full mr-2" [ngClass]="'bgc-' + land.Land_CityColor.toLowerCase()"></div>
           <span class="pl-1 " [ngClass]="'textc-' + land.Land_CityColor.toLowerCase()">
-            {{land.Land_CityColor}}</span>
+            {{landCitytype}}</span>
         </div>
         <div *ngIf="!land.Land_CityColor" class="text-black px-4">
           ไม่ทราบสีพื้นที่
         </div>
       </div>
+      <div class="flex items-center pb-1 gap-x-3 ">
+        <p class="box">ภาษีที่ดิน</p>
+        <select class="  border border-oceanBlue text-oceanBlue rounded-xl p-2" [(ngModel)]="landTaxType" (ngModelChange)="onAdditionalChange($event)">
+          <option class="text-center" disabled selected value="chooseType" >เลือกประเภทที่ดิน</option>
+          <option class="text-center" value="commercial">ที่ดินเชิงพาณิช</option>
+          <option class="text-center" value="deserted">ที่ดินรกร้าง</option>
+          <option class="text-center" value="residential">ที่อยู่อาศัย</option>
+          <option class="text-center" value="agricultural">ที่ดินเพื่อการเกษตร </option>
+        </select>
+
+        <select *ngIf="landTaxType==='residential'" class="  border border-oceanBlue text-oceanBlue rounded-xl p-2"
+          [(ngModel)]="firstHouse" (ngModelChange)="onAdditionalChange($event)">
+          <option class="text-center" disabled selected [value]="0" >-</option>
+          <option class="text-center" [value]="1">เจ้าของบ้านหลังแรก</option>
+          <option class="text-center" [value]="2">เจ้าของบ้านหลังที่สองขึ้นไป </option>
+        </select>
+
+        <select *ngIf="landTaxType==='agricultural'" class="  border border-oceanBlue text-oceanBlue rounded-xl p-2"
+          [(ngModel)]="legalEntity" (ngModelChange)="onAdditionalChange($event)">
+          <option class="text-center" disabled selected [value]="0" >-</option>
+          <option class="text-center" [value]="1">บุคคลธรรมดา</option>
+          <option class="text-center" [value]="2">นิติบุคคล  </option>
+        </select>
+
+        <div [ngSwitch]="landTaxType">
+          <p *ngSwitchCase="'chooseType'">- &nbsp;&nbsp;บาท</p>
+          <p *ngSwitchCase="'commercial'">{{ landTax }} บาท</p>
+          <p *ngSwitchCase="'deserted'">{{ landTax }} บาท</p>
+          <p *ngSwitchCase="'residential'">
+            <span *ngIf="firstHouse == '0'"> - &nbsp;&nbsp;บาท</span>
+            <span *ngIf="firstHouse != '0'">{{ landTax }} บาท</span>
+          </p>
+          <p *ngSwitchCase="'agricultural'">
+            <span *ngIf="legalEntity == '0'"> - &nbsp;&nbsp;บาท</span>
+            <span *ngIf="legalEntity != '0'">{{ landTax }} บาท</span>
+          </p>
+          <p *ngSwitchDefault>- &nbsp;&nbsp;บาท</p>
+        </div>
+        
+      </div>
+
       <div class="pb-1">
         <p class="box">รายละเอียด:</p>
         {{land.Description}}
@@ -63,42 +104,16 @@
 
       </div>
       <div class="grid grid-cols-2 gap-4 mt-4">
-        <!-- <div class="bg-white p-4 rounded-md flex items-center">
-          <img src="assets/icons/hospital-icon.png" alt="hospital icon" class="w-6 h-6 mr-2">
-          <div>
-            <p class="text-sm text-neutral-700">โรงพยาบาล</p>
-            <p class="text-sm text-neutral-950 font-bold">2 กม.</p>
-          </div>
-        </div>
-        <div class="bg-white p-4 rounded-md flex items-center">
-          <img src="assets/icons/public-icon.png" alt="public icon" class="w-6 h-6 mr-2">
-          <div>
-            <p class="text-sm text-neutral-700">สาธารณะ</p>
-            <p class="text-sm text-neutral-950 font-bold">5 กม.</p>
-          </div>
-        </div>
-        <div class="bg-white p-4 rounded-md flex items-center">
-          <img src="assets/icons/public-icon.png" alt="public icon" class="w-6 h-6 mr-2">
-          <div>
-            <p class="text-sm text-neutral-700">เซ็นทรัลลาดกระบัง</p>
-            <p class="text-sm text-neutral-950 font-bold">8 กม.</p>
-          </div>
-        </div>
-        <div class="bg-white p-4 rounded-md flex items-center">
-          <img src="assets/icons/public-icon.png" alt="public icon" class="w-6 h-6 mr-2">
-          <div>
-            <p class="text-sm text-neutral-700">สถานีรถไฟ</p>
-            <p class="text-sm text-neutral-950 font-bold">10 กม.</p>
-          </div>
-        </div> -->
+
         <div *ngFor="let place of nearbyPlaces" class="bg-white p-4 rounded-md flex items-center">
           <div class=" h-full flex items-center">
-            <mat-icon  class="text-darkBlue w-10 h-10  flex-shrink-0 text-4xl" aria-hidden="false" aria-label="Example help icon" [fontIcon]="getIconName(place.PlaceType)" ></mat-icon>
-
+            <mat-icon class="text-darkBlue w-10 h-10  flex-shrink-0 text-4xl" aria-hidden="false"
+              aria-label="Example help icon" [fontIcon]="getIconName(place.PlaceType)"></mat-icon>
+           
           </div>
           <div>
             <p class="text-sm text-neutral-700">{{place.Name}}</p>
-            <p class="text-sm text-neutral-950 font-bold">{{place.Distance}}</p>
+            <p class="text-sm text-neutral-950 font-bold">{{place.Distance}}  &nbsp; กม.</p>
           </div>
         </div>
       </div>

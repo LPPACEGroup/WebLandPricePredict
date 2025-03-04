@@ -55,6 +55,7 @@ export class ProfilePageComponent implements OnInit {
   userId  :number = -1;
   tier: string = '';
   emailerrMessage: string = '';
+  emailduplicate: boolean = false;
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
   ) {
@@ -318,6 +319,11 @@ onFileSelected(event: any): void {
     });
     this.checkEmail(this.profileForm.value.email);
 
+    if (this.emailduplicate)
+    {
+      return;
+    }
+
     if (this.profileForm.valid) {
       
       this.sEditing = false;
@@ -343,6 +349,10 @@ onFileSelected(event: any): void {
         LandTypeFV: this.profileForm.value.interestLand,
       };
 
+
+
+
+
       this.userService.updateUser(profileUpdate).subscribe({
         next: () => {
           const modal = document.getElementById('noti_profile_update') as HTMLDialogElement;
@@ -352,7 +362,6 @@ onFileSelected(event: any): void {
             this.authService.uploadProfile(this.userId,this.selectedFile).subscribe({
               next: (response) => {
                 console.log(response);
-                window.location.reload();
 
               },
               error: (error) => {
@@ -361,12 +370,12 @@ onFileSelected(event: any): void {
             });
           }
           else{
-            window.location.reload();
           }
           
         },
         error: (error) => {
-          this.errorMessage = error.error.message;
+          this.errorMessage = error.message          
+          ;
         },
       });
 
@@ -381,6 +390,10 @@ onFileSelected(event: any): void {
   
   }
 
+reloadPage(){
+  window.location.reload();
+}
+
 triggerFileInput(): void {
   const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
   fileInput.click();
@@ -390,18 +403,18 @@ triggerFileInput(): void {
   }
   checkEmail(email: string): string | null {
     let errorMessage: string | null = null;
+    this.emailduplicate = false;
     
     this.authService.checkDuplicateEmail(email).subscribe({
       next: (response) => {
         console.log('Response:', response);
         console.log('Email is available');
-        
+        this.emailduplicate = false;
+
       },
       error: (err) => {
-        console.error('Error:', err);
-        errorMessage = 'Email is already in use';
-        this.emailerrMessage = errorMessage;
-        const modal = document.getElementById('err_profile_update') as HTMLDialogElement;
+        this.emailduplicate = true;
+        const modal = document.getElementById('err_profile_update_2') as HTMLDialogElement;
         modal.showModal();
 
       }

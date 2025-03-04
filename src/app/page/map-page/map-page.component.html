@@ -322,36 +322,37 @@
 
 
 
-          <ul class=" bg-white text-grey p-0 w-fit">
-            <li>
-              <div><input id="lad" type="checkbox" class="radio w-4 h-4" name="area" />
-
-
-                <label for="lad">เขตลาดกระบัง</label>
-              </div>
-            </li>
+          <ul class=" bg-white text-grey p-0 w-full">
             <li>
               <div>
-                <input id="min" type="checkbox" class="radio w-4 h-4" name="area" />
+                <input id="min" type="checkbox" class="radio w-4 h-4" name="area" [(ngModel)] = "districtSelect.MinBuri" (ngModelChange)="districtSelectChange($event)" />
 
 
                 <label for="min">เขตมีนบุรี</label>
               </div>
             </li>
             <li>
-              <div><input id="khong" type="checkbox" class="radio w-4 h-4" name="area" />
+              <div><input id="lad" type="checkbox" class="radio w-4 h-4" name="area"   [(ngModel)] = "districtSelect.LatKrabang" (ngModelChange)="districtSelectChange($event)" />
 
 
-                <label for="khong">เขตคลองเตย</label>
+                <label for="lad">เขตลาดกระบัง</label>
               </div>
             </li>
             <li>
-              <div><input id="wat" type="checkbox" class="radio w-4 h-4" name="area" />
+              <div><input id="wat" type="checkbox" class="radio w-4 h-4" name="area" [(ngModel)] = "districtSelect.Watthana" (ngModelChange)="districtSelectChange($event)" />
 
 
                 <label for="wat">เขตวัฒนา</label>
               </div>
             </li>
+            <li>
+              <div><input id="khong" type="checkbox" class="radio w-4 h-4" name="area" [(ngModel)] = "districtSelect.KhlongToei" (ngModelChange)="districtSelectChange($event)" />
+
+
+                <label for="khong">เขตคลองเตย</label>
+              </div>
+            </li>
+
           </ul>
         </div>
       </details>

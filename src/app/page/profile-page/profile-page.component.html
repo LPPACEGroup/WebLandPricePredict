@@ -183,7 +183,7 @@
     <p class="py-4">อัพเดทโปรไฟล์สำเร็จ</p>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn bg-darkBlue text-white" routerLink="Home">รับทราบ</button>
+        <button class="btn bg-darkBlue text-white"  (click)="reloadPage()">รับทราบ</button>
       </form>
     </div>
   </div>
@@ -195,7 +195,7 @@
     <p class="py-4">โปรดกรอกข้อมูลให้ครบถ้วนและถูกต้อง</p>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn bg-darkBlue text-white" routerLink="Home">รับทราบ</button>
+        <button class="btn bg-darkBlue text-white" >รับทราบ</button>
       </form>
     </div>
   </div>
@@ -207,7 +207,18 @@
     <p class="py-4">{{errorMessage}}</p>
     <div class="modal-action">
       <form method="dialog">
-        <button class="btn bg-darkBlue text-white" routerLink="Home">รับทราบ</button>
+        <button class="btn bg-darkBlue text-white" >รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="err_profile_update_2" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">อีเมลนี้มีอยู่ในระบบอยู่แล้ว โปรดแก้ไข</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white">รับทราบ</button>
       </form>
     </div>
   </div>
