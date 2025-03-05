@@ -45,6 +45,8 @@ export class DashboardComponent implements OnChanges,OnDestroy {
   last_month_avg: any;
   pred_table: any;
   followedLand = [];
+  max_y = 0;
+  max_y_district = [0, 0, 0, 0];
   
   private destroy$ = new Subject<void>();
   selectedLabels: boolean[] = [];
@@ -82,7 +84,16 @@ export class DashboardComponent implements OnChanges,OnDestroy {
       switchMap(response => {
         this.AVG_Data = this.transformData(response);
         this.AVG_DATE = response.map((entry: any) => entry.year_month);
+        console.log(response, "response");
+        
+        console.log(this.AVG_Data, "AVG_Data");
+        console.log(this.AVG_DATE, "AVG_DATE");
 
+        const maxValues = this.AVG_Data.map((locationData: number[]) => Math.max(...locationData));
+        this.max_y = Math.max(...maxValues);
+        this.max_y_district = maxValues;
+        console.log(this.max_y, "max_y");
+        
         return forkJoin({
           followedLand: this.landListService.readFollowLand(),
           dashboardData: this.dashBoardService.getDashboardData(4),
@@ -114,12 +125,22 @@ export class DashboardComponent implements OnChanges,OnDestroy {
         ];
 
         const pred = this.transformData2(dashboardData);
-        console.log(dashboardData, "pred");
+        console.log(pred, "pred");
         
-        this.PRED_Data = this.AVG_Data.map((arr: number[], index: number) => arr.concat(pred[index]));
+        this.PRED_Data = pred;
+
+        const maxValues2 = pred.map((locationData: number[]) => Math.max(...locationData));
+        this.max_y = Math.max(this.max_y, ...maxValues2);
+
+        this.max_y_district = maxValues2.map((value, index) => Math.max(value, this.max_y_district[index]));
+
+        console.log(this.max_y_district, "max_y_district");
+        
+        console.log(this.max_y, "max_y");
+        
 
         const pred_date = dashboardData.predictions.dates.map((date: string) => date.slice(0, 7));
-        this.PRED_DATE = this.AVG_DATE.concat(pred_date);
+        this.PRED_DATE = pred_date;
 
         // Assign last month average
         this.last_month_avg = lastMonthAvg;
