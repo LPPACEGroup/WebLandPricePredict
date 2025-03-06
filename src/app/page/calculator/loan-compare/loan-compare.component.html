@@ -1,38 +1,80 @@
-<div class="w-full h-full bg-light-grey grid grid-cols-4 gap-1 items-center py-16">
-    <div class="text-end col-span-2">
-        <p>จำนวนเงินกู้</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="จำนวนเงินกู้" /></div>
-    <div class="text-end col-span-2">
-        <p>ระยะเวลากู้ยืม 1</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 1" placeholder="ระยะเวลากู้ยืมครั้งที่ 1" /></div>
-    <div class="text-end col-span-2">
-        <p>ระยะเวลากู้ยืม 2</p>
-    </div>
-    <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 2" placeholder="ะยะเวลากู้ยืมครั้งที่ 2" /></div>
+<div class="w-full h-full bg-light-grey p-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="space-y-4 mb-8">
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินที่ต้องการกู้</label>
+        <input type="text" [(ngModel)]="loanAmount" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="Loan Amount" placeholder="ยอดเงินที่ต้องการกู้ (บาท)" />
+      </div>
 
-    <div class="col-span-2"></div>
-    <div class="w-1/2 col-span-2">
-        <div class="text-end"><button class="bg-darkBlue w-1/2 h-8 rounded-full  text-white  hover:bg-[gold] hover:text-black">คำนวณ</button></div>
+      <div class="flex items-center justify-between gap-1">
+        <label class="text-darkBlue text-right min-w-[200px]">
+          ระยะเวลากู้ยืม 1
+        </label>
+        <input type="text" [(ngModel)]="loanTerm1" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="LoanTerm1" placeholder="ระยะเวลาที่ต้องการผ่อน 1 (ปี)" />
+
+        <label class="text-darkBlue text-right pl-2">
+          ดอกเบี้ย
+        </label>
+        <input type="text" [(ngModel)]="interest1" class="rounded-full px-6 py-3 flex-1  focus:outline-none" value=""
+          title="interest1" placeholder="อัตราดอกเบี้ย 1 (%)" />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">ระยะเวลากู้ยืม 2</label>
+        <input type="text" [(ngModel)]="loanTerm2"
+          class="border rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none focus:ring-2 focus:ring-[#2980b9]"
+          value="" title="loanTerm2" placeholder="ระยะเวลาที่ต้องการผ่อน 2 (ปี)" />
+
+        <label class="text-darkBlue text-right pl-2">
+          ดอกเบี้ย
+        </label>
+        <input type="text" [(ngModel)]="interest2" class="rounded-full px-6 py-3 flex-1  focus:outline-none" value=""
+          title="interest2" placeholder="อัตราดอกเบี้ย 2 (%)" />
+      </div>
     </div>
 
-    <div class="text-end row-span-6">ผลลัพธ์</div>
-    <div class="w-2/3 rounded-xl font-medium px-5 bg-white row-span-6 h-full col-span-3 grid grid-cols-3 text-sm">
-        <div></div>
-        <div>ระยะเวลากู้ยืม 1</div>
-        <div>ระยะเวลากู้ยืม 2</div>
-        <div>การชำระเงินรายเดือน:</div>
-        <div class="text-red-500">166,666.67</div>
-        <div class="text-red-500">83,333.33</div>
-        <div>การชำระเงินทั้งหมด:</div>
-        <div class="text-red-500">10.000,000,00</div>
-        <div class="text-red-500">10,000,000.00</div>
-        <div>ดอกเบี้ยทั้งหมด:</div>
-        <div class="text-red-500">0.00</div>
-        <div class="text-red-500">0.00</div>
-        <div>การชำระเงินรายปี:</div>
-        <div class="text-red-500">2,000,000,0</div>
-        <div class="text-red-500">999,999.96</div>
+
+    <div class="flex justify-center mb-8">
+      <button class="py-2 px-12 bg-darkBlue text-white rounded-full hover:bg-yellow hover:text-black"
+        (click)="calculate()">
+        คำนวณ
+      </button>
     </div>
+
+
+    <div class="bg-white rounded-md p-6 shadow-sm">
+      <h3 class="text-darkBlue font-semibold text-lg mb-4">ผลลัพธ์</h3>
+
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 text-left"></th>
+              <th class="px-4 py-2 text-right text-darkBlue">ระยะเวลากู้ยืม 1</th>
+              <th class="px-4 py-2 text-right text-darkBlue">ระยะเวลากู้ยืม 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-light-grey">
+              <td class="px-4 py-3 text-darkBlue">ยอดผ่อนชำระต่อเดือน (บาท)</td>
+              <td class="px-4 py-3 text-right text-darkRed font-medium">{{monthlyPayment1}}</td>
+              <td class="px-4 py-3 text-right text-darkRed font-medium">{{monthlyPayment2}}</td>
+            </tr>
+            <tr class="border-b border-light-grey">
+              <td class="px-4 py-3 text-darkBlue">จำนวนดอกเบี้ยต่อเดือน (บาท)</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{monthInterest1}}</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{monthInterest2}}</td>
+            </tr>
+            <tr class="border-b border-light-grey">
+              <td class="px-4 py-3 text-darkBlue">จำนวนดอกเบี้ยทั้งหมด (บาท)</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{totalInterest1}}</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{totalInterest2}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
