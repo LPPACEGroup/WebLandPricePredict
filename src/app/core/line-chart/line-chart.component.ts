@@ -121,18 +121,8 @@ export class LineChartComponent implements OnChanges {
               pointRadius: 0,
             },
             {
-              label: 'คลองเตย',
-              data: this.data[2] || [],
-              borderColor: 'green',
-              backgroundColor: 'transparent',
-              fill: false,
-              tension: 0.4,
-              borderWidth: 1,
-              pointRadius: 0,
-            },
-            {
               label: 'วัฒนา',
-              data: this.data[3] || [],
+              data: this.data[2] || [],
               borderColor: 'brown',
               backgroundColor: 'transparent',
               fill: false,
@@ -140,6 +130,17 @@ export class LineChartComponent implements OnChanges {
               borderWidth: 1,
               pointRadius: 0,
             },
+            {
+              label: 'คลองเตย',
+              data: this.data[3] || [],
+              borderColor: 'green',
+              backgroundColor: 'transparent',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 1,
+              pointRadius: 0,
+            },
+
           ],
         };
       } else {
