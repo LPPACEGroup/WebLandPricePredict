@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 export class DashboardService {
 
   apiURL = 'http://192.168.1.7:30070"';
-  baseUrl = 'http://localhost:8000/api';
+  baseUrl = 'http://192.168.1.7:30080/api';
   constructor(private http: HttpClient) {
   }
 

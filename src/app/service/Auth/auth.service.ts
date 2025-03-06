@@ -9,7 +9,6 @@ import { User } from 'model/user.interface';
 export class AuthService {
   // ต้องเปลี่ยนเป็น ชื่อ service backend ที่เราตั้งไว้
   apiURL = 'http://192.168.1.7:30080/api';
-  // apiURL = 'http://localhost:8000/api';
   private image_URL = 'http://192.168.1.7:30600';
 
   private signedIn = new BehaviorSubject<boolean>(false);

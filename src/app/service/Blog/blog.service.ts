@@ -7,7 +7,7 @@ import { Blog } from 'model/blog.interface';
   providedIn: 'root',
 })
 export class BlogService {
-  apiURL = 'http://localhost:8000/api';
+  apiURL = 'http://192.168.1.7:30080/api';
   constructor(private http: HttpClient) {}
 
   getBlogs(): Observable<any> {

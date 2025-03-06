@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class UsermanagementService {
 
-  apiURL = 'http://localhost:8000/api';
+  apiURL = 'http://192.168.1.7:30080/api';
   private image_URL = 'http://192.168.1.7:30600';
 
   constructor(private http: HttpClient) {

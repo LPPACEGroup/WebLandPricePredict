@@ -15,3 +15,6 @@ COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 EXPOSE 80
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # CMD ["nginx", "-g", "daemon off;"]
+
+# docker build -t neerachal/deploy_febe_lppm:v0.1.1 .
+# docker push neerachal/deploy_febe_lppm:v0.1.1
