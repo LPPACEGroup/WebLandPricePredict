@@ -17,6 +17,9 @@ Chart.register(annotationPlugin);  // Register the annotation plugin
 export class LineChartComponent implements OnChanges {
   @Input() labels: string[] = [];
   @Input() values: number[] = [];
+  @Input() max_y: number = 300000000;
+  @Input() max_y_district = [300000000,300000000,300000000,300000000];
+
   @Input() chartHeight: number = 350; // Default height
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   @Input() data: any;
@@ -44,21 +47,14 @@ export class LineChartComponent implements OnChanges {
 
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
+    scales: {
+      y: {
+        max: this.max_y,
+      },
+    },
     plugins: {
       legend: { position: 'top' },
-      annotation: {
-        annotations: {
-          line1: {
-            type: 'line',
-            xMax:48,
-            xMin:48,
-            borderColor: 'red',
-            borderWidth: 2,
-
-
-          },
-        },
-      },
+      
     },
   };
 
@@ -72,6 +68,17 @@ export class LineChartComponent implements OnChanges {
 
   // Detect changes in @Input() and update the chart
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.data);
+    console.log(this.labels);
+    
+    if (changes['max_y']) {
+      this.lineChartOptions.scales = {
+        y: {
+          max: this.max_y,
+        },
+      };
+    }
+    
     if (changes['labels']) {
       this.lineChartData.labels = this.labels;
     }
@@ -83,6 +90,13 @@ export class LineChartComponent implements OnChanges {
     if (changes['selectedArea'] && this.data) {
       
       if (changes['selectedArea'].currentValue === 'แสดงเขตทั้งหมด') {
+
+        this.lineChartOptions.scales = {
+          y: {
+            max: this.max_y,
+          },
+        };
+
         this.lineChartConfig.data = {
           labels: this.labels, // Ensure labels are set
           datasets: [
@@ -136,6 +150,12 @@ export class LineChartComponent implements OnChanges {
         else if (changes['selectedArea'].currentValue === 'เขตลาดกระบัง') areaIndex = 1;
         else if (changes['selectedArea'].currentValue === 'เขตวัฒนา') areaIndex = 2;
         else if (changes['selectedArea'].currentValue === 'เขตคลองเตย') areaIndex = 3;
+
+        this.lineChartOptions.scales = {
+          y: {
+            max: this.max_y_district[areaIndex],
+          },
+        };
   
         this.lineChartConfig.data = {
           labels: this.labels,

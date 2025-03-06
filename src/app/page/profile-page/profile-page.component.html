@@ -74,7 +74,7 @@
           <div class="right-content">
             <div class="space-y-2">
               <div class="box border-oceanBlue">
-                <p class="box-text text-oceanBlue font-bold">Tier 1</p>
+                <p class="box-text text-oceanBlue font-bold">{{tier}}</p>
               </div>
               <p class="text-base text-oceanBlue">
                 ชำระเงินแล้ว เมื่อวันที่ 23/4/2022 เวลา 3:50 PM
@@ -110,14 +110,7 @@
             </ng-container>
           </div>
 
-          <div class="right-content2">
-            <h2 class="text-primary-700 font-title text-lg font-bold">ข้อมูลที่สนใจ</h2>
-            <div class="flex gap-4 mt-2">
-              <button class="bg-white px-4 py-2 rounded-md text-gray-500">ที่ดินติดถนน</button>
-              <button class="bg-white px-4 py-2 rounded-md text-gray-500">ที่ดินใกล้ตัวเมือง</button>
-              <button class="bg-white px-4 py-2 rounded-md text-gray-500">ที่ดินภายในเขตอุตสาหกรรม</button>
-            </div>
-          </div>
+
 
           <div class="right-content2">
             <h2 class="text-primary-700 font-title text-lg font-bold">ข้อมูลติดต่อ</h2>
@@ -136,13 +129,13 @@
                 </div>
                 <div *ngIf="Sub_district && Sub_district.length > 0" class="flex w-9/12 justify-center items-center ">
 
-                  <label for="sub_district" class=" input-label">ตำบล
+                  <label for="sub_district" class=" input-label">ตำบล/แขวง
                   </label>
                   <app-filterselect [label]="Sub_district" [myControl]="sub_districtControl" placeholder="ตำบล" />
                 </div>
                 <div *ngIf="District && District.length > 0" class="flex w-9/12 justify-center items-center">
 
-                  <label for="district" class=" input-label">อำเภอ </label>
+                  <label for="district" class=" input-label">อำเภอ/เขต </label>
                   <app-filterselect [label]="District" [myControl]="districtControl" placeholder="อำเภอ" />
                 </div>
                 <div *ngIf="Province && Province.length > 0" class="flex w-9/12 justify-center items-center">
@@ -183,3 +176,50 @@
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>
 
+
+<!-- modal for notify  -->
+<dialog id="noti_profile_update" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">อัพเดทโปรไฟล์สำเร็จ</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white"  (click)="reloadPage()">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<!-- modal for warning  -->
+<dialog id="warning_profile_update" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">โปรดกรอกข้อมูลให้ครบถ้วนและถูกต้อง</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white" >รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<!-- modal for err  -->
+<dialog id="err_profile_update" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">{{errorMessage}}</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white" >รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="err_profile_update_2" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">อีเมลนี้มีอยู่ในระบบอยู่แล้ว โปรดแก้ไข</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>

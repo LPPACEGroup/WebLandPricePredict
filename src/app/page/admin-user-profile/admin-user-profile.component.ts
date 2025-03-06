@@ -25,6 +25,7 @@ export interface UserPaymentDetails {
   Tier: string;
   SubmissionDate: string | "-"; // ISO date string or "-".
   Verified: boolean;
+  Buytier: string;
 }
 
 
@@ -108,7 +109,7 @@ export class AdminUserProfileComponent {
       {
         next:(res) => {
           this.userPaymentDetails = res;
-          console.log(this.userPaymentDetails);
+          console.log(this.userPaymentDetails,"userPaymentDetails");
           
           this.verifyForm.patchValue({
             Verify:this.userPaymentDetails.Verified
@@ -194,4 +195,7 @@ export class AdminUserProfileComponent {
       
     })
   }
+
+
+
 }

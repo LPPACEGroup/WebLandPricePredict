@@ -42,10 +42,10 @@ export class LandCardComponent {
         console.log(response,this.tier);
         
         if (this.tier === 'Basic') {
-          console.log('enter basic');
-          alert(
-            'Please upgrade your account to Tier1 or higher to use this feature'
-          );
+
+          const modal = document.getElementById('warn_follow_1') as HTMLDialogElement;
+          modal.showModal();
+          // this.modalEvent.emit(modal);
           this.isFollowingInProgress = false; // Unlock before exiting
           return;
         } else if (
@@ -73,10 +73,8 @@ export class LandCardComponent {
             }
           );
         } else {
-          console.log('enter tier');
-          alert(
-            'You have reached the limit of follow land for your current tier in land card'
-          );
+          const modal = document.getElementById('warn_follow_2') as HTMLDialogElement;
+          modal.showModal();
           this.isFollowingInProgress = false; // Unlock before exiting
         }
       },

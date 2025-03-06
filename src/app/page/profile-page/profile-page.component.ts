@@ -53,6 +53,9 @@ export class ProfilePageComponent implements OnInit {
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
   userId  :number = -1;
+  tier: string = '';
+  emailerrMessage: string = '';
+  emailduplicate: boolean = false;
 
   constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
   ) {
@@ -132,6 +135,8 @@ export class ProfilePageComponent implements OnInit {
           birthDate: response.birthDate,
           gender : response.gender,
         })
+        this.tier = response.tier;
+        
         this.profileForm.disable();
         // clear profile picture
         if (this.profilePicture) {
@@ -314,41 +319,49 @@ onFileSelected(event: any): void {
     });
     this.checkEmail(this.profileForm.value.email);
 
+    if (this.emailduplicate)
+    {
+      return;
+    }
+
     if (this.profileForm.valid) {
       
       this.sEditing = false;
 
       console.log("saveChanges");
       
-      const profileUpdate: User = {
-        userName: this.profileForm.value.username,
-        password: "",
-        email: this.profileForm.value.email,
-        firstName: this.profileForm.value.firstName,
-        lastName: this.profileForm.value.lastName,
-        gender: this.profileForm.value.gender,
-        birthDate: this.profileForm.value.birthDate,
-        telephone: this.profileForm.value.telephone,
-        notification: this.profileForm.value.notification,
-        notinews: this.profileForm.value.notiNews,
-        province: this.profileForm.value.province,
-        district: this.profileForm.value.district,
-        subdistrict: this.profileForm.value.sub_district,
-        postcode: this.profileForm.value.postcode,
-        home_number: this.profileForm.value.home_number,
-        alley: this.profileForm.value.alley,
-        landTypeFV: this.profileForm.value.interestLand,
+      const profileUpdate: any = {
+        Username: this.profileForm.value.username,
+        Email: this.profileForm.value.email,
+        FirstName: this.profileForm.value.firstName,
+        LastName: this.profileForm.value.lastName,
+        Gender: this.profileForm.value.gender,
+        BirthDate: this.profileForm.value.birthDate,
+        Telephone: this.profileForm.value.telephone,
+        Notification: this.profileForm.value.notification,
+        NotiNews: this.profileForm.value.notiNews,
+        Province: this.profileForm.value.province,
+        District: this.profileForm.value.district,
+        Subdistrict: this.profileForm.value.sub_district,
+        PostCode: this.profileForm.value.postcode,
+        HomeNumber: this.profileForm.value.home_number,
+        Alley: this.profileForm.value.alley,
+        LandTypeFV: this.profileForm.value.interestLand,
       };
+
+
+
+
 
       this.userService.updateUser(profileUpdate).subscribe({
         next: () => {
-          alert('Profile Update successfully');
+          const modal = document.getElementById('noti_profile_update') as HTMLDialogElement;
+          modal.showModal();
 
           if(this.selectedFile){
             this.authService.uploadProfile(this.userId,this.selectedFile).subscribe({
               next: (response) => {
                 console.log(response);
-                window.location.reload();
 
               },
               error: (error) => {
@@ -357,12 +370,12 @@ onFileSelected(event: any): void {
             });
           }
           else{
-            window.location.reload();
           }
           
         },
         error: (error) => {
-          this.errorMessage = error.error.message;
+          this.errorMessage = error.message          
+          ;
         },
       });
 
@@ -371,10 +384,15 @@ onFileSelected(event: any): void {
     }
     else {
 
-        alert('Please fill in all required fields in the correct format');
+        const modal = document.getElementById('warning_profile_update') as HTMLDialogElement;
+        modal.showModal();
     }
   
   }
+
+reloadPage(){
+  window.location.reload();
+}
 
 triggerFileInput(): void {
   const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
@@ -385,17 +403,19 @@ triggerFileInput(): void {
   }
   checkEmail(email: string): string | null {
     let errorMessage: string | null = null;
+    this.emailduplicate = false;
     
     this.authService.checkDuplicateEmail(email).subscribe({
       next: (response) => {
         console.log('Response:', response);
         console.log('Email is available');
-        
+        this.emailduplicate = false;
+
       },
       error: (err) => {
-        console.error('Error:', err);
-        errorMessage = 'Email is already in use';
-        alert(errorMessage);
+        this.emailduplicate = true;
+        const modal = document.getElementById('err_profile_update_2') as HTMLDialogElement;
+        modal.showModal();
 
       }
     });

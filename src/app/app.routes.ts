@@ -38,10 +38,10 @@ export const routes: Routes = [
     { path: 'AdminSuggest', component: AdminSuggestComponent, canActivate: [AuthGuard] ,data: { roles: ['Admin'] }},
     { path: 'AdminUserManage', component: AdminUserManageComponent , canActivate: [AuthGuard],data: { roles: ['Admin'] }},
     {path:'UserPaymentManage/:id',component:AdminUserProfileComponent,canActivate:[AuthGuard],data:{roles:['Admin']}},
+    { path: '**', redirectTo: '/Signin' },
 
 
 
 
 
-  // { path: '**', redirectTo: '/Signin' },
 ];

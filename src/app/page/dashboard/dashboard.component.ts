@@ -1,7 +1,7 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, NgModule, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { CollapseComponent } from '../../core/collapse/collapse.component';
 import { dataSeries } from './data-series';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PinnedPropertyExpandComponent } from '../../core/pinned-property-expand/pinned-property-expand.component';
@@ -15,6 +15,8 @@ import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration, ChartData, ChartOptions } from 'chart.js';
 import { LineChartComponent } from '../../core/line-chart/line-chart.component';
 import { BarChartComponent } from 'app/core/bar-chart/bar-chart.component';
+import { forkJoin, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,12 +27,12 @@ import { BarChartComponent } from 'app/core/bar-chart/bar-chart.component';
     NgChartsModule,
     LineChartComponent,
     FormsModule,
-    BarChartComponent
+    BarChartComponent,FormsModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent implements OnChanges {
+export class DashboardComponent implements OnChanges,OnDestroy {
 
   AVG_Data: any;
   PRED_Data: any;
@@ -43,6 +45,12 @@ export class DashboardComponent implements OnChanges {
   last_month_avg: any;
   pred_table: any;
   followedLand = [];
+  max_y = 0;
+  max_y_district = [0, 0, 0, 0];
+  
+  private destroy$ = new Subject<void>();
+  selectedLabels: boolean[] = [];
+
   comparePrice: {
     averagePrice: number[];
     sellPrice: number[];
@@ -67,79 +75,93 @@ export class DashboardComponent implements OnChanges {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
 
-  ngOnInit() {
-
-  
-
-
-    this.dashBoardService.getPriceAvg(47).subscribe({
-      next: (response) => {
+  checkedChange() {
+    this.selectedLabels = this.selectedLabels.map(label=>label);
+      
+  }
+  ngOnInit(): void {
+    this.dashBoardService.getPriceAvg(47).pipe(
+      switchMap(response => {
         this.AVG_Data = this.transformData(response);
-        // console.log(this.AVG_Data);
         this.AVG_DATE = response.map((entry: any) => entry.year_month);
+        console.log(response, "response");
+        
+        console.log(this.AVG_Data, "AVG_Data");
+        console.log(this.AVG_DATE, "AVG_DATE");
 
-        this.landListService.readFollowLand().subscribe((data) => {
-          this.followedLand = data;
-          console.log(this.followedLand);
-          this.comparePrice.sellPrice = ((this.followedLand as{Price:number}[] ).map((land) => land.Price));
-          this.comparePrice.predictPrice = ((this.followedLand as{EstimatePrice:number}[] ).map((land) => land.EstimatePrice));
-          this.comparePrice.labels = (this.followedLand ).map((_, index) => `พื้นที่ ${index + 1}`);
-
-          console.log(this.comparePrice,"sssss");
-          
+        const maxValues = this.AVG_Data.map((locationData: number[]) => Math.max(...locationData));
+        this.max_y = Math.max(...maxValues);
+        this.max_y_district = maxValues;
+        console.log(this.max_y, "max_y");
+        
+        return forkJoin({
+          followedLand: this.landListService.readFollowLand(),
+          dashboardData: this.dashBoardService.getDashboardData(4),
+          lastMonthAvg: this.dashBoardService.getPriceAvg(0)
         });
+      }),
+      takeUntil(this.destroy$) // Automatically unsubscribe when component is destroyed
+    ).subscribe({
+      next: ({ followedLand, dashboardData, lastMonthAvg }) => {
+        this.followedLand = followedLand;
+        console.log(this.followedLand);
 
-        this.dashBoardService.getDashboardData(4).subscribe({
-          next: (response) => {
-            console.log(response);
-            const pred = this.transformData2(response);
-            //try to get key because to access object value 
-            const first_key = Object.keys(response.percentage_changes)[0];
-
-            this.pred_table = [[response.predictions.values[0]['price_avg_Min Buri'],response.percentage_changes[first_key]['Min Buri']],
-            [response.predictions.values[0]['price_avg_Lat Krabang'],response.percentage_changes[first_key]['Lat Krabang']],
-            [response.predictions.values[0]['price_avg_Watthana'],response.percentage_changes[first_key]['Watthana']],
-            [response.predictions.values[0]['price_avg_Khlong Toei'],response.percentage_changes[first_key]['Khlong Toei']]];
-
-            
-            
-
-            this.PRED_Data = this.AVG_Data.map((arr: number[], index: number) => arr.concat(pred[index]));
-            
-            const pred_date = response.predictions.dates.map((date: string | any[]) => {
-              const yearMonth = date.slice(0, 7); // Extracts 'YYYY-MM' part from 'YYYY-MM-DD'
-              return yearMonth;
-            });
-            this.PRED_DATE= this.AVG_DATE.concat(pred_date);
+        this.comparePrice.sellPrice = followedLand.map((land: { Price: number }) => land.Price);
+        this.comparePrice.predictPrice = followedLand.map((land: { EstimatePrice: number }) => land.EstimatePrice);
+        this.comparePrice.labels = followedLand.map((_: any, index: number) => `พื้นที่ ${index + 1}`);
+        this.selectedLabels = new Array(this.comparePrice.labels.length).fill(true);
 
 
-            this.dashBoardService.getPriceAvg(0).subscribe({
-              next: (response) => {
-                this.last_month_avg = response;
-                this.loading = false;
-                this.comparePrice.averagePrice = ((this.followedLand as {LocationID:number}[]).map((land) => this.getAveragePricebyLocationId(land.LocationID)));
-                console.log(this.comparePrice,"sssss");
+        // Extracting prediction data
+        const keys = Object.keys(dashboardData.percentage_changes);
+        const last_key = keys[keys.length - 1]; 
+        
 
-              },
-              error: (error) => {
-                console.error('Error:', error);
-                this.loading = false;
-              },
-            });
+        this.pred_table = [
+          [dashboardData.predictions.values[3]['price_avg_Min Buri'], dashboardData.percentage_changes[last_key]['Min Buri']],
+          [dashboardData.predictions.values[3]['price_avg_Lat Krabang'], dashboardData.percentage_changes[last_key]['Lat Krabang']],
+          [dashboardData.predictions.values[3]['price_avg_Watthana'], dashboardData.percentage_changes[last_key]['Watthana']],
+          [dashboardData.predictions.values[3]['price_avg_Khlong Toei'], dashboardData.percentage_changes[last_key]['Khlong Toei']]
+        ];
 
-            // this.loading = false;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            this.loading = false;
-          },
-        });
+        const pred = this.transformData2(dashboardData);
+        console.log(pred, "pred");
+        
+        this.PRED_Data = pred;
+
+        const maxValues2 = pred.map((locationData: number[]) => Math.max(...locationData));
+        this.max_y = Math.max(this.max_y, ...maxValues2);
+
+        this.max_y_district = maxValues2.map((value, index) => Math.max(value, this.max_y_district[index]));
+
+        console.log(this.max_y_district, "max_y_district");
+        
+        console.log(this.max_y, "max_y");
+        
+
+        const pred_date = dashboardData.predictions.dates.map((date: string) => date.slice(0, 7));
+        this.PRED_DATE = pred_date;
+
+        // Assign last month average
+        this.last_month_avg = lastMonthAvg;
+        this.comparePrice.averagePrice = followedLand.map((land: { LocationID: number }) =>
+          this.getAveragePricebyLocationId(land.LocationID)
+        );
+
+        console.log(this.comparePrice, "sssss");
+
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error:', error);
         this.loading = false;
-      },
+      }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   getAveragePricebyLocationId(locationId: number) {
@@ -203,37 +225,15 @@ export class DashboardComponent implements OnChanges {
   onAreaChange(selectedArea: string): void {
     console.log(selectedArea);
 
-    // if (selectedArea === 'แสดงเขตทั้งหมด') {
-    //   this.selected_Data = this.L_Data_PRED;
-    // } else if (selectedArea === 'เขตลาดกระบัง') {
-    //   this.selected_Data = this.L_Data_PRED;
-    // } else if (selectedArea === 'เขตมีนบุรี') {
-    //   this.selected_Data = this.M_Data_PRED;
-    // } else if (selectedArea === 'เขตคลองเตย') {
-    //   this.selected_Data = this.K_Data_PRED;
-    // } else if (selectedArea === 'เขตวัฒนา') {
-    //   this.selected_Data = this.W_Data_PRED;
-    // }
+
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.selectedArea);
 
-    // if (changes['selectedArea']) {
-    //   console.log(this.selectedArea);
-
-    //   if (this.selectedArea === 'แสดงเขตทั้งหมด') {
-    //     this.selected_Data = this.L_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตลาดกระบัง') {
-    //     this.selected_Data = this.L_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตมีนบุรี') {
-    //     this.selected_Data = this.M_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตคลองเตย') {
-    //     this.selected_Data = this.K_Data_PRED;
-    //   } else if (this.selectedArea === 'เขตวัฒนา') {
-    //     this.selected_Data = this.W_Data_PRED;
-    //   }
-    // }
   }
+
+
+
 }
 export class SelectMultipleExample {
   toppings = new FormControl('');

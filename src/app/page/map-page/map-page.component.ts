@@ -4,6 +4,8 @@ import {
   HostListener,
   ViewChild,
   OnInit,
+  OnDestroy,
+  
 } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../../core/map/map.component';
@@ -25,6 +27,8 @@ import { AuthService } from 'app/service/Auth/auth.service';
 import { AfterViewInit } from '@angular/core';
 import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 import { LineChart2Component } from 'app/core/line-chart-2/line-chart-2.component';
+import { forkJoin, Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 interface LocationResult {
   place_id: number;
@@ -59,12 +63,13 @@ export class AreaSlider {
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
-    LineChart2Component
+    LineChart2Component,
+    FormsModule
   ],
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
 })
-export class MapPageComponent implements OnInit, AfterViewInit {
+export class MapPageComponent implements OnInit,OnDestroy {
   coordinates: [number, number] | null = null;
   isInputFocused: boolean = false;
   results: LocationResult[] = [];
@@ -79,7 +84,6 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   matches: any[] = [];
   istoggleLandBar: boolean = false;
   istogglePriceBox: boolean = false;
-  fastsellState = false;
   searchValue: string = '';
   fowllowState = false;
   tier = 'Basic';
@@ -94,6 +98,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   date: any;
   value: any;
   loading: boolean = true;
+  private destroy$ = new Subject<void>();
   qoq = {
     'Min Buri': 0,
     'Lat Krabang': 0,
@@ -106,8 +111,16 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     'Khlong Toei': 0,
     Watthana: 0,
   };
+  districtSelect = {
+    MinBuri: false,
+    LatKrabang: false,
+    KhlongToei: false,
+    Watthana: false,
+  }
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
+  
+  
 
   constructor(
     private searchApiService: SearchApiService,
@@ -133,90 +146,58 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false;
+      console.log(' stop loading', this.loading);
+    }, 3000);
+  
     this.auth.getTier().subscribe((response) => {
       this.tier = response;
-      if (this.tier === 'Tier1') {
-        this.maxdistance = 2;
-      } else if (this.tier === 'Tier2') {
-        this.maxdistance = 4;
-      } else if (this.tier === 'Tier3') {
-        this.maxdistance = 8;
-      } else {
-        this.maxdistance = 0;
-      }
+      this.maxdistance = this.getMaxDistance(this.tier);
     });
-
-    this.landListService.getData().subscribe((response) => {
-      this.landList = response;
-      this.filteredLandList = this.landList;
-      this.sortedLandList = this.landList;
-      this.dashBoardService.goodSale('Min Buri').subscribe((data) => {
-        console.log(data);
-        // console.log(data.data['Min Buri'].quarterly_analytics[data.data['Min Buri'].quarterly_analytics.length]);
-        // console.log(data.data['Min Buri'].quarterly_analytics.length);
-
-        this.yoy['Min Buri'] =
-          data.data['Min Buri'].quarterly_analytics[
-            data.data['Min Buri'].quarterly_analytics.length - 1
-          ].yoy;
-        this.qoq['Min Buri'] =
-          data.data['Min Buri'].quarterly_analytics[
-            data.data['Min Buri'].quarterly_analytics.length - 1
-          ].qoq;
-        this.date = data.data['Min Buri'].monthly_indices.map(
-          ({ month, year }: { month: number; year: number }) =>
-            `${year}-${month.toString().padStart(2, '0')}`
-        );
-        this.date = this.date.reverse();
-
-        this.value = data.data['Min Buri'].monthly_indices.map(
-          ({ index }: { index: number }) => index );
-        
-        this.value = this.value.reverse();
-        
-
-        this.dashBoardService.goodSale('Lat Krabang').subscribe((data) => {
-          console.log(data);
-
-          this.yoy['Lat Krabang'] =
-            data.data['Lat Krabang'].quarterly_analytics[
-              data.data['Lat Krabang'].quarterly_analytics.length - 1
-            ].yoy;
-          this.qoq['Lat Krabang'] =
-            data.data['Lat Krabang'].quarterly_analytics[
-              data.data['Lat Krabang'].quarterly_analytics.length - 1
-            ].qoq;
-          this.dashBoardService.goodSale('Khlong Toei').subscribe((data) => {
-            this.yoy['Khlong Toei'] =
-              data.data['Khlong Toei'].quarterly_analytics[
-                data.data['Khlong Toei'].quarterly_analytics.length - 1
-              ].yoy;
-            this.qoq['Khlong Toei'] =
-              data.data['Khlong Toei'].quarterly_analytics[
-                data.data['Khlong Toei'].quarterly_analytics.length - 1
-              ].qoq;
-            this.dashBoardService.goodSale('Watthana').subscribe((data) => {
-              this.yoy['Watthana'] =
-                data.data['Watthana'].quarterly_analytics[
-                  data.data['Watthana'].quarterly_analytics.length - 1
-                ].yoy;
-              this.qoq['Watthana'] =
-                data.data['Watthana'].quarterly_analytics[
-                  data.data['Watthana'].quarterly_analytics.length - 1
-                ].qoq;
-            });
-          });
+  
+    this.landListService.getData().pipe(
+      switchMap((landList) => {
+        this.landList = landList;
+        this.filteredLandList = this.landList;
+        this.sortedLandList = this.landList;
+  
+        // Fetch data for multiple locations in parallel
+        return forkJoin({
+          minBuri: this.dashBoardService.goodSale('Min Buri'),
+          latKrabang: this.dashBoardService.goodSale('Lat Krabang'),
+          khlongToei: this.dashBoardService.goodSale('Khlong Toei'),
+          watthana: this.dashBoardService.goodSale('Watthana')
         });
-      });
+      })
+    ).subscribe(({ minBuri, latKrabang, khlongToei, watthana }) => {
+      this.processSaleData('Min Buri', minBuri);
+      this.processSaleData('Lat Krabang', latKrabang);
+      this.processSaleData('Khlong Toei', khlongToei);
+      this.processSaleData('Watthana', watthana);
     });
-
-    // this.landListService.getLandImage(1).subscribe((response) => {
-    //   this.landImage = response;
-    //   this.image_URL = this.landImage.images[0].file_path;
-    //   console.log(this.landImage);
-
-    //   console.log(this.image_URL);
-    // });
+  }
+  
+  getMaxDistance(tier: string): number {
+    switch (tier) {
+      case 'Tier1': return 2;
+      case 'Tier2': return 4;
+      case 'Tier3': return 8;
+      default: return 0;
+    }
+  }
+  
+  processSaleData(area: 'Min Buri' | 'Lat Krabang' | 'Khlong Toei' | 'Watthana', data: any): void {
+    this.yoy[area] = data.data[area].quarterly_analytics[data.data[area].quarterly_analytics.length - 1].yoy;
+    this.qoq[area] = data.data[area].quarterly_analytics[data.data[area].quarterly_analytics.length - 1].qoq;
+  
+    if (area === 'Min Buri') {
+      this.date = data.data[area].monthly_indices.map(({ month, year }: { month: number; year: number }) =>
+        `${year}-${month.toString().padStart(2, '0')}`
+      ).reverse();
+  
+      this.value = data.data[area].monthly_indices.map(({ index }: { index: number }) => index).reverse();
+    }
   }
 
   images: {
@@ -259,13 +240,13 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     // Check if the user is on the Basic tier
 
     this.landListService.getData().subscribe((response) => {
+      console.log(response);
+      
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
+      this.handleSearch(this.searchValue);
 
-      // Perform the follow action here
-      // For example:
-      // this.landListService.followLand(event.landId).subscribe(...);
     });
   }
 
@@ -295,10 +276,10 @@ export class MapPageComponent implements OnInit, AfterViewInit {
         console.log(response, this.tier);
 
         if (this.tier === 'Basic') {
-          console.log('enter basic');
-          alert(
-            'Please upgrade your account to Tier1 or higher to use this feature'
-          );
+
+          const modal = document.getElementById('warn_follow_1') as HTMLDialogElement;
+          modal.showModal();
+          
           return;
         } else if (
           (this.tier === 'Tier1' && response < 1) ||
@@ -315,9 +296,9 @@ export class MapPageComponent implements OnInit, AfterViewInit {
           this.onFollowChanged(follow);
         } else {
           console.log('enter tier');
-          alert(
-            'You have reached the limit of follow land for your current tier in land card'
-          );
+
+          const modal = document.getElementById('warn_follow_2') as HTMLDialogElement;
+          modal.showModal();
         }
       },
       (error) => {
@@ -355,29 +336,20 @@ export class MapPageComponent implements OnInit, AfterViewInit {
       modal.showModal();
     }
   }
+
+  districtSelectChange(event: any) {
+    this.handleSearch(this.searchValue);
+  }
+
+ 
+
   toggleLandBar() {
     this.istoggleLandBar = !this.istoggleLandBar;
   }
   togglePriceBox() {
     this.istogglePriceBox = !this.istogglePriceBox;
   }
-  onFastSellClick(event: Event) {
-    const toggleSwitch = event.target as HTMLInputElement;
-    const modal = document.getElementById(
-      'fastsell_Confirm'
-    ) as HTMLDialogElement;
-    toggleSwitch.checked = !toggleSwitch.checked;
-    if (!toggleSwitch.checked) {
-      modal.showModal();
-    } else {
-      toggleSwitch.checked = false;
-      this.fastsellState = false;
-    }
-  }
 
-  confirmFastSell() {
-    this.fastsellState = true;
-  }
 
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -394,6 +366,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     console.log(this.coordinates);
   }
 
+  // ใช้เพื่อปรับ landlist เมื่อมีการ filter หรือ sort เปลี่ยน
   handleSearch(inputValue: string) {
     // รวม location กับ description ของแต่ละที่ดินเข้าด้วยกันแล้ว ค้นหาด้วย inputValue
     if (inputValue && inputValue.length > 0) {
@@ -419,25 +392,57 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     });
 
     this.filteredLandList = this.matches && inrange;
+    this.filteredLandList = this.filterLands();
+    
+    console.log(this.filteredLandList);
+    
 
-    this.sortedLandList = this.markerSortService.sortByProximity(
-      this.filteredLandList,
-      this.markerCoord,
-      this.maxdistance
+
+    this.sortedLandList = this.markerSortService.sortByClosestReference(
+      this.filteredLandList,this.markerCoord,this.maxdistance
     );
+
   }
+
+  filterLands() {
+    // Mapping English district keys to Thai names
+    const districtMapping: { [key: string]: string } = {
+      MinBuri: "มีนบุรี",
+      LatKrabang: "ลาดกระบัง",
+      KhlongToei: "คลองเตย",
+      Watthana: "วัฒนา",
+    };
+  
+    // Get selected districts in Thai
+    const selectedDistricts = Object.keys(this.districtSelect)
+      .filter(district => this.districtSelect[district as keyof typeof this.districtSelect])
+      .map(district => districtMapping[district]); // Convert to Thai
+  
+      
+    // If no districts are selected, return all lands
+    if (selectedDistricts.length === 0) {
+      return this.filteredLandList;
+    }
+  
+    // Filter lands based on selected districts
+    return this.filteredLandList.filter(land => selectedDistricts.includes(land.LocationName));
+  }
+  
+  
+
   onMapOptionChange(option: string): void {
     this.selectedMapLayer = option;
   }
   markerCoordUpdate(coord: any): void {
     this.markerCoord = coord;
-    // console.log(this.markerCoord);
-    // console.log(this.landList);
-    this.sortedLandList = this.markerSortService.sortByProximity(
-      this.filteredLandList,
-      this.markerCoord,
-      this.maxdistance
+
+    
+    this.sortedLandList = this.markerSortService.sortByClosestReference(
+      this.filteredLandList,this.markerCoord,this.maxdistance
     );
+
+    
+    
   }
   leftPriceChange(event: any) {
     const inputElement = event.target as HTMLInputElement;
@@ -526,10 +531,20 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   autoSlide(): void {
     setInterval(() => {
       this.nextSlide();
+      
     }, 3000);
   }
 
-  ngAfterViewInit() {
-    this.loading = false;
+ 
+
+  getIconName(placeType: string): string {
+    
+    return this.dashBoardService.getIconName(placeType);
+    // return 'place';
   }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete(); // Clean up the subject
+  }
+
 }

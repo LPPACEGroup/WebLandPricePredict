@@ -18,7 +18,7 @@ export class UserService {
     return this.http.get(`${this.authService.apiURL}/user`, { withCredentials: true });
   }
    
-updateUser(user: User): Observable<any> {
+updateUser(user: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -44,6 +44,7 @@ updateUser(user: User): Observable<any> {
     formData.append('BuyTier', submit_payment.BuyTier);
     formData.append('AccName', submit_payment.AccName);
     formData.append('Telephone', submit_payment.Telephone);
+    formData.append('PaidPrice', submit_payment.PaidPrice);
     formData.append('Detail', submit_payment.Detail);
     
     

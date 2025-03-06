@@ -4,5 +4,6 @@ export interface SunmitPayment {
     AccName: string;
     Telephone: string;
     Detail: string;
+    PaidPrice:string;
 }
 

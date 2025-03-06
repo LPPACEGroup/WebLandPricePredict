@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError, map } from 'rxjs/operators';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-signup-page',
   standalone: true,
@@ -70,11 +71,11 @@ export class SignupPageComponent {
         email: ['', [Validators.required, Validators.email]], // Email validation
         firstName: ['', [
           Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
+          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
         ]], // First name required
         lastName: ['', [
           Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
+          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
         ]], // Last name required
         gender: ['', Validators.required], // Gender required
         birthDate: ['', Validators.required], // Birth date required
@@ -116,6 +117,7 @@ export class SignupPageComponent {
             isValid = false;
           }
         });
+        this.checkEmail(this.signupForm.value.email);
       } else if (this.currentStep == 2) {
         const fieldsToValidate = [
           'firstName',
@@ -155,14 +157,17 @@ export class SignupPageComponent {
       }
 
       if (!isValid) {
-        alert(
-          'Please fill all required fields and ensure all inputs are valid.'
-        );
+
+
+        const modal = document.getElementById('signup_warning_1') as HTMLDialogElement;
+        modal.showModal();
         return; // Stop if any visible field is invalid
       }
 
       // Proceed to the next step if all visible fields are valid
-      this.currentStep++;
+      if (this.currentStep != 1) {
+        this.currentStep++;
+      }
     }
   }
 
@@ -211,21 +216,26 @@ export class SignupPageComponent {
           this.authService.uploadProfile(userId,profilePicture).subscribe({
             next: (uploadResponse) => {
               console.log('Profile picture uploaded successfully:', uploadResponse);
-              alert('User created and profile picture uploaded successfully');
-              this.router.navigate(['/Signin']);
+
+              const modal = document.getElementById('signup_sucess') as HTMLDialogElement;
+              modal.showModal();
             },
             error: (uploadError) => {
               console.error('Profile picture upload failed:', uploadError);
-              alert('User created, but profile picture upload failed');
+
+              const modal = document.getElementById('signup_err_1') as HTMLDialogElement;
+              modal.showModal();
             }
           });
         } else {
-          alert('User created successfully');
-          this.router.navigate(['/Signin']);
+
+          const modal = document.getElementById('signup_sucess') as HTMLDialogElement;
+          modal.showModal();
+
         }
       },
       error: (error) => {
-        console.error('User creation failed:', error);
+        console.error('การสมัครสมาชิกล้มเหลว', error);
         this.errorMessage = error.error.message;
       }
     });
@@ -372,14 +382,20 @@ onFileSelected(event: any): void {
     });
   }
   checkEmail(email: string): void {
-    this.authService.checkDuplicateEmail(email).subscribe({
+    this.authService.checkUnauthorizedDuplicateEmail(email).subscribe({
       next: (response) => {
         console.log('Response:', response);
         // Handle successful response here
+        this.currentStep = 2;
+        
       },
       error: (err) => {
         console.error('Error:', err);
         // Handle error here
+        if (err.status === 409) {
+          const modal = document.getElementById('signup_err_2') as HTMLDialogElement;
+          modal.showModal();
+        }
       }
     });
   }

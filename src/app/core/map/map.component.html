@@ -9,21 +9,21 @@
   </div>
   <div class="absolute bottom-0 left-0 z-50">
     <div class="map-control  flex flex-row">
-      <button class="btn bg-ocean-blue btn-square btn-outline btn-sm" (click)="clickZoomin()" title="Zoom In">
+      <button class="btn bg-oceanBlue btn-square btn-outline btn-sm" (click)="clickZoomin()" title="Zoom In">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
           <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
         </svg>
 
 
       </button>
-      <button class="btn bg-ocean-blue btn-square btn-outline btn-sm" (click)="clickZoomout()" title="Zoom Out">
+      <button class="btn bg-oceanBlue btn-square btn-outline btn-sm" (click)="clickZoomout()" title="Zoom Out">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
           <path d="M200-440v-80h560v80H200Z" />
         </svg>
 
       </button>
       <div class="w-3"></div>
-      <button class="btn bg-ocean-blue btn-square btn-outline btn-sm" (click)="toggleMaker()" title="Toggle Marker">
+      <button class="btn bg-oceanBlue btn-square btn-outline btn-sm" (click)="toggleMaker()" title="Toggle Marker">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
           <path
             d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm280-40q97-82 144.5-152.5T672-523q0-91-58-144t-134-53q-76 0-134 53t-58 144q0 60 47.5 130.5T480-240Zm0-230q-21 0-35.5-14.5T430-520q0-21 14.5-35.5T480-570q21 0 35.5 14.5T530-520q0 21-14.5 35.5T480-470ZM200-200v-560 560Z" />
@@ -34,3 +34,26 @@
   </div>
 
 </div>
+
+<!-- modal warning when user tier not met requirement -->
+<dialog id="warn_marker_1" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">คุณถึงขีดจำกัดของ {{tier}} กรุณาอัพเกรด Tier  เพื่อใช้หมุดเพิ่มเติม</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="warn_marker_2" class="modal ">
+  <div class="modal-box  text-darkBlue">
+    <p class="py-4">ตอนนี้ระดับสมาชิกของคุณคือ {{tier}} กรุณาอัพเกรดTierข้นต่ำ Tier1 เพื่อใช้งานฟีเจอร์นี้</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn bg-darkBlue text-white">รับทราบ</button>
+      </form>
+    </div>
+  </div>
+</dialog>

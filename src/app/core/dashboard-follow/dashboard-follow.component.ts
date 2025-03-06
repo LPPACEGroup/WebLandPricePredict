@@ -13,6 +13,7 @@ import { FollowLand } from 'model/follow.interface';
 export class DashboardFollowComponent {
   @Input() land: any;
   @Output() followChanged = new EventEmitter<any>(); // Emit event to parent
+  @Input() index!: number;
   
 
   fowllowState = true;

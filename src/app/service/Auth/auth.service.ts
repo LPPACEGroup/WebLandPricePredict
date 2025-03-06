@@ -52,6 +52,10 @@ export class AuthService {
     return this.http.get(`${this.apiURL}/auth/check-email/${email}`, { withCredentials: true})
   }
 
+  checkUnauthorizedDuplicateEmail(email: string): Observable<any> {
+    return this.http.get(`${this.apiURL}/check-email/${email}`)
+  }
+
   
   private checkSignInStatus(): void {
     this.isAuthenticated().subscribe({
