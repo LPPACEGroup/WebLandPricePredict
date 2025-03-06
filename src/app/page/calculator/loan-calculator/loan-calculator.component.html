@@ -1,37 +1,60 @@
-<div class="w-full h-full bg-light-grey grid grid-cols-4 gap-1 items-center py-16">
-  <div class="text-end col-span-2">
-    <p>วงเงินที่ต้องการกู้</p>
-  </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="วงเงินที่ต้องการกู้" /></div>
-  <div class="text-end col-span-2">
-    <p>ระยะที่ต้องการผ่อนชำระ (ปี)</p>
-  </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 1" placeholder="ระยะที่ต้องการผ่อน" /></div>
-  <div class="text-end col-span-2">
-    <p>อัตราดอกเบี้ย (%)</p>
-  </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 2" placeholder="อัตราดอกเบี้ย" /></div>
+<div class="w-full h-full bg-light-grey p-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="space-y-4 mb-8">
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินที่ต้องการกู้ </label>
 
-  <div class="col-span-2"></div>
-  <div class="w-1/2 col-span-2">
-    <div class="text-end"><button
-        class="bg-dark-blue w-1/2 h-8 rounded-full  text-white  hover:bg-[gold] hover:text-black">คำนวณ</button></div>
-  </div>
+        <input type="number" [(ngModel)]="loanAmount" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="Loan Amount" placeholder="ยอดเงินที่ต้องการกู้ (บาท)" />
 
-  <div class="text-end row-span-3">ผลลัพธ์</div>
-  <div class="w-3/4 rounded-xl  px-5 bg-white row-span-3 h-full col-span-3 flex items-center justify-center">
-    <div class="w-full h-auto">
-      <div class="flex justify-between">
-        <p>ยอดผ่อนชำระต่อเดือน:</p>
-        <span class="text-darkRed">561,452</span>
       </div>
-      <div class="flex justify-between">
-        <p>จำนวนดอกเบี้ยต่อเดือน:</p>
-        <span class="text-darkRed">188,712</span>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">
+          ระยะเวลาที่ต้องการผ่อนชำระ
+        </label>
+        <input type="text" [(ngModel)]="installmentTerm" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="Installment Term" placeholder="ระยะที่ต้องการผ่อน (ปี)" />
       </div>
-      <div class="flex justify-between">
-        <p>จำนวนเงินต้น:</p>
-        <span class="text-darkRed">1,322,740</span>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">อัตราดอกเบี้ย</label>
+        <input type="text" [(ngModel)]="interestRate" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="Interest Rate" placeholder="อัตราดอกเบี้ย (%)" />
+      </div>
+    </div>
+
+
+    <div class="flex justify-center mb-8">
+      <button class="py-2 px-12 bg-darkBlue text-white rounded-full hover:bg-yellow hover:text-black"
+        (click)="calculate()">
+        คำนวณ
+      </button>
+    </div>
+
+    <div class="bg-white rounded-md p-6 shadow-sm">
+      <h3 class="text-darkBlue font-semibold text-lg mb-4">ผลลัพธ์</h3>
+
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">ยอดผ่อนชำระต่อเดือน (บาท)</span>
+          <span class="text-darkRed font-medium">{{monthlyPayment}}</span>
+        </div>
+
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">จำนวนดอกเบี้ยต่อเดือน (บาท)</span>
+          <span class="text-darkRed font-medium">{{monthInterest}}</span>
+        </div>
+
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">จำนวนดอกเบี้ยทั้งหมด (บาท)</span>
+          <span class="text-darkRed font-medium">{{yearInterest}}</span>
+        </div>
+       
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">ยอดรวมทั้งหมดที่ต้องชำระ (บาท)</span>
+          <span class="text-darkRed font-medium">{{totalLoanWithInterest}}</span>
+        </div>
       </div>
     </div>
   </div>

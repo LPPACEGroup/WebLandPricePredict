@@ -1,109 +1,133 @@
-<div class="w-full h-auto bg-light-grey gap-2 items-center py-6">
-  <div class="p-8">
-    <div class="mb-8">
-      <h2 class="mb-4 text-lg font-semibold text-blue-600">สินเชื่อเดิม</h2>
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label class="block mb-1 text-sm">จำนวนเงินกู้</label>
-          <input type="text" value="10000000" title="จำนวนเงินกู้" placeholder="จำนวนเงินกู้" class="w-full px-3 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 text-sm">ระยะเวลากู้</label>
-          <input type="text" value="8" title="ระยะเวลากู้" placeholder="ระยะเวลากู้" class="w-full px-3 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 text-sm">เดือน/ปี ที่เริ่มสินเชื่อ</label>
-          <input type="text" value="มกราคม 2566" title="เดือน/ปี ที่เริ่มสินเชื่อ" placeholder="เดือน/ปี ที่เริ่มสินเชื่อ" class="w-full px-3 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 text-sm">อัตราดอกเบี้ยปัจจุบัน (%)</label>
-          <input type="text" value="1.7" title="อัตราดอกเบี้ยปัจจุบัน" placeholder="อัตราดอกเบี้ยปัจจุบัน" class="w-full px-3 py-2 border rounded" />
-        </div>
+<div class="w-full h-auto bg-light-grey p-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="space-y-4 mb-8">
+      <h2 class="mb-4 text-lg font-semibold text-darkBlue text-center">สินเชื่อเดิม</h2>
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">วงเงินกู้เดิม</label>
+        <input type="number" min="0" step="any" [(ngModel)]="currentLoanAmount"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="currentLoanAmount"
+          placeholder="วงเงินกู้เดิม (บาท)" />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">
+          ค่างวดต่อเดือน
+        </label>
+        <input type="number" min="0" step="any" [(ngModel)]="currentMonthlyPayment"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="currentMonthlyPayment"
+          placeholder="ค่างวดต่อเดือน ณ ปัจจุบัน (บาท)" />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">จำนวนปีคงเหลือ</label>
+        <input type="number" min="0" step="any" [(ngModel)]="currentLoanTerm"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate"
+          placeholder="จำนวนปีคงเหลือโดยประมาณ" />
+      </div>
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">อัตราดอกเบี้ยปัจจุบัน</label>
+        <input type="number" min="0" step="any" [(ngModel)]="currentInterestRate"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate"
+          placeholder="อัตราดอกเบี้ยปัจจุบัน (%)" />
       </div>
     </div>
 
-    <div class="mb-8">
-      <h2 class="mb-4 text-lg font-semibold text-blue-600">สินเชื่อใหม่</h2>
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label class="block mb-1 text-sm">ยอดสินเชื่อคงเหลือ</label>
-          <input type="text" value="10000000" title="ยอดสินเชื่อคงเหลือ" placeholder="ยอดสินเชื่อคงเหลือ" class="w-full px-3 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 text-sm">ระยะเวลากู้</label>
-          <input type="text" value="8" title="ระยะเวลากู้" placeholder="ระยะเวลากู้" class="w-full px-3 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 text-sm">ค่าใช้จ่ายในการรีไฟแนนซ์</label>
-          <input type="text" value="0" title="ค่าใช้จ่ายในการรีไฟแนนซ์" placeholder="ค่าใช้จ่ายในการรีไฟแนนซ์" class="w-full px-3 py-2 border rounded" />
-        </div>
-        <div>
-          <label class="block mb-1 text-sm">อัตราดอกเบี้ยใหม่ (%)</label>
-          <input type="text" value="1.4" title="อัตราดอกเบี้ยใหม่" placeholder="อัตราดอกเบี้ยใหม่" class="w-full px-3 py-2 border rounded" />
-        </div>
+    <div class="space-y-4 mb-8">
+      <h2 class="mb-4 text-lg font-semibold text-darkBlue text-center">สินเชื่อใหม่</h2>
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินกู้ใหม่</label>
+        <input type="number" min="0" step="any" [(ngModel)]="newLoanAmount"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" name="loanAmount" value="" title="Loan Amount"
+          placeholder="ยอดสินเชื่อคงเหลือ (บาท)" />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">
+          ระยะเวลากู้
+        </label>
+        <input type="number" min="0" step="any" [(ngModel)]="newLoanTerm"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Loan Term"
+          placeholder="ระยะเวลากู้" />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">ค่าใช้จ่ายในการรีไฟแนนซ์</label>
+        <input type="number" min="0" step="any" [(ngModel)]="refinanceCost"
+          placeholder="ค่าใช้จ่ายในการรีไฟแนนซ์ หากไม่มีกรุณาใส่ 0"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate" required />
+      </div>
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">อัตราดอกเบี้ยใหม่</label>
+        <input type="number" min="0" step="any" [(ngModel)]="newInterestRate"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate"
+          placeholder="อัตราดอกเบี้ยใหม่ (%)" />
       </div>
     </div>
 
-    <div class="flex justify-end mb-8">
-      <button class="w-1/2 h-8 bg-darkBlue text-white bg-blue-600 rounded-full hover:bg-[gold] hover:text-black">คำนวณ</button>
+
+
+    <div class="flex justify-center mb-8">
+      <button class="py-2 px-12 bg-darkBlue text-white rounded-full hover:bg-yellow hover:text-black"
+        (click)="calculate()">
+        คำนวณ
+      </button>
     </div>
 
+    <table class="w-full mt-8 bg-white rounded-lg overflow-hidden">
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="p-3 text-sm">ยอดเงินกู้(บาท)</th>
+          <th class="p-3 text-sm">ระยะเวลากู้ (ปี)</th>
+          <th class="p-3 text-sm">ดอกเบี้ยต่อเดือน (บาท)</th>
+          <th class="p-3 text-sm">ยอดผ่อนชำระต่อเดือน (บาท)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b">
+          <td class="p-3 text-center text-grey">{{currentLoanAmountWithInterest | number:'1.2-2'}}</td>
+          <td class="p-3 text-center text-grey">{{currentLoanTerm}}</td>
+          <td class="p-3 text-center text-grey">{{currentTotalInterest | number:'1.2-2'}}</td>
+          <td class="p-3 text-center text-grey">{{currentMonthlyPayment | number:'1.2-2'}}</td>
+        </tr>
+        <tr>
+          <td class="p-3 text-center text-oceanBlue">
+            <img src="assets\icons\continue-arr.svg" alt="Decair Icon" class="inline-block w-9 h-9 mr-2 text-left">
+            {{newLoanAmountWithInterest | number:'1.2-2'}}
+          </td>
+          <td class="p-3 text-center text-oceanBlue">{{newLoanTerm}}</td>
+          <td class="p-3 text-center text-oceanBlue">{{newTotalInterest | number:'1.2-2'}}</td>
+          <td class="p-3 text-center text-oceanBlue">{{newMonthlyPayment | number:'1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div class="bg-white rounded-md p-6 shadow-sm mt-8">
+      <h3 class="text-darkBlue font-semibold text-lg mb-4">ผลลัพธ์</h3>
+
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">ดอกเบี้ยที่ประหยัดได้ (บาท)</span>
+          <span class="text-darkRed font-medium">{{interestSaved | number:'1.2-2'}}</span>
+        </div>
+
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">ยอดผ่อนชำระต่อเดือนใหม่ (บาท)</span>
+          <span class="text-darkRed font-medium">{{newMonthlyPayment | number:'1.2-2'}}</span>
+        </div>
+
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">ส่วนต่างยอดผ่อนชำระต่อเดือน (บาท)</span>
+          <span class="text-darkRed font-medium">{{monthlyDifference | number:'1.2-2'}}</span>
+        </div>
+
+      </div>
+    </div>
 
   </div>
-  
-  <table class="w-full mb-8">
-    <thead>
-      <tr class="bg-gray-100">
-        <th class="p-2 text-left">ยอดผ่อนชำระต่อเดือน (บาท)</th>
-        <th class="p-2 text-left">ระยะเวลากู้ (ปี)</th>
-        <th class="p-2 text-left">อัตราดอกเบี้ย (%) ต่อปี</th>
-        <th class="p-2 text-left">จำนวนดอกเบี้ย 3 ปี (บาท)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="border-b">
-        <td class="p-2">111,484</td>
-        <td class="p-2">6</td>
-        <td class="p-2">1.7</td>
-        <td class="p-2">421,733</td>
-      </tr>
-      <tr>
-        <td class="p-2">62,741</td>
-        <td class="p-2">7</td>
-        <td class="p-2">1.5</td>
-        <td class="p-2">179,877</td>
-      </tr>
-    </tbody>
-  </table>
 
-  <div class="p-6 bg-gray-100 rounded">
-    <h2 class="mb-4 text-lg font-semibold text-blue-600">ผลลัพธ์</h2>
-    <div class="grid gap-4">
-      <div class="flex justify-between">
-        <span>ดอกเบี้ยที่ประหยัดได้ (บาท)</span>
-        <span class="text-red-600">241,856.00</span>
-      </div>
-      <div class="flex justify-between">
-        <span>ยอดผ่อนชำระต่อเดือนใหม่ (บาท)</span>
-        <span>62,741.00</span>
-      </div>
-      <div class="flex justify-between">
-        <span>ส่วนต่างผ่อนต่อเดือนระ</span>
-        <span>48,743</span>
-      </div>
-      <div class="flex justify-between">
-        <span>ระยะเวลากู้ (ปี)</span>
-        <span>7</span>
-      </div>
-      <div class="flex justify-between">
-        <span>อัตราดอกเบี้ย (%)</span>
-        <span>1.5</span>
-      </div>
-      <div class="flex justify-between">
-        <span>จำนวนดอกเบี้ย 3 ปี (บาท)</span>
-        <span>179,877.00</span>
-      </div>
-    </div>
-  </div>
+
+
+
 
 </div>

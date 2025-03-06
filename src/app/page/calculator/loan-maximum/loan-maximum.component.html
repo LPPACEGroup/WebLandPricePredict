@@ -1,38 +1,79 @@
-<div class="w-full h-full bg-light-grey grid grid-cols-4 gap-1 items-center py-16">
-  <div class="text-end col-span-2">
-      <p>รายได้รวมต่อปี (บาท)</p>
-  </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="รายได้รวมต่อปี" /></div>
-  <div class="text-end col-span-2">
-      <p>ระยะเวลากู้</p>
-  </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 1" placeholder="ระยะเวลากู้" /></div>
-  <div class="text-end col-span-2">
-      <p>ระบุอัตราดอกเบี้ย (%)</p>
-  </div>
-  <div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Term 2" placeholder="อัตราดอกเบี้ย" /></div>
-  <div class="text-end col-span-2">
-    <p>เปอร์เซ็นต์วงเงินกู้สูงสุดของรายได้ (%)</p>
-</div>
-<div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="% วงเงินกู้สูงสุด" /></div>
-<div class="text-end col-span-2">
-  <p>ภาระหนี้สินต่อเดือน (บาท) </p>
-</div>
-<div class="col-span-2"><input class="w-1/2 rounded-full font-medium px-5" title="Loan Amount" placeholder="จำนวนหนี้สินต่อเดือน" /></div>
-  <div class="col-span-2"></div>
-  <div class="w-1/2 col-span-2">
-      <div class="text-end"><button class="bg-dark-blue w-1/2 h-8 rounded-full  text-white  hover:bg-[gold] hover:text-black">คำนวณ</button></div>
-  </div>
-  <div class="text-end row-span-6">ผลลัพธ์</div>
-  <div class="w-3/4 rounded-xl  px-5 bg-white row-span-6 h-full col-span-3 flex items-center justify-center">
-    <div class="w-full h-auto">
-      <div class="flex justify-between">
-        <p>การชำระค่างวดสูงสุด:</p>
-        <span class="text-darkRed">561,452</span>
+<div class="w-full h-auto bg-light-grey p-8">
+  <div class="max-w-4xl mx-auto">
+    <div class="space-y-4 mb-8">
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">รายได้รวมต่อเดือน</label>
+        <input type="number" min="0" step="any" [(ngModel)]="monthlyIncome"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="monthlyIncome"
+          placeholder="รายได้รวมต่อเดือน (บาท)" />
       </div>
-      <div class="flex justify-between">
-        <p>วงเงินกู้สูงสุด:</p>
-        <span class="text-darkRed">188,712</span>
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">ระยะเวลากู้</label>
+        <input type="number" min="0" step="any" [(ngModel)]="loanTerm"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="loanTerm"
+          placeholder="ระยะเวลากู้ (ปี)" />
+      </div>
+      <div class="flex items-center justify-between">
+        <label class="text-darkBlue text-right min-w-[200px]">
+          อัตราดอกเบี้ย
+        </label>
+        <input type="number" min="0" step="any" [(ngModel)]="interestRate"
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="interestRate"
+          placeholder="อัตราดอกเบี้ย (%)" />
+      </div>
+      <div class="gap-1">
+        <div class="flex items-center justify-between">
+          <label class="text-darkBlue text-right min-w-[200px]">%วงเงินกู้สูงสุดของรายได้</label>
+          <input type="number" min="0" step="any" [(ngModel)]="maximumLoanPercentage"
+            class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="maximumLoanPercentage"
+            placeholder="เปอร์เซ็นต์วงเงินกู้สูงสุดของรายได้ (%)" />
+        </div>
+        <div class="flex justify-end">
+          <p class="text-oceanBlue font-thin text-sm ">
+            ตามแต่ละธนาคารกำหนด โดยประมาณ 30-40%
+          </p>
+        </div>
+      </div>
+      <div class="gap-1">
+        <div class="flex items-center justify-between">
+          <label class="text-darkBlue text-right min-w-[200px]">
+            ภาระหนี้สินต่อเดือน
+          </label>
+          <input type="number" min="0" step="any" [(ngModel)]="monthlyDebt"
+            class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="currentLoanAmount"
+            placeholder="ภาระหนี้สินต่อเดือน (บาท)" />
+        </div>
+        <div class="flex justify-end">
+          <p class="text-oceanBlue font-thin text-sm ">
+            รวมถึงรายจ่ายสินเชื่อเพื่อการศึกษา, สินเชื่อรถยนต์, สินเชื่อส่วนบุคคล และอื่นๆ
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="flex justify-center mb-8">
+      <button class="py-2 px-12 bg-darkBlue text-white rounded-full hover:bg-yellow hover:text-black"
+        (click)="calculate()">
+        คำนวณ
+      </button>
+    </div>
+
+    <div class="bg-white rounded-md p-6 shadow-sm mt-8">
+      <h3 class="text-darkBlue font-semibold text-lg mb-4">ผลลัพธ์</h3>
+
+      <div class="space-y-4">
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">วงเงินกู้สูงสุด (บาท)</span>
+          <span class="text-darkRed font-medium">{{maximumLoanAmount | number:'1.2-2'}}</span>
+        </div>
+
+        <div class="flex items-center justify-between border-b border-light-grey py-2">
+          <span class="text-darkBlue font-medium">ยอดผ่อนชำระต่อเดือน (บาท)</span>
+          <span class="text-darkRed font-medium">{{newMonthlyPayment | number:'1.2-2'}}</span>
+        </div>
+
+
       </div>
     </div>
   </div>
