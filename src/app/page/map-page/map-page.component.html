@@ -6,7 +6,7 @@
   <dialog id="fullland_detail" class="modal">
     <div class="modal-box w-full max-w-5xl  m-0 p-0 min-h-screen overflow-y-scroll ">
       <div class="w-full h-[400px] overflow-clip flex-center">
-        <div *ngIf="!loading" class="carousel-container">
+        <div *ngIf="!loading" class="carousel-container" id="carousel-container">
           <button class="prev c-bth" (click)="prevSlide()">&#10094;</button>
 
 
@@ -27,10 +27,10 @@
       <div class="modal-action flex flex-col m-6">
         <div class="border-b-2 py-5 flex flex-row">
           <div>
-            <p class="text-grey date-text">ข้อมูลเมื่อวันที่ 11 Aug 2022 9:00 PM</p>
-            <p class="font-semibold text-xl">ที่ดินเลขที่ 278</p>
-            <p class="text-xs">รหัสอสังหาริมทรัพย์: 0190ecdf-6651-7aa2-90f0-5a47933a869f</p>
-            <p class="text-xs">ที่ตั้ง : ถนนฉลองกรุง 8 เขตลาดกระบัง กรุงเทพ 10520</p>
+            <p class="text-grey date-text">ข้อมูลเมื่อวันที่ {{ selectedLand?.create_date | date:'dd MMM yyyy':'en-US' }}</p>
+            <p class="font-semibold text-xl">{{selectedLand?.LandTitle}}</p>
+            <p class="text-xs">รหัสอสังหาริมทรัพย์: {{selectedLand?.LandDataId}}</p>
+            <p class="text-xs">ที่ตั้ง : {{selectedLand?.LandTitle?.replace('ขายที่ดิน ใน ', '')}} กรุงเทพ 10520</p>
           </div>
           <div class="w-full flex justify-end">
             <button class=" border-grey border rounded-xl flex justify-center items-center p-1 followbutton h-1/3"
@@ -99,9 +99,7 @@
             selectedLand?.Description}}</p>
         </div>
         <div class="p-5">
-          <form method="dialog">
-            <button class="btn">Close</button>
-          </form>
+            <button class="btn" (click)="closeModal()">Close</button>
         </div>
       </div>
     </div>
@@ -189,7 +187,7 @@
         <button class="bg-white p-2 rounded shadow-sm hover:shadow-md transition-shadow w-[150px] "
           onclick="document.getElementById('indexLandPopup').showModal()">
           <div class="flex items-center justify-center gap-2 text-darkBlue">
-            <span>Index Land</span>
+            <span>ดัชนีราคาที่ดิน</span>
           </div>
           <div class="flex items-center justify-center gap-2">
             <span> <img src="assets\icons\ic-graph.svg" class="w-12 h-12" alt="Zoom In Icon" />

@@ -329,7 +329,18 @@ export class MapPageComponent implements OnInit,OnDestroy {
         .subscribe(
           (response) => {
             this.nearbyPlaces = response;
-            console.log('Nearby places:', response);
+            // let x = [];
+            // this.nearbyPlaces.sort((a: any, b: any) => {
+            //   return a.Distance - b.Distance;
+            // }
+            // );
+            // console.log(this.nearbyPlaces);
+
+            // for (let i = 0; i < this.nearbyPlaces.length; i++) {
+            //   if (this.nearbyPlaces[i])
+              
+            // }
+            
           },
           (error) => console.error('Error fetching nearby places:', error)
         );
@@ -546,5 +557,19 @@ export class MapPageComponent implements OnInit,OnDestroy {
     this.destroy$.next();
     this.destroy$.complete(); // Clean up the subject
   }
+
+  closeModal() {
+   
+  
+    // Close the modal
+    const modal = document.getElementById('fullland_detail') as HTMLDialogElement;
+
+    
+    
+    document.getElementById("carousel-container")?.scrollIntoView();
+    modal.close();
+   
+  }
+  
 
 }
