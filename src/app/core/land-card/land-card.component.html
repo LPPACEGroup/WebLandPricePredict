@@ -1,4 +1,4 @@
-<div class="h-fit w-full rounded-2xl grid grid-cols-2 overflow-clip border border-grey">
+<div class="h-fit w-full rounded-2xl grid grid-cols-2 overflow-clip border border-midGrey">
   <div class="w-full h-full"><img *ngIf="imageBlobUrls !==''" class="w-full h-full" [src]="imageBlobUrls" alt="">
     <div *ngIf="imageBlobUrls ===''" class="w-full h-full flex justify-center items-center bg-lightBlue ">ไม่มีรูปภาพตัวอย่าง</div>
   </div>
@@ -16,7 +16,7 @@
       <br>
     </div>
     <div class="w-full flex justify-end">
-      <button class=" border-grey border rounded-xl flex justify-center items-center p-1 followbutton"
+      <button class=" border-midGrey border rounded-xl flex justify-center items-center p-1 followbutton"
         (click)="onfollow()" *ngIf="!fowllowState; else nowfollow"> <span><svg xmlns="http://www.w3.org/2000/svg"
             height="24px" viewBox="0 -960 960 960" width="24px" fill="#2749A3">
             <path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Z" />
@@ -25,7 +25,7 @@
 
       </button>
       <ng-template #nowfollow><button
-          class=" border-grey border rounded-xl flex justify-center items-center p-1 followbutton" (click)="onfollow()">
+          class=" border-midGrey border rounded-xl flex justify-center items-center p-1 followbutton" (click)="onfollow()">
           <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
               fill="#2749A3">
               <path d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Z" />

@@ -10,20 +10,20 @@
 
       <div class="container">
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('main-features')">
-          <a  class="guid-link">แนะนำเมนูหลัก</a>
+          <a class="guid-link">แนะนำเมนูหลัก</a>
         </div>
 
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('other-features')">
-          <a  class="guid-link">ฟีเจอร์อื่น ๆ</a>
+          <a class="guid-link">ฟีเจอร์อื่น ๆ</a>
         </div>
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('intro')">
-          <a  class="guid-link">ที่มาโครงงาน</a>
+          <a class="guid-link">ที่มาโครงงาน</a>
         </div>
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('membership')">
-          <a  class="guid-link">แพ็คเกจสมาชิก</a>
+          <a class="guid-link">แพ็คเกจสมาชิก</a>
         </div>
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('team')">
-          <a  class="guid-link">ทีมผู้พัฒนา</a>
+          <a class="guid-link">ทีมผู้พัฒนา</a>
         </div>
 
       </div>
@@ -56,16 +56,17 @@
           <div class="mid-content">
 
             <p>
-              <li>แนะนำสถานที่ยอดนิยม</li>
               <li>ค้นหาที่ดินที่สนใจ</li>
               <li>ปักหมุดที่ดินที่ต้องการ</li>
               <li>ตรวจสอบสถานที่ใกล้เคียง</li>
+              <li>ข้อมูลเปอร์เซ็นต์การเปลี่ยนแปลงของราคา</li>
+              <li>กราฟดัชนีราคาที่ดินเปล่า</li>
             </p>
 
           </div>
           <div class="right-content">
             <div>
-              <img class="h-72 w-auto rounded-lg" src="assets/imgs/map.png" alt="" />
+              <img class="h-72 w-auto rounded-lg" src="assets\imgs\map.png" alt="" />
             </div>
           </div>
         </div>
@@ -97,15 +98,17 @@
           </div>
           <div class="mid-content">
             <p>
-              <li>วิเคราะห์ข้อมูลที่ดิน</li>
-              <li>เปรียบเทียบราคา</li>
-              <li>คาดการณ์ราคาที่ดิน</li>
+              <li>กราฟรายงานราคาเฉลี่ยตามเขต</li>
+              <li>กราฟเปรียบเทียบราคาที่ดิน</li>
+              <li>รายการที่ดินที่กดติดตาม</li>
+              <li>ข้อมูลราคาที่ดิน</li>
+              <li>รายละเอียดที่ดิน</li>
             </p>
           </div>
 
           <div class="right-content">
             <div>
-              <img class="h-72 w-auto rounded-lg" src="assets\imgs\dashboard (2).png" alt="" />
+              <img class="h-72 w-auto rounded-lg" src="assets\imgs\dashboard.png" alt="" />
             </div>
           </div>
         </div>
@@ -136,9 +139,10 @@
 
           <div class="mid-content">
             <p>
-              <li>ข่าวสารที่เกี่ยวของ</li>
-              <li>คำถามยอดนิยมจากผู้ใช้งาน</li>
-              <li>ส่งข้อสอบถาม-ข้อเสนอแนะ</li>
+              <li>แสดงข่าวสารที่เกี่ยวของ</li>
+              <li>รายการคำถามยอดนิยม FAQ</li>
+              <li>ฟิลเตอร์เพื่อค้นหาคำถามที่ต้องการ</li>
+
             </p>
           </div>
 
@@ -154,50 +158,27 @@
       <div class="container" id="other-features">
         <div class="box">
           <div class="left-content">
-            <div class="icon-container">
+            <div class="icon-container shadow-lg p-8 rounded-lg">
               <img class="icon" src="assets\icons\calculator.svg" alt="calculator" />
               <p class="icon-text"> เครื่องคิดเลข </p>
-              <p class="text-description"> ตัวช่วยคำนวณค่าใช้จ่าย/สินเชื่อที่ดินประเภทต่าง ๆ </p>
+              <p class="text-description"> ตัวช่วยคำนวณค่าใช้จ่าย/สินเชื่อต่าง ๆ </p>
             </div>
           </div>
           <div class="left-content">
-            <div class="icon-container">
+            <div class="icon-container shadow-lg p-8 rounded-lg">
               <img class="icon" src="assets\icons\ic-chat.svg" alt="Blog" />
               <p class="icon-text"> ติดต่อเรา </p>
               <p class="text-description"> สามารถติดต่อเราเมื่อพบปัญหาการใช้งาน/มีข้อซักถาม </p>
             </div>
           </div>
           <div class="left-content">
-            <div class="icon-container">
+            <div class="icon-container shadow-lg p-8 rounded-lg">
               <img class="icon" src="assets\icons\ic-pdf.svg" alt="Blog" />
               <p class="icon-text"> คู่มือการใช้งาน </p>
               <p class="text-description"> เอกสารการใช้งานเว็บไซต์อย่างละเอียด </p>
             </div>
           </div>
 
-        </div>
-      </div>
-
-      <div class="h-36 flex flex-col justify-center text-darkBlue font-LPPA text-center font-bold">
-        <h1 class="text-5xl" id="intro">LPPM</h1>
-      </div>
-
-      <div class="  w-full flex flex-col gap-y-5 justify-center">
-        <div class="  w-full ">
-          <div class="h-auto ">
-            <div class=" text-darkBlue h-14 text-3xl font-semibold flex-center">Land Price Prediction and
-              Monitoring</div>
-            <p class="text-darkBlue text-xl ">เว็บไซต์เพื่อช่วยการทำนายและติดตามราคาที่ดิน ที่เกิดจาก
-              ปัญหาในการตัดสินใจซื้อที่ดินจริงซึ่งต้องใช้ข้อมูลที่เยอะและ
-              หายากเกินไป
-              โดยการใช้เทคโนโลยี Machine Learning เข้ามาช่วยการ
-              ทำนายราคา โดยอิงจากราคาการซื้อขายที่ดินจริงเพื่อให้ได้
-              ผลการทำนายที่แม่นยำ</p>
-          </div>
-
-        </div>
-        <div class="h-auto w-full justify-items-center">
-          <img class="h-full w-auto" src="assets/imgs/land.png" alt="" />
         </div>
       </div>
 
@@ -278,9 +259,8 @@
                 </li>
 
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"   [routerLink]="['/Payment', 'Tier1']"
-
-                style="bottom: 10px;">99 B</button>
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
+                [routerLink]="['/Payment', 'Tier1']" style="bottom: 10px;">99 B</button>
             </div>
           </div>
 
@@ -320,7 +300,8 @@
                   <span>รัศมีรอบได้ 4 km</span>
                 </li>
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white" [routerLink]="['/Payment', 'Tier2']">299
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
+                [routerLink]="['/Payment', 'Tier2']">299
                 B</button>
             </div>
           </div>
@@ -361,7 +342,8 @@
                   <span>รัศมีรอบได้ 8 km</span>
                 </li>
               </ul>
-              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white" [routerLink]="['/Payment', 'Tier3']">499
+              <button class="bg-darkBlue w-1/2 absolute bottom-0 h-8 rounded-full translate-y-1/2 text-white"
+                [routerLink]="['/Payment', 'Tier3']">499
                 B</button>
             </div>
           </div>
@@ -372,6 +354,31 @@
 
 
     <app-contact-page></app-contact-page>
+
+
+    <div class="h-36 flex flex-col justify-center text-darkBlue font-LPPA text-center font-bold">
+      <h1 class="text-5xl" id="intro">LPPM</h1>
+    </div>
+
+    <div class="  w-full flex flex-col gap-y-5 justify-center">
+      <div class="  w-full ">
+        <div class="h-auto ">
+          <div class=" text-darkBlue h-14 text-3xl font-semibold flex-center">Land Price Prediction and
+            Monitoring</div>
+          <p class="text-darkBlue text-xl ">เว็บไซต์เพื่อช่วยการทำนายและติดตามราคาที่ดิน ที่เกิดจาก
+            ปัญหาในการตัดสินใจซื้อที่ดินจริงซึ่งต้องใช้ข้อมูลที่เยอะและ
+            หายากเกินไป
+            โดยการใช้เทคโนโลยี Machine Learning เข้ามาช่วยการ
+            ทำนายราคา โดยอิงจากราคาการซื้อขายที่ดินจริงเพื่อให้ได้
+            ผลการทำนายที่แม่นยำ</p>
+        </div>
+
+      </div>
+      <div class="h-auto w-full justify-items-center">
+        <img class="h-full w-auto" src="assets/imgs/land.png" alt="" />
+      </div>
+    </div>
+
 
     <!-- footer -->
     <div class="justify-items-center">

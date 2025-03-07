@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, CommonModule  } from '@angular/common';
 
 @Component({
   selector: 'app-loan-compare',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   providers: [
     DecimalPipe
   ],

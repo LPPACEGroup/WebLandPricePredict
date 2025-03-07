@@ -117,7 +117,7 @@
     <button class=" bg-white first-letter:hover:shadow-md transition-shadow p-1 rounded" title="button"
       aria-hidden="false">
       <img [ngClass]="{'transform scale-x-[-1]':istogglePriceBox,'':!istogglePriceBox}" src="assets\icons\ic-double-arrow.svg" class="w-4 h-5" alt="Zoom In Icon" />
-      
+
     </button>
   </div>
   <div *ngIf="!loading" class=" pricebox pricebox-active  landBar landbar-active transition-transform duration-300 ease-in-out"
@@ -152,8 +152,8 @@
             <span [ngClass]="yoy['Lat Krabang']<0?'text-red-500':'text-green-500'">{{yoy['Lat Krabang']<0?'↓':'↑'}} {{yoy['Lat Krabang']}}%</span>
           </div>
         </div>
-        
-        
+
+
         <div class="bg-white p-2 rounded w-[150px] h-fit">
           <div class="flex justify-center text-darkBlue ">
             <span>วัฒนา</span>
@@ -181,8 +181,8 @@
             <span [ngClass]="yoy['Watthana']<0?'text-red-500':'text-green-500'">{{yoy['Watthana']<0?'↓':'↑'}} {{yoy['Watthana']}}%</span>
           </div>
         </div>
-        
-        
+
+
 
         <button class="bg-white p-2 rounded shadow-sm hover:shadow-md transition-shadow w-[150px] "
           onclick="document.getElementById('indexLandPopup').showModal()">
@@ -223,9 +223,14 @@
 
     </div>
     <div class="w-full search">
-      <input placeholder="ค้นหา ชื่อ/เขต/แขวง/จังหวัด........"
-        class="input input-bordered w-full h-10   placeholder-darkBlue" (keydown)="onKeyDown($event)"
-        (input)="onInput($event)" (foucs)="onFocus()" #searchInput />
+      <div class="relative w-full h-10">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+          <img src="assets/icons/search.svg" class="w-5 h-5" alt="Search Icon" />
+        </span>
+        <input placeholder="ค้นหา ชื่อ/เขต/แขวง/จังหวัด........"
+          class="input input-bordered w-full h-10 pl-10 placeholder-grey" (keydown)="onKeyDown($event)"
+          (input)="onInput($event)" (focus)="onFocus()" #searchInput />
+      </div>
       <div class="bg-white z-40 h-44 overflow-y-scroll w-full pt-2"
         [ngClass]="{'block/': isInputFocused, 'hidden': !isInputFocused}" #searchResults>
         <div class=" h-12 w-full truncate hover:bg-light-grey" *ngFor="let result of results"
@@ -240,7 +245,10 @@
 
     <div class=" w-full flex flex-row gap-2 ">
       <details class="dropdown w-1/2">
-        <summary class="btn  bg-white  text-darkBlue font-normal  select-bordered m-0 w-full">เลือกแสดงข้อมูลแผนที่
+        <summary class="btn  bg-white  text-grey font-normal  select-bordered m-0 w-full">เลือกแสดงข้อมูลแผนที่
+          <span class="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+          <img src="assets/icons/dropdown.svg" class="w-5 h-5" alt="Dropdown Arrow Icon" />
+          </span>
         </summary>
         <ul class="menu dropdown-content bg-white">
           <li>
@@ -271,7 +279,10 @@
         </ul>
       </details>
       <details class="dropdown  w-1/2">
-        <summary class="btn  bg-white  text-darkBlue font-normal  select-bordered m-0 w-full ">ตั้งค่าแสดงรายการที่ดิน
+        <summary class="btn  bg-white  text-grey font-normal  select-bordered m-0 w-full ">ตั้งค่าแสดงรายการที่ดิน
+          <span class="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+            <img src="assets/icons/dropdown.svg" class="w-5 h-5" alt="Dropdown Arrow Icon" />
+            </span>
         </summary>
         <div class="  m-0 p-5  dropdown-content w-11/12 bg-white ">
           <h4>ช่วงราคา(ล้าน)</h4>

@@ -10,7 +10,6 @@
         </svg>
         <input type="text" placeholder="ค้นหา..." class="border-none outline-none w-full search_blog" #search
           (input)="searchBlog($event)">
-        >
       </div>
       <button class="bg-midGreen text-white rounded-md px-4 py-2 flex justify-center items-center w-1/6 h-12"
         onclick="create_blog_modal.showModal()">
@@ -20,7 +19,7 @@
     </div>
 
 
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="">
       <!-- Order Column -->
       <ng-container matColumnDef="Order">
         <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
@@ -28,46 +27,48 @@
           {{ getRowIndex(element) }}
         </td>
       </ng-container>
-    
+
       <!-- ID Column -->
       <ng-container matColumnDef="ID">
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
       </ng-container>
-    
+
       <!-- Topic Column -->
       <ng-container matColumnDef="Topic">
         <th mat-header-cell *matHeaderCellDef> ข้อเสนอแนะ </th>
         <td mat-cell *matCellDef="let element"> {{element.Topic}} </td>
       </ng-container>
-    
+
       <!-- Content/Date Column -->
       <ng-container matColumnDef="Content">
         <th mat-header-cell *matHeaderCellDef> เวลาส่ง </th>
         <td mat-cell *matCellDef="let element"> {{element.CreateDate}} </td>
       </ng-container>
-    
+
       <!-- Edit Column -->
       <ng-container matColumnDef="Edit">
         <th mat-header-cell *matHeaderCellDef> แก้ไข </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button class="btn bg-[#FFAB00] text-white btn-sm" (click)="onEditClick(element.ID); $event.stopPropagation()">แก้ไข</button>
+          <button mat-button class="btn bg-[#FFAB00] text-white btn-sm"
+            (click)="onEditClick(element.ID); $event.stopPropagation()">แก้ไข</button>
         </td>
       </ng-container>
-    
+
       <!-- Delete Column -->
       <ng-container matColumnDef="Delete">
         <th mat-header-cell *matHeaderCellDef> ลบ </th>
         <td mat-cell *matCellDef="let element">
-          <button mat-button class="btn bg-[#FF5630] text-white btn-sm" (click)="onDeleteClick(element.ID); $event.stopPropagation()">ลบ</button>
+          <button mat-button class="btn bg-[#FF5630] text-white btn-sm"
+            (click)="onDeleteClick(element.ID); $event.stopPropagation()">ลบ</button>
         </td>
       </ng-container>
-    
+
       <!-- Expanded Content Column -->
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
-               *ngIf="element == expandedElement">
+            *ngIf="element == expandedElement">
             <div class="p-4  rounded-lg flex flex-row gap-x-6 bg-white">
               <h3 class=" mb-2">เนื้อหา:</h3>
               <p class="whitespace-pre-line font-bold text-darkBlue text-lg">{{element.Content}}</p>
@@ -75,31 +76,30 @@
           </div>
         </td>
       </ng-container>
-    
+
       <!-- Row definitions -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-          class="element-row"
-          [class.expanded-row]="expandedElement === element"
-          (click)="expandedElement = expandedElement === element ? null : element">
+      <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
       </tr>
-      <tr mat-row *matRowDef="let element; columns: ['expandedDetail']" 
-          class="detail-row"
-          [class.detail-row-hidden]="expandedElement !== element">
+      <tr mat-row *matRowDef="let element; columns: ['expandedDetail']" class="detail-row"
+        [class.detail-row-hidden]="expandedElement !== element">
       </tr>
     </table>
-    
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of blogs"></mat-paginator>
-    
 
-    
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of blogs"></mat-paginator>
+
+
+
 
   </div>
   <dialog id="create_blog_modal" class="modal">
     <div class="modal-box h-2/3 min-w-[80%] bg-white p-6 rounded-3xl text-darkBlue ">
       <div class="modal-action w-full flex justify-center">
         <form method="dialog" class="flex flex-col items-center">
-          <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button></form>
+          <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
         <form method="dialog" class="w-full flex flex-col gap-4 " [formGroup]="createBlogForm" (ngSubmit)="onSubmit()">
           <h2 class="text-3xl text-center font-extrabold mb-4 ">สร้าง Blog</h2>
           <label for="Topic" class="font-bold ">หัวเรื่อง</label>
@@ -122,7 +122,8 @@
     <div class="modal-box h-2/3 min-w-[80%] bg-white p-6 rounded-3xl text-darkBlue ">
       <div class="modal-action w-full flex justify-center">
         <form method="dialog" class="flex flex-col items-center">
-          <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button></form>
+          <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
         <form method="dialog" class="w-full flex flex-col gap-4 " [formGroup]="editBlogForm" (ngSubmit)="editBlog()">
           <h2 class="text-3xl text-center font-extrabold mb-4 ">แก้ไข Blog</h2>
           <label for="Topic" class="font-bold ">หัวเรื่อง</label>
