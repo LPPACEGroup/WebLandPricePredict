@@ -83,16 +83,18 @@
         </tr>
       </thead>
       <tbody>
+
         <tr class="border-b">
-          <td class="p-3 text-center text-grey">{{currentLoanAmountWithInterest | number:'1.2-2'}}</td>
+          <td class="p-3 text-center text-grey">
+            <span class="text-grey text-xs">เดิม</span> {{currentLoanAmountWithInterest | number:'1.2-2'}}
+          </td>
           <td class="p-3 text-center text-grey">{{currentLoanTerm}}</td>
           <td class="p-3 text-center text-grey">{{currentTotalInterest | number:'1.2-2'}}</td>
           <td class="p-3 text-center text-grey">{{currentMonthlyPayment | number:'1.2-2'}}</td>
         </tr>
         <tr>
           <td class="p-3 text-center text-oceanBlue">
-            <img src="assets\icons\continue-arr.svg" alt="Decair Icon" class="inline-block w-9 h-9 mr-2 text-left">
-            {{newLoanAmountWithInterest | number:'1.2-2'}}
+            <span class="text-oceanBlue text-xs">ใหม่</span> {{newLoanAmountWithInterest | number:'1.2-2'}}
           </td>
           <td class="p-3 text-center text-oceanBlue">{{newLoanTerm}}</td>
           <td class="p-3 text-center text-oceanBlue">{{newTotalInterest | number:'1.2-2'}}</td>

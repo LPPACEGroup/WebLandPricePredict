@@ -10,17 +10,17 @@
 
       <div class="container">
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('main-features')">
-          <a class="guid-link">แนะนำเมนูหลัก</a>
+          <a class="guid-link">แนะนำเมนู/ฟีเจอร์อื่นๆ</a>
         </div>
 
-        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('other-features')">
-          <a class="guid-link">ฟีเจอร์อื่น ๆ</a>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('membership')">
+          <a class="guid-link">แพ็คเกจสมาชิก</a>
+        </div>
+        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('contact')">
+          <a class="guid-link">ช่องทางติดต่อ/ข้อเสนอแนะ</a>
         </div>
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('intro')">
           <a class="guid-link">ที่มาโครงงาน</a>
-        </div>
-        <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('membership')">
-          <a class="guid-link">แพ็คเกจสมาชิก</a>
         </div>
         <div class="guide-box cursor-pointer text-darkBlue" (click)="scrollToElementbyId('team')">
           <a class="guid-link">ทีมผู้พัฒนา</a>
@@ -352,9 +352,7 @@
       </div>
     </div>
 
-
-    <app-contact-page></app-contact-page>
-
+    <app-contact-page id="contact"></app-contact-page>
 
     <div class="h-36 flex flex-col justify-center text-darkBlue font-LPPA text-center font-bold">
       <h1 class="text-5xl" id="intro">LPPM</h1>
