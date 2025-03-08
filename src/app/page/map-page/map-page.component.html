@@ -29,8 +29,8 @@
           <div>
             <p class="text-grey date-text">ข้อมูลเมื่อวันที่ {{ selectedLand?.create_date | date:'dd MMM yyyy':'en-US' }}</p>
             <p class="font-semibold text-xl">{{selectedLand?.LandTitle}}</p>
-            <p class="text-xs">รหัสอสังหาริมทรัพย์: {{selectedLand?.LandDataId}}</p>
-            <p class="text-xs">ที่ตั้ง : {{selectedLand?.LandTitle?.replace('ขายที่ดิน ใน ', '')}} กรุงเทพ 10520</p>
+            <p class="text-xs">รหัสอสังหาริมทรัพย์: {{selectedLand?.LandDataID}}</p>
+            <p class="text-xs">{{selectedLand?.LandLocate}}</p>
           </div>
           <div class="w-full flex justify-end">
             <button class=" border-grey border rounded-xl flex justify-center items-center p-1 followbutton h-1/3"
@@ -368,8 +368,8 @@
     </div>
 
 
-    <div class="flex flex-col gap-2 w-full overflow-y-scroll">
-      <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item"
+    <div *ngIf="tier != ''" class="flex flex-col gap-2 w-full overflow-y-scroll">
+      <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" [tier]="tier"
         (click)="onCardClick(item,$event) " (followChanged)="onFollowChanged($event)" ></app-land-card>
 
     </div>

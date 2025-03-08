@@ -82,4 +82,9 @@ export class NavbarComponent {
       this.notiComponent.markAllAsRead();
     }
   }
+  scrollToTop() {
+    document.body.scrollTop = 0;
+    document.getElementsByClassName('scrollable-content')[0].scrollTop = 0;
+  }
+  
 }
