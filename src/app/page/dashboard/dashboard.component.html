@@ -38,7 +38,7 @@
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาเฉลี่ยเขตที่ดิน</div>
           <app-line-chart [data]="AVG_Data" [labels]="AVG_DATE" [selectedArea]="selectedArea" [max_y]="max_y"
-            [max_y_district]="max_y_district"></app-line-chart>
+            [max_y_district]="max_y_district" [min_y]="min_y" [max_y_district]="max_y_district"></app-line-chart>
 
         </div>
         <div class="h-96 " style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
@@ -46,7 +46,7 @@
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาทำนาย</div>
           <app-line-chart [data]="PRED_Data" [labels]="PRED_DATE" [selectedArea]="selectedArea" [max_y]="max_y"
-            [max_y_district]="max_y_district"></app-line-chart>
+            [max_y_district]="max_y_district" [min_y]="min_y" [max_y_district]="max_y_district"></app-line-chart>
 
         </div>
 
@@ -138,7 +138,7 @@
       <p class="text-2xl font-bold text-darkBlue">ที่ดินที่กดติดตาม</p>
     </div>
 
-    <app-dashboard-follow *ngFor="let land of followedLand; let i = index" [land]="land" [index]="i"
+    <app-dashboard-follow *ngFor="let land of followedLand; let i = index" [land]="land" [index]="i" 
       (followChanged)="onFollowChanged()"></app-dashboard-follow>
   </div>
 
