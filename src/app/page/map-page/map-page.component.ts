@@ -442,6 +442,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
     } else {
       this.matches = this.landList;
     }
+    
+    
 
     const inrange = this.matches.filter((land) => {
       const x =
