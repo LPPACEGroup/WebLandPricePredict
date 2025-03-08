@@ -1,5 +1,5 @@
-<div *ngIf="!loading"  class="h-nmax  relative flex-center">
-  <div *ngIf="tier==='Tier2'||tier==='Tier3'" class="h-9/10 w-2/3 bg-white z-10 ">
+<div *ngIf="!loading" class="h-max  relative flex-center">
+  <div *ngIf="tier==='Tier2'||tier==='Tier3'" class="pt-4 h-full w-9/10 bg-white z-10 ">
     <mat-tab-group>
       <mat-tab label="คำนวณสินเชื่อ" class="h-full "> <app-loan-calculator /> </mat-tab>
       <mat-tab label="เปรียบเทียบสินเชื่อ" class="h-full "> <app-loan-compare /> </mat-tab>
@@ -8,7 +8,8 @@
     </mat-tab-group>
 
   </div>
-  <div *ngIf="tier=='Tier1'||tier=='Basic'" class="h-9/10 w-full bg-white z-10 text-darkRed text-center text-3xl font-bold">
-    ได้โปรดอัพเกรดขั้นต่ำเป็น Tier2 เพื่อใช้งานฟีเจอร์นี้
-  <div class="absolute h-1/2 z-0 bg-blue bottom-0 w-full"></div>
+  <div *ngIf="tier=='Tier1'||tier=='Basic'" class=" w-full bg-white z-10 text-darkRed text-center text-3xl font-bold h-nmax flex items-center justify-center ">
+    กรุณาอัพเกรดขั้นต่ำเป็น Tier2 เพื่อใช้งานฟีเจอร์นี้
+  <!-- <div class="absolute h-1/2 z-0 bg-blue bottom-0 w-full"></div> -->
 </div>
+

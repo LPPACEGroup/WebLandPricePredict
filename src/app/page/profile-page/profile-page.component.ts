@@ -75,8 +75,8 @@ export class ProfilePageComponent implements OnInit {
       gender: ['', Validators.required], // Gender required
       birthDate: ['', Validators.required], // Birth date required
       telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
-      notification: [true], // Default to true
-      notiNews: [false], // Default to false
+      notification: [1], // Default to true
+      notiNews: [0], // Default to false
       province: ['', Validators.required],
       district: ['', Validators.required],
       sub_district: ['', Validators.required],
@@ -134,6 +134,8 @@ export class ProfilePageComponent implements OnInit {
           alley: response.alley,
           birthDate: response.birthDate,
           gender : response.gender,
+          notiNews: response.notinews,
+          notification: response.notification,
         })
         this.tier = response.tier;
         
@@ -338,8 +340,8 @@ onFileSelected(event: any): void {
         Gender: this.profileForm.value.gender,
         BirthDate: this.profileForm.value.birthDate,
         Telephone: this.profileForm.value.telephone,
-        Notification: this.profileForm.value.notification,
-        NotiNews: this.profileForm.value.notiNews,
+        Notification: this.profileForm.value.notification?1:0,
+        NotiNews: this.profileForm.value.notiNews?1:0,
         Province: this.profileForm.value.province,
         District: this.profileForm.value.district,
         Subdistrict: this.profileForm.value.sub_district,
@@ -348,6 +350,8 @@ onFileSelected(event: any): void {
         Alley: this.profileForm.value.alley,
         LandTypeFV: this.profileForm.value.interestLand,
       };
+      console.log(profileUpdate);
+      
 
 
 

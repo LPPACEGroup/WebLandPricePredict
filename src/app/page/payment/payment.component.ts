@@ -11,6 +11,7 @@ import {
 import { first } from 'rxjs';
 import { SunmitPayment } from 'model/payment.interface';
 import { UserService } from 'app/service/User/user.service';
+import { AuthService } from 'app/service/Auth/auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -28,12 +29,14 @@ export class PaymentComponent {
   submitted = false;
   paymentVerified = false;
   PaymentData = true;
+  userTier = 'Basic';
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserService,
-    private router : Router
+    private router : Router,
+    private auth : AuthService
   ) {
     this.paymentForm = this.fb.group({
       AccName: new FormControl('', Validators.required),
@@ -54,16 +57,17 @@ export class PaymentComponent {
   }
 
   ngOnInit(): void {
+
+    this.auth.getTier().subscribe((response) => {
+      this.userTier = response;
+    });
+
     // check payment verified to prevent user from submitting payment proof multiple times while the previous payment is still being processed
     this.userService.checkVerifyPayment().subscribe(
       (data) => {
-        console.log(data);
+        console.log(data,"payment data");
         
-        if (data === 1) {
-          this.paymentVerified = true;
-        } else {
-          this.paymentVerified = false
-        }
+        this.paymentVerified = data.verify_payment;
       },
       (error) => {
         if (error.status === 404) {

@@ -42,61 +42,62 @@ barChartOptions: ChartOptions = {
   };
 
   ngOnChanges(changes: SimpleChanges): void {
-    
-    
+
+
       if(changes['data'])
-      {
+      { console.log(this.data, 'data');
+        console.log(this.data.predictPrice, 'predictPrice');
         this.barChartData =
         {
           labels: this.data.labels,
           datasets: [
             { label: 'ราคาเฉลี่ย', data:this.data.averagePrice, backgroundColor: '#86B6CD' },
             { label: 'ราคาขาย', data: this.data.sellPrice, backgroundColor: '#C6E6FF' },
-            { label: 'ราคาประเมิน', data: this.data.EstimatePrice, backgroundColor: '#2749A3' }
+            { label: 'ราคาประเมิน', data: this.data.predictPrice, backgroundColor: '#2749A3' }
           ]
         };
       }
       if (changes['selectedLabels'] && this.data) {
         this.updateChartData();
       }
-      
-      
-      
+
+
+
   }
   updateChartData() {
     // ตั้งค่าเริ่มต้นเพื่อป้องกัน undefined หรือ null
     const labels = this.data?.labels || [];
     const averagePrice = this.data?.averagePrice || [];
     const sellPrice = this.data?.sellPrice || [];
-    const estimatePrice = this.data?.EstimatePrice || [];
-  
-    const filteredLabels = labels.map((label: string, i: number) => 
+    const predictPrice = this.data?.predictPrice || [];
+
+    const filteredLabels = labels.map((label: string, i: number) =>
       this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? label : null) : null
     );
-  
-    const filteredAveragePrice = averagePrice.map((price: number, i: number) => 
+
+    const filteredAveragePrice = averagePrice.map((price: number, i: number) =>
       this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? price : null) : null
     );
-  
-    const filteredSellPrice = sellPrice.map((price: number, i: number) => 
+
+    const filteredSellPrice = sellPrice.map((price: number, i: number) =>
       this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? price : null) : null
     );
-  
-    const filteredEstimatePrice = estimatePrice.map((price: number, i: number) => 
+
+    const filteredpredictPrice = predictPrice.map((price: number, i: number) =>
       this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? price : null) : null
     );
-  
+
     // อัปเดตกราฟ
     this.barChartData = {
       labels: filteredLabels,
       datasets: [
         { label: 'ราคาเฉลี่ย', data: filteredAveragePrice, backgroundColor: '#86B6CD' },
         { label: 'ราคาขาย', data: filteredSellPrice, backgroundColor: '#C6E6FF' },
-        { label: 'ราคาประเมิน', data: filteredEstimatePrice, backgroundColor: '#2749A3' }
+        { label: 'ราคาประเมิน', data: filteredpredictPrice, backgroundColor: '#2749A3' }
       ]
     };
   }
-  
-  
-  
+
+
+
 }

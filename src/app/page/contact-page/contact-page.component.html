@@ -1,50 +1,50 @@
-<div class="grid w-full h-4/5">
+<div class="grid w-full h-4/5" id="contact">
   <!-- <div class="bg-darkBlue bg-cover bg-no-repeat" style="background-image: url('assets/imgs/bg_contact.png');"></div>
     <div class="bg-baby-blue"></div> -->
   <div class="absolute inset-x-0 flex items-center justify-center h-4/5 ">
 
-    <div class="container bg-white h-auto w-full rounded-3xl px-10 py-10">
+    <div class="container bg-white h-auto w-full rounded-3xl px-10 py-10" >
       <h1 class="text-darkBlue text-3xl font-bold font-LPPA row-span-1 text-center">ช่องทางการติดต่อ</h1>
-      <p class="text-darkBlue font-LPPA text-sm text-center">เปิดให้บริการตั้งแต่ 9.00 น.- 18.00 น.
-        ปิดทำการเฉพาะวันหยุดสุดสัปดาห์และวันหยุดนักขัตฤกษ</p>
+      <p class="text-darkBlue font-LPPA text-sm text-center">เวลาทำการ 9.00 น.- 18.00 น.
+        (ปิดทำการวันหยุดสุดสัปดาห์และวันหยุดนักขัตฤกษ์)</p>
 
       <div class=" grid grid-cols-1 md:grid-cols-2 gap-x-6 pt-5" style="overflow: auto;">
-        <div class=" rounded-2xl mt-6 mb-6 ml-6 flex flex-col relative">
+        <div class=" rounded-2xl mt-6 ml-6 flex flex-col relative">
           <div class="text-darkBlue">
             <p>อีเมล์</p>
           </div>
-          <div class="bg-lightBlue  min-w-80 h-8 flex justify-center items-center">
+          <div class="bg-lightBlue min-w-80 h-10 flex items-center justify-between px-6 py-6 rounded-md">
             <app-svg-icon [iconName]="'email'" />
-            <p class="text-lg text-darkBlue">Email</p>
+            <p class="text-lg text-darkBlue mx-auto">lppm.property&#64;gmail.com</p>
           </div>
 
           <div class="text-darkBlue">
             <p>เบอร์ติดต่อ</p>
           </div>
-          <div class="bg-lightBlue min-w-80 h-8 flex justify-center items-center"> <app-svg-icon [iconName]="'tel'" />
-            <p>Tel</p>
+          <div class="bg-lightBlue min-w-80 h-10 flex items-center justify-between px-6 py-6 rounded-md">
+            <app-svg-icon [iconName]="'tel'" />
+            <p class="text-lg text-darkBlue mx-auto">02-222-2222</p>
           </div>
-
 
           <div class="text-darkBlue">
             <p>เพจ Facebook</p>
           </div>
-          <div class="bg-lightBlue min-w-80 h-8 flex justify-center items-center"> <app-svg-icon
-              [iconName]="'facebook'" />
-            <p>Facebook</p>
+          <div class="bg-lightBlue min-w-80 h-10 flex items-center justify-between px-6 py-6 rounded-md">
+            <app-svg-icon [iconName]="'facebook'" />
+            <p class="text-lg text-darkBlue mx-auto">LPPMproperty</p>
           </div>
         </div>
 
 
         <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
-          <div class=" rounded-r-3xl flex flex-col items-center gap-y-5 relative">
+          <div class=" rounded-2xl mt-6 ml-6 flex flex-col relative ">
             <div class=" min-w-full h-48 ">
               <p class="text-grey font-semibold font-LPPA">ข้อเสนอแนะ</p>
-              <p *ngIf ="feedbackForm.invalid&& pressed" class="text-darkRed">กรุณากรอกข้อเสนอแนะก่อนกดส่ง</p>
-              <p *ngIf ="success" class="text-midGreen">ส่งข้อเสนอแนะสำเร็จ</p>
+              <p *ngIf="feedbackForm.invalid&& pressed" class="text-darkRed">กรุณากรอกข้อเสนอแนะก่อนกดส่ง</p>
+              <p *ngIf="success" class="text-midGreen">ส่งข้อเสนอแนะสำเร็จ</p>
 
-              <textarea class="textarea w-full h-3/4 border-grey" placeholder="พิมข้อความของคุณได้ที่นี้!"         formControlName="feedback"
-              ></textarea>
+              <textarea class="textarea w-full h-3/4 border-grey" placeholder="พิมข้อความของคุณได้ที่นี้!"
+                formControlName="feedback"></textarea>
               <div class="w-full flex justify-end">
                 <button class="btn btn-sm bg-darkBlue text-white rounded-xl w-20">ส่ง</button>
               </div>

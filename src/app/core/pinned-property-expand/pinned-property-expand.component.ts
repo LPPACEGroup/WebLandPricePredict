@@ -32,7 +32,7 @@ export class PinnedPropertyExpandComponent {
   ngOnInit() {
     this.landListService.getNearbyLandMark(this.land.LandDataID).subscribe(
       (response) => {
-        this.nearbyPlaces = response;
+        this.nearbyPlaces = this.nearbyPlaceFilter(response);
       },
       (error) => console.error('Error fetching nearby places:', error)
     );
@@ -92,7 +92,45 @@ export class PinnedPropertyExpandComponent {
         this.landCitytype = 'ไม่มีข้อมูล';
     }
   }
+  nearbyPlaceFilter(places: any) {
+    places.sort((a: any, b: any) => a.Distance - b.Distance);
 
+    const selectedPlaces: any[] = [];
+    const placeTypeMap = new Map<string, any[]>();
+
+    // Categorize places by PlaceType
+    for (const place of places) {
+      if (!placeTypeMap.has(place.PlaceType)) {
+        placeTypeMap.set(place.PlaceType, []);
+      }
+      placeTypeMap.get(place.PlaceType)!.push(place);
+    }
+
+    console.log(placeTypeMap);
+
+    while (selectedPlaces.length < 3 && placeTypeMap.size > 0) {
+      for (const [_, placeList] of placeTypeMap) {
+        if (placeList.length > 0 && selectedPlaces.length < 8) {
+          selectedPlaces.push(placeList.shift()!);
+        }
+      }
+    }
+
+    // If not enough, fill the rest with the nearest remaining places
+    while (selectedPlaces.length < 8) {
+      let added = false;
+      for (const [_, placeList] of placeTypeMap) {
+        if (placeList.length > 0 && selectedPlaces.length < 8) {
+          selectedPlaces.push(placeList.shift()!);
+          added = true;
+        }
+      }
+      if (!added) break; // Break if no more places are available
+      
+    }
+
+    return selectedPlaces;
+  }
   onAdditionalChange($event: any) {
     let payload = null;
     this.landTax = '-'

@@ -14,13 +14,13 @@
             }
           </mat-select>
         </mat-form-field> -->
-        <select class="select select-bordered w-auto max-w-xs" title="เลือกเขตพื้นที่" [(ngModel)]="selectedArea"
-          (ngModelChange)="onAreaChange($event)">
+        <select class="select select-bordered w-auto max-w-xs text-grey" title="เลือกเขตพื้นที่"
+          [(ngModel)]="selectedArea" (ngModelChange)="onAreaChange($event)">
           <option>แสดงเขตทั้งหมด</option>
           <option>เขตลาดกระบัง</option>
           <option>เขตมีนบุรี</option>
-          <option>เขตคลองเตย</option>
           <option>เขตวัฒนา</option>
+          <option>เขตคลองเตย</option>
         </select>
       </div>
     </div>
@@ -37,14 +37,16 @@
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาเฉลี่ยเขตที่ดิน</div>
-          <app-line-chart [data]="AVG_Data" [labels]="AVG_DATE" [selectedArea]="selectedArea" [max_y]="max_y" [max_y_district]="max_y_district"></app-line-chart>
+          <app-line-chart [data]="AVG_Data" [labels]="AVG_DATE" [selectedArea]="selectedArea" [max_y]="max_y"
+            [max_y_district]="max_y_district"></app-line-chart>
 
         </div>
         <div class="h-96 " style="margin: 5px; border: 1px solid var(--lightGrey); border-radius: 10px;">
           <div class="text-grey h-14 text-xl font-semibold flex-center"
             style="background-color: var(--lightGrey); border-top-left-radius: 10px; border-top-right-radius: 10px;;">
             ราคาทำนาย</div>
-          <app-line-chart [data]="PRED_Data" [labels]="PRED_DATE" [selectedArea]="selectedArea" [max_y]="max_y" [max_y_district]="max_y_district"></app-line-chart>
+          <app-line-chart [data]="PRED_Data" [labels]="PRED_DATE" [selectedArea]="selectedArea" [max_y]="max_y"
+            [max_y_district]="max_y_district"></app-line-chart>
 
         </div>
 
@@ -77,24 +79,24 @@
               <td class="px-4 py-2 text-left">ลาดกระบัง</td>
               <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][1]['price_avg']}}</td>
               <td class="px-4 py-2 text-center">{{pred_table[1][0]}} <span
-                  [ngClass]="pred_table[0][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
+                  [ngClass]="pred_table[1][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[1][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[1][1]}}</span></td>
 
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">วัฒนา</td>
-              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']}}</td>
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']}}</td>
               <td class="px-4 py-2 text-center">{{pred_table[2][0]}} <span
-                  [ngClass]="pred_table[3][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
+                  [ngClass]="pred_table[2][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[2][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[2][1]}}</span></td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">คลองเตย</td>
-              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']}}</td>
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']}}</td>
               <td class="px-4 py-2 text-center">{{pred_table[3][0]}} <span
-                  [ngClass]="pred_table[2][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
+                  [ngClass]="pred_table[3][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[3][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[3][1]}}</span></td>
             </tr>
@@ -108,7 +110,7 @@
       <p class="text-2xl font-bold mb-5 text-darkBlue">กราฟเปรียบเทียบราคาที่ดิน</p>
       <div class="dropdown px-5">
         <details>
-          <summary class="btn bg-white text-darkBlue font-normal select-bordered w-full">
+          <summary class="btn bg-white text-grey font-normal select select-bordered w-full">
             เลือกแสดงข้อมูลแผนที่
           </summary>
           <ul class="menu dropdown-content bg-white shadow rounded-box w-52">
