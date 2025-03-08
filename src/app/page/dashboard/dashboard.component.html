@@ -138,7 +138,7 @@
       <p class="text-2xl font-bold text-darkBlue">ที่ดินที่กดติดตาม</p>
     </div>
 
-    <app-dashboard-follow *ngFor="let land of followedLand; let i = index" [land]="land" [index]="i" 
+    <app-dashboard-follow *ngFor="let land of followedLand; let i = index" [land]="land" [index]="i" [predictPrice]="PRED_Data"
       (followChanged)="onFollowChanged()"></app-dashboard-follow>
   </div>
 

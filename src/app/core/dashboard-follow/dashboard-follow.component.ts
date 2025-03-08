@@ -14,6 +14,7 @@ export class DashboardFollowComponent {
   @Input() land: any;
   @Output() followChanged = new EventEmitter<any>(); // Emit event to parent
   @Input() index!: number;
+  @Input() predictPrice: any;
   
 
   fowllowState = true;

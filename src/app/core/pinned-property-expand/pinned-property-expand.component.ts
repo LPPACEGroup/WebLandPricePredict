@@ -24,6 +24,8 @@ export class PinnedPropertyExpandComponent {
   legalEntity: string = '0';;
   landTax = '-'
   averagePrice: number = 0;
+  locationKey:string = '';
+  @Input() predPrice: any;
 
 
   constructor(
@@ -32,6 +34,10 @@ export class PinnedPropertyExpandComponent {
   ) {}
 
   ngOnInit() {
+    this.predPrice = this.predPrice[this.land.LocationID-1][this.predPrice[this.land.LocationID-1].length-1];
+    
+
+
     this.landListService.getNearbyLandMark(this.land.LandDataID).subscribe(
       (response) => {
         this.nearbyPlaces = this.nearbyPlaceFilter(response);
@@ -68,6 +74,7 @@ export class PinnedPropertyExpandComponent {
       },
       (error) => console.error('Error fetching average price:', error)
     );
+    
 
 
 
