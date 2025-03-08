@@ -59,18 +59,18 @@
           <tbody>
             <tr class="border-b border-light-grey">
               <td class="px-4 py-3 text-darkBlue">ยอดผ่อนชำระต่อเดือน (บาท)</td>
-              <td class="px-4 py-3 text-right text-darkRed font-medium">{{monthlyPayment1}}</td>
-              <td class="px-4 py-3 text-right text-darkRed font-medium">{{monthlyPayment2}}</td>
+              <td class="px-4 py-3 text-right text-darkRed font-medium">{{monthlyPayment1 | number:'1.2-2'}}</td>
+              <td class="px-4 py-3 text-right text-darkRed font-medium">{{monthlyPayment2 | number:'1.2-2'}}</td>
             </tr>
             <tr class="border-b border-light-grey">
               <td class="px-4 py-3 text-darkBlue">จำนวนดอกเบี้ยต่อเดือน (บาท)</td>
-              <td class="px-4 py-3 text-right text-darkRed">{{monthInterest1}}</td>
-              <td class="px-4 py-3 text-right text-darkRed">{{monthInterest2}}</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{monthInterest1 | number:'1.2-2'}}</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{monthInterest2 | number:'1.2-2'}}</td>
             </tr>
             <tr class="border-b border-light-grey">
               <td class="px-4 py-3 text-darkBlue">จำนวนดอกเบี้ยทั้งหมด (บาท)</td>
-              <td class="px-4 py-3 text-right text-darkRed">{{totalInterest1}}</td>
-              <td class="px-4 py-3 text-right text-darkRed">{{totalInterest2}}</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{totalInterest1 | number:'1.2-2'}}</td>
+              <td class="px-4 py-3 text-right text-darkRed">{{totalInterest2 | number:'1.2-2'}}</td>
             </tr>
           </tbody>
         </table>

@@ -38,22 +38,22 @@
       <div class="space-y-4">
         <div class="flex items-center justify-between border-b border-light-grey py-2">
           <span class="text-darkBlue font-medium">ยอดผ่อนชำระต่อเดือน (บาท)</span>
-          <span class="text-darkRed font-medium">{{monthlyPayment}}</span>
+          <span class="text-darkRed font-medium">{{monthlyPayment | number:'1.2-2'}}</span>
         </div>
 
         <div class="flex items-center justify-between border-b border-light-grey py-2">
           <span class="text-darkBlue font-medium">จำนวนดอกเบี้ยต่อเดือน (บาท)</span>
-          <span class="text-darkRed font-medium">{{monthInterest}}</span>
+          <span class="text-darkRed font-medium">{{monthInterest | number:'1.2-2'}}</span>
         </div>
 
         <div class="flex items-center justify-between border-b border-light-grey py-2">
           <span class="text-darkBlue font-medium">จำนวนดอกเบี้ยทั้งหมด (บาท)</span>
-          <span class="text-darkRed font-medium">{{yearInterest}}</span>
+          <span class="text-darkRed font-medium">{{yearInterest | number:'1.2-2'}}</span>
         </div>
 
         <div class="flex items-center justify-between border-b border-light-grey py-2">
           <span class="text-darkBlue font-medium">ยอดรวมทั้งหมดที่ต้องชำระ (บาท)</span>
-          <span class="text-darkRed font-medium">{{totalLoanWithInterest}}</span>
+          <span class="text-darkRed font-medium">{{totalLoanWithInterest | number:'1.2-2'}}</span>
         </div>
       </div>
     </div>

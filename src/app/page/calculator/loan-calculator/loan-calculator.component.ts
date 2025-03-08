@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, CommonModule  } from '@angular/common';
 
 @Component({
   selector: 'app-loan-calculator',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
     providers: [
       DecimalPipe
     ],
@@ -26,7 +26,7 @@ monthInterest!: number;
 calculate() {
   const monthlyInterestRate = this.interestRate / 100 / 12;
   const numberOfPayments = this.installmentTerm * 12;
-  
+
   this.monthlyPayment = (this.loanAmount * monthlyInterestRate) /
     (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
 
