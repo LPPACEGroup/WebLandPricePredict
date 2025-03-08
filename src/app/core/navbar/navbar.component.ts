@@ -67,6 +67,17 @@ export class NavbarComponent {
     
   }
 
+  navigateNscroll(page: string,id: string) {
+    this.router.navigate([page]).then(() => {
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100); // Small delay to ensure the DOM is updated
+    });
+  }
+  
+
+
+
   public updateUnreadNewsStatus(hasUnreadNews: boolean) {
     console.log('hasUnreadNews:', hasUnreadNews);
     
@@ -82,4 +93,9 @@ export class NavbarComponent {
       this.notiComponent.markAllAsRead();
     }
   }
+  scrollToTop() {
+    document.body.scrollTop = 0;
+    document.getElementsByClassName('scrollable-content')[0].scrollTop = 0;
+  }
+  
 }

@@ -5,7 +5,6 @@ import {
   ViewChild,
   OnInit,
   OnDestroy,
-  
 } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from '../../core/map/map.component';
@@ -64,12 +63,12 @@ export class AreaSlider {
     MatInputModule,
     MatFormFieldModule,
     LineChart2Component,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css'],
 })
-export class MapPageComponent implements OnInit,OnDestroy {
+export class MapPageComponent implements OnInit, OnDestroy {
   coordinates: [number, number] | null = null;
   isInputFocused: boolean = false;
   results: LocationResult[] = [];
@@ -86,7 +85,7 @@ export class MapPageComponent implements OnInit,OnDestroy {
   istogglePriceBox: boolean = false;
   searchValue: string = '';
   fowllowState = false;
-  tier = 'Basic';
+  tier = '';
   maxdistance = 0;
   Priceslider = new PriceSlider();
   Areaslider = new AreaSlider();
@@ -116,11 +115,9 @@ export class MapPageComponent implements OnInit,OnDestroy {
     LatKrabang: false,
     KhlongToei: false,
     Watthana: false,
-  }
+  };
   @ViewChild('searchInput') searchInput!: ElementRef;
   @ViewChild('searchResults') searchResults!: ElementRef;
-  
-  
 
   constructor(
     private searchApiService: SearchApiService,
@@ -150,53 +147,74 @@ export class MapPageComponent implements OnInit,OnDestroy {
       this.loading = false;
       console.log(' stop loading', this.loading);
     }, 3000);
-  
+
     this.auth.getTier().subscribe((response) => {
       this.tier = response;
       this.maxdistance = this.getMaxDistance(this.tier);
     });
-  
-    this.landListService.getData().pipe(
-      switchMap((landList) => {
-        this.landList = landList;
-        this.filteredLandList = this.landList;
-        this.sortedLandList = this.landList;
-  
-        // Fetch data for multiple locations in parallel
-        return forkJoin({
-          minBuri: this.dashBoardService.goodSale('Min Buri'),
-          latKrabang: this.dashBoardService.goodSale('Lat Krabang'),
-          khlongToei: this.dashBoardService.goodSale('Khlong Toei'),
-          watthana: this.dashBoardService.goodSale('Watthana')
-        });
-      })
-    ).subscribe(({ minBuri, latKrabang, khlongToei, watthana }) => {
-      this.processSaleData('Min Buri', minBuri);
-      this.processSaleData('Lat Krabang', latKrabang);
-      this.processSaleData('Khlong Toei', khlongToei);
-      this.processSaleData('Watthana', watthana);
-    });
+
+    this.landListService
+      .getData()
+      .pipe(
+        switchMap((landList) => {
+          this.landList = landList;
+          this.filteredLandList = this.landList;
+          this.sortedLandList = this.landList;
+
+          // Fetch data for multiple locations in parallel
+          return forkJoin({
+            minBuri: this.dashBoardService.goodSale('Min Buri'),
+            latKrabang: this.dashBoardService.goodSale('Lat Krabang'),
+            khlongToei: this.dashBoardService.goodSale('Khlong Toei'),
+            watthana: this.dashBoardService.goodSale('Watthana'),
+          });
+        })
+      )
+      .subscribe(({ minBuri, latKrabang, khlongToei, watthana }) => {
+        this.processSaleData('Min Buri', minBuri);
+        this.processSaleData('Lat Krabang', latKrabang);
+        this.processSaleData('Khlong Toei', khlongToei);
+        this.processSaleData('Watthana', watthana);
+      });
   }
-  
+
   getMaxDistance(tier: string): number {
     switch (tier) {
-      case 'Tier1': return 2;
-      case 'Tier2': return 4;
-      case 'Tier3': return 8;
-      default: return 0;
+      case 'Tier1':
+        return 2;
+      case 'Tier2':
+        return 4;
+      case 'Tier3':
+        return 8;
+      default:
+        return 0;
     }
   }
-  
-  processSaleData(area: 'Min Buri' | 'Lat Krabang' | 'Khlong Toei' | 'Watthana', data: any): void {
-    this.yoy[area] = data.data[area].quarterly_analytics[data.data[area].quarterly_analytics.length - 1].yoy;
-    this.qoq[area] = data.data[area].quarterly_analytics[data.data[area].quarterly_analytics.length - 1].qoq;
-  
+
+  processSaleData(
+    area: 'Min Buri' | 'Lat Krabang' | 'Khlong Toei' | 'Watthana',
+    data: any
+  ): void {
+    this.yoy[area] =
+      data.data[area].quarterly_analytics[
+        data.data[area].quarterly_analytics.length - 1
+      ].yoy;
+    this.qoq[area] =
+      data.data[area].quarterly_analytics[
+        data.data[area].quarterly_analytics.length - 1
+      ].qoq;
+
     if (area === 'Min Buri') {
-      this.date = data.data[area].monthly_indices.map(({ month, year }: { month: number; year: number }) =>
-        `${year}-${month.toString().padStart(2, '0')}`
-      ).reverse();
-  
-      this.value = data.data[area].monthly_indices.map(({ index }: { index: number }) => index).reverse();
+      this.date = data.data[area].monthly_indices
+        .map(
+          ({ month, year }: { month: number; year: number }) =>
+            `${year}-${month.toString().padStart(2, '0')}`
+        )
+        .reverse();
+
+      this.value = data.data[area].monthly_indices
+        .map(({ index }: { index: number }) => index)
+        .reverse();
     }
   }
 
@@ -241,12 +259,11 @@ export class MapPageComponent implements OnInit,OnDestroy {
 
     this.landListService.getData().subscribe((response) => {
       console.log(response);
-      
+
       this.landList = response;
       this.filteredLandList = this.landList;
       this.sortedLandList = this.landList;
       this.handleSearch(this.searchValue);
-
     });
   }
 
@@ -276,10 +293,11 @@ export class MapPageComponent implements OnInit,OnDestroy {
         console.log(response, this.tier);
 
         if (this.tier === 'Basic') {
-
-          const modal = document.getElementById('warn_follow_1') as HTMLDialogElement;
+          const modal = document.getElementById(
+            'warn_follow_1'
+          ) as HTMLDialogElement;
           modal.showModal();
-          
+
           return;
         } else if (
           (this.tier === 'Tier1' && response < 1) ||
@@ -297,7 +315,9 @@ export class MapPageComponent implements OnInit,OnDestroy {
         } else {
           console.log('enter tier');
 
-          const modal = document.getElementById('warn_follow_2') as HTMLDialogElement;
+          const modal = document.getElementById(
+            'warn_follow_2'
+          ) as HTMLDialogElement;
           modal.showModal();
         }
       },
@@ -328,8 +348,9 @@ export class MapPageComponent implements OnInit,OnDestroy {
         .getNearbyLandMark(this.selectedLand.LandDataID)
         .subscribe(
           (response) => {
-            this.nearbyPlaces = response;
-            console.log('Nearby places:', response);
+
+            this.nearbyPlaces = this.nearbyPlaceFilter(response);
+
           },
           (error) => console.error('Error fetching nearby places:', error)
         );
@@ -341,7 +362,45 @@ export class MapPageComponent implements OnInit,OnDestroy {
     this.handleSearch(this.searchValue);
   }
 
- 
+  nearbyPlaceFilter(places: any) {
+    places.sort((a: any, b: any) => a.Distance - b.Distance);
+
+    const selectedPlaces: any[] = [];
+    const placeTypeMap = new Map<string, any[]>();
+
+    // Categorize places by PlaceType
+    for (const place of places) {
+      if (!placeTypeMap.has(place.PlaceType)) {
+        placeTypeMap.set(place.PlaceType, []);
+      }
+      placeTypeMap.get(place.PlaceType)!.push(place);
+    }
+
+    console.log(placeTypeMap);
+
+    while (selectedPlaces.length < 3 && placeTypeMap.size > 0) {
+      for (const [_, placeList] of placeTypeMap) {
+        if (placeList.length > 0 && selectedPlaces.length < 8) {
+          selectedPlaces.push(placeList.shift()!);
+        }
+      }
+    }
+
+    // If not enough, fill the rest with the nearest remaining places
+    while (selectedPlaces.length < 8) {
+      let added = false;
+      for (const [_, placeList] of placeTypeMap) {
+        if (placeList.length > 0 && selectedPlaces.length < 8) {
+          selectedPlaces.push(placeList.shift()!);
+          added = true;
+        }
+      }
+      if (!added) break; // Break if no more places are available
+      
+    }
+
+    return selectedPlaces;
+  }
 
   toggleLandBar() {
     this.istoggleLandBar = !this.istoggleLandBar;
@@ -349,7 +408,6 @@ export class MapPageComponent implements OnInit,OnDestroy {
   togglePriceBox() {
     this.istogglePriceBox = !this.istogglePriceBox;
   }
-
 
   onInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -393,42 +451,43 @@ export class MapPageComponent implements OnInit,OnDestroy {
 
     this.filteredLandList = this.matches && inrange;
     this.filteredLandList = this.filterLands();
-    
-    console.log(this.filteredLandList);
-    
 
+    console.log(this.filteredLandList);
 
     this.sortedLandList = this.markerSortService.sortByClosestReference(
-      this.filteredLandList,this.markerCoord,this.maxdistance
+      this.filteredLandList,
+      this.markerCoord,
+      this.maxdistance
     );
-
   }
 
   filterLands() {
     // Mapping English district keys to Thai names
     const districtMapping: { [key: string]: string } = {
-      MinBuri: "มีนบุรี",
-      LatKrabang: "ลาดกระบัง",
-      KhlongToei: "คลองเตย",
-      Watthana: "วัฒนา",
+      MinBuri: 'มีนบุรี',
+      LatKrabang: 'ลาดกระบัง',
+      KhlongToei: 'คลองเตย',
+      Watthana: 'วัฒนา',
     };
-  
+
     // Get selected districts in Thai
     const selectedDistricts = Object.keys(this.districtSelect)
-      .filter(district => this.districtSelect[district as keyof typeof this.districtSelect])
-      .map(district => districtMapping[district]); // Convert to Thai
-  
-      
+      .filter(
+        (district) =>
+          this.districtSelect[district as keyof typeof this.districtSelect]
+      )
+      .map((district) => districtMapping[district]); // Convert to Thai
+
     // If no districts are selected, return all lands
     if (selectedDistricts.length === 0) {
       return this.filteredLandList;
     }
-  
+
     // Filter lands based on selected districts
-    return this.filteredLandList.filter(land => selectedDistricts.includes(land.LocationName));
+    return this.filteredLandList.filter((land) =>
+      selectedDistricts.includes(land.LocationName)
+    );
   }
-  
-  
 
   onMapOptionChange(option: string): void {
     this.selectedMapLayer = option;
@@ -436,13 +495,11 @@ export class MapPageComponent implements OnInit,OnDestroy {
   markerCoordUpdate(coord: any): void {
     this.markerCoord = coord;
 
-    
     this.sortedLandList = this.markerSortService.sortByClosestReference(
-      this.filteredLandList,this.markerCoord,this.maxdistance
+      this.filteredLandList,
+      this.markerCoord,
+      this.maxdistance
     );
-
-    
-    
   }
   leftPriceChange(event: any) {
     const inputElement = event.target as HTMLInputElement;
@@ -531,14 +588,10 @@ export class MapPageComponent implements OnInit,OnDestroy {
   autoSlide(): void {
     setInterval(() => {
       this.nextSlide();
-      
     }, 3000);
   }
 
- 
-
   getIconName(placeType: string): string {
-    
     return this.dashBoardService.getIconName(placeType);
     // return 'place';
   }
@@ -547,4 +600,13 @@ export class MapPageComponent implements OnInit,OnDestroy {
     this.destroy$.complete(); // Clean up the subject
   }
 
+  closeModal() {
+    // Close the modal
+    const modal = document.getElementById(
+      'fullland_detail'
+    ) as HTMLDialogElement;
+
+    document.getElementById('carousel-container')?.scrollIntoView();
+    modal.close();
+  }
 }

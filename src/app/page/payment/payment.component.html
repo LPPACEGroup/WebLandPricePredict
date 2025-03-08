@@ -1,4 +1,4 @@
-<form *ngIf="!PaymentData||paymentVerified" [formGroup]="paymentForm">
+<form *ngIf="(!PaymentData||paymentVerified)&&(userTier != 'Tier3')" [formGroup]="paymentForm">
   <div class="min-h-screen flex items-center justify-center bg-neutral-100">
     <div class="w-[1024px] bg-neutral-50 shadow-lg rounded-lg p-8 flex gap-6">
       <div class="flex-1 bg-white p-6 rounded-lg justify-center">
@@ -49,10 +49,13 @@
   </div>
 </form>
 
-<div *ngIf="!paymentVerified&&PaymentData" class="text-darkRed text-3xl text-center ">
+<div *ngIf="!paymentVerified&&PaymentData&&(userTier != 'Tier3')" class="text-darkRed text-3xl text-center h-nmax flex items-center justify-center">
   การตรวจสอบการชำระเงินอยู่ในระหว่างดำเนินการ กรุณารอ 1-2 วัน หากมีข้อสงสัยโปรดติดต่อเจ้าหน้าที่
 </div>
 
+<div *ngIf="userTier === 'Tier3'" class="text-darkRed text-3xl text-center h-nmax flex items-center justify-center">
+  คุณเป็นสมาชิกระดับสูงสุดแล้ว ไม่จำเป็นต้องทำการอัพเกรดอีก
+</div>
 
 <!-- modal notify when payment submit -->
 <dialog id="noti_payment" class="modal ">

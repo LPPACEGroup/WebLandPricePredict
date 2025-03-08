@@ -7,7 +7,7 @@
 
       <!-- Home btt -->
       <li class="">
-        <div routerLink="Home" class="text-white" routerLinkActive="">
+        <div routerLink="Home" class="text-white" routerLinkActive="" (click)="scrollToTop()">
           <img src="assets\icons\home.svg" alt="Home" class="w-6 h-6 inline-block mr-2">
           <p>หน้าหลัก</p>
         </div>
@@ -52,8 +52,8 @@
           <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-darkBlue">
             <li routerLink="Calculator"><a>เครื่องคิดเลข</a></li>
             <li><a>คู่มือการใช้งาน</a></li>
-            <li routerLink="Home"><a>แพ็คเกจสมาชิก</a></li>
-            <li routerLink="Home"><a>ช่องทางติดต่อ</a></li>
+            <li (click)="navigateNscroll('/Home','membership')"><a>แพ็คเกจสมาชิก</a></li>
+            <li (click)="navigateNscroll('/Home','contact')"><a>ช่องทางติดต่อ</a></li>
 
           </ul>
         </div>
