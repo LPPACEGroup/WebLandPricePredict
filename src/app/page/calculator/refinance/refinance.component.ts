@@ -25,8 +25,8 @@ export class RefinanceComponent {
   // current
   currentLoanAmount!: number;
   currentMonthlyPayment! : number;
-  currentInterestRate!: number;
   currentLoanTerm!: number;
+  currentInterestRate!: number;
 
   // new
   newLoanAmount!: number;
@@ -45,26 +45,25 @@ export class RefinanceComponent {
 
 
   calculate() {
-    const currentMonthlyInterestRate = this.currentInterestRate / 100 / 12;
-    const currentNumberOfPayments = this.currentLoanTerm * 12;
+    const currentMonthlyRate = this.currentInterestRate / 100 / 12;
+    const newMonthlyRate = this.newInterestRate / 100 / 12;
 
-    const newMonthlyInterestRate = this.newInterestRate / 100 / 12;
-    const newNumberOfPayments = this.newLoanTerm * 12;
+    const currentLoanTermMonths = this.currentLoanTerm * 12;
+    const newLoanTermMonths = this.newLoanTerm * 12;
 
-    this.currentMonthlyPayment = ((this.currentLoanAmount + this.refinanceCost) * currentMonthlyInterestRate) /
-      (1 - Math.pow(1 + currentMonthlyInterestRate, -currentNumberOfPayments));
+    const currentMonthlyPayment = this.currentLoanAmount * currentMonthlyRate / (1 - Math.pow(1 + currentMonthlyRate, -currentLoanTermMonths));
+    const newMonthlyPayment = this.newLoanAmount * newMonthlyRate / (1 - Math.pow(1 + newMonthlyRate, -newLoanTermMonths));
 
-    this.newMonthlyPayment = ((this.newLoanAmount + this.refinanceCost) * newMonthlyInterestRate) /
-      (1 - Math.pow(1 + newMonthlyInterestRate, -newNumberOfPayments));
+    this.currentTotalInterest = (currentMonthlyPayment * currentLoanTermMonths) - this.currentLoanAmount;
+    this.newTotalInterest = (newMonthlyPayment * newLoanTermMonths) - this.newLoanAmount + this.refinanceCost;
 
-      this.currentTotalInterest = (this.currentMonthlyPayment * currentNumberOfPayments) - this.currentLoanAmount;
-      this.newTotalInterest = (this.newMonthlyPayment * newNumberOfPayments) - this.newLoanAmount;
+    this.interestSaved = this.currentTotalInterest - this.newTotalInterest;
+    this.newMonthlyPayment = newMonthlyPayment;
+    this.monthlyDifference = currentMonthlyPayment - newMonthlyPayment;
+    this.currentLoanAmountWithInterest = this.currentLoanAmount + this.currentTotalInterest;
+    this.newLoanAmountWithInterest = this.newLoanAmount + this.newTotalInterest;
 
-      this.interestSaved = this.currentTotalInterest - this.newTotalInterest;
-      this.monthlyDifference = this.currentMonthlyPayment - this.newMonthlyPayment;
 
-      this.currentLoanAmountWithInterest = this.currentLoanAmount + this.currentTotalInterest;
-      this.newLoanAmountWithInterest = this.newLoanAmount + this.newTotalInterest;
   }
 }
 
