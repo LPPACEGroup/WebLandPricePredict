@@ -23,6 +23,10 @@ export class PinnedPropertyExpandComponent {
   firstHouse: string = '0';
   legalEntity: string = '0';;
   landTax = '-'
+  averagePrice: number = 0;
+  locationKey:string = '';
+  @Input() predPrice: any;
+
 
   constructor(
     private landListService: LandListService,
@@ -30,6 +34,10 @@ export class PinnedPropertyExpandComponent {
   ) {}
 
   ngOnInit() {
+    this.predPrice = this.predPrice[this.land.LocationID-1][this.predPrice[this.land.LocationID-1].length-1];
+    
+
+
     this.landListService.getNearbyLandMark(this.land.LandDataID).subscribe(
       (response) => {
         this.nearbyPlaces = this.nearbyPlaceFilter(response);
@@ -56,6 +64,20 @@ export class PinnedPropertyExpandComponent {
       },
       (error) => console.error('Error fetching interest level:', error)
     );
+    this.dashBoardService.getPriceAvg(0).subscribe(
+      (response) => {
+         this.averagePrice = response[0].data[this.land.LocationID-1].price_avg
+        console.log(response, 'avg price');
+        console.log(response[0].data[this.land.LocationID-1].price_avg,"sssssss");
+        
+        
+      },
+      (error) => console.error('Error fetching average price:', error)
+    );
+    
+
+
+
     switch (this.land.Land_CityColor) {
       case 'red':
         this.landCitytype = 'ที่ดินประเภทพานิชบกรรม';
@@ -170,7 +192,9 @@ export class PinnedPropertyExpandComponent {
         (response) => {
           
           
-          this.landTax = response.tax_amount;          
+          this.landTax = response.tax_amount;         
+          console.log(this.landTax);
+           
         },
         (error) => console.error('Error fetching land tax:', error)
       );

@@ -44,7 +44,7 @@ export class PriceSlider {
 }
 export class AreaSlider {
   minArea = 0;
-  maxArea = 99999;
+  maxArea = 1000;
   leftArea = this.minArea;
   rightArea = this.maxArea;
 }
@@ -160,6 +160,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
           this.landList = landList;
           this.filteredLandList = this.landList;
           this.sortedLandList = this.landList;
+          console.log('landList:', landList);
+          
 
           // Fetch data for multiple locations in parallel
           return forkJoin({
@@ -343,7 +345,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
     if (!target.closest('.followbutton')) {
       this.selectedLand = item;
       this.fowllowState = this.selectedLand.Follow;
-      this.fetchLandImages(item.LandDataID);
+      console.log(this.selectedLand);
+      
       this.landListService
         .getNearbyLandMark(this.selectedLand.LandDataID)
         .subscribe(
@@ -439,6 +442,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
     } else {
       this.matches = this.landList;
     }
+    
+    
 
     const inrange = this.matches.filter((land) => {
       const x =

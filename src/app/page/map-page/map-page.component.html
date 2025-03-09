@@ -26,7 +26,7 @@
       </div>
       <div class="modal-action flex flex-col m-6">
         <div class="border-b-2 py-5 flex flex-row">
-          <div>
+          <div class="w-full">
             <p class="text-grey date-text">ข้อมูลเมื่อวันที่ {{ selectedLand?.create_date | date:'dd MMM yyyy':'en-US' }}</p>
             <p class="font-semibold text-xl">{{selectedLand?.LandTitle}}</p>
             <p class="text-xs">รหัสอสังหาริมทรัพย์: {{selectedLand?.LandDataID}}</p>
@@ -99,7 +99,7 @@
             selectedLand?.Description}}</p>
         </div>
         <div class="p-5">
-            <button class="btn" (click)="closeModal()">Close</button>
+            <button class="btn" (click)="closeModal()">ปิด</button>
         </div>
       </div>
     </div>
@@ -231,16 +231,16 @@
           class="input input-bordered w-full h-10 pl-10 placeholder-grey" (keydown)="onKeyDown($event)"
           (input)="onInput($event)" (focus)="onFocus()" #searchInput />
       </div>
-      <div class="bg-white z-40 h-44 overflow-y-scroll w-full pt-2"
+      <!-- <div class="bg-white z-40 h-44 overflow-y-scroll w-full pt-2"
         [ngClass]="{'block/': isInputFocused, 'hidden': !isInputFocused}" #searchResults>
         <div class=" h-12 w-full truncate hover:bg-light-grey" *ngFor="let result of results"
           (click)="changeCoord(result.lat, result.lon)">
           <p>{{result.display_name}}</p>
         </div>
-        <div class="w-full h-full flex-center" *ngIf="results.length==0">
-          <div>Result not found</div>
+        <div class="w-full h-full flex-center" *ngIf="results.length===0">
+          <div>ไม่พบสถานที่ ที่ตรงกับการค้นหา</div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class=" w-full flex flex-row gap-2 ">
@@ -368,10 +368,12 @@
     </div>
 
 
-    <div *ngIf="tier != ''" class="flex flex-col gap-2 w-full overflow-y-scroll">
+    <div *ngIf="tier != '' " class="flex flex-col gap-2 w-full overflow-y-scroll" >
       <app-land-card class="w-full" *ngFor="let item of sortedLandList" [item]="item" [tier]="tier"
         (click)="onCardClick(item,$event) " (followChanged)="onFollowChanged($event)" ></app-land-card>
-
+        <div class="w-full h-full flex-center" *ngIf="sortedLandList.length===0 && searchValue != ''">
+          <div>ไม่พบสถานที่ ที่ตรงกับการค้นหา</div>
+        </div>
     </div>
 
     <!-- <img [src]="image_URL"/> -->
