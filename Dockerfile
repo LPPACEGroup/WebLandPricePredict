@@ -16,5 +16,5 @@ EXPOSE 80
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 # CMD ["nginx", "-g", "daemon off;"]
 
-# docker build -t neerachal/deploy_febe_lppm:v0.1.2 .
-# docker push neerachal/deploy_febe_lppm:v0.1.2
+# docker build -t neerachal/deploy_febe_lppm:v0.1.3 .
+# docker push neerachal/deploy_febe_lppm:v0.1.3
