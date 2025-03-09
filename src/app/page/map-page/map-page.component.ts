@@ -180,6 +180,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
         this.processSaleData('Khlong Toei', khlongToei);
         this.processSaleData('Watthana', watthana);
       });
+
   }
 
   getMaxDistance(tier: string): number {
@@ -201,11 +202,11 @@ export class MapPageComponent implements OnInit, OnDestroy {
   ): void {
     this.yoy[area] =
       data.data[area].quarterly_analytics[
-        data.data[area].quarterly_analytics.length - 1
+        0
       ].yoy;
     this.qoq[area] =
       data.data[area].quarterly_analytics[
-        data.data[area].quarterly_analytics.length - 1
+        0
       ].qoq;
 
     if (area === 'Min Buri') {
