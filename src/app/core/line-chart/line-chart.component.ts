@@ -19,6 +19,8 @@ export class LineChartComponent implements OnChanges {
   @Input() values: number[] = [];
   @Input() max_y: number = 300000000;
   @Input() max_y_district = [300000000,300000000,300000000,300000000];
+  @Input() min_y: number = 0;
+  @Input() min_y_district = [0,0,0,0];
 
   @Input() chartHeight: number = 350; // Default height
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
@@ -50,6 +52,8 @@ export class LineChartComponent implements OnChanges {
     scales: {
       y: {
         max: this.max_y,
+        min: this.min_y,
+        
       },
     },
     plugins: {
@@ -75,6 +79,7 @@ export class LineChartComponent implements OnChanges {
       this.lineChartOptions.scales = {
         y: {
           max: this.max_y,
+          min: this.min_y,
         },
       };
     }
@@ -94,6 +99,7 @@ export class LineChartComponent implements OnChanges {
         this.lineChartOptions.scales = {
           y: {
             max: this.max_y,
+            min: this.min_y,
           },
         };
 
@@ -155,6 +161,7 @@ export class LineChartComponent implements OnChanges {
         this.lineChartOptions.scales = {
           y: {
             max: this.max_y_district[areaIndex],
+            min: this.min_y_district[areaIndex],
           },
         };
   

@@ -47,6 +47,8 @@ export class DashboardComponent implements OnChanges,OnDestroy {
   followedLand = [];
   max_y = 0;
   max_y_district = [0, 0, 0, 0];
+  min_y = 0;
+  min_y_district = [0, 0, 0, 0];
   
   private destroy$ = new Subject<void>();
   selectedLabels: boolean[] = [];
@@ -93,6 +95,10 @@ export class DashboardComponent implements OnChanges,OnDestroy {
         this.max_y = Math.max(...maxValues);
         this.max_y_district = maxValues;
         console.log(this.max_y, "max_y");
+
+        const minValues = this.AVG_Data.map((locationData: number[]) => Math.min(...locationData));
+        this.min_y = Math.min(...minValues);
+        this.min_y_district = minValues;
         
         return forkJoin({
           followedLand: this.landListService.readFollowLand(),
@@ -127,7 +133,12 @@ export class DashboardComponent implements OnChanges,OnDestroy {
         const pred = this.transformData2(dashboardData);
         console.log(pred, "pred");
         
-        this.PRED_Data = pred;
+
+        //get last 2 month of avg price
+        const last2MonthAvg = this.AVG_Data.map((arr: number[]) => arr.slice(-2));
+
+        this.PRED_Data = pred.map((arr, index) => [...last2MonthAvg[index], ...arr]);
+        console.log(this.PRED_Data, "PRED_Data");
 
         const maxValues2 = pred.map((locationData: number[]) => Math.max(...locationData));
         this.max_y = Math.max(this.max_y, ...maxValues2);
@@ -138,9 +149,10 @@ export class DashboardComponent implements OnChanges,OnDestroy {
         
         console.log(this.max_y, "max_y");
         
+        const last2MonthAvgDate = this.AVG_DATE.slice(-2);
 
         const pred_date = dashboardData.predictions.dates.map((date: string) => date.slice(0, 7));
-        this.PRED_DATE = pred_date;
+        this.PRED_DATE = last2MonthAvgDate.concat(pred_date);
 
         // Assign last month average
         this.last_month_avg = lastMonthAvg;

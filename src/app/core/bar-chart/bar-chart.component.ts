@@ -21,7 +21,9 @@ barChartOptions: ChartOptions = {
     scales: {
       y: {
         beginAtZero: true
-      }
+      },
+      
+      
     },
     plugins: {
       legend: {
@@ -47,13 +49,14 @@ barChartOptions: ChartOptions = {
       if(changes['data'])
       { console.log(this.data, 'data');
         console.log(this.data.predictPrice, 'predictPrice');
+        
         this.barChartData =
         {
           labels: this.data.labels,
           datasets: [
-            { label: 'ราคาเฉลี่ย', data:this.data.averagePrice, backgroundColor: '#86B6CD' },
-            { label: 'ราคาขาย', data: this.data.sellPrice, backgroundColor: '#C6E6FF' },
-            { label: 'ราคาประเมิน', data: this.data.predictPrice, backgroundColor: '#2749A3' }
+            { label: 'ราคาเฉลี่ย', data:this.data.averagePrice, backgroundColor: '#86B6CD' ,maxBarThickness:32},
+            { label: 'ราคาขาย', data: this.data.sellPrice, backgroundColor: '#C6E6FF' ,maxBarThickness:32},
+            { label: 'ราคาประเมิน', data: this.data.predictPrice, backgroundColor: '#2749A3' ,maxBarThickness:32}
           ]
         };
       }
@@ -91,9 +94,9 @@ barChartOptions: ChartOptions = {
     this.barChartData = {
       labels: filteredLabels,
       datasets: [
-        { label: 'ราคาเฉลี่ย', data: filteredAveragePrice, backgroundColor: '#86B6CD' },
-        { label: 'ราคาขาย', data: filteredSellPrice, backgroundColor: '#C6E6FF' },
-        { label: 'ราคาประเมิน', data: filteredpredictPrice, backgroundColor: '#2749A3' }
+        { label: 'ราคาเฉลี่ย', data: filteredAveragePrice, backgroundColor: '#86B6CD' ,maxBarThickness:32},
+        { label: 'ราคาขาย', data: filteredSellPrice, backgroundColor: '#C6E6FF' ,maxBarThickness:32},
+        { label: 'ราคาประเมิน', data: filteredpredictPrice, backgroundColor: '#2749A3',maxBarThickness:32 }
       ]
     };
   }
