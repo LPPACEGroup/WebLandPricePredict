@@ -245,6 +245,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
             filePath: img.file_path,
           })
         );
+        console.log('Images:', this.images);
+        
         this.max = this.images.length;
 
         // Fetch image blobs
@@ -348,6 +350,7 @@ export class MapPageComponent implements OnInit, OnDestroy {
       this.selectedLand = item;
       this.fowllowState = this.selectedLand.Follow;
       console.log(this.selectedLand);
+      this.fetchLandImages(this.selectedLand.LandDataID);
       
       this.landListService
         .getNearbyLandMark(this.selectedLand.LandDataID)
