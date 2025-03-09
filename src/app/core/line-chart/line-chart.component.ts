@@ -150,6 +150,8 @@ export class LineChartComponent implements OnChanges {
           ],
         };
       } else {
+        console.log(this.min_y_district, "min_y_district");
+        
 
         // Select only one dataset based on the area
         let areaIndex = 0;

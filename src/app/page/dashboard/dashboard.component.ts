@@ -141,13 +141,21 @@ export class DashboardComponent implements OnChanges,OnDestroy {
         console.log(this.PRED_Data, "PRED_Data");
 
         const maxValues2 = pred.map((locationData: number[]) => Math.max(...locationData));
-        this.max_y = Math.max(this.max_y, ...maxValues2);
+        this.max_y = Math.max(this.max_y, ...maxValues2)*1.1;
 
-        this.max_y_district = maxValues2.map((value, index) => Math.max(value, this.max_y_district[index]));
+        this.max_y_district = maxValues2.map((value, index) => Math.max(value, this.max_y_district[index])*1.1);
 
         console.log(this.max_y_district, "max_y_district");
         
         console.log(this.max_y, "max_y");
+
+
+        const minValues2 = pred.map((locationData: number[]) => Math.min(...locationData));
+        this.min_y = Math.min(this.min_y, ...minValues2)*0.9;
+        this.min_y_district = minValues2.map((value, index) => Math.min(value, this.min_y_district[index])*0.9);
+
+        
+
         
         const last2MonthAvgDate = this.AVG_DATE.slice(-2);
 
