@@ -173,6 +173,8 @@ export class MapPageComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(({ minBuri, latKrabang, khlongToei, watthana }) => {
+        console.log(minBuri, latKrabang, khlongToei, watthana ,"good sale");
+        
         this.processSaleData('Min Buri', minBuri);
         this.processSaleData('Lat Krabang', latKrabang);
         this.processSaleData('Khlong Toei', khlongToei);
