@@ -9,7 +9,7 @@
           <div class="relative">
             <img *ngIf="!profilePicture" src="\assets\imgs\default profile img.png" alt="Avatar"
               class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
-              <img *ngIf="profilePicture" [src]="profilePicture" alt="avatar"
+            <img *ngIf="profilePicture" [src]="profilePicture" alt="avatar"
               class="rounded-full w-[200px] h-[200px] mx-auto object-contain flex items-center gap-4 mb-6" />
             <button
               class="absolute top-0 right-0 bg-red-500 text-white rounded-md text-sm px-4 py-2 flex items-center gap-2"
@@ -60,13 +60,16 @@
             <div class="flex justify-between items-start">
 
               <div class="w-[50%] flex flex-col items-center">
-                <div *ngIf="slipImage===''" class="w-[280px] h-[300px] flex items-center justify-center bg-lightBlue p-4">
+                <div *ngIf="slipImage===''"
+                  class="w-[280px] h-[300px] flex items-center justify-center bg-lightBlue p-4">
                   <p>ไม่มีรูปภาพ</p>
                 </div>
-                <img *ngIf="slipImage!=''" [src]="slipImage" alt="Slip Image"/>
+                <img *ngIf="slipImage!=''" [src]="slipImage" alt="Slip Image" />
                 <div class="grid grid-cols-2 mt-2 ">
                   <p class="text-[10px] font-bold text-darkBlue">เวลาในการชำระเงิน:</p>
-                  <p class="text-[10px] font-medium text-center" [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">{{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
+                  <p class="text-[10px] font-medium text-center"
+                    [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">
+                    {{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
                 </div>
 
               </div>
@@ -84,7 +87,8 @@
                 </div>
                 <form [formGroup]="tierForm">
                   <select id="membership" title="ระดับสมาชิกปัจจุบัน"
-                    class="w-full rounded-md p-2 bg-babyBlue font-bold text-darkBlue" formControlName="Tier" (change)="tierUpdate()">
+                    class="w-full rounded-md p-2 bg-babyBlue font-bold text-darkBlue" formControlName="Tier"
+                    (change)="tierUpdate()">
                     <option class="bg-lightBlue font-bold">Basic</option>
                     <option class="bg-lightBlue font-bold">Tier1</option>
                     <option class="bg-lightBlue font-bold">Tier2</option>
@@ -99,11 +103,12 @@
                 </div>
                 <form [formGroup]="verifyForm" *ngIf="userPaymentDetails.SubmissionDate">
                   <select id="status" title="สถานะการตรวจสอบ" formControlName="Verify"
-                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey "(change)="verficationUpdate()">
+                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey " (change)="verficationUpdate()">
                     <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
-                    <option [ngValue]="true" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
+                    <option [ngValue]="true" onclick="" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว
+                    </option>
                   </select>
-                                    <!-- <select id="status" title="สถานะการตรวจสอบ"
+                  <!-- <select id="status" title="สถานะการตรวจสอบ"
                     class="w-full rounded-md p-2 bg-light-grey font-bold text-grey " >
                     <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
                     <option [ngValue]="true" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว</option>
@@ -144,6 +149,29 @@
           </div>
         </section>
       </div>
+
+      <dialog id="confirm_tier" class="modal">
+        <div class="modal-box bg-white p-6 rounded-3xl text-darkBlue ">
+          <div class="modal-action  flex justify-center flex-col items-center gap-4">
+            <form method="dialog" class="flex flex-col items-center">
+              <button class="btn btn-lg btn-circle btn-ghost absolute right-2 top-2">✕</button>
+              <h1 class="text-2xl font-bold mb-4">
+                <img src="\assets\icons\alert-circle.svg" alt="Icon" class="inline-block w-8 h-8 mr-2">
+                กรุณาตรวจสอบความถูกต้อง
+              </h1>
+              <p>ระดับสมาชิกปัจจุบัน : <span class="font-bold">Tier 3</span> </p>
+              <p class="text-left">ต้องการปรับสถานะเป็น <span class="text-midGreen font-bold">"ตรวจสอบแล้ว"
+                </span> ? </p>
+              <div class="flex flex-row justify-center gap-4 w-full mt-4">
+                <button class="btn bg-whiteGrey text-darkBlue rounded-full px-6 py-1">ยกเลิก</button>
+                <button class="btn bg-midGreen text-white rounded-full px-6 py-1">ยืนยันการตรวจสอบ</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </dialog>
+
       <dialog id="confirm_delete" class="modal">
         <div class="modal-box bg-white p-6 rounded-3xl text-darkBlue ">
           <div class="modal-action  flex justify-center flex-col items-center">
