@@ -1,6 +1,12 @@
 import { MatIconModule } from '@angular/material/icon';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FilterselectComponent } from 'app/core/filterselect/filterselect.component';
 import { AuthService } from 'app/service/Auth/auth.service';
@@ -10,9 +16,8 @@ import { UserService } from 'app/service/User/user.service';
 import { User } from 'model/user.interface';
 import { Location } from '@angular/common';
 
-
 interface UserProfile {
-avatarUrl: any;
+  avatarUrl: any;
   id: string;
   name: string;
   email: string;
@@ -26,18 +31,20 @@ avatarUrl: any;
   paymentDate: string;
 }
 
-
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [MatIconModule, CommonModule,ReactiveFormsModule,FilterselectComponent],
+  imports: [
+    MatIconModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FilterselectComponent,
+  ],
 
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
 })
-
 export class ProfilePageComponent implements OnInit {
-
   sEditing = false;
   profileForm: FormGroup;
   Province: string[] = [];
@@ -52,26 +59,37 @@ export class ProfilePageComponent implements OnInit {
   profilePicture: string = '';
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
-  userId  :number = -1;
+  userId: number = -1;
   tier: string = '';
   emailerrMessage: string = '';
   emailduplicate: boolean = false;
 
-  constructor(private fb: FormBuilder,    private authService: AuthService,    thaiLocationService: ThaiLocationService,    private cdr: ChangeDetectorRef,private userService: UserService, private location: Location
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    thaiLocationService: ThaiLocationService,
+    private cdr: ChangeDetectorRef,
+    private userService: UserService,
+    private location: Location
   ) {
-    
     this.thaiLocationService = thaiLocationService;
     this.profileForm = this.fb.group({
       username: ['', [Validators.required]], // Example: username with min length
       email: ['', [Validators.required, Validators.email]], // Email validation
-      firstName: ['', [
-        Validators.required,
-        Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
-      ]], // First name required
-      lastName: ['', [
-        Validators.required,
-        Validators.pattern(/^[A-Za-zÀ-ÿ]+$/),  // Allows alphabetic characters and accented characters only
-      ]], // Last name required
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/), // Allows alphabetic characters and accented characters only
+        ],
+      ], // First name required
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/), // Allows alphabetic characters and accented characters only
+        ],
+      ], // Last name required
       gender: ['', Validators.required], // Gender required
       birthDate: ['', Validators.required], // Birth date required
       telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
@@ -89,7 +107,6 @@ export class ProfilePageComponent implements OnInit {
       interestLand: [1],
     });
     this.profileForm.disable();
-
   }
 
   async ngOnInit() {
@@ -133,39 +150,38 @@ export class ProfilePageComponent implements OnInit {
           home_number: response.home_number,
           alley: response.alley,
           birthDate: response.birthDate,
-          gender : response.gender,
+          gender: response.gender,
           notiNews: response.notinews,
           notification: response.notification,
-        })
+        });
         this.tier = response.tier;
-        
+
         this.profileForm.disable();
         // clear profile picture
         if (this.profilePicture) {
           URL.revokeObjectURL(this.profilePicture);
         }
 
-
         this.userId = response.Id;
-        
+
         // Get profile picture
         this.userService.getProfilePicture(this.userId).subscribe({
           next: (response) => {
             console.log('Profile picture:', response);
-        
-            const blob = new Blob([response], { type: response.type }); 
+
+            const blob = new Blob([response], { type: response.type });
             this.profilePicture = URL.createObjectURL(blob);
             console.log(this.profilePicture);
+            this.imagePreview = this.profilePicture;
             this.loading = false;
 
           },
           error: (error) => {
             console.error(error);
             this.loading = false;
+
           },
         });
-        
-
       },
       error: (error: any) => {
         console.error(error);
@@ -173,7 +189,6 @@ export class ProfilePageComponent implements OnInit {
       },
     });
 
-    
     this.profileForm.valueChanges.subscribe((value) => {
       if (this.isUpdatingForm) {
         this.previousValue.sub_district =
@@ -274,7 +289,6 @@ export class ProfilePageComponent implements OnInit {
           });
       }
     });
-    
   }
 
   // clear profile memory  when component is destroyed
@@ -284,35 +298,33 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-// Handle file selection
-onFileSelected(event: any): void {
-  const file: File = event.target.files[0];
-  if (file) {
-    // Update the form control
-    this.selectedFile = file;
+  // Handle file selection
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      // Update the form control
+      this.selectedFile = file;
 
-    // Read the file and create a preview
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
-    reader.readAsDataURL(file);
+      // Read the file and create a preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
-}
 
   startEditing() {
     this.sEditing = true;
     this.resetForm();
     this.imagePreview = this.profilePicture;
     this.profileForm.enable();
-    
   }
 
   cancelEdit() {
     this.sEditing = false;
     this.resetForm();
     this.profileForm.disable();
-
   }
 
   saveChanges() {
@@ -321,17 +333,15 @@ onFileSelected(event: any): void {
     });
     this.checkEmail(this.profileForm.value.email);
 
-    if (this.emailduplicate)
-    {
+    if (this.emailduplicate) {
       return;
     }
 
     if (this.profileForm.valid) {
-      
       this.sEditing = false;
 
-      console.log("saveChanges");
-      
+      console.log('saveChanges');
+
       const profileUpdate: any = {
         Username: this.profileForm.value.username,
         Email: this.profileForm.value.email,
@@ -340,8 +350,8 @@ onFileSelected(event: any): void {
         Gender: this.profileForm.value.gender,
         BirthDate: this.profileForm.value.birthDate,
         Telephone: this.profileForm.value.telephone,
-        Notification: this.profileForm.value.notification?1:0,
-        NotiNews: this.profileForm.value.notiNews?1:0,
+        Notification: this.profileForm.value.notification ? 1 : 0,
+        NotiNews: this.profileForm.value.notiNews ? 1 : 0,
         Province: this.profileForm.value.province,
         District: this.profileForm.value.district,
         Subdistrict: this.profileForm.value.sub_district,
@@ -351,93 +361,87 @@ onFileSelected(event: any): void {
         LandTypeFV: this.profileForm.value.interestLand,
       };
       console.log(profileUpdate);
-      
-
-
-
-
 
       this.userService.updateUser(profileUpdate).subscribe({
         next: () => {
-          const modal = document.getElementById('noti_profile_update') as HTMLDialogElement;
+          const modal = document.getElementById(
+            'noti_profile_update'
+          ) as HTMLDialogElement;
           modal.showModal();
 
-          if(this.selectedFile){
-            this.authService.uploadProfile(this.userId,this.selectedFile).subscribe({
-              next: (response) => {
-                console.log(response);
-
-              },
-              error: (error) => {
-                console.error(error);
-              },
-            });
+          if (this.selectedFile) {
+            this.authService
+              .uploadProfile(this.userId, this.selectedFile)
+              .subscribe({
+                next: (response) => {
+                  console.log(response);
+                },
+                error: (error) => {
+                  console.error(error);
+                },
+              });
+          } else {
           }
-          else{
-          }
-          
         },
         error: (error) => {
-          this.errorMessage = error.message          
-          ;
+          this.errorMessage = error.message;
         },
       });
 
       this.profileForm.disable();
-
-    }
+    } 
     else {
+      console.log(this.profileForm.value);
 
-        const modal = document.getElementById('warning_profile_update') as HTMLDialogElement;
-        modal.showModal();
+      const modal = document.getElementById(
+        'warning_profile_update'
+      ) as HTMLDialogElement;
+      modal.showModal();
     }
-  
   }
 
-reloadPage(){
-  window.location.reload();
-}
-
-triggerFileInput(): void {
-  const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
-  fileInput.click();
-}
-  private resetForm() {
-
+  reloadPage() {
+    window.location.reload();
   }
+
+  triggerFileInput(): void {
+    const fileInput = document.getElementById(
+      'profilePicture'
+    ) as HTMLInputElement;
+    fileInput.click();
+  }
+  private resetForm() {}
   checkEmail(email: string): string | null {
     let errorMessage: string | null = null;
     this.emailduplicate = false;
-    
+
     this.authService.checkDuplicateEmail(email).subscribe({
       next: (response) => {
         console.log('Response:', response);
         console.log('Email is available');
         this.emailduplicate = false;
-
       },
       error: (err) => {
         this.emailduplicate = true;
-        const modal = document.getElementById('err_profile_update_2') as HTMLDialogElement;
+        const modal = document.getElementById(
+          'err_profile_update_2'
+        ) as HTMLDialogElement;
         modal.showModal();
-
-      }
+      },
     });
     return errorMessage;
   }
-  
 
-    get provinceControl(): FormControl {
-      return this.profileForm.get('province') as FormControl;
-    }
-    get districtControl(): FormControl {
-      return this.profileForm.get('district') as FormControl;
-    }
-    get sub_districtControl(): FormControl {
-      return this.profileForm.get('sub_district') as FormControl;
-    }
-    get postcodeControl(): FormControl {
-      return this.profileForm.get('postcode') as FormControl;
-    }
-
+  get provinceControl(): FormControl {
+    return this.profileForm.get('province') as FormControl;
+  }
+  get districtControl(): FormControl {
+    return this.profileForm.get('district') as FormControl;
+  }
+  get sub_districtControl(): FormControl {
+    return this.profileForm.get('sub_district') as FormControl;
+  }
+  get postcodeControl(): FormControl {
+    return this.profileForm.get('postcode') as FormControl;
+  }
 }

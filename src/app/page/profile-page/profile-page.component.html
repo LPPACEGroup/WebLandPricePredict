@@ -5,11 +5,13 @@
 
         <div class="left-flex">
           <div class="pt-4  border-8 border-white rounded-full relative">
-            <img *ngIf="profileForm.disabled" [src]="profilePicture" alt="avatar"
+
+            <img *ngIf="imagePreview" [src]="imagePreview" alt="avatar"
               class="w-[240px] h-[240px] rounded-full object-cover " />
-            <img *ngIf="!profileForm.disabled&&imagePreview" [src]="imagePreview" alt="avatar"
-              class="w-[240px] h-[240px] rounded-full object-cover " />
-            <div *ngIf="!profileForm.disabled&&!imagePreview" class="bg-grey w-[240px] h-[240px]  rounded-full"></div>
+            <div *ngIf="!imagePreview" class="bg-grey w-[240px] h-[240px]  rounded-full overflow-clip">
+              <img src="assets/imgs/default_profile.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+
+            </div>
 
             <label for="profilePicture" class="sr-only">Profile Picture</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture"

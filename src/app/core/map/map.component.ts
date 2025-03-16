@@ -13,6 +13,7 @@ import { GetJsonService } from 'app/service/GetJson/get-json.service';
 import { style } from '@angular/animations';
 import { AuthService } from 'app/service/Auth/auth.service';
 import { DashboardService } from 'app/service/Dashboard/dashboard.service';
+import shp from 'shpjs';
 
 @Component({
   selector: 'app-map',
@@ -38,6 +39,7 @@ export class MapComponent implements OnChanges {
   // private p3 = L.geoJSON();
   // private p4 = L.geoJSON();
   private colorMap = L.featureGroup();
+  private mrtLayer : any;
 
   tier = "Basic";
   // Initialize the map
@@ -189,25 +191,36 @@ export class MapComponent implements OnChanges {
 
   // Switch between OSM and Google Satellite layers
   private switchMapLayer(layer: string): void {
+    // Remove all layers before switching
+    this.map.removeLayer(this.osmLayer);
+    this.map.removeLayer(this.googleSatLayer);
+    this.map.removeLayer(this.colorMap);
+    if (this.mrtLayer) {
+      this.map.removeLayer(this.mrtLayer); // Remove MRT if it exists
+    }
+  
     if (layer === 'osm') {
-      // Switch to OSM Layer
-      this.map.removeLayer(this.googleSatLayer);
-      this.map.removeLayer(this.colorMap)
       this.osmLayer.addTo(this.map);
     } else if (layer === 'satellite') {
-      // Switch to Google Satellite Layer
-      this.map.removeLayer(this.osmLayer);
-      this.map.removeLayer(this.colorMap)
       this.googleSatLayer.addTo(this.map);
-    }
-    else if (layer === 'colormap') {
-      // Switch to Colormap Layer
-      this.map.removeLayer(this.osmLayer);
+    } else if (layer === 'colormap') {
       this.osmLayer.addTo(this.map);
-      this.colorMap.addTo(this.map)
-
+      this.colorMap.addTo(this.map);
+    } else if (layer === 'mrt') {
+      this.osmLayer.addTo(this.map);
+  
+      // ✅ Check if MRT layer exists; load if not
+      if (!this.mrtLayer) {
+        this.loadShapefile('assets/layers/mrt_station.zip', 'MRT', (layer) => {
+          this.mrtLayer = layer;
+          this.mrtLayer.addTo(this.map);
+        });
+      } else {
+        this.mrtLayer.addTo(this.map);
+      }
     }
   }
+  
   constructor(private getJsonService: GetJsonService, private auth: AuthService ,private dashBoardService: DashboardService) {
     this.getJsonService
       .getJson('assets/layers/latkrabang.geojson')
@@ -265,6 +278,7 @@ export class MapComponent implements OnChanges {
       },
     }))
       });
+
   }
 
   ngOnInit() {
@@ -314,5 +328,28 @@ export class MapComponent implements OnChanges {
 
     return result;
   }
+  private loadShapefile(zipUrl: string, layerName: string, callback?: (layer: L.Layer) => void) {
+    fetch(zipUrl)
+      .then(response => response.arrayBuffer())
+      .then(buffer => shp(buffer)) // Convert ZIP to GeoJSON
+      .then(geojson => {
+        const layer = L.geoJSON(geojson, {
+          pointToLayer: (feature, latlng) => {
+            return L.circleMarker(latlng, {
+              radius: 5, // Adjust size
+              color: 'blue', // Outline color
+              fillColor: 'blue', // Fill color
+              fillOpacity: 0.8
+            });
+          }
+        });
+  
+        if (callback) callback(layer);
+      })
+      .catch(error => console.error(`Error loading ${layerName}:`, error));
+  }
+  
+  
+  
 
 }

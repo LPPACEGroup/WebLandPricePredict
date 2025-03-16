@@ -49,7 +49,6 @@ export class SignupPageComponent {
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
 
-  
   @HostListener('wheel', ['$event'])
   onWheel(event: Event) {
     event.preventDefault();
@@ -66,17 +65,27 @@ export class SignupPageComponent {
     this.signupForm = this.fb.group(
       {
         username: ['', [Validators.required]], // Example: username with min length
-        password: ['', [Validators.required, Validators.minLength(8)]], // Example: password validation
+        password: [
+          '',
+          [Validators.required, Validators.minLength(8),          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/),
+          ],
+        ], // Example: password validation
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]], // Example: password
         email: ['', [Validators.required, Validators.email]], // Email validation
-        firstName: ['', [
-          Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
-        ]], // First name required
-        lastName: ['', [
-          Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
-        ]], // Last name required
+        firstName: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/), // Allows alphabetic characters and accented characters only
+          ],
+        ], // First name required
+        lastName: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/), // Allows alphabetic characters and accented characters only
+          ],
+        ], // Last name required
         gender: ['', Validators.required], // Gender required
         birthDate: ['', Validators.required], // Birth date required
         telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
@@ -131,8 +140,8 @@ export class SignupPageComponent {
           control?.markAsTouched(); // Mark the field as touched
           if (control?.invalid) {
             console.log(control.invalid);
-            console.log(this.signupForm.get('telephone')?.errors);  
-          
+            console.log(this.signupForm.get('telephone')?.errors);
+
             isValid = false;
           }
         });
@@ -157,9 +166,9 @@ export class SignupPageComponent {
       }
 
       if (!isValid) {
-
-
-        const modal = document.getElementById('signup_warning_1') as HTMLDialogElement;
+        const modal = document.getElementById(
+          'signup_warning_1'
+        ) as HTMLDialogElement;
         modal.showModal();
         return; // Stop if any visible field is invalid
       }
@@ -182,7 +191,7 @@ export class SignupPageComponent {
     this.signupForm.patchValue({
       postcode: this.signupForm.value.postcode.toString(),
     });
-  
+
     // Prepare the user data
     const newuser: User = {
       userName: this.signupForm.value.username,
@@ -203,65 +212,74 @@ export class SignupPageComponent {
       alley: this.signupForm.value.alley,
       landTypeFV: this.signupForm.value.interestLand,
     };
-  
+
     // Step 1: Create the user
     this.authService.signup(newuser).subscribe({
       next: (response: any) => {
         console.log('User created successfully:', response);
         const userId = response.UserID;
-  
+
         // Step 2: Upload the profile picture if selected
         const profilePicture = this.selectedFile;
         if (profilePicture) {
-          this.authService.uploadProfile(userId,profilePicture).subscribe({
+          this.authService.uploadProfile(userId, profilePicture).subscribe({
             next: (uploadResponse) => {
-              console.log('Profile picture uploaded successfully:', uploadResponse);
+              console.log(
+                'Profile picture uploaded successfully:',
+                uploadResponse
+              );
 
-              const modal = document.getElementById('signup_sucess') as HTMLDialogElement;
+              const modal = document.getElementById(
+                'signup_sucess'
+              ) as HTMLDialogElement;
               modal.showModal();
             },
             error: (uploadError) => {
               console.error('Profile picture upload failed:', uploadError);
 
-              const modal = document.getElementById('signup_err_1') as HTMLDialogElement;
+              const modal = document.getElementById(
+                'signup_err_1'
+              ) as HTMLDialogElement;
               modal.showModal();
-            }
+            },
           });
         } else {
-
-          const modal = document.getElementById('signup_sucess') as HTMLDialogElement;
+          const modal = document.getElementById(
+            'signup_sucess'
+          ) as HTMLDialogElement;
           modal.showModal();
-
         }
       },
       error: (error) => {
         console.error('การสมัครสมาชิกล้มเหลว', error);
         this.errorMessage = error.error.message;
-      }
+      },
     });
   }
 
- // Trigger file input when the button is clicked
- triggerFileInput(): void {
-  const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
-  fileInput.click();
-}
-
-// Handle file selection
-onFileSelected(event: any): void {
-  const file: File = event.target.files[0];
-  if (file) {
-    // Update the form control
-    this.selectedFile = file;
-
-    // Read the file and create a preview
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
-    reader.readAsDataURL(file);
+  // Trigger file input when the button is clicked
+  triggerFileInput(): void {
+    const fileInput = document.getElementById(
+      'profilePicture'
+    ) as HTMLInputElement;
+    fileInput.click();
   }
-}
+
+  // Handle file selection
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      // Update the form control
+      this.selectedFile = file;
+
+      // Read the file and create a preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
   ngOnInit() {
     this.thaiLocationService?.getProvince().then((data) => {
       this.Province = data;
@@ -387,16 +405,17 @@ onFileSelected(event: any): void {
         console.log('Response:', response);
         // Handle successful response here
         this.currentStep = 2;
-        
       },
       error: (err) => {
         console.error('Error:', err);
         // Handle error here
         if (err.status === 409) {
-          const modal = document.getElementById('signup_err_2') as HTMLDialogElement;
+          const modal = document.getElementById(
+            'signup_err_2'
+          ) as HTMLDialogElement;
           modal.showModal();
         }
-      }
+      },
     });
   }
   get provinceControl(): FormControl {
