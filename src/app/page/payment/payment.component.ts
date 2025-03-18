@@ -30,6 +30,7 @@ export class PaymentComponent {
   paymentVerified = false;
   PaymentData = true;
   userTier = 'Basic';
+  loading = true;
 
   constructor(
     private fb: FormBuilder,
@@ -60,6 +61,7 @@ export class PaymentComponent {
 
     this.auth.getTier().subscribe((response) => {
       this.userTier = response;
+      this.loading = false;
     });
 
     // check payment verified to prevent user from submitting payment proof multiple times while the previous payment is still being processed
