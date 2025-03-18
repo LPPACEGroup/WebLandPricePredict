@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsermanagementService {
-
-  apiURL = 'http://192.168.1.7:30080/api';
-  private image_URL = 'http://192.168.1.7:30600';
+  apiURL = environment.BE_URL;
+  private image_URL = environment.API_URL;
 
   constructor(private http: HttpClient) {
 

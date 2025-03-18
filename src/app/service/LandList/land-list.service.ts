@@ -3,16 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FollowLand } from 'model/follow.interface';
 import { AuthService } from '../Auth/auth.service';
-
-
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LandListService {
-
-  apiURL = 'http://192.168.1.7:30080/api';
-  private image_URL = 'http://192.168.1.7:30600';
+  apiURL = environment.BE_URL;
+  private image_URL = environment.API_URL;
 
   constructor(private http:HttpClient, private auth :AuthService) { }
 

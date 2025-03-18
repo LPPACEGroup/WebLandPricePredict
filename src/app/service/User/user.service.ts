@@ -4,12 +4,13 @@ import { AuthService } from '../Auth/auth.service';
 import { Observable } from 'rxjs';
 import { User } from 'model/user.interface';
 import {SunmitPayment} from 'model/payment.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private image_URL = 'http://192.168.1.7:30600';
+  private image_URL = environment.API_URL;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

@@ -2,14 +2,14 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'model/user.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // ต้องเปลี่ยนเป็น ชื่อ service backend ที่เราตั้งไว้
-  apiURL = 'http://192.168.1.7:30080/api';
-  private image_URL = 'http://192.168.1.7:30600';
+  apiURL = environment.BE_URL;
+  private image_URL = environment.API_URL;
 
   private signedIn = new BehaviorSubject<boolean>(false);
   isSignedIn$ = this.signedIn.asObservable();

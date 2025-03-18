@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Blog } from 'model/blog.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  apiURL = 'http://192.168.1.7:30080/api';
+  apiURL = environment.BE_URL;
+
   constructor(private http: HttpClient) {}
 
   getBlogs(): Observable<any> {

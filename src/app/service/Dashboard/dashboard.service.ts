@@ -1,30 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
+  apiURL = environment.PD_URL;
+  baseUrl = environment.BE_URL;
+  ServerAPI = environment.API_URL;
+  Land_estimate = environment.LE_URL;
 
-  apiURL = 'http://192.168.1.7:30070"';
-  baseUrl = 'http://192.168.1.7:30080/api';
   constructor(private http: HttpClient) {
   }
 
   getDashboardData(month:number): Observable<any> {
-    return this.http.get(`http://192.168.1.7:30070/predict/${month}`);
+    return this.http.get(`${this.apiURL}/predict/${month}`);
   }
   getPriceAvg(month:number): Observable<any> {
     return this.http.get(`${this.baseUrl}/price_avg_last_n_months/${month}` );
   }
 
   goodSale(districts:string): Observable<any> {
-    return this.http.get(`http://192.168.1.7:30600/get_goodsale_analytics?districts=${districts}`);
+    return this.http.get(`${this.ServerAPI}/get_goodsale_analytics?districts=${districts}`);
   }
 
   interestLevel(id:string): Observable<any> {
-    return this.http.get(`http://192.168.1.7:30500/api/land/estimate/${id}`);
+    return this.http.get(`${this.Land_estimate}/api/land/estimate/${id}`);
   }
 
   landTax(payload:any): Observable<any> {
@@ -32,7 +35,7 @@ export class DashboardService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     };
-    return this.http.post(`http://192.168.1.7:30600/calculate_land_tax`, payload, { headers });
+    return this.http.post(`${this.ServerAPI}/calculate_land_tax`, payload, { headers });
   }
 
   getIconName(placeType: string): string {
