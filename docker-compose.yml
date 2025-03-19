@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend:
+    # Your image Or this image
+    image: neerachal/deploy_febe_lppm:v0.2.1
+    ports:
+      - "30008:80"
+    environment:
+      - API_URL=http://localhost:30600
+      - BE_URL=http://localhost:30080/api
+      - LE_URL=http://localhost:30500
+      - DB_URL=http://localhost:30036
+      - PD_URL=http://localhost:30070
+
+# docker-compose up -d

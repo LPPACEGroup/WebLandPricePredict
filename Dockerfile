@@ -1,8 +1,7 @@
-### STAGE 1: Build ###
 FROM node:18.17.1-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-# RUN npx ngcc --properties es2023 browser module main --first-only --create-ivy-entry-points
+
 COPY . .
 RUN npm install
 RUN npm run build -- --configuration production
