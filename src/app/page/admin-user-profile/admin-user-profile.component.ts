@@ -71,7 +71,7 @@ export class AdminUserProfileComponent {
       Tier :['Basic']
     })
     this.verifyForm = fb.group({
-      Verify:[false]
+      Verify:[0]
     })
    }
 
