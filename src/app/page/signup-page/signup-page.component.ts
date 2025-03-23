@@ -48,6 +48,8 @@ export class SignupPageComponent {
   private thaiLocationService?: ThaiLocationService;
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
+  emailValid: boolean = false;
+  loading: boolean = false;
 
   @HostListener('wheel', ['$event'])
   onWheel(event: Event) {
@@ -64,10 +66,20 @@ export class SignupPageComponent {
     this.thaiLocationService = thaiLocationService;
     this.signupForm = this.fb.group(
       {
-        username: ['', [Validators.required]], // Example: username with min length
+        username: [
+          '',
+          [
+            Validators.required,
+
+            Validators.pattern('^[a-zA-Z0-9]+$'), // Only letters and numbers
+          ],
+        ],
         password: [
           '',
-          [Validators.required, Validators.minLength(8),          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/),
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/),
           ],
         ], // Example: password validation
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]], // Example: password
@@ -109,7 +121,7 @@ export class SignupPageComponent {
   }
 
   nextStep() {
-    if (this.currentStep < 4) {
+    if (this.currentStep < 3) {
       let isValid = true;
 
       if (this.currentStep == 1) {
@@ -126,7 +138,14 @@ export class SignupPageComponent {
             isValid = false;
           }
         });
-        this.checkEmail(this.signupForm.value.email);
+
+        //check email only after all fields are valid to make modal appear correctly
+        if (isValid) {
+          this.emailValid = false;
+          this.checkEmail(this.signupForm.value.email, () => {
+            this.checkUsername(this.signupForm.value.username);
+          });
+        }
       } else if (this.currentStep == 2) {
         const fieldsToValidate = [
           'firstName',
@@ -187,6 +206,8 @@ export class SignupPageComponent {
   }
 
   printForm() {
+
+
     // Ensure postcode is a string
     this.signupForm.patchValue({
       postcode: this.signupForm.value.postcode.toString(),
@@ -212,9 +233,15 @@ export class SignupPageComponent {
       alley: this.signupForm.value.alley,
       landTypeFV: this.signupForm.value.interestLand,
     };
+    console.log(newuser);
+    
 
     // Step 1: Create the user
-    this.authService.signup(newuser).subscribe({
+    this.loading = true;
+    this.authService.signup(newuser).subscribe(
+      {
+
+      
       next: (response: any) => {
         console.log('User created successfully:', response);
         const userId = response.UserID;
@@ -228,6 +255,7 @@ export class SignupPageComponent {
                 'Profile picture uploaded successfully:',
                 uploadResponse
               );
+              this.loading = false;
 
               const modal = document.getElementById(
                 'signup_sucess'
@@ -235,6 +263,7 @@ export class SignupPageComponent {
               modal.showModal();
             },
             error: (uploadError) => {
+              this.loading = false;
               console.error('Profile picture upload failed:', uploadError);
 
               const modal = document.getElementById(
@@ -244,6 +273,7 @@ export class SignupPageComponent {
             },
           });
         } else {
+          this.loading = false;
           const modal = document.getElementById(
             'signup_sucess'
           ) as HTMLDialogElement;
@@ -253,6 +283,7 @@ export class SignupPageComponent {
       error: (error) => {
         console.error('การสมัครสมาชิกล้มเหลว', error);
         this.errorMessage = error.error.message;
+        this.loading = false;
       },
     });
   }
@@ -399,8 +430,28 @@ export class SignupPageComponent {
       }
     });
   }
-  checkEmail(email: string): void {
+  checkEmail(email: string, callback: () => void): void {
     this.authService.checkUnauthorizedDuplicateEmail(email).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+        this.emailValid = true;
+        callback(); // Proceed to check username
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        if (err.status === 409) {
+          const modal = document.getElementById(
+            'signup_err_2'
+          ) as HTMLDialogElement;
+          modal.showModal();
+        }
+        this.emailValid = false;
+      },
+    });
+  }
+
+  checkUsername(username: string): void {
+    this.authService.checkUnauthorizedDuplicateUsername(username).subscribe({
       next: (response) => {
         console.log('Response:', response);
         // Handle successful response here
@@ -411,13 +462,14 @@ export class SignupPageComponent {
         // Handle error here
         if (err.status === 409) {
           const modal = document.getElementById(
-            'signup_err_2'
+            'signup_err_3'
           ) as HTMLDialogElement;
           modal.showModal();
         }
       },
     });
   }
+
   get provinceControl(): FormControl {
     return this.signupForm.get('province') as FormControl;
   }
