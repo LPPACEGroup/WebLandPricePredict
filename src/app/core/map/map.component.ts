@@ -14,11 +14,12 @@ import { style } from '@angular/animations';
 import { AuthService } from 'app/service/Auth/auth.service';
 import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 import shp from 'shpjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
@@ -32,7 +33,7 @@ export class MapComponent implements OnChanges {
   private markersLayer = L.layerGroup();
   private osmLayer!: L.TileLayer;
   private googleSatLayer!: L.TileLayer;
-  private markerManage: boolean = false;
+  markerManage: boolean = false;
   private geodata: any;
   // private p1 = L.geoJSON();
   // private p2 = L.geoJSON();
@@ -40,6 +41,7 @@ export class MapComponent implements OnChanges {
   // private p4 = L.geoJSON();
   private colorMap = L.featureGroup();
   private mrtLayer : any;
+  private radius = 500;
 
   tier = "Basic";
   // Initialize the map
@@ -142,39 +144,49 @@ export class MapComponent implements OnChanges {
         'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
       shadowSize: [41, 41],
     });
-
+  
     const marker = L.marker([latitude, longitude], { icon: customIcon });
+  
+    const radius = this.radius; // Radius in meters
+    const circle = L.circle([latitude, longitude], {
+      color: 'blue',
+      fillColor: 'blue',
+      fillOpacity: 0.2,
+      radius: radius,
+    });
+  
     console.log(this.markerCoord.length);
-    
+  
     if (
-      (this.tier === 'Tier1' && this.markerCoord.length+1 > 1) ||
-      (this.tier === 'Tier2' && this.markerCoord.length+1 > 3) ||
-      (this.tier === 'Tier3' && this.markerCoord.length+1 > 10)
+      (this.tier === 'Tier1' && this.markerCoord.length + 1 > 1) ||
+      (this.tier === 'Tier2' && this.markerCoord.length + 1 > 3) ||
+      (this.tier === 'Tier3' && this.markerCoord.length + 1 > 10)
     ) {
       const modal = document.getElementById('warn_marker_1') as HTMLDialogElement;
       modal.showModal();
       return;
     }
+  
     this.markerCoord.push([latitude, longitude]);
-    
-    // marker.bindPopup(
-    //   `<b>Custom Location</b><br>Latitude: ${latitude}, Longitude: ${longitude}`
-    // );
+  
+    // remove if click on marker when markerManage is true
     marker.on('click', (e: L.LeafletMouseEvent) => {
       if (this.markerManage) {
         this.map.removeLayer(marker);
+        this.map.removeLayer(circle); // Remove the circle when marker is removed
         this.markerCoord = this.markerCoord.filter(
           (coord) => coord[0] !== latitude && coord[1] !== longitude
         );
         this.markerCoordOutput.emit(this.markerCoord);
       }
     });
-
+  
     this.markerCoordOutput.emit(this.markerCoord);
-    // console.log(this.markerCoord);
-
+  
     this.markersLayer.addLayer(marker);
+    this.markersLayer.addLayer(circle); // Add circle to the same layer as markers
   }
+  
 
   // Handle changes to input properties
   ngOnChanges(changes: SimpleChanges): void {
@@ -284,6 +296,19 @@ export class MapComponent implements OnChanges {
   ngOnInit() {
     this.auth.getTier().subscribe((data) => {
       this.tier = data;
+
+      if (this.tier === 'Basic') {
+        this.radius = 0;
+      }
+      else if (this.tier === 'Tier1') {
+        this.radius = 2000;
+      }
+      else if (this.tier === 'Tier2') {
+        this.radius = 4000;
+      }
+      else if (this.tier === 'Tier3') {
+        this.radius = 8000;
+      }
       
     });
     
