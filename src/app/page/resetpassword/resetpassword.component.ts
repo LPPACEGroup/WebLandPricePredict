@@ -18,7 +18,7 @@ token: string | null = null;
 
   constructor(private authService: AuthService, private router: Router,private route: ActivatedRoute) {
     this.resetPassword = new FormGroup({
-      newpassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      newpassword: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/),]),
     });
   }
 

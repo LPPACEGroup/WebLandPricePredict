@@ -108,7 +108,7 @@
                 </div>
                 <form [formGroup]="verifyForm" *ngIf="userPaymentDetails.SubmissionDate">
                   <select id="status" title="สถานะการตรวจสอบ" formControlName="Verify"
-                    class="w-full rounded-md p-2  " [ngClass]="verifyForm.value.Verify === 0 ? 'bg-light-grey font-bold text-grey' : 'bg-lightGreen font-bold text-midGreen'" (change)="verficationUpdate()">
+                    class="w-full rounded-md p-2  " [ngClass]="verifyForm.value.Verify == false ? 'bg-light-grey font-bold text-grey' : 'bg-lightGreen font-bold text-midGreen'" (change)="verficationUpdate()">
                     <option [ngValue]="0" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
                     <option [ngValue]="1" onclick="" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว
                     </option>

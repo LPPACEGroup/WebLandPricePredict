@@ -138,7 +138,8 @@ export class AdminUserProfileComponent {
             this.paidPrice = 499;
           }
 
-
+          console.log(this.userPaymentDetails.Verified);
+          
           this.loading = false
         },
         error:(error) => {

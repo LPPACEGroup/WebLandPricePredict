@@ -1,4 +1,4 @@
-<form *ngIf="!loading" class="min-h-nmax" [formGroup]="profileForm">
+<form *ngIf="!loading" class="min-h-nmax" [formGroup]="profileForm"  (ngSubmit)="saveChanges()" (keydown.enter)="saveChanges()">
   <div class="bg">
     <div class="scrollable-content">
       <div class="profile-container ">
@@ -104,7 +104,7 @@
                 </span>
                 <span>ยกเลิก</span>
               </button>
-              <button (click)="saveChanges()" class="button bg-midGreen text-white border">
+              <button  class="button bg-midGreen text-white border" type="submit">
                 <span class="">
                   <img src="\assets\icons\save file.svg" alt="icon" class="w-6 h-6" />
                 </span>
@@ -232,3 +232,19 @@
     </div>
   </div>
 </dialog>
+
+<dialog id="err_profile_update_3" class="modal ">
+  <div class="modal-box  text-darkBlue">
+      <p class="py-4">ชื่อผู้ใช้งานนี้มีอยู่ในระบบอยู่แล้ว โปรดแก้ไข</p>
+      <div class="modal-action">
+          <form method="dialog">
+              <button class="btn bg-darkBlue text-white">รับทราบ</button>
+          </form>
+      </div>
+  </div>
+</dialog>
+
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+</div>
