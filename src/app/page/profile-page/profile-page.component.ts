@@ -62,7 +62,8 @@ export class ProfilePageComponent implements OnInit {
   userId: number = -1;
   tier: string = '';
   emailerrMessage: string = '';
-  emailduplicate: boolean = false;
+  emailValid: boolean = false;
+  usernameduplicate: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -331,16 +332,30 @@ export class ProfilePageComponent implements OnInit {
     this.profileForm.patchValue({
       postcode: this.profileForm.value.postcode.toString(),
     });
-    this.checkEmail(this.profileForm.value.email);
+    
+    this.loading = true;
+    this.emailValid = true;
+    this.usernameduplicate = true;
 
-    if (this.emailduplicate) {
-      return;
-    }
+    this.checkEmail(this.profileForm.value.email, () => {
+      this.checkUsername(this.profileForm.value.username, () => {
+        this.uploadProfile();
+      }
+      );
+    });
 
+
+
+    
+  }
+
+
+  uploadProfile()
+  {
     if (this.profileForm.valid) {
       this.sEditing = false;
+      
 
-      console.log('saveChanges');
 
       const profileUpdate: any = {
         Username: this.profileForm.value.username,
@@ -374,9 +389,11 @@ export class ProfilePageComponent implements OnInit {
               .uploadProfile(this.userId, this.selectedFile)
               .subscribe({
                 next: (response) => {
+                  this.loading = false;
                   console.log(response);
                 },
                 error: (error) => {
+                  this.loading = false;
                   console.error(error);
                 },
               });
@@ -384,6 +401,7 @@ export class ProfilePageComponent implements OnInit {
           }
         },
         error: (error) => {
+          this.loading = false;
           this.errorMessage = error.message;
         },
       });
@@ -391,6 +409,7 @@ export class ProfilePageComponent implements OnInit {
       this.profileForm.disable();
     } 
     else {
+      this.loading = false;
       console.log(this.profileForm.value);
 
       const modal = document.getElementById(
@@ -411,26 +430,52 @@ export class ProfilePageComponent implements OnInit {
     fileInput.click();
   }
   private resetForm() {}
-  checkEmail(email: string): string | null {
-    let errorMessage: string | null = null;
-    this.emailduplicate = false;
 
+  checkEmail(email: string, callback: () => void): void {
     this.authService.checkDuplicateEmail(email).subscribe({
       next: (response) => {
         console.log('Response:', response);
-        console.log('Email is available');
-        this.emailduplicate = false;
+        this.emailValid = true;
+        callback(); // Proceed to check username
       },
       error: (err) => {
-        this.emailduplicate = true;
-        const modal = document.getElementById(
-          'err_profile_update_2'
-        ) as HTMLDialogElement;
-        modal.showModal();
+        console.error('Error:', err);
+        if (err.status === 409) {
+
+          const modal = document.getElementById(
+            'err_profile_update_2'
+          ) as HTMLDialogElement;
+          modal.showModal();
+
+          this.loading = false;
+        }
+        this.emailValid = false;
       },
     });
-    return errorMessage;
   }
+
+  checkUsername(username: string, callback: () => void): void {
+    this.authService.checkDuplicateUsername(username).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+        this.usernameduplicate = true;
+        callback();
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        if (err.status === 409) {
+          const modal = document.getElementById(
+            'err_profile_update_3'
+          ) as HTMLDialogElement;
+          modal.showModal();
+          this.loading = false;
+        }
+        this.usernameduplicate = false;
+      },
+    });
+  }
+
+
 
   get provinceControl(): FormControl {
     return this.profileForm.get('province') as FormControl;

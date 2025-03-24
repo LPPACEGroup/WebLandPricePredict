@@ -71,7 +71,12 @@
                     [ngClass]="userPaymentDetails.SubmissionDate=='-'?'text-brightRed':'text-darkBlue'">
                     {{userPaymentDetails.SubmissionDate=="-"?"ยังไม่ได้ชำระเงิน":userPaymentDetails.SubmissionDate}}</p>
                 </div>
-
+                <div class="grid grid-cols-2 mt-2 " *ngIf="userPaymentDetails.SubmissionDate!='-'">
+                  <p class="text-[10px] font-bold text-darkBlue">จำนวนเงินที่ชำระ:</p>
+                  <p class="text-[10px] font-medium text-center text-darkBlue"
+                    >
+                    {{paidPrice}}</p>
+                </div>
               </div>
 
               <div class="w-[50%] p-4 space-y-5">
@@ -103,9 +108,9 @@
                 </div>
                 <form [formGroup]="verifyForm" *ngIf="userPaymentDetails.SubmissionDate">
                   <select id="status" title="สถานะการตรวจสอบ" formControlName="Verify"
-                    class="w-full rounded-md p-2 bg-light-grey font-bold text-grey " (change)="verficationUpdate()">
-                    <option [ngValue]="false" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
-                    <option [ngValue]="true" onclick="" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว
+                    class="w-full rounded-md p-2  " [ngClass]="verifyForm.value.Verify == false ? 'bg-light-grey font-bold text-grey' : 'bg-lightGreen font-bold text-midGreen'" (change)="verficationUpdate()">
+                    <option [ngValue]="0" class="bg-lightOrange font-bold text-darkOrange">ไม่ได้ตรวจสอบ</option>
+                    <option [ngValue]="1" onclick="" class="bg-lightGreen font-bold text-midGreen">ตรวจสอบแล้ว
                     </option>
                   </select>
                   <!-- <select id="status" title="สถานะการตรวจสอบ"
