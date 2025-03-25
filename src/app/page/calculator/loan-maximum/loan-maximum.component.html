@@ -5,13 +5,13 @@
         <label class="text-darkBlue text-right min-w-[200px]">รายได้รวมต่อเดือน</label>
         <input type="number" min="0" step="any" [(ngModel)]="monthlyIncome"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="monthlyIncome"
-          placeholder="รายได้รวมต่อเดือน (บาท)" />
+          placeholder="รายได้รวมต่อเดือน (บาท)" min="0" (keydown)="preventNegative($event)" required />
       </div>
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">ระยะเวลากู้</label>
         <input type="number" min="0" step="any" [(ngModel)]="loanTerm"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="loanTerm"
-          placeholder="ระยะเวลากู้ (ปี)" />
+          placeholder="ระยะเวลากู้ (ปี)" min="0" (keydown)="preventNegative($event)" required />
       </div>
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">
@@ -19,14 +19,14 @@
         </label>
         <input type="number" min="0" step="any" [(ngModel)]="interestRate"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="interestRate"
-          placeholder="อัตราดอกเบี้ย (%)" />
+          placeholder="อัตราดอกเบี้ย (%)" min="0" (keydown)="preventNegative($event)" required/>
       </div>
       <div class="gap-1">
         <div class="flex items-center justify-between">
           <label class="text-darkBlue text-right min-w-[200px]">%วงเงินกู้สูงสุดของรายได้</label>
-          <input type="number" min="0" step="any" [(ngModel)]="maximumLoanPercentage"
+          <input type="number" min="0" step="any" [(ngModel)]="DTI"
             class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="maximumLoanPercentage"
-            placeholder="เปอร์เซ็นต์วงเงินกู้สูงสุดของรายได้ (%)" />
+            placeholder="เปอร์เซ็นต์วงเงินกู้สูงสุดของรายได้ (%)" min="0" (keydown)="preventNegative($event)" required/>
         </div>
         <div class="flex justify-end">
           <p class="text-oceanBlue font-thin text-sm ">
@@ -41,7 +41,7 @@
           </label>
           <input type="number" min="0" step="any" [(ngModel)]="monthlyDebt"
             class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="currentLoanAmount"
-            placeholder="ภาระหนี้สินต่อเดือน (บาท)" />
+            placeholder="ภาระหนี้สินต่อเดือน (บาท)" min="0" (keydown)="preventNegative($event)" required/>
         </div>
         <div class="flex justify-end">
           <p class="text-oceanBlue font-thin text-sm ">

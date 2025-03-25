@@ -1,8 +1,8 @@
-<div class=" h-screen bg-blue flex-center">
+<div *ngIf="!loading" class=" h-screen bg-blue flex-center">
 
     <div class="bg-white w-1/2 h-2/3 rounded-xl " *ngIf="currentStep ==1">
         <form class="flex flex-col  items-center justify-center gap-3 h-full w-full" [formGroup]="signupForm">
-            <h1 class="text-2xl font-bold pb-5">ลงทะเบียนผู้ใช้งาน</h1>
+            <h1 class="text-2xl font-bold pb-5 text-darkBlue">ลงทะเบียนผู้ใช้งาน</h1>
 
 
             <ol
@@ -19,7 +19,11 @@
 
             </ol>
 
-            <div class="flex w-9/12 justify-center items-center">
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 w-full text-center"
+                    *ngIf="signupForm.get('username')?.hasError('pattern') && signupForm.get('username')?.touched">
+                    รูปแบบ ชื่อผู้ใช้งานไม่ถูกต้อง สามารถใช้ตัวอักษร ตัวเลขได้เท่านั้น
+                </div>
                 <label for="username" class="input-label">ชื่อผู้ใช้งาน</label>
                 <input class="input-box" type="text" formControlName="username" placeholder="ชื่อผู้ใช้งาน">
             </div>
@@ -35,7 +39,12 @@
                 <label for="email" class=" input-label">อีเมล</label>
                 <input class="input-box" type="email" formControlName="email" placeholder="อีเมล">
             </div>
-            <div class="flex w-9/12 justify-center items-center">
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-brightRed w-full text-center"
+                    *ngIf="signupForm.get('password')?.hasError('pattern')  && signupForm.get('password')?.touched">
+                    รหัสผ่านต้องมีความยาว 8 ตัวอักษรขึ้นไป มีตัวอักษรตัวใหญ่ ตัวเล็ก และตัวเลข อย่างน้อย 1 ตัว
+                </div>
+
                 <label for="password" class=" input-label">รหัสผ่าน</label>
                 <input class="input-box" type="password" formControlName="password" placeholder="รหัสผ่าน">
             </div>
@@ -51,9 +60,9 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4 ">
-                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
+                <button  class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
                     routerLink="/signin"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ยกเลิก</button>
-                <button type="submit" class=" btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
+                <button  class=" btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
                     (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
             <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a routerLink="/Signin"
@@ -63,7 +72,8 @@
     <div class="bg-white w-1/2 h-5/6 rounded-xl" *ngIf="currentStep == 2">
         <form class="flex flex-col items-center gap-3 h-full w-full" [formGroup]="signupForm">
             <h1 class="text-2xl font-bold pb-5">กรอกข้อมูลส่วนตัว</h1>
-            <ol class="flex items-center w-9/12 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-3 justify-between">
+            <ol
+                class="flex items-center w-9/12 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base mb-3 justify-between">
                 <li class="rounded-full bg-yellow w-2 h-2"></li>
                 <li class="w-[30%] h-[1px] bg-yellow"></li>
                 <li class="rounded-full bg-yellow w-2 h-2"></li>
@@ -72,31 +82,39 @@
                 <li class="w-[30%] h-[1px] bg-gray-300"></li>
                 <li class="rounded-full bg-slate-300 w-2 h-2"></li>
             </ol>
-    
+
             <!-- Image Preview and Upload Button -->
             <div class="relative">
                 <!-- Image Preview -->
-                <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Picture Preview" class="w-24 h-24 rounded-full object-cover">
+                <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Picture Preview"
+                    class="w-24 h-24 rounded-full object-cover">
                 <!-- Gray Circle (Fallback if no image is selected) -->
-                <div *ngIf="!imagePreview" class="bg-grey w-24 h-24 rounded-full"></div>
+                <div *ngIf="!imagePreview" class="bg-grey w-24 h-24 rounded-full overflow-clip">
+                    <img src="assets/imgs/default_profile.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+                </div>
                 <!-- Hidden File Input -->
-                <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden" >
+                <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" title="Profile Picture"
+                    class="hidden">
                 <!-- Upload Button -->
-                <button type="button" class="btn btn-sm absolute -bottom-2 -right-2 bg-white text-grey border-gray-400 rounded-full p-2 shadow-md" (click)="triggerFileInput()">
+                <button type="button" title="Upload Profile Picture"
+                    class="btn btn-sm absolute -bottom-2 -right-2 bg-white text-grey border-gray-400 rounded-full p-2 shadow-md"
+                    (click)="triggerFileInput()">
                     <mat-icon fontIcon="image"></mat-icon>
                 </button>
             </div>
             <p>ไฟล์ต้องเป็น jpg และ png เท่านั้น</p>
             <!-- Rest of the Form -->
             <div class="flex w-9/12 justify-center items-center flex-wrap">
-                <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('firstName')?.hasError('pattern') && signupForm.get('firstName')?.touched">
+                <div class="text-red-500 text-center w-full"
+                    *ngIf="signupForm.get('firstName')?.hasError('pattern') && signupForm.get('firstName')?.touched">
                     อนุณาตให้ใส่เฉพาะตัวอักษรเท่านั้น
                 </div>
                 <label for="firstName" class="input-label">ชื่อจริง</label>
                 <input class="input-box" type="text" formControlName="firstName" placeholder="ชื่อจริง">
             </div>
             <div class="flex w-9/12 justify-center items-center flex-wrap">
-                <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('lastName')?.hasError('pattern') && signupForm.get('lastName')?.touched">
+                <div class="text-red-500 text-center w-full"
+                    *ngIf="signupForm.get('lastName')?.hasError('pattern') && signupForm.get('lastName')?.touched">
                     อนุณาตให้ใส่เฉพาะตัวอักษรเท่านั้น
                 </div>
                 <label for="lastName" class="input-label">นามสกุล</label>
@@ -111,7 +129,8 @@
                 </select>
             </div>
             <div class="flex w-9/12 justify-center items-center flex-wrap">
-                <div class="text-red-500 text-center w-full" *ngIf="signupForm.get('telephone')?.hasError('pattern') && signupForm.get('telephone')?.touched">
+                <div class="text-red-500 text-center w-full"
+                    *ngIf="signupForm.get('telephone')?.hasError('pattern') && signupForm.get('telephone')?.touched">
                     รูปแบบเบอร์โทรไม่ถูกต้อง
                 </div>
                 <label for="telephone" class="input-label appearance-none">เบอร์โทร</label>
@@ -121,16 +140,19 @@
                 <label for="birthDate" class="input-label">วันเดือนปีเกิด</label>
                 <input class="input-select" type="date" formControlName="birthDate" placeholder="วันเดือนปีเกิด">
             </div>
-    
+
             <div class="mt-6 flex gap-x-4 w-3/4">
-                <button type="button" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400" (click)="perviousStep()">
+                <button type="button" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                    (click)="perviousStep()">
                     <mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ
                 </button>
-                <button type="submit" class="btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full" (click)="nextStep()">
+                <button  class="btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
+                    (click)="nextStep()">
                     ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon>
                 </button>
             </div>
-            <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a routerLink="/Signin" class="text-xl text-dark-blue font-semibold">ลงชื่อเข้าใช้งาน</a></p>
+            <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a routerLink="/Signin"
+                    class="text-xl text-dark-blue font-semibold">ลงชื่อเข้าใช้งาน</a></p>
         </form>
     </div>
     <div class="bg-white w-1/2 h-5/6 rounded-xl " *ngIf="currentStep ==3">
@@ -185,16 +207,16 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4">
-                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                <button  class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
                     (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
-                    <button type="button" class=" btn btn-sm h-10 flex-center bg-darkBlue text-white w-full"
+                <button type="button" class=" btn btn-sm h-10 flex-center bg-darkBlue text-white w-full"
                     (click)="printForm()">สร้างบัญชี<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
             <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a routerLink="/Signin"
                     class="text-xl text-dark-blue font-semibold ">ลงชื่อเข้าใช้งาน</a></p>
         </form>
     </div>
-    
+
 
 </div>
 
@@ -202,44 +224,59 @@
 <!-- modal sign up update -->
 <dialog id="signup_sucess" class="modal ">
     <div class="modal-box  text-darkBlue">
-      <p class="py-4">การสมัครสมาชิกเสร็จสิ้น</p>
-      <div class="modal-action">
-        <form method="dialog">
-          <button class="btn bg-darkBlue text-white" routerLink="Signin">รับทราบ</button>
-        </form>
-      </div>
+        <p class="py-4">การสมัครสมาชิกเสร็จสิ้น</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn bg-darkBlue text-white" routerLink="Signin">รับทราบ</button>
+            </form>
+        </div>
     </div>
-  </dialog>
+</dialog>
 
-  <dialog id="signup_warning_1" class="modal ">
+<dialog id="signup_warning_1" class="modal ">
     <div class="modal-box  text-darkBlue">
-      <p class="py-4">กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</p>
-      <div class="modal-action">
-        <form method="dialog">
-          <button class="btn bg-darkBlue text-white">รับทราบ</button>
-        </form>
-      </div>
+        <p class="py-4">กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn bg-darkBlue text-white">รับทราบ</button>
+            </form>
+        </div>
     </div>
-  </dialog>
+</dialog>
 
-  <dialog id="signup_err_1" class="modal ">
+<dialog id="signup_err_1" class="modal ">
     <div class="modal-box  text-darkBlue">
-      <p class="py-4">การสมัครสมาชิกเสร็จสิ้นแต่รูปภาพอัพโหลดไม่สำเร็จ</p>
-      <div class="modal-action">
-        <form method="dialog">
-          <button class="btn bg-darkBlue text-white">รับทราบ</button>
-        </form>
-      </div>
+        <p class="py-4">การสมัครสมาชิกเสร็จสิ้นแต่รูปภาพอัพโหลดไม่สำเร็จ</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn bg-darkBlue text-white" routerLink="Signin">รับทราบ</button>
+            </form>
+        </div>
     </div>
-  </dialog>
+</dialog>
 
-  <dialog id="signup_err_2" class="modal ">
+<dialog id="signup_err_2" class="modal ">
     <div class="modal-box  text-darkBlue">
-      <p class="py-4">อีเมลนี้มีอยู่ในระบบอยู่แล้ว</p>
-      <div class="modal-action">
-        <form method="dialog">
-          <button class="btn bg-darkBlue text-white">รับทราบ</button>
-        </form>
-      </div>
+        <p class="py-4">อีเมลนี้มีอยู่ในระบบอยู่แล้ว</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn bg-darkBlue text-white">รับทราบ</button>
+            </form>
+        </div>
     </div>
-  </dialog>
+</dialog>
+
+<dialog id="signup_err_3" class="modal ">
+    <div class="modal-box  text-darkBlue">
+        <p class="py-4">ชื่อผู้ใช้งานนี้มีอยู่ในระบบอยู่แล้ว</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn bg-darkBlue text-white">รับทราบ</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
+    <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+  </div>

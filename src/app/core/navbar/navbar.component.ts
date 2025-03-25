@@ -19,6 +19,7 @@ export class NavbarComponent {
   isDropdownOpen = false;
 
   @ViewChild(NotiComponent) notiComponent!: NotiComponent;
+isSubmenuVisible: any;
 
 
   constructor(
@@ -64,7 +65,7 @@ export class NavbarComponent {
       },
     });
 
-    
+
   }
 
   navigateNscroll(page: string,id: string) {
@@ -74,17 +75,17 @@ export class NavbarComponent {
       }, 100); // Small delay to ensure the DOM is updated
     });
   }
-  
+
 
 
 
   public updateUnreadNewsStatus(hasUnreadNews: boolean) {
     console.log('hasUnreadNews:', hasUnreadNews);
-    
+
     this.hasUnreadNews = hasUnreadNews
 
     console.log(this.hasUnreadNews);
-    
+
   }
 
   public triggerMarkAllAsRead() {
@@ -97,5 +98,7 @@ export class NavbarComponent {
     document.body.scrollTop = 0;
     document.getElementsByClassName('scrollable-content')[0].scrollTop = 0;
   }
-  
+  toggleSubmenu() {
+    this.isSubmenuVisible = !this.isSubmenuVisible;
+  }
 }

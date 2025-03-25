@@ -13,25 +13,43 @@ import { DecimalPipe, CommonModule  } from '@angular/common';
   styleUrl: './loan-calculator.component.css'
 })
 export class LoanCalculatorComponent {
-loanAmount!: number;
-interestRate!: number;
-installmentTerm!: number;
-monthlyPayment!: number;
-monthInterest!: number;
+
+  validatePositiveInput(event: Event, minValue: number) {
+    const inputElement = event.target as HTMLInputElement;
+    if (parseFloat(inputElement.value) < minValue) {
+      inputElement.value = minValue.toString();
+    }
+  }
+
+  preventNegative(event: KeyboardEvent) {
+    if (event.key === '-' || event.key === 'e') {
+      event.preventDefault();
+    }
+  }
+
+  loanAmount!: number;
+  interestRate!: number;
+  installmentTerm!: number;
+
+  monthlyPayment!: number;
+
+  monthInterest!: number;
   yearInterest!: number;
   totalLoanWithInterest!: number;
-  principalPayment!: number;
-
 
 calculate() {
-  const monthlyInterestRate = this.interestRate / 100 / 12;
-  const numberOfPayments = this.installmentTerm * 12;
+      const P = this.loanAmount;
+      const r = (this.interestRate / 100) / 12; // Convert annual rate to monthly
+      const n = this.installmentTerm * 12; // Convert years to months
 
-  this.monthlyPayment = (this.loanAmount * monthlyInterestRate) /
-    (1 - Math.pow(1 + monthlyInterestRate, -numberOfPayments));
+      if (r > 0) {
+        this.monthlyPayment = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      } else {
+        this.monthlyPayment = P / n; // For zero interest loans
+      }
 
-    this.monthInterest = this.monthlyPayment * monthlyInterestRate;
-    this.yearInterest = this.monthInterest * 12 * this.installmentTerm;
-    this.totalLoanWithInterest = this.monthlyPayment * numberOfPayments;
+      this.totalLoanWithInterest = this.monthlyPayment * n;
+      this.yearInterest = this.totalLoanWithInterest - P;
+      this.monthInterest = this.yearInterest / n;
 }
 }

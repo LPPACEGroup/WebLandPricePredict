@@ -30,6 +30,7 @@ export interface UserPaymentDetails {
 
 
 
+
 @Component({
   selector: 'app-admin-user-profile',
   standalone: true,
@@ -47,6 +48,7 @@ export class AdminUserProfileComponent {
   profilePicture: string = '';
   paymentPicture: string | undefined ;
   slipImage: string ='';
+  paidPrice!: number;
 
   constructor(private UMService:UsermanagementService,private route :ActivatedRoute ,private fb:FormBuilder, private userService: UserService,private router :Router) {
     this.userupdateForm = fb.group({
@@ -69,7 +71,7 @@ export class AdminUserProfileComponent {
       Tier :['Basic']
     })
     this.verifyForm = fb.group({
-      Verify:[false]
+      Verify:[0]
     })
    }
 
@@ -122,6 +124,22 @@ export class AdminUserProfileComponent {
           {
             this.verifyForm.disable()
           }
+
+          if (this.userPaymentDetails.Buytier == "Basic") {
+            this.paidPrice = 0;
+          }
+          else if (this.userPaymentDetails.Buytier == "Tier1") {
+            this.paidPrice = 99;
+          }
+          else if (this.userPaymentDetails.Buytier == "Tier2") {
+            this.paidPrice = 299;
+          }
+          else if (this.userPaymentDetails.Buytier == "Tier3") {
+            this.paidPrice = 499;
+          }
+
+          console.log(this.userPaymentDetails.Verified);
+          
           this.loading = false
         },
         error:(error) => {

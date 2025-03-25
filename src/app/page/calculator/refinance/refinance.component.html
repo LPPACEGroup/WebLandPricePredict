@@ -6,7 +6,7 @@
         <label class="text-darkBlue text-right min-w-[200px]">วงเงินกู้เดิม</label>
         <input type="number" min="0" step="any" [(ngModel)]="currentLoanAmount"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="currentLoanAmount"
-          placeholder="วงเงินกู้เดิม (บาท)" />
+          placeholder="วงเงินกู้เดิม (บาท)" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
@@ -15,20 +15,20 @@
         </label>
         <input type="number" min="0" step="any" [(ngModel)]="currentMonthlyPayment"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="currentMonthlyPayment"
-          placeholder="ค่างวดต่อเดือน ณ ปัจจุบัน (บาท)" />
+          placeholder="ค่างวดต่อเดือน ณ ปัจจุบัน (บาท)" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">จำนวนปีคงเหลือ</label>
         <input type="number" min="0" step="any" [(ngModel)]="currentLoanTerm"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate"
-          placeholder="จำนวนปีคงเหลือโดยประมาณ" />
+          placeholder="จำนวนปีคงเหลือโดยประมาณ" min="0" (keydown)="preventNegative($event)" required  />
       </div>
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">อัตราดอกเบี้ยปัจจุบัน</label>
         <input type="number" min="0" step="any" [(ngModel)]="currentInterestRate"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate"
-          placeholder="อัตราดอกเบี้ยปัจจุบัน (%)" />
+          placeholder="อัตราดอกเบี้ยปัจจุบัน (%)" (input)="validatePositiveInput($event, 0)" />
       </div>
     </div>
 
@@ -38,7 +38,7 @@
         <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินกู้ใหม่</label>
         <input type="number" min="0" step="any" [(ngModel)]="newLoanAmount"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" name="loanAmount" value="" title="Loan Amount"
-          placeholder="ยอดสินเชื่อคงเหลือ (บาท)" />
+          placeholder="ยอดสินเชื่อคงเหลือ (บาท)" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
@@ -47,20 +47,20 @@
         </label>
         <input type="number" min="0" step="any" [(ngModel)]="newLoanTerm"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Loan Term"
-          placeholder="ระยะเวลากู้" />
+          placeholder="ระยะเวลากู้" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">ค่าใช้จ่ายในการรีไฟแนนซ์</label>
         <input type="number" min="0" step="any" [(ngModel)]="refinanceCost"
-          placeholder="ค่าใช้จ่ายในการรีไฟแนนซ์ หากไม่มีกรุณาใส่ 0"
-          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate" required />
+          class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate" required
+          placeholder="ค่าใช้จ่ายในการรีไฟแนนซ์ หากไม่มีกรุณาใส่ 0" (input)="validatePositiveInput($event, 0)" />
       </div>
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">อัตราดอกเบี้ยใหม่</label>
         <input type="number" min="0" step="any" [(ngModel)]="newInterestRate"
           class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none" value="" title="Interest Rate"
-          placeholder="อัตราดอกเบี้ยใหม่ (%)" />
+          placeholder="อัตราดอกเบี้ยใหม่ (%)" (input)="validatePositiveInput($event, 0)" />
       </div>
     </div>
 
@@ -78,7 +78,7 @@
         <tr class="bg-gray-50">
           <th class="p-3 text-sm">ยอดเงินกู้(บาท)</th>
           <th class="p-3 text-sm">ระยะเวลากู้ (ปี)</th>
-          <th class="p-3 text-sm">ดอกเบี้ยต่อเดือน (บาท)</th>
+          <th class="p-3 text-sm">ยอดดอกเบี้ย (บาท)</th>
           <th class="p-3 text-sm">ยอดผ่อนชำระต่อเดือน (บาท)</th>
         </tr>
       </thead>

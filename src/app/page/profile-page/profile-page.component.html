@@ -1,15 +1,17 @@
-<form *ngIf="!loading" class="min-h-nmax" [formGroup]="profileForm">
+<form *ngIf="!loading" class="min-h-nmax" [formGroup]="profileForm"  (ngSubmit)="saveChanges()" (keydown.enter)="saveChanges()">
   <div class="bg">
     <div class="scrollable-content">
       <div class="profile-container ">
 
         <div class="left-flex">
           <div class="pt-4  border-8 border-white rounded-full relative">
-            <img *ngIf="profileForm.disabled" [src]="profilePicture" alt="avatar"
+
+            <img *ngIf="imagePreview" [src]="imagePreview" alt="avatar"
               class="w-[240px] h-[240px] rounded-full object-cover " />
-            <img *ngIf="!profileForm.disabled&&imagePreview" [src]="imagePreview" alt="avatar"
-              class="w-[240px] h-[240px] rounded-full object-cover " />
-            <div *ngIf="!profileForm.disabled&&!imagePreview" class="bg-grey w-[240px] h-[240px]  rounded-full"></div>
+            <div *ngIf="!imagePreview" class="bg-grey w-[240px] h-[240px]  rounded-full overflow-clip">
+              <img src="assets/imgs/default_profile.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+
+            </div>
 
             <label for="profilePicture" class="sr-only">Profile Picture</label>
             <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture"
@@ -102,7 +104,7 @@
                 </span>
                 <span>ยกเลิก</span>
               </button>
-              <button (click)="saveChanges()" class="button bg-midGreen text-white border">
+              <button  class="button bg-midGreen text-white border" type="submit">
                 <span class="">
                   <img src="\assets\icons\save file.svg" alt="icon" class="w-6 h-6" />
                 </span>
@@ -230,3 +232,19 @@
     </div>
   </div>
 </dialog>
+
+<dialog id="err_profile_update_3" class="modal ">
+  <div class="modal-box  text-darkBlue">
+      <p class="py-4">ชื่อผู้ใช้งานนี้มีอยู่ในระบบอยู่แล้ว โปรดแก้ไข</p>
+      <div class="modal-action">
+          <form method="dialog">
+              <button class="btn bg-darkBlue text-white">รับทราบ</button>
+          </form>
+      </div>
+  </div>
+</dialog>
+
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+</div>

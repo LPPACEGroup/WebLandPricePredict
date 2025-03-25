@@ -22,6 +22,10 @@ export class ForgetpasswordComponent {
 
   onSubmit() {
     if (this.resetPassword.valid) {
+      const modal = document.getElementById(
+        'forget_password'
+      ) as HTMLDialogElement;
+      modal.showModal();
       console.log('Reset Password:', this.resetPassword.value);
       const email = this.resetPassword.value.email;
       console.log('Email:', email);

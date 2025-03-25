@@ -1,70 +1,83 @@
-<form *ngIf="(!PaymentData||paymentVerified)&&(userTier != 'Tier3')" [formGroup]="paymentForm">
-  <div class="min-h-screen flex items-center justify-center bg-neutral-100">
-    <div class="w-[1024px] bg-neutral-50 shadow-lg rounded-lg p-8 flex gap-6">
-      <div class="flex-1 bg-white p-6 rounded-lg justify-center">
-        <h1 class="text-darkBlue font-title text-2xl font-bold">การชำระเงิน</h1>
-        <p class="text-oceanBlue mt-2">โปรดชำระเงินผ่าน QR Code พร้อมทั้งกรอกข้อมูลด้านล่างเพื่อยืนยันการชำระเงิน</p>
-
-        <div class="grid grid-cols-2 gap-4 mt-6">
-          <div class="flex flex-col col-span-2">
-            <label class="text-darkBlue mb-1" htmlFor="AccName">ชื่อบัญชีที่ทำการชำระเงิน</label>
-            <input class="bg-lightBlue rounded-md p-1" id="AccName" type="text" title="กรอกชื่อบัญชีที่ทำการชำระเงิน" formControlName="AccName"
-              placeholder="กรอกชื่อบัญชีที่ทำการชำระเงิน" />
+<div *ngIf="!loading" >
+  <form *ngIf="(!PaymentData||paymentVerified)&&!(userTier === 'Tier3'||(userTier === 'Tier2' && (tier === 'Tier1'||tier === 'Tier2'))||(userTier === 'Tier1'&&tier ==='Tier1'))" [formGroup]="paymentForm">
+    <div class="min-h-screen flex items-center justify-center bg-neutral-100">
+      <div class="w-[1024px] bg-neutral-50 shadow-lg rounded-lg p-8 flex gap-6">
+        <div class="flex-1 bg-white p-6 rounded-lg justify-center">
+          <h1 class="text-darkBlue font-title text-2xl font-bold">การชำระเงิน</h1>
+          <p class="text-oceanBlue mt-2">โปรดชำระเงินผ่าน QR Code พร้อมทั้งกรอกข้อมูลด้านล่างเพื่อยืนยันการชำระเงิน</p>
+  
+          <div class="grid grid-cols-2 gap-4 mt-6">
+            <div class="flex flex-col col-span-2">
+              <label class="text-darkBlue mb-1" htmlFor="AccName">ชื่อบัญชีที่ทำการชำระเงิน</label>
+              <input class="bg-lightBlue rounded-md p-1" id="AccName" type="text" title="กรอกชื่อบัญชีที่ทำการชำระเงิน" formControlName="AccName"
+                placeholder="กรอกชื่อบัญชีที่ทำการชำระเงิน" />
+            </div>
+            <div class="flex flex-col col-span-2">
+              <label class="text-darkBlue mb-1" htmlFor="phoneNumber">เบอร์โทรศัพท์</label>
+              <input class="bg-lightBlue rounded-md p-1" id="phoneNumber" type="text" title="กรอกเบอร์โทรศัพท์" formControlName="phoneNumber"
+                placeholder="กรอกเบอร์โทรศัพท์" />
+            </div>
           </div>
-          <div class="flex flex-col col-span-2">
-            <label class="text-darkBlue mb-1" htmlFor="phoneNumber">เบอร์โทรศัพท์</label>
-            <input class="bg-lightBlue rounded-md p-1" id="phoneNumber" type="text" title="กรอกเบอร์โทรศัพท์" formControlName="phoneNumber"
-              placeholder="กรอกเบอร์โทรศัพท์" />
+  
+          <p class="text-darkBlue font-bold mt-6">ระดับสมาชิกที่ต้องการ: <span class="font-bold">{{tier}}</span></p>
+          <p class="text-darkBlue font-bold mt-6">ราคาที่ต้องจ่าย: <span class="font-bold">{{price}}</span></p>
+          <div (click)="triggerFileInput()"
+            class="mt-4 border-2 border-blue bg-lightBlue rounded-md h-[500px] flex flex-col justify-center items-center cursor-pointer">
+            <i class="fa-solid fa-camera text-primary-500 text-2xl"></i>
+            <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden" title="Upload Picture">
+            <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Picture Preview" class="w-full h-full  ">
+  
+            <img *ngIf="!imagePreview" class="w-[100px] h-[300px] object-contain" src="assets\icons\Uploadimg.svg" alt="icon" >
           </div>
+  
+          <div class="mt-6">
+            <label class="text-darkBlue mb-1" htmlFor="note" >หมายเหตุ</label>
+            <input class="bg-lightBlue rounded-sm p-1 w-full" id="note" type="text" title="กรอกหมายเหตุ" formControlName="detail"
+              placeholder="กรอกหมายเหตุ" />
+          </div>
+          <div class="flex justify-end mt-4">
+            <button class="bg-darkBlue text-white rounded-full py-1 px-6" (click)="onSubmit()">
+              ยืนยัน
+            </button>
+          </div>
+  
         </div>
-
-        <p class="text-darkBlue font-bold mt-6">ระดับสมาชิกที่ต้องการ: <span class="font-bold">{{tier}}</span></p>
-        <p class="text-darkBlue font-bold mt-6">ราคาที่ต้องจ่าย: <span class="font-bold">{{price}}</span></p>
-        <div (click)="triggerFileInput()"
-          class="mt-4 border-2 border-blue bg-lightBlue rounded-md h-[500px] flex flex-col justify-center items-center cursor-pointer">
-          <i class="fa-solid fa-camera text-primary-500 text-2xl"></i>
-          <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" class="hidden" title="Upload Picture">
-          <img *ngIf="imagePreview" [src]="imagePreview" alt="Profile Picture Preview" class="w-full h-full  ">
-
-          <img *ngIf="!imagePreview" class="w-[100px] h-[300px] object-contain" src="assets\icons\Uploadimg.svg" alt="icon" >
+  
+        <div *ngIf="tier==='Tier1'" class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+          <img class="w-full h-auto object-contain" src="assets\imgs\t1.jpg" alt="QR Code สำหรับการชำระเงิน">
         </div>
-
-        <div class="mt-6">
-          <label class="text-darkBlue mb-1" htmlFor="note" >หมายเหตุ</label>
-          <input class="bg-lightBlue rounded-sm p-1 w-full" id="note" type="text" title="กรอกหมายเหตุ" formControlName="detail"
-            placeholder="กรอกหมายเหตุ" />
+        <div *ngIf="tier==='Tier2'" class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+          <img class="w-full h-auto object-contain" src="assets\imgs\t2.jpg" alt="QR Code สำหรับการชำระเงิน">
         </div>
-        <div class="flex justify-end mt-4">
-          <button class="bg-darkBlue text-white rounded-full py-1 px-6" (click)="onSubmit()">
-            ยืนยัน
-          </button>
+        <div *ngIf="tier==='Tier3'" class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+          <img class="w-full h-auto object-contain" src="assets\imgs\t3.jpg" alt="QR Code สำหรับการชำระเงิน">
         </div>
-
-      </div>
-
-      <div class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
-        <img class="w-full h-auto object-contain" src="assets\imgs\qr.jpg" alt="QR Code สำหรับการชำระเงิน">
       </div>
     </div>
+  </form>
+  
+  <div *ngIf="!paymentVerified&&PaymentData&&!(userTier === 'Tier3'||(userTier === 'Tier2' && (tier === 'Tier1'||tier === 'Tier2'))||(userTier === 'Tier1'&&tier ==='Tier1'))" class="text-darkRed text-3xl text-center h-nmax flex items-center justify-center">
+    การตรวจสอบการชำระเงินอยู่ในระหว่างดำเนินการ กรุณารอ 1-2 วัน หากมีข้อสงสัยโปรดติดต่อเจ้าหน้าที่
   </div>
-</form>
-
-<div *ngIf="!paymentVerified&&PaymentData&&(userTier != 'Tier3')" class="text-darkRed text-3xl text-center h-nmax flex items-center justify-center">
-  การตรวจสอบการชำระเงินอยู่ในระหว่างดำเนินการ กรุณารอ 1-2 วัน หากมีข้อสงสัยโปรดติดต่อเจ้าหน้าที่
-</div>
-
-<div *ngIf="userTier === 'Tier3'" class="text-darkRed text-3xl text-center h-nmax flex items-center justify-center">
-  คุณเป็นสมาชิกระดับสูงสุดแล้ว ไม่จำเป็นต้องทำการอัพเกรดอีก
-</div>
-
-<!-- modal notify when payment submit -->
-<dialog id="noti_payment" class="modal ">
-  <div class="modal-box  text-darkBlue">
-    <p class="py-4">ทำการส่งหลักฐานยืนยันการชำระเงินแล้ว กรุณารอการตรวจสอบจากทางเจ้าหน้าที่</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <button class="btn bg-darkBlue text-white" routerLink="/Home">รับทราบ</button>
-      </form>
+  
+  <div *ngIf="userTier === 'Tier3'||(userTier === 'Tier2' && (tier === 'Tier1'||tier === 'Tier2'))||(userTier === 'Tier1'&&tier ==='Tier1')" class="text-darkRed text-3xl text-center h-nmax flex items-center justify-center">
+    Tier ของคุณมากกว่าหรือเท่ากับ Tier นี้แล้ว ไม่สามารถชำระเงินในระดับนี้ได้อีก กรุณาเลือก Tier ที่ลำดับสูงกว่าถ้ามี
+  </div>
+  
+  <!-- modal notify when payment submit -->
+  <dialog id="noti_payment" class="modal ">
+    <div class="modal-box  text-darkBlue">
+      <p class="py-4">ทำการส่งหลักฐานยืนยันการชำระเงินแล้ว กรุณารอการตรวจสอบจากทางเจ้าหน้าที่</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn bg-darkBlue text-white" routerLink="/Home">รับทราบ</button>
+        </form>
+      </div>
     </div>
-  </div>
-</dialog>
+  </dialog>
+</div>
+
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
+  <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+</div>

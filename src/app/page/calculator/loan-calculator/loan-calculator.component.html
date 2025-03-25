@@ -2,25 +2,23 @@
   <div class="max-w-4xl mx-auto">
     <div class="space-y-4 mb-8">
       <div class="flex items-center justify-between">
-        <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินที่ต้องการกู้ </label>
-
+        <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินที่ต้องการกู้</label>
         <input type="number" [(ngModel)]="loanAmount" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
-          value="" title="Loan Amount" placeholder="ยอดเงินที่ต้องการกู้ (บาท)" />
-
+          value="" title="Loan Amount" placeholder="ยอดเงินที่ต้องการกู้ (บาท)" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">
           ระยะเวลาที่ต้องการผ่อนชำระ
         </label>
-        <input type="text" [(ngModel)]="installmentTerm" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
-          value="" title="Installment Term" placeholder="ระยะที่ต้องการผ่อน (ปี)" />
+        <input type="number" [(ngModel)]="installmentTerm" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="Installment Term" placeholder="ระยะที่ต้องการผ่อน (ปี)" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">อัตราดอกเบี้ย</label>
-        <input type="text" [(ngModel)]="interestRate" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
-          value="" title="Interest Rate" placeholder="อัตราดอกเบี้ย (%)" />
+        <input type="number" [(ngModel)]="interestRate" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="Interest Rate" placeholder="อัตราดอกเบี้ย (%)" min="0" (keydown)="preventNegative($event)" required />
       </div>
     </div>
 

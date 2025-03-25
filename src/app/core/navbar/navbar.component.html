@@ -42,16 +42,28 @@
       <!-- Dropdown for more menu -->
       <div class="flex-none">
         <div class="dropdown dropdown-end">
-          <li tabindex="0" class="">
+          <li tabindex="0" class="" >
             <div class="text-white flex">
               <img src="assets\icons\moremenu.svg" alt="More" class="w-6 h-6 inline-block mr-2">
               <p>เพิ่มเติม</p>
               <img src="assets\icons\downarrow.svg" alt="More" class="w-6 h-6 inline-block mr-2">
             </div>
           </li>
-          <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-darkBlue">
+          <ul  tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-darkBlue">
             <li routerLink="Calculator"><a>เครื่องคิดเลข</a></li>
-            <li><a>คู่มือการใช้งาน</a></li>
+            <li tabindex="0">
+              <a class="justify-between" (click)="toggleSubmenu()">
+                คู่มือการใช้งาน
+                <svg class="fill-current transition-transform duration-300" [ngClass]="{'rotate-180': isSubmenuVisible}" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </a>
+                <ul class="" *ngIf="isSubmenuVisible">
+                <li><a>คู่มือการใช้งาน</a></li>
+                <li><a>คู่มือการติดตั้ง</a></li>
+                <li><a>คู่มือสำหรับนักพัฒนา</a></li>
+                </ul>
+            </li>
             <li (click)="navigateNscroll('/Home','membership')"><a>แพ็คเกจสมาชิก</a></li>
             <li (click)="navigateNscroll('/Home','contact')"><a>ช่องทางติดต่อ</a></li>
 
@@ -61,7 +73,7 @@
     </ul>
 
     <!-- notification -->
-    <div class="lg:flex" >
+    <div class="lg:flex">
       <div class="dropdown dropdown-end" (click)="triggerMarkAllAsRead()">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full relative">
@@ -78,10 +90,13 @@
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
           <div class="w-10 rounded-full">
-            <img [src]="profilePicture" alt="avatar"
-              class="w-10 h-10 rounded-full object-cover " />          </div>
+            <img *ngIf="profilePicture" [src]="profilePicture" alt="avatar" class="w-10 h-10 rounded-full object-cover " />
+            <img *ngIf="!profilePicture" src="assets/imgs/default_profile.jpg" alt="avatar" class="w-10 h-10 rounded-full object-cover " />
+
+          </div>
         </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-darkBlue">
+        <ul tabindex="0"
+          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-darkBlue">
           <li routerLink="Profile"><a>หน้าโปรไฟล์</a></li>
           <li (click)="signout()">
             <a>ออกจากระบบ

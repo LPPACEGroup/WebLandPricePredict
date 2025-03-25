@@ -48,8 +48,9 @@ export class SignupPageComponent {
   private thaiLocationService?: ThaiLocationService;
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
+  emailValid: boolean = false;
+  loading: boolean = false;
 
-  
   @HostListener('wheel', ['$event'])
   onWheel(event: Event) {
     event.preventDefault();
@@ -65,18 +66,38 @@ export class SignupPageComponent {
     this.thaiLocationService = thaiLocationService;
     this.signupForm = this.fb.group(
       {
-        username: ['', [Validators.required]], // Example: username with min length
-        password: ['', [Validators.required, Validators.minLength(8)]], // Example: password validation
+        username: [
+          '',
+          [
+            Validators.required,
+
+            Validators.pattern('^[a-zA-Z0-9]+$'), // Only letters and numbers
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/),
+          ],
+        ], // Example: password validation
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]], // Example: password
         email: ['', [Validators.required, Validators.email]], // Email validation
-        firstName: ['', [
-          Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
-        ]], // First name required
-        lastName: ['', [
-          Validators.required,
-          Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/),  // Allows alphabetic characters and accented characters only
-        ]], // Last name required
+        firstName: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/), // Allows alphabetic characters and accented characters only
+          ],
+        ], // First name required
+        lastName: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+$/), // Allows alphabetic characters and accented characters only
+          ],
+        ], // Last name required
         gender: ['', Validators.required], // Gender required
         birthDate: ['', Validators.required], // Birth date required
         telephone: ['', [Validators.required, Validators.pattern(/^0?\d{9}$/)]], // Phone number pattern
@@ -100,7 +121,7 @@ export class SignupPageComponent {
   }
 
   nextStep() {
-    if (this.currentStep < 4) {
+    if (this.currentStep < 3) {
       let isValid = true;
 
       if (this.currentStep == 1) {
@@ -117,7 +138,14 @@ export class SignupPageComponent {
             isValid = false;
           }
         });
-        this.checkEmail(this.signupForm.value.email);
+
+        //check email only after all fields are valid to make modal appear correctly
+        if (isValid) {
+          this.emailValid = false;
+          this.checkEmail(this.signupForm.value.email, () => {
+            this.checkUsername(this.signupForm.value.username);
+          });
+        }
       } else if (this.currentStep == 2) {
         const fieldsToValidate = [
           'firstName',
@@ -131,8 +159,8 @@ export class SignupPageComponent {
           control?.markAsTouched(); // Mark the field as touched
           if (control?.invalid) {
             console.log(control.invalid);
-            console.log(this.signupForm.get('telephone')?.errors);  
-          
+            console.log(this.signupForm.get('telephone')?.errors);
+
             isValid = false;
           }
         });
@@ -157,9 +185,9 @@ export class SignupPageComponent {
       }
 
       if (!isValid) {
-
-
-        const modal = document.getElementById('signup_warning_1') as HTMLDialogElement;
+        const modal = document.getElementById(
+          'signup_warning_1'
+        ) as HTMLDialogElement;
         modal.showModal();
         return; // Stop if any visible field is invalid
       }
@@ -178,11 +206,13 @@ export class SignupPageComponent {
   }
 
   printForm() {
+
+
     // Ensure postcode is a string
     this.signupForm.patchValue({
       postcode: this.signupForm.value.postcode.toString(),
     });
-  
+
     // Prepare the user data
     const newuser: User = {
       userName: this.signupForm.value.username,
@@ -203,65 +233,84 @@ export class SignupPageComponent {
       alley: this.signupForm.value.alley,
       landTypeFV: this.signupForm.value.interestLand,
     };
-  
+    console.log(newuser);
+    
+
     // Step 1: Create the user
-    this.authService.signup(newuser).subscribe({
+    this.loading = true;
+    this.authService.signup(newuser).subscribe(
+      {
+
+      
       next: (response: any) => {
         console.log('User created successfully:', response);
         const userId = response.UserID;
-  
+
         // Step 2: Upload the profile picture if selected
         const profilePicture = this.selectedFile;
         if (profilePicture) {
-          this.authService.uploadProfile(userId,profilePicture).subscribe({
+          this.authService.uploadProfile(userId, profilePicture).subscribe({
             next: (uploadResponse) => {
-              console.log('Profile picture uploaded successfully:', uploadResponse);
+              console.log(
+                'Profile picture uploaded successfully:',
+                uploadResponse
+              );
+              this.loading = false;
 
-              const modal = document.getElementById('signup_sucess') as HTMLDialogElement;
+              const modal = document.getElementById(
+                'signup_sucess'
+              ) as HTMLDialogElement;
               modal.showModal();
             },
             error: (uploadError) => {
+              this.loading = false;
               console.error('Profile picture upload failed:', uploadError);
 
-              const modal = document.getElementById('signup_err_1') as HTMLDialogElement;
+              const modal = document.getElementById(
+                'signup_err_1'
+              ) as HTMLDialogElement;
               modal.showModal();
-            }
+            },
           });
         } else {
-
-          const modal = document.getElementById('signup_sucess') as HTMLDialogElement;
+          this.loading = false;
+          const modal = document.getElementById(
+            'signup_sucess'
+          ) as HTMLDialogElement;
           modal.showModal();
-
         }
       },
       error: (error) => {
         console.error('การสมัครสมาชิกล้มเหลว', error);
         this.errorMessage = error.error.message;
-      }
+        this.loading = false;
+      },
     });
   }
 
- // Trigger file input when the button is clicked
- triggerFileInput(): void {
-  const fileInput = document.getElementById('profilePicture') as HTMLInputElement;
-  fileInput.click();
-}
-
-// Handle file selection
-onFileSelected(event: any): void {
-  const file: File = event.target.files[0];
-  if (file) {
-    // Update the form control
-    this.selectedFile = file;
-
-    // Read the file and create a preview
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
-    reader.readAsDataURL(file);
+  // Trigger file input when the button is clicked
+  triggerFileInput(): void {
+    const fileInput = document.getElementById(
+      'profilePicture'
+    ) as HTMLInputElement;
+    fileInput.click();
   }
-}
+
+  // Handle file selection
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      // Update the form control
+      this.selectedFile = file;
+
+      // Read the file and create a preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
   ngOnInit() {
     this.thaiLocationService?.getProvince().then((data) => {
       this.Province = data;
@@ -381,24 +430,46 @@ onFileSelected(event: any): void {
       }
     });
   }
-  checkEmail(email: string): void {
+  checkEmail(email: string, callback: () => void): void {
     this.authService.checkUnauthorizedDuplicateEmail(email).subscribe({
+      next: (response) => {
+        console.log('Response:', response);
+        this.emailValid = true;
+        callback(); // Proceed to check username
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        if (err.status === 409) {
+          const modal = document.getElementById(
+            'signup_err_2'
+          ) as HTMLDialogElement;
+          modal.showModal();
+        }
+        this.emailValid = false;
+      },
+    });
+  }
+
+  checkUsername(username: string): void {
+    this.authService.checkUnauthorizedDuplicateUsername(username).subscribe({
       next: (response) => {
         console.log('Response:', response);
         // Handle successful response here
         this.currentStep = 2;
-        
       },
       error: (err) => {
         console.error('Error:', err);
         // Handle error here
         if (err.status === 409) {
-          const modal = document.getElementById('signup_err_2') as HTMLDialogElement;
+          const modal = document.getElementById(
+            'signup_err_3'
+          ) as HTMLDialogElement;
           modal.showModal();
         }
-      }
+      },
     });
   }
+
   get provinceControl(): FormControl {
     return this.signupForm.get('province') as FormControl;
   }

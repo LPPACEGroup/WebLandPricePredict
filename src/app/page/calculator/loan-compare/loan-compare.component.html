@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">ยอดเงินที่ต้องการกู้</label>
         <input type="text" [(ngModel)]="loanAmount" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
-          value="" title="Loan Amount" placeholder="ยอดเงินที่ต้องการกู้ (บาท)" />
+          value="" title="Loan Amount" placeholder="ยอดเงินที่ต้องการกู้ (บาท)" min="0" (keydown)="preventNegative($event)" required />
       </div>
 
       <div class="flex items-center justify-between gap-1">
@@ -12,26 +12,25 @@
           ระยะเวลากู้ยืม 1
         </label>
         <input type="text" [(ngModel)]="loanTerm1" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
-          value="" title="LoanTerm1" placeholder="ระยะเวลาที่ต้องการผ่อน 1 (ปี)" />
+          value="" title="LoanTerm1" placeholder="ระยะเวลาที่ต้องการผ่อน 1 (ปี)"  min="0" (keydown)="preventNegative($event)" required />
 
         <label class="text-darkBlue text-right pl-2">
           ดอกเบี้ย
         </label>
         <input type="text" [(ngModel)]="interest1" class="rounded-full px-6 py-3 flex-1  focus:outline-none" value=""
-          title="interest1" placeholder="อัตราดอกเบี้ย 1 (%)" />
+          title="interest1" placeholder="อัตราดอกเบี้ย 1 (%)" min="0" (keydown)="preventNegative($event)" required  />
       </div>
 
       <div class="flex items-center justify-between">
         <label class="text-darkBlue text-right min-w-[200px]">ระยะเวลากู้ยืม 2</label>
-        <input type="text" [(ngModel)]="loanTerm2"
-          class="border rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none focus:ring-2 focus:ring-[#2980b9]"
-          value="" title="loanTerm2" placeholder="ระยะเวลาที่ต้องการผ่อน 2 (ปี)" />
+        <input type="text" [(ngModel)]="loanTerm2" class="rounded-full px-6 py-3 flex-1 ml-4 focus:outline-none"
+          value="" title="loanTerm2" placeholder="ระยะเวลาที่ต้องการผ่อน 2 (ปี)" min="0" (keydown)="preventNegative($event)" required />
 
         <label class="text-darkBlue text-right pl-2">
           ดอกเบี้ย
         </label>
         <input type="text" [(ngModel)]="interest2" class="rounded-full px-6 py-3 flex-1  focus:outline-none" value=""
-          title="interest2" placeholder="อัตราดอกเบี้ย 2 (%)" />
+          title="interest2" placeholder="อัตราดอกเบี้ย 2 (%)" min="0" (keydown)="preventNegative($event)" required />
       </div>
     </div>
 
