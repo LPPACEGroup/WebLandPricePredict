@@ -2,7 +2,7 @@
 
     <div class="bg-white w-1/2 h-2/3 rounded-xl " *ngIf="currentStep ==1">
         <form class="flex flex-col  items-center justify-center gap-3 h-full w-full" [formGroup]="signupForm">
-            <h1 class="text-2xl font-bold pb-5">ลงทะเบียนผู้ใช้งาน</h1>
+            <h1 class="text-2xl font-bold pb-5 text-darkBlue">ลงทะเบียนผู้ใช้งาน</h1>
 
 
             <ol
@@ -89,10 +89,10 @@
                     <img src="assets/imgs/default_profile.jpg" alt="Profile Picture" class="w-full h-full object-cover">
                 </div>
                 <!-- Hidden File Input -->
-                <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture"
+                <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" id="profilePicture" title="Profile Picture"
                     class="hidden">
                 <!-- Upload Button -->
-                <button type="button"
+                <button type="button" title="Upload Profile Picture"
                     class="btn btn-sm absolute -bottom-2 -right-2 bg-white text-grey border-gray-400 rounded-full p-2 shadow-md"
                     (click)="triggerFileInput()">
                     <mat-icon fontIcon="image"></mat-icon>

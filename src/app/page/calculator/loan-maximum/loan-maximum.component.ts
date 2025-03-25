@@ -14,29 +14,52 @@ import { Directive, HostListener, ElementRef } from '@angular/core';
   styleUrl: './loan-maximum.component.css'
 })
 export class LoanMaximumComponent {
+
+  validatePositiveInput(event: Event, minValue: number) {
+    const inputElement = event.target as HTMLInputElement;
+    if (parseFloat(inputElement.value) < minValue) {
+      inputElement.value = minValue.toString();
+    }
+  }
+
+  preventNegative(event: KeyboardEvent) {
+    if (event.key === '-' || event.key === 'e') {
+      event.preventDefault();
+    }
+  }
+
   monthlyIncome!: number;
   loanTerm!: number;
   interestRate!: number;
-  maximumLoanPercentage!: number;
+  DTI!: number;
   monthlyDebt!: number;
+
   maximumLoanAmount!: number;
   newMonthlyPayment!: number;
-  averageLoanRatio = 150;
+
+
 calculate() {
-    // const monthlyIncome = parseFloat(this.monthlyIncome);
-    // const loanTerm = parseFloat(this.loanTerm);
-    // const interestRate = parseFloat(this.interestRate) / 100 / 12;
-    // const maximumLoanPercentage = parseFloat(this.maximumLoanPercentage) / 100;
-    // const monthlyDebt = parseFloat(this.monthlyDebt);
+    const r = this.interestRate / 12 / 100; // Monthly interest rate
+    const n = this.loanTerm * 12; // Total number of months
+    const maxEMI = (this.monthlyIncome * this.DTI) / 100 - this.monthlyDebt;
 
-    const newInterestRate = this.interestRate / 100 / 12;
-    const newMaximumLoanPercentage = this.maximumLoanPercentage / 100;
-    const numberOfPayments = this.loanTerm * 12;
+    if (this.monthlyIncome > 0 && this.DTI > 0 && this.interestRate > 0 && this.loanTerm > 0) {
+      if (maxEMI <= 0) {
+        this.maximumLoanAmount = 0;
+        return;
+      }
+      if (r === 0) {
+        this.maximumLoanAmount = maxEMI * n; // If 0% interest, it's just EMI * months
+      } else {
+        this.maximumLoanAmount = (maxEMI * (1 - Math.pow(1 + r, -n))) / r;
+      }
+    }
 
-    this.maximumLoanAmount = ((this.monthlyIncome - this.monthlyDebt  ) * newMaximumLoanPercentage)* this.averageLoanRatio;
-
-    this.newMonthlyPayment = this.maximumLoanAmount * newInterestRate / (1 - Math.pow(1 + newInterestRate, -numberOfPayments));
-
+    if (r > 0) {
+      this.newMonthlyPayment = (this.maximumLoanAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    } else {
+      this.newMonthlyPayment = this.maximumLoanAmount / n; // For zero interest loans
+    }
   }
 }
 
