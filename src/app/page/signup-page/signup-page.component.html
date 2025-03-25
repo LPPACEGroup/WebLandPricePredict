@@ -1,4 +1,4 @@
-<div class=" h-screen bg-blue flex-center">
+<div *ngIf="!loading" class=" h-screen bg-blue flex-center">
 
     <div class="bg-white w-1/2 h-2/3 rounded-xl " *ngIf="currentStep ==1">
         <form class="flex flex-col  items-center justify-center gap-3 h-full w-full" [formGroup]="signupForm">
@@ -19,7 +19,11 @@
 
             </ol>
 
-            <div class="flex w-9/12 justify-center items-center">
+            <div class="flex w-9/12 justify-center items-center flex-wrap">
+                <div class="text-red-500 w-full text-center"
+                    *ngIf="signupForm.get('username')?.hasError('pattern') && signupForm.get('username')?.touched">
+                    รูปแบบ ชื่อผู้ใช้งานไม่ถูกต้อง สามารถใช้ตัวอักษร ตัวเลขได้เท่านั้น
+                </div>
                 <label for="username" class="input-label">ชื่อผู้ใช้งาน</label>
                 <input class="input-box" type="text" formControlName="username" placeholder="ชื่อผู้ใช้งาน">
             </div>
@@ -56,9 +60,9 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4 ">
-                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
+                <button  class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400 h"
                     routerLink="/signin"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ยกเลิก</button>
-                <button type="submit" class=" btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
+                <button  class=" btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
                     (click)="nextStep()">ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
             </div>
             <p class="text-grey pt-5">มีบัญชีผู้ใช้งานอยู่แล้ว? <a routerLink="/Signin"
@@ -142,7 +146,7 @@
                     (click)="perviousStep()">
                     <mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ
                 </button>
-                <button type="submit" class="btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
+                <button  class="btn btn-sm h-10 flex-center bg-oceanBlue text-white w-full"
                     (click)="nextStep()">
                     ต่อไป<mat-icon fontIcon="arrow_forward_ios"></mat-icon>
                 </button>
@@ -203,7 +207,7 @@
             </div>
 
             <div class="mt-6 flex gap-x-4 w-3/4">
-                <button type="submit" class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
+                <button  class="btn btn-sm h-10 flex-center bg-white text-grey w-full border-gray-400"
                     (click)="perviousStep()"><mat-icon fontIcon="arrow_back_ios"></mat-icon>ย้อนกลับ</button>
                 <button type="button" class=" btn btn-sm h-10 flex-center bg-darkBlue text-white w-full"
                     (click)="printForm()">สร้างบัญชี<mat-icon fontIcon="arrow_forward_ios"></mat-icon></button>
@@ -245,7 +249,7 @@
         <p class="py-4">การสมัครสมาชิกเสร็จสิ้นแต่รูปภาพอัพโหลดไม่สำเร็จ</p>
         <div class="modal-action">
             <form method="dialog">
-                <button class="btn bg-darkBlue text-white">รับทราบ</button>
+                <button class="btn bg-darkBlue text-white" routerLink="Signin">รับทราบ</button>
             </form>
         </div>
     </div>
@@ -261,3 +265,18 @@
         </div>
     </div>
 </dialog>
+
+<dialog id="signup_err_3" class="modal ">
+    <div class="modal-box  text-darkBlue">
+        <p class="py-4">ชื่อผู้ใช้งานนี้มีอยู่ในระบบอยู่แล้ว</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn bg-darkBlue text-white">รับทราบ</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
+    <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+  </div>

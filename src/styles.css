@@ -230,3 +230,11 @@ input:disabled {
 .mdc-text-field--filled:not(.mdc-text-field--disabled){
   background-color: white !important; /* Change the background color */
 }
+
+path:focus {
+  outline: none !important;
+}
+
+path{
+  outline: none !important;
+}

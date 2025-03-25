@@ -43,8 +43,14 @@
   
         </div>
   
-        <div class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
-          <img class="w-full h-auto object-contain" src="assets\imgs\qr.jpg" alt="QR Code สำหรับการชำระเงิน">
+        <div *ngIf="tier==='Tier1'" class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+          <img class="w-full h-auto object-contain" src="assets\imgs\t1.jpg" alt="QR Code สำหรับการชำระเงิน">
+        </div>
+        <div *ngIf="tier==='Tier2'" class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+          <img class="w-full h-auto object-contain" src="assets\imgs\t2.jpg" alt="QR Code สำหรับการชำระเงิน">
+        </div>
+        <div *ngIf="tier==='Tier3'" class="w-[300px] bg-white p-6 rounded-lg flex flex-col items-center">
+          <img class="w-full h-auto object-contain" src="assets\imgs\t3.jpg" alt="QR Code สำหรับการชำระเงิน">
         </div>
       </div>
     </div>

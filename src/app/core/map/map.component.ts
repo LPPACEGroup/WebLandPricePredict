@@ -14,11 +14,12 @@ import { style } from '@angular/animations';
 import { AuthService } from 'app/service/Auth/auth.service';
 import { DashboardService } from 'app/service/Dashboard/dashboard.service';
 import shp from 'shpjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
@@ -32,16 +33,19 @@ export class MapComponent implements OnChanges {
   private markersLayer = L.layerGroup();
   private osmLayer!: L.TileLayer;
   private googleSatLayer!: L.TileLayer;
-  private markerManage: boolean = false;
+  markerManage: boolean = false;
   private geodata: any;
   // private p1 = L.geoJSON();
   // private p2 = L.geoJSON();
   // private p3 = L.geoJSON();
   // private p4 = L.geoJSON();
   private colorMap = L.featureGroup();
-  private mrtLayer : any;
+  private mrt = L.featureGroup();
+  private bts = L.featureGroup();
+  private lineweights = 4
+  private radius = 500;
 
-  tier = "Basic";
+  tier = 'Basic';
   // Initialize the map
   private initMap(): void {
     this.map = L.map('map', {
@@ -84,18 +88,16 @@ export class MapComponent implements OnChanges {
     // Add marker layer
     this.markersLayer.addTo(this.map);
 
-
     L.geoJSON(this.geodata, {
       style: (feature) => {
         return {
-          color: feature ? this.getColor(feature.properties.color) : 'gray', 
+          color: feature ? this.getColor(feature.properties.color) : 'gray',
           weight: 2, // ความหนาของเส้นขอบ
-          opacity: 1, 
-          fillOpacity: 0.5, 
+          opacity: 1,
+          fillOpacity: 0.5,
         };
       },
     }).addTo(this.map);
-    
   }
   // map สีกับ geojson
   getColor(color: any) {
@@ -119,7 +121,7 @@ export class MapComponent implements OnChanges {
       case 10:
         return 'blue';
       default:
-        return 'black'; 
+        return 'black';
     }
   }
   // Update the map view based on the provided coordinates
@@ -142,39 +144,54 @@ export class MapComponent implements OnChanges {
         'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
       shadowSize: [41, 41],
     });
-
+  
     const marker = L.marker([latitude, longitude], { icon: customIcon });
+  
+    const radius = this.radius; // Radius in meters
+    const circle = L.circle([latitude, longitude], {
+      color: 'blue',
+      fillColor: 'blue',
+      fillOpacity: 0.2,
+      radius: radius,
+    });
+  
     console.log(this.markerCoord.length);
-    
     if (
-      (this.tier === 'Tier1' && this.markerCoord.length+1 > 1) ||
-      (this.tier === 'Tier2' && this.markerCoord.length+1 > 3) ||
-      (this.tier === 'Tier3' && this.markerCoord.length+1 > 10)
+      (this.tier === 'Tier1' && this.markerCoord.length + 1 > 1) ||
+      (this.tier === 'Tier2' && this.markerCoord.length + 1 > 3) ||
+      (this.tier === 'Tier3' && this.markerCoord.length + 1 > 10)
     ) {
-      const modal = document.getElementById('warn_marker_1') as HTMLDialogElement;
+      const modal = document.getElementById(
+        'warn_marker_1'
+      ) as HTMLDialogElement;
       modal.showModal();
       return;
     }
+  
     this.markerCoord.push([latitude, longitude]);
-    
+
     // marker.bindPopup(
     //   `<b>Custom Location</b><br>Latitude: ${latitude}, Longitude: ${longitude}`
     // );
+  
+    // remove if click on marker when markerManage is true
     marker.on('click', (e: L.LeafletMouseEvent) => {
       if (this.markerManage) {
         this.map.removeLayer(marker);
+        this.map.removeLayer(circle); // Remove the circle when marker is removed
         this.markerCoord = this.markerCoord.filter(
           (coord) => coord[0] !== latitude && coord[1] !== longitude
         );
         this.markerCoordOutput.emit(this.markerCoord);
       }
     });
-
+  
     this.markerCoordOutput.emit(this.markerCoord);
-    // console.log(this.markerCoord);
-
+  
     this.markersLayer.addLayer(marker);
+    this.markersLayer.addLayer(circle); // Add circle to the same layer as markers
   }
+  
 
   // Handle changes to input properties
   ngOnChanges(changes: SimpleChanges): void {
@@ -195,10 +212,9 @@ export class MapComponent implements OnChanges {
     this.map.removeLayer(this.osmLayer);
     this.map.removeLayer(this.googleSatLayer);
     this.map.removeLayer(this.colorMap);
-    if (this.mrtLayer) {
-      this.map.removeLayer(this.mrtLayer); // Remove MRT if it exists
-    }
-  
+    this.map.removeLayer(this.mrt);
+    this.map.removeLayer(this.bts);
+
     if (layer === 'osm') {
       this.osmLayer.addTo(this.map);
     } else if (layer === 'satellite') {
@@ -208,88 +224,356 @@ export class MapComponent implements OnChanges {
       this.colorMap.addTo(this.map);
     } else if (layer === 'mrt') {
       this.osmLayer.addTo(this.map);
-  
-      // ✅ Check if MRT layer exists; load if not
-      if (!this.mrtLayer) {
-        this.loadShapefile('assets/layers/mrt_station.zip', 'MRT', (layer) => {
-          this.mrtLayer = layer;
-          this.mrtLayer.addTo(this.map);
-        });
-      } else {
-        this.mrtLayer.addTo(this.map);
-      }
+      this.mrt.addTo(this.map);
+    } else if (layer === 'bts') {
+      this.osmLayer.addTo(this.map);
+      this.bts.addTo(this.map);
     }
   }
-  
-  constructor(private getJsonService: GetJsonService, private auth: AuthService ,private dashBoardService: DashboardService) {
+
+  constructor(
+    private getJsonService: GetJsonService,
+    private auth: AuthService,
+    private dashBoardService: DashboardService
+  ) {
+    //  get geojson and add to colorMap layer
     this.getJsonService
       .getJson('assets/layers/latkrabang.geojson')
-      .subscribe((data:any) => {
-        this.colorMap.addLayer(L.geoJSON(data,{
-      style: (feature) => {
-        return {
-          color: feature ? this.getColor(feature.properties.color) : 'gray', 
-          weight: 2, // ความหนาของเส้นขอบ
-          opacity: 1, 
-          fillOpacity: 0.5, 
-        };
-      },
-    }))
+      .subscribe((data: any) => {
+        this.colorMap.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: feature
+                  ? this.getColor(feature.properties.color)
+                  : 'gray',
+                weight: 2, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+          })
+        );
       });
-      this.getJsonService
+    this.getJsonService
       .getJson('assets/layers/minburi.geojson')
-      .subscribe((data:any) => {
-        this.colorMap.addLayer(L.geoJSON(data,{
-      style: (feature) => {
-        return {
-          color: feature ? this.getColor(feature.properties.color) : 'gray', 
-          weight: 2, // ความหนาของเส้นขอบ
-          opacity: 1, 
-          fillOpacity: 0.5, 
-        };
-      },
-    }))
+      .subscribe((data: any) => {
+        this.colorMap.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: feature
+                  ? this.getColor(feature.properties.color)
+                  : 'gray',
+                weight: 2, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+          })
+        );
       });
-      this.getJsonService
+    this.getJsonService
       .getJson('assets/layers/khlong_Toei.geojson')
-      .subscribe((data:any) => {
-        this.colorMap.addLayer(L.geoJSON(data,{
-      style: (feature) => {
-        return {
-          color: feature ? this.getColor(feature.properties.color) : 'gray', 
-          weight: 2, // ความหนาของเส้นขอบ
-          opacity: 1, 
-          fillOpacity: 0.5, 
-        };
-      },
-    }))
+      .subscribe((data: any) => {
+        this.colorMap.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: feature
+                  ? this.getColor(feature.properties.color)
+                  : 'gray',
+                weight: 2, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+          })
+        );
       });
-      this.getJsonService
+    this.getJsonService
       .getJson('assets/layers/watthana.geojson')
-      .subscribe((data:any) => {
-        this.colorMap.addLayer(L.geoJSON(data,{
-      style: (feature) => {
-        return {
-          color: feature ? this.getColor(feature.properties.color) : 'gray', 
-          weight: 2, // ความหนาของเส้นขอบ
-          opacity: 1, 
-          fillOpacity: 0.5, 
-        };
-      },
-    }))
+      .subscribe((data: any) => {
+        this.colorMap.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: feature
+                  ? this.getColor(feature.properties.color)
+                  : 'gray',
+                weight: 2, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+          })
+        );
       });
 
+    // config bts and mrt
+
+    // Mapping of GeoJSON files to their names
+    const lineNames = {
+      'Green Line.geojson': 'Green Line',
+      'Hard Green Line.geojson': 'Hard Green Line',
+      'Light Red Line.geojson': 'Light Red Line',
+      'Middle Red Line.geojson': 'Middle Red Line',
+      'Pink Line.geojson': 'Pink Line',
+      'Red Line.geojson': 'Red Line',
+      'Yellow Line.geojson': 'Yellow Line',
+      'Blue.geojson': 'Blue Line',
+      'Purple.geojson': 'Purple Line',
+      'Yellow.geojson': 'Yellow Line',
+    };
+    
+
+
+    // get geojson and add to mrt layer
+    this.getJsonService
+      .getJson('assets/layers/mrt/Blue.geojson')
+      .subscribe((data: any) => {
+        this.mrt.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: 'blue',
+                weight: this.lineweights, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Blue.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+    this.getJsonService
+      .getJson('assets/layers/mrt/Purple.geojson')
+      .subscribe((data: any) => {
+        this.mrt.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: 'purple',
+                weight: this.lineweights, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Purple.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+    this.getJsonService
+      .getJson('assets/layers/mrt/Yellow.geojson')
+      .subscribe((data: any) => {
+        this.mrt.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: 'yellow',
+                weight: this.lineweights, // ความหนาของเส้นขอบ
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Yellow.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+
+    
+    this.getJsonService
+      .getJson('assets/layers/bts/Green Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#77cb00',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Green Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+    this.getJsonService
+      .getJson('assets/layers/bts/Hard Green Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#246b5b',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Hard Green Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+    this.getJsonService
+      .getJson('assets/layers/bts/Ligth_Red_Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#f95558',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Light Red Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+    this.getJsonService
+      .getJson('assets/layers/bts/Middle Red Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#dd0f19',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Middle Red Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+    this.getJsonService
+      .getJson('assets/layers/bts/Pink Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#eda0c2',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Pink Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+    this.getJsonService
+      .getJson('assets/layers/bts/Red Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#FF0000',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Red Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+    this.getJsonService
+      .getJson('assets/layers/bts/Yellow Line.geojson')
+      .subscribe((data: any) => {
+        this.bts.addLayer(
+          L.geoJSON(data, {
+            style: (feature) => {
+              return {
+                color: '#ffbb00',
+                weight: this.lineweights,
+                opacity: 1,
+                fillOpacity: 0.5,
+              };
+            },
+            onEachFeature: (feature, layer) => {
+              // Use the name mapping
+              const name = lineNames['Yellow Line.geojson'];
+              layer.bindTooltip(name, { permanent: false, direction: 'top' });
+            },
+          })
+        );
+      });
+
+      
   }
 
   ngOnInit() {
     this.auth.getTier().subscribe((data) => {
       this.tier = data;
+
+      if (this.tier === 'Basic') {
+        this.radius = 0;
+      }
+      else if (this.tier === 'Tier1') {
+        this.radius = 2000;
+      }
+      else if (this.tier === 'Tier2') {
+        this.radius = 4000;
+      }
+      else if (this.tier === 'Tier3') {
+        this.radius = 8000;
+      }
       
     });
-    
+    // Add this function to adjust weight based on zoom level
+
+
   }
   clickZoomin() {
-    this.map.zoomIn();
+    this.map.zoomIn();    
+    
   }
   clickZoomout() {
     this.map.zoomOut();
@@ -298,17 +582,50 @@ export class MapComponent implements OnChanges {
   // Initialize the map after the view is initialized
   ngAfterViewInit(): void {
     this.initMap();
+
+    this.map.on('zoom', () => {
+      const zoomLevel = this.map.getZoom();
+      console.log(zoomLevel);
+      let weight = 4;
+      if (zoomLevel >= 12) {
+        weight = 4+zoomLevel/6;
+      }
+      else
+      {
+        weight = 4-zoomLevel/4;
+      }
+      
+      this.bts.eachLayer(function (layer) {
+        if (layer instanceof L.GeoJSON) {
+          layer.setStyle({
+            weight: weight, // Apply zoom-based weight
+          });
+        }
+      });
+
+      this.mrt.eachLayer(function (layer) {
+        if (layer instanceof L.GeoJSON) {
+          layer.setStyle({
+            weight: weight, // Apply zoom-based weight
+          });
+        }
+      }
+      );
+    });
+    
+
+
   }
   toggleMaker(): void {
     console.log(this.tier);
-    
-    if (this.tier === 'Basic') {
-      const modal = document.getElementById('warn_marker_2') as HTMLDialogElement;
-      modal.showModal();
-    }
-    else {
-      this.markerManage = !this.markerManage;
 
+    if (this.tier === 'Basic') {
+      const modal = document.getElementById(
+        'warn_marker_2'
+      ) as HTMLDialogElement;
+      modal.showModal();
+    } else {
+      this.markerManage = !this.markerManage;
     }
   }
   checkColor(lat: number, lng: number): string {
@@ -328,28 +645,28 @@ export class MapComponent implements OnChanges {
 
     return result;
   }
-  private loadShapefile(zipUrl: string, layerName: string, callback?: (layer: L.Layer) => void) {
+  private loadShapefile(
+    zipUrl: string,
+    layerName: string,
+    callback?: (layer: L.Layer) => void
+  ) {
     fetch(zipUrl)
-      .then(response => response.arrayBuffer())
-      .then(buffer => shp(buffer)) // Convert ZIP to GeoJSON
-      .then(geojson => {
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => shp(buffer)) // Convert ZIP to GeoJSON
+      .then((geojson) => {
         const layer = L.geoJSON(geojson, {
           pointToLayer: (feature, latlng) => {
             return L.circleMarker(latlng, {
               radius: 5, // Adjust size
               color: 'blue', // Outline color
               fillColor: 'blue', // Fill color
-              fillOpacity: 0.8
+              fillOpacity: 0.8,
             });
-          }
+          },
         });
-  
+
         if (callback) callback(layer);
       })
-      .catch(error => console.error(`Error loading ${layerName}:`, error));
+      .catch((error) => console.error(`Error loading ${layerName}:`, error));
   }
-  
-  
-  
-
 }

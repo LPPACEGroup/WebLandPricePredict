@@ -15,3 +15,21 @@
   #map {
     height: 100%;
   }
+
+  /* Add this to your styles */
+.glowing-line {
+  transition: all 0.3s ease;
+  filter: brightness(1.5) drop-shadow(0 0 10px #77cb00); /* Adjust the color and glow intensity */
+}
+
+.glowing-line:hover {
+  filter: brightness(2) drop-shadow(0 0 15px #77cb00); /* Add more glow effect on hover */
+}
+
+path:focus {
+  outline: none !important;
+}
+
+path{
+  outline: none !important;
+}
