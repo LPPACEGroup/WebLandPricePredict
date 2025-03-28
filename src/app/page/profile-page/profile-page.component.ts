@@ -64,6 +64,12 @@ export class ProfilePageComponent implements OnInit {
   emailerrMessage: string = '';
   emailValid: boolean = false;
   usernameduplicate: boolean = false;
+  verifyPaymentTime: string = '';
+  verifyPaymentTimeDate = {
+    date : '',
+    time : ''
+  }
+  vefrifyPayment :boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -174,7 +180,28 @@ export class ProfilePageComponent implements OnInit {
             this.profilePicture = URL.createObjectURL(blob);
             console.log(this.profilePicture);
             this.imagePreview = this.profilePicture;
-            this.loading = false;
+
+            this.userService.checkVerifyPayment().subscribe({
+              next: (data) => {
+                console.log(data, 'payment data');
+                this.verifyPaymentTime = data.submission_date;
+                const dateObj = new Date(this.verifyPaymentTime);
+                this.verifyPaymentTimeDate.date = dateObj.toLocaleDateString("th-TH");
+                this.verifyPaymentTimeDate.time = dateObj.toLocaleTimeString("th-TH", { hour: '2-digit', minute: '2-digit' });
+                console.log(this.verifyPaymentTimeDate.date, this.verifyPaymentTimeDate.time, 'date and time');
+                this.vefrifyPayment = data.verify_payment;
+
+                this.loading = false;
+
+                
+              },
+              error: (error) => {
+                if (error.status === 404) {
+                  this.verifyPaymentTime = '';
+                  this.loading = false;
+                }
+              },
+            });
 
           },
           error: (error) => {
