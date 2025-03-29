@@ -17,6 +17,7 @@ import { LineChartComponent } from '../../core/line-chart/line-chart.component';
 import { BarChartComponent } from 'app/core/bar-chart/bar-chart.component';
 import { forkJoin, Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
+import { AuthService } from 'app/service/Auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,6 +50,7 @@ export class DashboardComponent implements OnChanges,OnDestroy {
   max_y_district = [0, 0, 0, 0];
   min_y = 0;
   min_y_district = [0, 0, 0, 0];
+  tier = "Basic";
   
   private destroy$ = new Subject<void>();
   selectedLabels: boolean[] = [];
@@ -69,7 +71,8 @@ export class DashboardComponent implements OnChanges,OnDestroy {
 
   constructor(
     private landListService: LandListService,
-    private dashBoardService: DashboardService
+    private dashBoardService: DashboardService,
+    private auth: AuthService,
   ) {}
 
   isDropdownVisible = false;
@@ -82,6 +85,7 @@ export class DashboardComponent implements OnChanges,OnDestroy {
       
   }
   ngOnInit(): void {
+
     this.dashBoardService.getPriceAvg(47).pipe(
       switchMap(response => {
         this.AVG_Data = this.transformData(response);
@@ -170,7 +174,18 @@ export class DashboardComponent implements OnChanges,OnDestroy {
 
         console.log(this.comparePrice, "sssss");
 
-        this.loading = false;
+        this.auth.getTier().subscribe({
+          next: (response: any) => {
+            this.tier = response;
+            this.loading = false;
+            
+          },
+          error: (error: any) => {
+            console.log(error);
+            this.loading = false;
+
+          },
+        });
       },
       error: (error) => {
         console.error('Error:', error);
