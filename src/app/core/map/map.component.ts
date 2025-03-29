@@ -238,14 +238,14 @@ export class MapComponent implements OnChanges {
   ) {
     //  get geojson and add to colorMap layer
     this.getJsonService
-      .getJson('assets/layers/latkrabang.geojson')
+      .getJson('assets/layers/colormap/latkrabang.geojson')
       .subscribe((data: any) => {
         this.colorMap.addLayer(
           L.geoJSON(data, {
             style: (feature) => {
               return {
                 color: feature
-                  ? this.getColor(feature.properties.color)
+                  ? `#${feature.properties.landcolor}`
                   : 'gray',
                 weight: 2, // ความหนาของเส้นขอบ
                 opacity: 1,
@@ -256,14 +256,14 @@ export class MapComponent implements OnChanges {
         );
       });
     this.getJsonService
-      .getJson('assets/layers/minburi.geojson')
+      .getJson('assets/layers/colormap/minburi.geojson')
       .subscribe((data: any) => {
         this.colorMap.addLayer(
           L.geoJSON(data, {
             style: (feature) => {
               return {
                 color: feature
-                  ? this.getColor(feature.properties.color)
+                  ? `#${feature.properties.landcolor}`
                   : 'gray',
                 weight: 2, // ความหนาของเส้นขอบ
                 opacity: 1,
@@ -274,14 +274,14 @@ export class MapComponent implements OnChanges {
         );
       });
     this.getJsonService
-      .getJson('assets/layers/khlong_Toei.geojson')
+      .getJson('assets/layers/colormap/khlong_Toei.geojson')
       .subscribe((data: any) => {
         this.colorMap.addLayer(
           L.geoJSON(data, {
             style: (feature) => {
               return {
                 color: feature
-                  ? this.getColor(feature.properties.color)
+                  ? `#${feature.properties.landcolor}`
                   : 'gray',
                 weight: 2, // ความหนาของเส้นขอบ
                 opacity: 1,
@@ -292,14 +292,14 @@ export class MapComponent implements OnChanges {
         );
       });
     this.getJsonService
-      .getJson('assets/layers/watthana.geojson')
+      .getJson('assets/layers/colormap/watthana.geojson')
       .subscribe((data: any) => {
         this.colorMap.addLayer(
           L.geoJSON(data, {
             style: (feature) => {
               return {
                 color: feature
-                  ? this.getColor(feature.properties.color)
+                  ? `#${feature.properties.landcolor}`
                   : 'gray',
                 weight: 2, // ความหนาของเส้นขอบ
                 opacity: 1,
