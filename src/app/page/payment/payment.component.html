@@ -77,6 +77,17 @@
   </dialog>
 </div>
 
+<dialog id="payment_err_1" class="modal ">
+  <div class="modal-box  text-darkBlue">
+      <p class="py-4">การสมัครสมาชิกเสร็จสิ้นแต่รูปภาพอัพโหลดไม่สำเร็จ</p>
+      <div class="modal-action">
+          <form method="dialog">
+              <button class="btn bg-darkBlue text-white" routerLink="Signin">รับทราบ</button>
+          </form>
+      </div>
+  </div>
+</dialog>
+
 
 <div *ngIf="loading" class="bg-white w-full h-nmax flex-center z-50">
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>

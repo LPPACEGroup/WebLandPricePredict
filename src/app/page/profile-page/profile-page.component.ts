@@ -69,7 +69,7 @@ export class ProfilePageComponent implements OnInit {
     date : '',
     time : ''
   }
-  vefrifyPayment :boolean = true;
+  vefrifyPayment :number = 1;
 
   constructor(
     private fb: FormBuilder,

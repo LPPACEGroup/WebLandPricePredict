@@ -80,11 +80,11 @@
               <div class="box border-oceanBlue">
                 <p class="box-text text-oceanBlue font-bold">{{tier}}</p>
               </div>
-              <p *ngIf="verifyPaymentTime !== ''" class="text-base text-oceanBlue">
+              <p *ngIf="verifyPaymentTime !== '' &&vefrifyPayment !==0" class="text-base text-oceanBlue">
                 ชำระเงินแล้ว เมื่อวันที่ {{verifyPaymentTimeDate.date}} เวลา {{verifyPaymentTimeDate.time}}
               </p>
               <p class="text-base text-darkRed" *ngIf="verifyPaymentTime === ''">ยังไม่มีรายการชำระเงิน</p>
-              <p class="text-base text-darkRed"*ngIf="vefrifyPayment === false">การชำระเงินกำลังอยู่ระหว่างการตรวจสอบ</p>
+              <p class="text-base text-darkRed"*ngIf="vefrifyPayment === 0">การชำระเงินกำลังอยู่ระหว่างการตรวจสอบ</p>
             </div>
           </div>
 
