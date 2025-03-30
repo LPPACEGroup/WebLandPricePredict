@@ -13,5 +13,5 @@ COPY /nginx.conf  /etc/nginx/conf.d/default.conf
 # Expose port 80
 EXPOSE 80
 
-# docker build -t neerachal/deploy_febe_lppm:v0.2.1 .
-# docker push neerachal/deploy_febe_lppm:v0.2.1
+# docker build -t neerachal/deploy_febe_lppm:v0.2.2 .
+# docker push neerachal/deploy_febe_lppm:v0.2.2

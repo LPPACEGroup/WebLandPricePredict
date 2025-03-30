@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: neerachal/deploy_febe_lppm:v0.2.1 # ใช้ Image บน Docker Hub
+          image: neerachal/deploy_febe_lppm:v0.2.2 # ใช้ Image บน Docker Hub
           ports:
             - containerPort: 80
           resources:
