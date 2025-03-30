@@ -40,9 +40,10 @@ export class PaymentComponent {
     private auth : AuthService
   ) {
     this.paymentForm = this.fb.group({
-      AccName: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', Validators.required),
-      detail: new FormControl('', Validators.required),
+      AccName: new FormControl('', [Validators.required,  Validators.pattern(/^[A-Za-zÀ-ÿ\u0E00-\u0E7F]+( [A-Za-zÀ-ÿ\u0E00-\u0E7F]+)?$/)
+      ]),
+      phoneNumber: new FormControl('', [Validators.required,Validators.pattern(/^0?\d{9}$/)]),
+      detail: new FormControl('', ),
     });
 
     this.route.params.subscribe((params) => {
@@ -103,16 +104,17 @@ export class PaymentComponent {
 
   onSubmit(): void {
     this.submitted = true;
-    if (!this.selectedFile) {
+    if (!this.selectedFile || this.paymentForm.invalid) {
       console.log('Please upload payment proof');
-      
+      const modal = document.getElementById('payment_err_1') as HTMLDialogElement;
+      modal.showModal();
       return;
     }
 
 
-    if (this.paymentForm.invalid) {
-      return;
-    }
+    // if (this.paymentForm.invalid) {
+    //   return;
+    // }
     this.userService
       .getUserId()
       .pipe(first())

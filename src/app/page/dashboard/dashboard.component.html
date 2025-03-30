@@ -1,4 +1,4 @@
-<div *ngIf="!loading" class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible"
+<div *ngIf="!loading && tier!=='Basic'"  class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible"
   style="background-color: white;">
 
   <!-- Overall Report -->
@@ -146,4 +146,8 @@
 </div>
 <div *ngIf="loading" class="bg-white w-full h-nmax flex-center">
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>
+</div>
+
+<div *ngIf="tier=='Basic'" class=" w-full bg-white z-10 text-darkRed text-center text-3xl font-bold h-nmax flex items-center justify-center ">
+  กรุณาอัพเกรดขั้นต่ำเป็น Tier1 เพื่อใช้งานฟีเจอร์นี้
 </div>
