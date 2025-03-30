@@ -68,38 +68,38 @@ barChartOptions: ChartOptions = {
 
   }
   updateChartData() {
-    // ตั้งค่าเริ่มต้นเพื่อป้องกัน undefined หรือ null
-    const labels = this.data?.labels || [];
-    const averagePrice = this.data?.averagePrice || [];
-    const sellPrice = this.data?.sellPrice || [];
-    const predictPrice = this.data?.predictPrice || [];
-
-    const filteredLabels = labels.map((label: string, i: number) =>
-      this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? label : null) : null
-    );
-
-    const filteredAveragePrice = averagePrice.map((price: number, i: number) =>
-      this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? price : null) : null
-    );
-
-    const filteredSellPrice = sellPrice.map((price: number, i: number) =>
-      this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? price : null) : null
-    );
-
-    const filteredpredictPrice = predictPrice.map((price: number, i: number) =>
-      this.selectedLabels[i] !== null ? (this.selectedLabels[i] ? price : null) : null
-    );
-
-    // อัปเดตกราฟ
+    if (!this.data || !this.selectedLabels) return;
+  
+    const filteredIndexes = this.selectedLabels
+      .map((isSelected, index) => isSelected ? index : -1)
+      .filter(index => index !== -1);
+  
     this.barChartData = {
-      labels: filteredLabels,
+      labels: filteredIndexes.map(i => this.data.labels[i]), 
       datasets: [
-        { label: 'ราคาเฉลี่ย', data: filteredAveragePrice, backgroundColor: '#86B6CD' ,maxBarThickness:32},
-        { label: 'ราคาขาย', data: filteredSellPrice, backgroundColor: '#C6E6FF' ,maxBarThickness:32},
-        { label: 'ราคาประเมิน', data: filteredpredictPrice, backgroundColor: '#2749A3',maxBarThickness:32 }
+        { 
+          label: 'ราคาเฉลี่ย', 
+          data: filteredIndexes.map(i => this.data.averagePrice[i] ?? null), 
+          backgroundColor: '#86B6CD', 
+          maxBarThickness: 32
+        },
+        { 
+          label: 'ราคาขาย', 
+          data: filteredIndexes.map(i => this.data.sellPrice[i] ?? null), 
+          backgroundColor: '#C6E6FF', 
+          maxBarThickness: 32
+        },
+        { 
+          label: 'ราคาประเมิน', 
+          data: filteredIndexes.map(i => this.data.predictPrice[i] ?? null), 
+          backgroundColor: '#2749A3', 
+          maxBarThickness: 32
+        }
       ]
     };
   }
+  
+  
 
 
 
