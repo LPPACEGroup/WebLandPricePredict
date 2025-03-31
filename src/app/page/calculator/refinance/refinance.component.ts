@@ -40,7 +40,7 @@ export class RefinanceComponent {
   newInterestRate!: number;
 
 // cal
-  interestSaved!: number;
+  interestSaved!:number;
   newMonthlyPayment!: number;
   monthlyDifference!: number;
   currentTotalInterest!: number;
@@ -58,13 +58,13 @@ export class RefinanceComponent {
 
     let currentMonthlyPaymentCal = this.currentMonthlyPayment
 
-    if (currentMonthlyRate > 0) {
+    if (this.currentInterestRate > 0) {
       currentMonthlyPaymentCal = (this.currentLoanAmount * currentMonthlyRate * Math.pow(1 + currentMonthlyRate, currentLoanTermMonths)) / (Math.pow(1 + currentMonthlyRate, currentLoanTermMonths) - 1);
     } else {
       currentMonthlyPaymentCal = this.currentLoanAmount / currentLoanTermMonths; // For zero interest loans
     }
 
-    if (newMonthlyRate > 0) {
+    if (this.newInterestRate > 0) {
       this.newMonthlyPayment = (this.newLoanAmount * newMonthlyRate * Math.pow(1 + newMonthlyRate, newLoanTermMonths)) / (Math.pow(1 + newMonthlyRate, newLoanTermMonths) - 1);
     } else {
       this.newMonthlyPayment = this.newLoanAmount / newLoanTermMonths; // For zero interest loans

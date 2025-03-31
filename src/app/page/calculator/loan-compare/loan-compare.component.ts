@@ -43,7 +43,7 @@ export class LoanCompareComponent {
     const P = this.loanAmount;
     const r1 = (this.interest1 / 100) / 12;
     const r2 = (this.interest2 / 100) / 12;
-    const n1 = this.loanTerm2 * 12;
+    const n1 = this.loanTerm1 * 12;
     const n2 = this.loanTerm2 * 12;
 
     if (r1 > 0) {
