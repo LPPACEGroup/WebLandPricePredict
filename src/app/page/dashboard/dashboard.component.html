@@ -1,4 +1,4 @@
-<div *ngIf="!loading && tier!=='Basic'"  class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible"
+<div *ngIf="!loading && tier!=='Basic'" class="bg-cover bg-no-repeat min-h-nmax flex justify-center visible"
   style="background-color: white;">
 
   <!-- Overall Report -->
@@ -68,8 +68,8 @@
           <tbody>
             <tr>
               <td class="px-4 py-2 text-left">มีนบุรี</td>
-              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][0]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">{{pred_table[0][0]}} <span
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][0]['price_avg']| number:'1.2-2'}}</td>
+              <td class="px-4 py-2 text-center">{{pred_table[0][0]| number:'1.2-2'}} <span
                   [ngClass]="pred_table[0][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[0][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[0][1]}}</span></td>
@@ -77,8 +77,8 @@
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">ลาดกระบัง</td>
-              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][1]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">{{pred_table[1][0]}} <span
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][1]['price_avg']| number:'1.2-2'}}</td>
+              <td class="px-4 py-2 text-center">{{pred_table[1][0]| number:'1.2-2'}} <span
                   [ngClass]="pred_table[1][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[1][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[1][1]}}</span></td>
@@ -86,16 +86,16 @@
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">วัฒนา</td>
-              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">{{pred_table[2][0]}} <span
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][2]['price_avg']| number:'1.2-2'}}</td>
+              <td class="px-4 py-2 text-center">{{pred_table[2][0]| number:'1.2-2'}} <span
                   [ngClass]="pred_table[2][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[2][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[2][1]}}</span></td>
             </tr>
             <tr>
               <td class="px-4 py-2 text-left">คลองเตย</td>
-              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']}}</td>
-              <td class="px-4 py-2 text-center">{{pred_table[3][0]}} <span
+              <td class="px-4 py-2 text-center">{{last_month_avg[0]['data'][3]['price_avg']| number:'1.2-2'}}</td>
+              <td class="px-4 py-2 text-center">{{pred_table[3][0]| number:'1.2-2'}} <span
                   [ngClass]="pred_table[3][1][0]==='-'?'text-red-500':'text-green-500'" class="text-lg"><span
                     class="text-3xl">{{pred_table[3][1][0]==='-'?'↓':'↑'}}</span>&nbsp;
                   &nbsp;{{pred_table[3][1]}}</span></td>
@@ -138,8 +138,8 @@
       <p class="text-2xl font-bold text-darkBlue">ที่ดินที่กดติดตาม</p>
     </div>
 
-    <app-dashboard-follow *ngFor="let land of followedLand; let i = index" [land]="land" [index]="i" [predictPrice]="PRED_Data"
-      (followChanged)="onFollowChanged()"></app-dashboard-follow>
+    <app-dashboard-follow *ngFor="let land of followedLand; let i = index" [land]="land" [index]="i"
+      [predictPrice]="PRED_Data" (followChanged)="onFollowChanged()"></app-dashboard-follow>
   </div>
 
 
@@ -148,6 +148,7 @@
   <span class="loading loading-spinner loading-lg text-darkBlue"></span>
 </div>
 
-<div *ngIf="tier=='Basic'" class=" w-full bg-white z-10 text-darkRed text-center text-3xl font-bold h-nmax flex items-center justify-center ">
+<div *ngIf="tier=='Basic'"
+  class=" w-full bg-white z-10 text-darkRed text-center text-3xl font-bold h-nmax flex items-center justify-center ">
   กรุณาอัพเกรดขั้นต่ำเป็น Tier1 เพื่อใช้งานฟีเจอร์นี้
 </div>

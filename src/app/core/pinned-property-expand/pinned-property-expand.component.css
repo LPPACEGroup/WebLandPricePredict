@@ -52,17 +52,17 @@
 }
 
 .bgc-lightgreen {
-  background-color: lightgreen;
+  background-color: var(--midGreen);
 }
 .textc-lightgreen  {
-  color: lightgreen;
+  color: var(--midGreen);
 }
 
 .bgc-yellow {
-  background-color: yellow;
+  background-color: #F3C762;
 }
 .textc-yellow  {
-  color: yellow;
+  color: #F3C762;
 }
 
 .bgc-purple {

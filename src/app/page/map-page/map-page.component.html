@@ -56,12 +56,12 @@
         </div>
         <div class="border-b-2 py-5 font-medium">
           <p class="text-lg text-darkBlue">ราคาขาย</p>
-          <p class="text-lg">{{selectedLand?.Price}}</p>
+          <p class="text-lg">{{selectedLand?.Price| number:'1.0-2'}}</p>
           <div class="grid grid-cols-2 text-base text-black">
             <p>ราคาต่อตารางเมตร </p>
-            <p>{{selectedLand?.Price/selectedLand?.Size*4}} บาท</p>
+            <p>{{selectedLand?.Price/selectedLand?.Size*4 | number:'1.0-2'}} บาท</p>
             <p>ขนาดพื้นที่ </p>
-            <p>{{selectedLand?.Size}} ตรว.</p>
+            <p>{{selectedLand?.Size | number:'1.0-2'}} ตรว.</p>
           </div>
         </div>
         <!-- <div class="border-b-2 py-5">
@@ -208,7 +208,7 @@
           </div> -->
         </button>
         <dialog id="indexLandPopup" class="modal">
-          <div class="modal-box w-3/4 h-3/5 max-w-full ">
+          <div class="modal-box w-3/4 h-4/5 max-w-full items-center">
             <div class="absolute top-4 right-4">
               <button class="text-black text-sm " onclick="document.getElementById('indexLandPopup').close()">
                 <mat-icon aria-hidden="false" aria-label="Close icon" fontIcon="close"></mat-icon>
@@ -257,7 +257,8 @@
             <img src="assets/icons/dropdown.svg" class="w-5 h-5" alt="Dropdown Arrow Icon" />
           </span>
         </summary>
-        <ul class="menu dropdown-content w-full bg-white shadow-2xl backdrop-blur-xl rounded-bl-md rounded-br-md rounded-tl-md">
+        <ul
+          class="menu dropdown-content w-full bg-white shadow-2xl backdrop-blur-xl rounded-bl-md rounded-br-md rounded-tl-md">
           <li>
             <div><input id="osm" type="radio" name="mapOption" value="osm" (change)="onMapOptionChange('osm')"
                 checked />
@@ -283,16 +284,14 @@
             </div>
           </li>
           <li>
-            <div><input id="mrt" type="radio" name="mapOption" value="mrt"
-                (change)="onMapOptionChange('mrt')" />
+            <div><input id="mrt" type="radio" name="mapOption" value="mrt" (change)="onMapOptionChange('mrt')" />
 
 
               <label for="mrt">MRT</label>
             </div>
           </li>
           <li>
-            <div><input id="bts" type="radio" name="mapOption" value="bts"
-                (change)="onMapOptionChange('bts')" />
+            <div><input id="bts" type="radio" name="mapOption" value="bts" (change)="onMapOptionChange('bts')" />
 
 
               <label for="bts">BTS</label>
@@ -306,7 +305,8 @@
             <img src="assets/icons/dropdown.svg" class="w-5 h-5" alt="Dropdown Arrow Icon" />
           </span>
         </summary>
-        <div class="  m-0 p-5  dropdown-content w-full bg-white shadow-2xl backdrop-blur-xl rounded-bl-md rounded-br-md rounded-tl-md">
+        <div
+          class="  m-0 p-5  dropdown-content w-full bg-white shadow-2xl backdrop-blur-xl rounded-bl-md rounded-br-md rounded-tl-md">
           <h4>ช่วงราคา(ล้าน)</h4>
           <form>
             <div class="flex justify-between text-sm">

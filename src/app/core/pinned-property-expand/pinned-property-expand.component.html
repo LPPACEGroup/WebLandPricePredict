@@ -1,19 +1,19 @@
 <div class="px-4 pb-4">
   <div class="grid grid-cols-5 text-center gap-4 mt-4">
     <div class="bg-babyBlue p-4 rounded-lg">
-      <h4 class="text-lg text-darkBlue font-bold">{{land.Price}}</h4>
+      <h4 class="text-lg text-darkBlue font-bold">{{land.Price| number:'1.2-2'}}</h4>
       <p class="text-sm text-darkBlue">ราคาขายจริง</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-oceanBlue font-bold">{{averagePrice}}</h4>
+      <h4 class="text-lg text-oceanBlue font-bold">{{averagePrice| number:'1.2-2'}}</h4>
       <p class="text-sm text-oceanBlue">ราคาเฉลี่ย</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-oceanBlue font-bold">{{land.EstimatePrice}}</h4>
+      <h4 class="text-lg text-oceanBlue font-bold">{{land.EstimatePrice| number:'1.2-2'}}</h4>
       <p class="text-sm text-oceanBlue">ราคาประเมิน</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
-      <h4 class="text-lg text-oceanBlue font-bold">{{predPrice}}</h4>
+      <h4 class="text-lg text-oceanBlue font-bold">{{predPrice| number:'1.2-2'}}</h4>
       <p class="text-sm text-oceanBlue">ราคาทำนาย</p>
     </div>
     <div class="bg-white p-4 rounded-lg">
@@ -26,7 +26,7 @@
     <div class="gap-4 text-darkBlue">
       <div class="flex items-center pb-1">
         <p class="box">ราคาต่อหน่วย</p>
-        <p class="pl-4">{{land.Price/land.Size}} / ตร.วา</p>
+        <p class="pl-4">{{land.Price/land.Size | number:'1.2-2'}} / ตร.วา</p>
       </div>
       <div class="flex items-center pb-1">
         <p class="box">ที่ตั้ง</p>
@@ -34,7 +34,7 @@
       </div>
       <div class="flex items-center pb-1">
         <p class="box">ขนาดพื้นที่</p>
-        <span class="pl-4">{{land.Size}} ตร.วา</span>
+        <span class="pl-4">{{land.Size| number:'1.2-2'}} ตร.วา</span>
       </div>
       <div class="flex items-center pb-1">
         <p class="box">สีพื้นที่</p>
@@ -49,7 +49,7 @@
       </div>
       <div class="flex items-center pb-1 gap-x-3 ">
         <p class="box">ภาษีที่ดิน</p>
-        <select class="  border border-oceanBlue text-oceanBlue rounded-xl p-2" [(ngModel)]="landTaxType" (ngModelChange)="onAdditionalChange($event)">
+        <select class="  border border-oceanBlue text-oceanBlue rounded-xl p-2" [(ngModel)]="landTaxType" (ngModelChange)="onAdditionalChange($event)" title="เลือกประเภทที่ดิน">
           <option class="text-center" disabled selected value="chooseType" >เลือกประเภทที่ดิน</option>
           <option class="text-center" value="commercial">ที่ดินเชิงพาณิช</option>
           <option class="text-center" value="deserted">ที่ดินรกร้าง</option>
@@ -58,14 +58,14 @@
         </select>
 
         <select *ngIf="landTaxType==='residential'" class="  border border-oceanBlue text-oceanBlue rounded-xl p-2"
-          [(ngModel)]="firstHouse" (ngModelChange)="onAdditionalChange($event)">
+          [(ngModel)]="firstHouse" (ngModelChange)="onAdditionalChange($event)" title="เลือกประเภทเจ้าของบ้าน">
           <option class="text-center" disabled selected [value]="0" >-</option>
           <option class="text-center" [value]="1">เจ้าของบ้านหลังแรก</option>
           <option class="text-center" [value]="2">เจ้าของบ้านหลังที่สองขึ้นไป </option>
         </select>
 
         <select *ngIf="landTaxType==='agricultural'" class="  border border-oceanBlue text-oceanBlue rounded-xl p-2"
-          [(ngModel)]="legalEntity" (ngModelChange)="onAdditionalChange($event)">
+          [(ngModel)]="legalEntity" (ngModelChange)="onAdditionalChange($event)" title="เลือกประเภทนิติบุคคล">
           <option class="text-center" disabled selected [value]="0" >-</option>
           <option class="text-center" [value]="1">บุคคลธรรมดา</option>
           <option class="text-center" [value]="2">นิติบุคคล  </option>
@@ -73,19 +73,19 @@
 
         <div [ngSwitch]="landTaxType">
           <p *ngSwitchCase="'chooseType'">- &nbsp;&nbsp;บาท</p>
-          <p *ngSwitchCase="'commercial'">{{ landTax }} บาท</p>
-          <p *ngSwitchCase="'deserted'">{{ landTax }} บาท</p>
+          <p *ngSwitchCase="'commercial'">{{ landTax | number:'1.2-2' }} บาท</p>
+          <p *ngSwitchCase="'deserted'">{{ landTax | number:'1.2-2'}} บาท</p>
           <p *ngSwitchCase="'residential'">
             <span *ngIf="firstHouse == '0'"> - &nbsp;&nbsp;บาท</span>
-            <span *ngIf="firstHouse != '0'">{{ landTax }} บาท</span>
+            <span *ngIf="firstHouse != '0'">{{ landTax | number:'1.2-2'}} บาท</span>
           </p>
           <p *ngSwitchCase="'agricultural'">
             <span *ngIf="legalEntity == '0'"> - &nbsp;&nbsp;บาท</span>
-            <span *ngIf="legalEntity != '0'">{{ landTax }} บาท</span>
+            <span *ngIf="legalEntity != '0'">{{ landTax | number:'1.2-2'}} บาท</span>
           </p>
           <p *ngSwitchDefault>- &nbsp;&nbsp;บาท</p>
         </div>
-        
+
       </div>
 
       <div class="pb-1">
@@ -109,7 +109,7 @@
           <div class=" h-full flex items-center">
             <mat-icon class="text-darkBlue w-10 h-10  flex-shrink-0 text-4xl" aria-hidden="false"
               aria-label="Example help icon" [fontIcon]="getIconName(place.PlaceType)"></mat-icon>
-           
+
           </div>
           <div>
             <p class="text-sm text-neutral-700">{{place.Name}}</p>

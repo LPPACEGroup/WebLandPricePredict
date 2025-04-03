@@ -9,10 +9,10 @@
     </div>
     <div class=" w-full grid grid-cols-5 font-semibold gap-y-1 pt-2">
       <p class="col-span-2 "> ขนาดพื้นที่ </p>
-      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Size}} ตรว.</p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Size| number:'1.0-2'}} ตรว.</p>
       <p class="col-span-2 font-semibold">ราคาขาย </p>
-      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Price}} บาท</p>
-      <p class=" text-grey col-span-5">ราคา {{item?.Price/item?.Size*4}} บาท/ตรม.</p>
+      <p class="col-span-3 bg-light-blue rounded-full">{{item?.Price| number:'1.0-2'}} บาท</p>
+      <p class=" text-grey col-span-5">ราคา {{item?.Price/item?.Size*4| number:'1.0-2'}} บาท/ตรม.</p>
       <br>
     </div>
     <div class="w-full flex justify-end">
